@@ -2830,7 +2830,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1833314804}
   m_Layer: 0
-  m_Name: GalleryModeManager
+  m_Name: GalleryManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
