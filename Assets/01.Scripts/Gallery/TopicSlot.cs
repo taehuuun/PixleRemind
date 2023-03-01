@@ -1,3 +1,4 @@
+using LTH.ColorMatch.Managers;
 using UnityEngine;
 
 namespace LTH.ColorMatch.UI
@@ -6,9 +7,7 @@ namespace LTH.ColorMatch.UI
     {
         public override void OnSlotClick()
         {
-            PlayerPrefs.SetString("Topic",titleText.text);
-            PlayerPrefs.Save();
-            
+            GalleryManager.topic = titleText.text;
             Debug.Log($"Topic Slot Click : {titleText.text}");
         }
     }
