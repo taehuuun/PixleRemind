@@ -12,7 +12,14 @@ namespace LTH.ColorMatch.UI
 
         private void SetPage()
         {
-            // _pixelArts = DataManager.GetFiles()
+            _pixelArts = DataManager.GetFiles(GalleryManager.topic);
+            
+            Debug.Log(_pixelArts.Count);
+
+            foreach (var pixelArt in _pixelArts)
+            {
+                Debug.Log($"{pixelArt}");
+            }
         }
     }
 }
