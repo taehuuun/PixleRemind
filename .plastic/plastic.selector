@@ -1,4 +1,0 @@
-repository "ColorMatcher@Hades44@cloud"
-  path "/"
-    smartbranch "/main/develop/Feat-GalleryMode"        
-     
