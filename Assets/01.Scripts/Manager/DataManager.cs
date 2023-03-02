@@ -27,8 +27,10 @@ namespace LTH.ColorMatch.Managers
         {
             List<string> files = new List<string>();
 
-            DirectoryInfo directoryInfoInfo = new DirectoryInfo(Application.persistentDataPath + "/" + topic);
-
+            DirectoryInfo directoryInfoInfo = new DirectoryInfo(Application.persistentDataPath + "/" + topic + "/");
+            
+            Debug.Log(Application.persistentDataPath + "/" + topic + "/");
+            
             foreach (var file in directoryInfoInfo.GetFiles())
             {
                 files.Add(file.Name.Substring(0,file.Name.Length-5));

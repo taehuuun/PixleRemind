@@ -549,6 +549,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: GalleryPixelArtSlot (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 6865051258694730863, guid: 728a633eed3a0f044bca389712b16407, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 728a633eed3a0f044bca389712b16407, type: 3}
 --- !u!224 &434409209 stripped
@@ -644,10 +648,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 466181607}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa7969cf40f7b7a45bff58fcea0c761d, type: 3}
+  m_Script: {fileID: 11500000, guid: a5caf26e59869a64eb5f15c780d49b31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   isLock: 0
+  ui: {fileID: 1603840867}
+  pixelArtSlotPrefab: {fileID: 9001983187739698152, guid: 728a633eed3a0f044bca389712b16407, type: 3}
+  slotGenTrans: {fileID: 58818942}
 --- !u!1 &529820634
 GameObject:
   m_ObjectHideFlags: 0
@@ -1068,6 +1075,10 @@ PrefabInstance:
     - target: {fileID: 6865051258694730863, guid: 728a633eed3a0f044bca389712b16407, type: 3}
       propertyPath: m_Name
       value: GalleryPixelArtSlot
+      objectReference: {fileID: 0}
+    - target: {fileID: 6865051258694730863, guid: 728a633eed3a0f044bca389712b16407, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 728a633eed3a0f044bca389712b16407, type: 3}
@@ -1635,7 +1646,7 @@ PrefabInstance:
     - target: {fileID: 2045218336, guid: 38095e1a2d7b4d945b0ec4532e922a36, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
       value: 
-      objectReference: {fileID: 466181611}
+      objectReference: {fileID: 0}
     - target: {fileID: 3351360341124286379, guid: 38095e1a2d7b4d945b0ec4532e922a36, type: 3}
       propertyPath: m_Name
       value: GallerySlot
@@ -2959,6 +2970,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: GalleryPixelArtSlot (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 6865051258694730863, guid: 728a633eed3a0f044bca389712b16407, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 728a633eed3a0f044bca389712b16407, type: 3}
 --- !u!224 &1858683279 stripped
@@ -3058,9 +3073,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isLock: 0
-  ui: {fileID: 0}
-  topicSlotPrefab: {fileID: 0}
-  topicGenTrans: {fileID: 0}
+  ui: {fileID: 1603840867}
+  topicSlotPrefab: {fileID: 2594523969052836803, guid: 38095e1a2d7b4d945b0ec4532e922a36, type: 3}
+  topicGenTrans: {fileID: 1649297697}
 --- !u!1 &1954389302
 GameObject:
   m_ObjectHideFlags: 0
