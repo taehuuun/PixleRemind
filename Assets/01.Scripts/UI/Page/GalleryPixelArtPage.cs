@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.IO;
 using LTH.ColorMatch.Data;
 using LTH.ColorMatch.Managers;
 using UnityEngine;
@@ -34,7 +35,7 @@ namespace LTH.ColorMatch.UI
                 PixelArtSlot newPixelArtSlot = Instantiate(pixelArtSlotPrefab, slotGenTrans);
                 newPixelArtSlot.titleText.text = pixelArt;
                 newPixelArtSlot.pixelData =
-                DataManager.LoadJsonData<PixelArtData>(GalleryManager.topic + "/" + pixelArt);
+                    DataManager.LoadJsonData<PixelArtData>(Path.Combine(GalleryManager.topic, pixelArt));
                 newPixelArtSlot.GetComponent<Button>().onClick.AddListener(() => ui.SelectPage(ui.pixelArtPage));
                 Debug.Log($"Pixel Data Path : {GalleryManager.topic + "/"+pixelArt}");
             }
