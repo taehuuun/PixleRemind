@@ -4,7 +4,7 @@ using LTH.ColorMatch.UI;
 
 namespace LTH.ColorMatch.Managers
 {
-    public class ColorFindGameManager : MonoBehaviour
+    public class ColorMatchSystem : MonoBehaviour
     {
         public ColorSlot targetColorSlot;
         public List<ColorSlot> selectColorSlots;

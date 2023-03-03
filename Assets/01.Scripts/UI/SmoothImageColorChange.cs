@@ -21,7 +21,7 @@ namespace LTH.ColorMatch.UI
         
         private IEnumerator BackgroundChanger()
         {
-            while (!ColorFindGameManager.isGameOver)
+            while (!ColorMatchSystem.isGameOver)
             {
                 if (!_isBackGroundChange)
                 {
