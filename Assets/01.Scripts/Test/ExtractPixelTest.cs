@@ -39,30 +39,30 @@ namespace LTH.ColorMatch.Test
             
             Debug.Log(testData.size);
             
-            if (isBlackWhite)
-            {
-                GenerateBoard(600, testData.size, testData.blackWhiteData.Pixels);
-            }
-            else
-            {
-                GenerateBoard(600, testData.size, testData.colorData.Pixels);
-            }
+            // if (isBlackWhite)
+            // {
+            //     GenerateBoard(600, testData.size, testData.blackWhiteData.Pixels);
+            // }
+            // else
+            // {
+            //     GenerateBoard(600, testData.size, testData.colorData.Pixels);
+            // }
         }
         
-        private void GenerateBoard(int boardSize, int cellSize, List<List<CustomColor>> pixelData)
-        {
-            board = new Cell[cellSize,cellSize];
-            int width = boardSize / cellSize;
-            int height = boardSize / cellSize;
-
-            for (int y = 0; y < cellSize; y++)
-            {
-                for (int x = 0; x < cellSize; x++)
-                {
-                    board[y, x] = Instantiate(cellPrefabs);
-                    board[y, x].SetCell(cellParent, width, height, x, y, pixelData[y][x].ConvertColor());
-                }
-            }
-        }
+        // private void GenerateBoard(int boardSize, int cellSize, List<List<CustomColor>> pixelData)
+        // {
+        //     board = new Cell[cellSize,cellSize];
+        //     int width = boardSize / cellSize;
+        //     int height = boardSize / cellSize;
+        //
+        //     for (int y = 0; y < cellSize; y++)
+        //     {
+        //         for (int x = 0; x < cellSize; x++)
+        //         {
+        //             board[y, x] = Instantiate(cellPrefabs);
+        //             board[y, x].SetCell(cellParent, width, height, x, y, pixelData[y][x].ConvertColor());
+        //         }
+        //     }
+        // }
     }
 }
