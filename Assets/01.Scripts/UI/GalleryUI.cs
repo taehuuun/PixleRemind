@@ -1,11 +1,12 @@
 using System.Collections.Generic;
+using LTH.ColorMatch.Enums;
 using UnityEngine;
 
 namespace LTH.ColorMatch.UI
 {
     public class GalleryUI : BodyUI
     {
-        public Page pixelArtPage;
+        public Page[] pages;
         
         protected override void Update()
         {
@@ -14,14 +15,14 @@ namespace LTH.ColorMatch.UI
                 Close();
             }
         }
-        public void SelectPage(Page page)
+        public void SelectPage(GalleryPage page)
         {
             if(activePopups.Count > 0)
             {
                 ClosePopup();
             }
             
-            OpenPopup(page);
+            OpenPopup(pages[(int)page]);
         }
         public void Close()
         {
