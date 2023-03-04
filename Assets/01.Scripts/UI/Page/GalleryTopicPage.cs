@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using LTH.ColorMatch.Enums;
 using LTH.ColorMatch.Managers;
 using UnityEngine;
 using UnityEngine.UI;
@@ -29,7 +30,7 @@ namespace LTH.ColorMatch.UI
             {
                 TopicSlot newTopicSlot = Instantiate(topicSlotPrefab, topicGenTrans);
                 newTopicSlot.titleText.text = topic;
-                newTopicSlot.GetComponent<Button>().onClick.AddListener(() => ui.SelectPage(ui.pixelArtPage));
+                newTopicSlot.GetComponent<Button>().onClick.AddListener(() => ui.SelectPage(GalleryPage.PixelArt));
             }
         }
     }
