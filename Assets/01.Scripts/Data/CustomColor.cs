@@ -2,48 +2,48 @@ using UnityEngine;
 
 namespace LTH.ColorMatch.Data
 {
-    public class CustomColor
+    public class ColorMatchColor
     {
-        public Color originColor;
-        public Color grayColor;
-        public bool complete;
-        
         public float r;
         public float g;
         public float b;
         public float a;
 
+        public ColorMatchColor(float r, float g, float b, float a)
+        {
+            this.r = r;
+            this.g = g;
+            this.b = b;
+            this.a = a;
+        }
+    }
+    
+    public class CustomColor
+    {
+        public ColorMatchColor originColorMatchColor;
+        public ColorMatchColor grayColorMatchColor;
+        public bool complete;
+        
         public CustomColor()
         {
-            r = 0f;
-            g = 0f;
-            b = 0f;
-            a = 0f;
-        }
-        public CustomColor(Color color)
-        {
-            r = color.r;
-            g = color.g;
-            b = color.b;
-            a = color.a;
-            
-            float grayValue = GetGaryValue(r, g, b, a);
-            
-            originColor = new Color(r, g, b, a);
-            grayColor = new Color(grayValue, grayValue, grayValue, grayValue);
+            originColorMatchColor = new ColorMatchColor(0, 0, 0, 0);
+            grayColorMatchColor = new ColorMatchColor(0, 0, 0, 0);
             complete = false;
         }
-        public CustomColor(float fr, float fg, float fb, float fa)
+        public CustomColor(ColorMatchColor colorMatchColor)
         {
-            r = fr;
-            g = fg;
-            b = fb;
-            a = fa;
-
+            float grayValue = GetGaryValue(colorMatchColor.r, colorMatchColor.g, colorMatchColor.b, colorMatchColor.a);
+            
+            originColorMatchColor = new ColorMatchColor(colorMatchColor.r, colorMatchColor.g, colorMatchColor.b, colorMatchColor.a);
+            grayColorMatchColor = new ColorMatchColor(grayValue, grayValue, grayValue, grayValue);
+            complete = false;
+        }
+        public CustomColor(float r, float g, float b, float a)
+        {
             float grayValue = GetGaryValue(r,g,b,a);
             
-            originColor = new Color(r, g, b, a);
-            grayColor = new Color(grayValue, grayValue, grayValue, grayValue);
+            originColorMatchColor = new ColorMatchColor(r, g, b, a);
+            grayColorMatchColor = new ColorMatchColor(grayValue, grayValue, grayValue, grayValue);
             complete = false;
         }
         private float GetGaryValue(float r,float g,float b,float a)
