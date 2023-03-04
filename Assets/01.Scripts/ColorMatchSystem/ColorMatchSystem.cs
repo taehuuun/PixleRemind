@@ -1,15 +1,17 @@
 using System.Collections.Generic;
+using LTH.ColorMatch.Interfaces;
 using UnityEngine;
 using LTH.ColorMatch.UI;
 
 namespace LTH.ColorMatch.Managers
 {
-    public class ColorMatchSystem : MonoBehaviour
+    public class ColorMatchSystem : MonoBehaviour, ISubject
     {
         public ColorSlot targetColorSlot;
         public List<ColorSlot> selectColorSlots;
         public ColorFindGameUI ui;
-        
+
+        private List<IObserver> _observers = new List<IObserver>();
         public int score;
         public float similarRange = 80f;
         public float decRangeValue = 0.05f;
@@ -111,6 +113,30 @@ namespace LTH.ColorMatch.Managers
             float g = Mathf.Clamp(Random.Range(targetColor.g - range, targetColor.g + range), 0f, 1f);
             float b = Mathf.Clamp(Random.Range(targetColor.b - range, targetColor.b + range), 0f, 1f);
             return new Color(r, g, b);
+        }
+
+        public void RegisterObserver(IObserver observer)
+        {
+            if (!_observers.Contains(observer))
+            {
+                _observers.Add(observer);
+            }
+        }
+
+        public void RemoveObserver(IObserver observer)
+        {
+            if (_observers.Contains(observer))
+            {
+                _observers.Remove(observer);
+            }
+        }
+
+        public void NotifyObservers()
+        {
+            foreach (IObserver observer in _observers)
+            {
+                observer.Update();
+            }
         }
     }
 }
