@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.IO;
 using LTH.ColorMatch.Data;
 using LTH.ColorMatch.Managers;
+using Unity.PlasticSCM.Editor.WebApi;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -42,9 +43,11 @@ namespace LTH.ColorMatch.UI
             {
                 for (int x = 0; x < cellSize; x++)
                 {
-                    Color color = pixelData[y][x].complete ? pixelData[y][x].originColor : pixelData[y][x].grayColor;
+                    ColorMatchColor colorMatchColor = pixelData[y][x].complete ? pixelData[y][x].originColorMatchColor : pixelData[y][x].grayColorMatchColor;
+                    Color setColor = new Color(colorMatchColor.r, colorMatchColor.g, colorMatchColor.b,
+                        colorMatchColor.a);
                     _boardData[y, x] = Instantiate(cellPrefab);
-                    _boardData[y, x].SetCell(cellGenParent, width, height, x, y, color);
+                    _boardData[y, x].SetCell(cellGenParent, width, height, x, y, setColor);
                 }
             }
         }
