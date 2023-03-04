@@ -10,14 +10,10 @@ namespace LTH.ColorMatch.Test
     public class ExtractPixelTest : MonoBehaviour
     {
         public Texture2D testImage;
-
+        public GalleryTopic topic;
+        public Difficulty difficulty;
         public PixelArtData testData;
-        public Transform cellParent;
 
-        public Cell cellPrefabs;
-        public Cell[,] board;
-        
-        public bool isBlackWhite = false;
         private void Start()
         {
             if (DataManager.JsonFileExist(testImage.name))
@@ -26,7 +22,7 @@ namespace LTH.ColorMatch.Test
             }
             else
             {
-                testData = PixelDataExtractor.ExportPixelData(GalleryTopic.Animal, testImage.name, testImage,Difficulty.Easy);
+                testData = PixelDataExtractor.ExportPixelData(topic, testImage.name, testImage, difficulty);
                 DataManager.SaveJsonData(JsonConvert.SerializeObject(testData), testImage.name);
             }
         }
