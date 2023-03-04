@@ -17,7 +17,8 @@ namespace LTH.ColorMatch.Utill
                 
                 for (int x = 0; x < extractTarget.width; x++)
                 {
-                    CustomColor customColor = new CustomColor(extractTarget.GetPixel(x, y));
+                    Color getPixelColor = extractTarget.GetPixel(x, y);
+                    CustomColor customColor = new CustomColor(getPixelColor.r,getPixelColor.g,getPixelColor.b,getPixelColor.a);
                     rowPixelDatas.Add(customColor);
                 }
                 
