@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.IO;
 using LTH.ColorMatch.Data;
+using LTH.ColorMatch.Enums;
 using LTH.ColorMatch.Managers;
 using UnityEngine;
 using UnityEngine.UI;
@@ -25,10 +26,10 @@ namespace LTH.ColorMatch.UI
         {
             _pixelArts = DataManager.GetFiles(GalleryManager.topic);
 
-            CreateTopicSlot();
+            CreatePixelArtSlot();
         }
 
-        private void CreateTopicSlot()
+        private void CreatePixelArtSlot()
         {
             foreach (var pixelArt in _pixelArts)
             {
@@ -36,7 +37,7 @@ namespace LTH.ColorMatch.UI
                 newPixelArtSlot.titleText.text = pixelArt;
                 newPixelArtSlot.pixelData =
                     DataManager.LoadJsonData<PixelArtData>(Path.Combine(GalleryManager.topic, pixelArt));
-                newPixelArtSlot.GetComponent<Button>().onClick.AddListener(() => ui.SelectPage(ui.pixelArtPage));
+                newPixelArtSlot.GetComponent<Button>().onClick.AddListener(() => ui.SelectPage(GalleryPage.ColorMatch));
                 Debug.Log($"Pixel Data Path : {GalleryManager.topic + "/"+pixelArt}");
             }
         }
