@@ -35,7 +35,7 @@ namespace LTH.ColorMatch.Data
             float grayValue = GetGaryValue(colorMatchColor.r, colorMatchColor.g, colorMatchColor.b, colorMatchColor.a);
             
             originColorMatchColor = new ColorMatchColor(colorMatchColor.r, colorMatchColor.g, colorMatchColor.b, colorMatchColor.a);
-            grayColorMatchColor = new ColorMatchColor(grayValue, grayValue, grayValue, grayValue);
+            grayColorMatchColor = new ColorMatchColor(grayValue, grayValue, grayValue, colorMatchColor.a);
             complete = false;
         }
         public CustomColor(float r, float g, float b, float a)
@@ -43,12 +43,12 @@ namespace LTH.ColorMatch.Data
             float grayValue = GetGaryValue(r,g,b,a);
             
             originColorMatchColor = new ColorMatchColor(r, g, b, a);
-            grayColorMatchColor = new ColorMatchColor(grayValue, grayValue, grayValue, grayValue);
+            grayColorMatchColor = new ColorMatchColor(grayValue, grayValue, grayValue, a);
             complete = false;
         }
         private float GetGaryValue(float r,float g,float b,float a)
         {
-            return (r + g + b + a) / 3;
+            return (r + g + b) / 3;
         }
     }
 }
