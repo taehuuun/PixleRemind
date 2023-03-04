@@ -1,13 +1,13 @@
-
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting.FullSerializer;
 using UnityEngine;
 
 namespace LTH.ColorMatch.Data
 {
     public class CustomColor
     {
+        public Color originColor;
+        public Color grayColor;
+        public bool complete;
+        
         public float r;
         public float g;
         public float b;
@@ -26,6 +26,12 @@ namespace LTH.ColorMatch.Data
             g = color.g;
             b = color.b;
             a = color.a;
+            
+            float grayValue = GetGaryValue(r, g, b, a);
+            
+            originColor = new Color(r, g, b, a);
+            grayColor = new Color(grayValue, grayValue, grayValue, grayValue);
+            complete = false;
         }
         public CustomColor(float fr, float fg, float fb, float fa)
         {
@@ -33,11 +39,16 @@ namespace LTH.ColorMatch.Data
             g = fg;
             b = fb;
             a = fa;
-        }
 
-        public Color ConvertColor()
+            float grayValue = GetGaryValue(r,g,b,a);
+            
+            originColor = new Color(r, g, b, a);
+            grayColor = new Color(grayValue, grayValue, grayValue, grayValue);
+            complete = false;
+        }
+        private float GetGaryValue(float r,float g,float b,float a)
         {
-            return new Color(r, g, b, a);
+            return (r + g + b + a) / 3;
         }
     }
 }
