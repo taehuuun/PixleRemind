@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using LTH.ColorMatch.Interfaces;
 using UnityEngine;
 using LTH.ColorMatch.UI;
@@ -9,33 +10,67 @@ namespace LTH.ColorMatch.Managers
     {
         public ColorSlot targetColorSlot;
         public List<ColorSlot> selectColorSlots;
-        public ColorFindGameUI ui;
 
-        private List<IObserver> _observers = new List<IObserver>();
-        public int score;
-        public float similarRange = 80f;
+        public List<IObserver> observers = new List<IObserver>();
+        private int _score;
+        private int _life;
+        private float _similarRange;
+        private bool _isGameOver = false;
+        
         public float decRangeValue = 0.05f;
-        public int life = 3;
+        public int maxLife;
+        public float maxSimilarRange;
 
-        public static bool isGameOver = false;
+        public int Score
+        {
+            get => _score;
+            set
+            {
+                _score = value;
+                NotifyObservers();
+            }
+        }
+        public int Life
+        {
+            get { return _life; }
+            set
+            {
+                _life = value;
+                NotifyObservers();
+            }
+        }
+        public float SimilarRange
+        {
+            get { return _similarRange; }
+            set
+            {
+                _similarRange = value;
+                NotifyObservers();
+            }
+        }
+        public bool IsGameOver
+        {
+            get { return _isGameOver; }
+            set
+            {
+                _isGameOver = value;
+                NotifyObservers();
+            }
+        }
+        
         
         private void Start()
         {
-            GenerateNewPuzzle();
-            ui.UpdateSimilarity(similarRange);
-            ui.UpdateLife(life);
+            ReStart();
         }
 
         public void ReStart()
         {
-            life = 3;
-            score = 0;
-            similarRange = 80f;
-            
-            ui.UpdateScore(score);
-            ui.UpdateSimilarity(similarRange);
-            ui.UpdateLife(life);
-            ui.gameOverPopup.gameObject.SetActive(false);
+            Life = maxLife;
+            Score = 0;
+            SimilarRange = maxSimilarRange;
+            IsGameOver = false;
+
             GenerateNewPuzzle();
         }
         
@@ -43,26 +78,19 @@ namespace LTH.ColorMatch.Managers
         {
             if (slot.slotImage.color == targetColorSlot.slotImage.color)
             {
-                score++;
-                similarRange = Mathf.Clamp(similarRange - decRangeValue, 5, 100);
-                ui.UpdateScore(score);
-                ui.UpdateSimilarity(similarRange);
+                Score++;
+                SimilarRange = Mathf.Clamp(SimilarRange - decRangeValue, 5, 100);
                 GenerateNewPuzzle();
             }
             else
             {
-                if (life > 0)
+                if (Life > 0)
                 {
-                    Debug.Log("Not Match");
-                    life--;
-                    ui.UpdateLife(life);
+                    Life--;
 
-                    if (life == 0)
+                    if (Life == 0)
                     {
-                        Debug.Log("GameOver");
-                        isGameOver = false;
-                        ui.gameOverPopScoreText.text = $"이번 점수 : {score.ToString()}점!!";
-                        ui.OpenPopup(ui.gameOverPopup);
+                        IsGameOver = true;
                     }
                 }
             }
@@ -77,7 +105,6 @@ namespace LTH.ColorMatch.Managers
         {
             var randColor = Random.ColorHSV();
             targetColorSlot.SetSlot(randColor);
-            ui.targetColorHexCodeText.text = targetColorSlot.slotHexCode;
         }
         private void SetRandomSelectColorSlots()
         {
@@ -93,11 +120,11 @@ namespace LTH.ColorMatch.Managers
                 }
                 else
                 {
-                    randColor = GetRandomSimilarColor(targetColorSlot.slotImage.color,similarRange) ;
+                    randColor = GetRandomSimilarColor(targetColorSlot.slotImage.color,SimilarRange) ;
 
                     while (randColor == targetColorSlot.slotImage.color)
                     {
-                        randColor = GetRandomSimilarColor(targetColorSlot.slotImage.color,similarRange) ;
+                        randColor = GetRandomSimilarColor(targetColorSlot.slotImage.color,SimilarRange) ;
                     }
                 }
                 
@@ -117,25 +144,25 @@ namespace LTH.ColorMatch.Managers
 
         public void RegisterObserver(IObserver observer)
         {
-            if (!_observers.Contains(observer))
+            if (!observers.Contains(observer))
             {
-                _observers.Add(observer);
+                observers.Add(observer);
             }
         }
 
         public void RemoveObserver(IObserver observer)
         {
-            if (_observers.Contains(observer))
+            if (observers.Contains(observer))
             {
-                _observers.Remove(observer);
+                observers.Remove(observer);
             }
         }
 
         public void NotifyObservers()
         {
-            foreach (IObserver observer in _observers)
+            foreach (IObserver observer in observers)
             {
-                observer.Update();
+                observer.UpdateSubjectState();
             }
         }
     }
