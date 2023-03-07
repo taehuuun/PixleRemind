@@ -31,12 +31,6 @@ namespace LTH.ColorMatch.Managers
         /// <returns>토픽 리스트</returns>
         public List<string> GetTopics()
         {
-            if (string.IsNullOrEmpty(selectedTopic))
-            {
-                Debug.LogWarning("선택된 Topic이 없습니다.");
-                return null;
-            }
-
             return DataManager.GetTopics();
         }
 
@@ -46,9 +40,9 @@ namespace LTH.ColorMatch.Managers
         /// <returns>픽셀 아트 리스트</returns>
         public List<string> GetPixelArts()
         {
-            if (string.IsNullOrEmpty(selectedTopic) || string.IsNullOrEmpty(selectedPixelArt))
+            if (string.IsNullOrEmpty(selectedTopic))
             {
-                Debug.LogWarning("선택된 Topic 또는 PixelArt가 없습니다.");
+                Debug.LogWarning("선택된 Topic가 없습니다.");
                 return null;
             }
 
@@ -79,7 +73,7 @@ namespace LTH.ColorMatch.Managers
         {
             string jsonData = JsonConvert.SerializeObject(data);
             string path = Path.Combine(selectedTopic, selectedPixelArt);
-            DataManager.SaveJsonData(jsonData, path);
+            DataManager.SaveJsonData(selectedTopic, selectedPixelArt, jsonData);
         }
     }
 }

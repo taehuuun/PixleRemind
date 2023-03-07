@@ -31,9 +31,9 @@ namespace LTH.ColorMatch.Managers
         /// </summary>
         /// <param name="jsonData">저장할 JSON 데이터</param>
         /// <param name="fileName">저장할 파일 이름</param>
-        public static void SaveJsonData(string jsonData, string fileName)
+        public static void SaveJsonData(string topic,string pixelArt,string jsonData)
         {
-            SaveJsonDataToFile(jsonData,fileName);
+            SaveJsonDataToFile(topic, pixelArt, jsonData);
         }
         /// <summary>
         /// JSON 데이터를 로드하는 함수
@@ -81,14 +81,17 @@ namespace LTH.ColorMatch.Managers
 
             return directoryNames;
         }
+
         /// <summary>
         /// JSON 데이터를 파일로 저장하는 함수
         /// </summary>
-        /// <param name="fileName">저장할 파일 이름</param>
+        /// <param name="topic">저장할 Topic</param>
+        /// <param name="pixelArt">저장할 PixelArt</param>
         /// <param name="jsonData">저장할 JSON 데이터</param>
-        private static void SaveJsonDataToFile(string fileName, string jsonData)
+        private static void SaveJsonDataToFile(string topic,string pixelArt, string jsonData)
         {
-            string path = Path.Combine(BasePath, $"{fileName}.json");
+            string path = Path.Combine(BasePath, topic, $"{pixelArt}.json");
+            Debug.Log(path);
             byte[] bytes = System.Text.Encoding.UTF8.GetBytes(jsonData);
             string code = System.Convert.ToBase64String(bytes);
 
