@@ -65,9 +65,9 @@ namespace LTH.ColorMatch.Managers
             return fileNames;
         }
         /// <summary>
-        /// BasePath의 모들 Topic을 가져오는 함수
+        /// BasePath의 모든 Topic 이름을 가져오는 함수
         /// </summary>
-        /// <returns>Topic이 담긴 리스트</returns>
+        /// <returns>Topic 이름이 담긴 리스트</returns>
         private static List<string> GetTopicNames()
         {
             List<string> directoryNames = new List<string>();
@@ -84,50 +84,51 @@ namespace LTH.ColorMatch.Managers
         /// <summary>
         /// JSON 데이터를 파일로 저장하는 함수
         /// </summary>
-        /// <param name="jsonData">저장할 JSON 데이터</param>
         /// <param name="fileName">저장할 파일 이름</param>
-        private static void SaveJsonDataToFile(string jsonData, string fileName)
+        /// <param name="jsonData">저장할 JSON 데이터</param>
+        private static void SaveJsonDataToFile(string fileName, string jsonData)
         {
-            string path = Path.Combine(BasePath,$"{fileName}.json");
+            string path = Path.Combine(BasePath, $"{fileName}.json");
             byte[] bytes = System.Text.Encoding.UTF8.GetBytes(jsonData);
             string code = System.Convert.ToBase64String(bytes);
-        
+
             File.WriteAllText(path, code);
         }
         /// <summary>
         /// JSON 데이터를 로드하는 함수
         /// </summary>
-        /// <param name="fileName">로드할 파일 이름</param>
         /// <typeparam name="T">로드할 데이터 타입</typeparam>
-        /// <returns name="T">T타입 오브젝트 리턴</returns>
-        private static T LoadJsonDataFromFile<T> (string fileName)
+        /// <param name="fileName">로드할 파일 이름</param>
+        /// <returns>T 타입 오브젝트 리턴</returns>
+        private static T LoadJsonDataFromFile<T>(string fileName)
         {
-            string path = Path.Combine(BasePath,$"{fileName}.json");
+            string path = Path.Combine(BasePath, $"{fileName}.json");
 
-            T loadData = default (T);
+            T loadData = default(T);
 
-            if (FileExist(fileName))
+            if (FileExists(fileName))
             {
-                StreamReader reader = new StreamReader(path);
-                string code = reader.ReadToEnd();
-                byte[] bytes = System.Convert.FromBase64String(code);
-                string loadJson = System.Text.Encoding.UTF8.GetString(bytes);
-                
-                loadData = JsonConvert.DeserializeObject<T>(loadJson);
+                using (StreamReader reader = new StreamReader(path))
+                {
+                    string code = reader.ReadToEnd();
+                    byte[] bytes = System.Convert.FromBase64String(code);
+                    string loadJson = System.Text.Encoding.UTF8.GetString(bytes);
+                    loadData = JsonConvert.DeserializeObject<T>(loadJson);
+                }
             }
             else
             {
-                Debug.LogError("해당 json파일이 존재 하지 않음");
+                Debug.LogError($"해당 json 파일이 존재하지 않음: {path}");
             }
 
             return loadData;
         }
         /// <summary>
-        /// 주어진 경로의 파일이 존재하는지 체크하는 함수
+        /// 파일이 존재하는지 확인합니다.
         /// </summary>
-        /// <param name="fileName">체크할 파일 이름</param>
-        /// <returns>파일 유무리턴</returns>
-        private static bool FileExist(string fileName)
+        /// <param name="fileName">파일 이름</param>
+        /// <returns>파일의 존재 여부</returns>
+        private static bool FileExists(string fileName)
         {
             string path = Path.Combine(BasePath,$"{fileName}.json");
             return File.Exists(path);
