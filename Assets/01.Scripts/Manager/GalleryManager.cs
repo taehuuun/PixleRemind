@@ -30,7 +30,7 @@ namespace LTH.ColorMatch.Managers
             }
         }
 
-        public List<string> GetTopicDatas()
+        public List<string> GetTopics()
         {
             if (topic == null)
             {
@@ -38,9 +38,9 @@ namespace LTH.ColorMatch.Managers
                 return null;
             }
 
-            return DataManager.GetDirectorys();
+            return DataManager.GetTopics();
         }
-        public List<string> GetPixelArtDatas()
+        public List<string> GetPixelArts()
         {
             if (topic == null)
             {
@@ -54,7 +54,7 @@ namespace LTH.ColorMatch.Managers
                 return null;
             }
             
-            return DataManager.GetFiles(GalleryManager.ins.topic);
+            return DataManager.GetPixelArts(topic);
         }
         public PixelArtData GetPixelArtData()
         {

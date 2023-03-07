@@ -23,7 +23,7 @@ namespace LTH.ColorMatch.UI
         }
         private void CreateTopicSlot()
         {
-            List<string> topics = GalleryManager.ins.GetTopicDatas();
+            List<string> topics = GalleryManager.ins.GetTopics();
             
             foreach (var topic in topics)
             {

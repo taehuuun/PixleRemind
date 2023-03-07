@@ -27,7 +27,7 @@ namespace LTH.ColorMatch.UI
 
         private void CreatePixelArtSlot()
         {
-            List<string> pixelArts = GalleryManager.ins.GetPixelArtDatas();
+            List<string> pixelArts = GalleryManager.ins.GetPixelArts();
             
             foreach (var pixelArt in pixelArts)
             {

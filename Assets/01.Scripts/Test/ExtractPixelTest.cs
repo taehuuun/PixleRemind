@@ -17,15 +17,8 @@ namespace LTH.ColorMatch.Test
 
         private void Start()
         {
-            if (DataManager.JsonFileExist(Path.Combine(topic.ToString(),testImage.name)))
-            {
-                testData = DataManager.LoadJsonData<PixelArtData>(Path.Combine(topic.ToString(),testImage.name));
-            }
-            else
-            {
-                testData = PixelDataExtractor.ExportPixelData(topic, testImage.name, testImage, difficulty);
-                DataManager.SaveJsonData(JsonConvert.SerializeObject(testData), Path.Combine(topic.ToString(),testImage.name));
-            }
+            testData = PixelDataExtractor.ExportPixelData(topic, testImage.name, testImage, difficulty);
+            DataManager.SaveJsonData(JsonConvert.SerializeObject(testData), Path.Combine(topic.ToString(),testImage.name));
         }
     }
 }
