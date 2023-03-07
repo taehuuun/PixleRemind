@@ -14,8 +14,6 @@ namespace LTH.ColorMatch.UI
 
         public PixelArtSlot pixelArtSlotPrefab;
         public Transform slotGenTrans;
-        
-        private List<string> _pixelArts = new List<string>();
 
         private void Start()
         {
@@ -24,21 +22,20 @@ namespace LTH.ColorMatch.UI
 
         private void SetPage()
         {
-            _pixelArts = DataManager.GetFiles(GalleryManager.topic);
-
             CreatePixelArtSlot();
         }
 
         private void CreatePixelArtSlot()
         {
-            foreach (var pixelArt in _pixelArts)
+            List<string> pixelArts = GalleryManager.ins.GetPixelArtDatas();
+            
+            foreach (var pixelArt in pixelArts)
             {
                 PixelArtSlot newPixelArtSlot = Instantiate(pixelArtSlotPrefab, slotGenTrans);
                 newPixelArtSlot.titleText.text = pixelArt;
                 newPixelArtSlot.pixelData =
-                    DataManager.LoadJsonData<PixelArtData>(Path.Combine(GalleryManager.topic, pixelArt));
+                    DataManager.LoadJsonData<PixelArtData>(Path.Combine(GalleryManager.ins.topic, pixelArt));
                 newPixelArtSlot.GetComponent<Button>().onClick.AddListener(() => ui.SelectPage(GalleryPage.ColorMatch));
-                Debug.Log($"Pixel Data Path : {GalleryManager.topic + "/"+pixelArt}");
             }
         }
     }
