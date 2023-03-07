@@ -1,3 +1,5 @@
+using System;
+using System.Runtime.CompilerServices;
 using LTH.ColorMatch.Interfaces;
 using LTH.ColorMatch.Managers;
 using TMPro;
@@ -25,7 +27,12 @@ namespace LTH.ColorMatch.UI
             system.RegisterObserver(this);
             scoreText.text = "0";
         }
-        
+
+        private void Start()
+        {
+            system.ReStart();
+        }
+
         public void UpdateScore(int score)
         {
             scoreText.text = score.ToString();

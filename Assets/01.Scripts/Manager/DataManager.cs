@@ -54,11 +54,11 @@ namespace LTH.ColorMatch.Managers
         public static void SaveJsonData(string jsonData, string fileName)
         {
             string path = Application.persistentDataPath + "/" + fileName + ".json";
-            byte[] bytes = System.Text.Encoding.UTF8.GetBytes(jsonData);
-            string code = System.Convert.ToBase64String(bytes);
+            // byte[] bytes = System.Text.Encoding.UTF8.GetBytes(jsonData);
+            // string code = System.Convert.ToBase64String(bytes);
         
-            File.WriteAllText(path, code);
-            // File.WriteAllText(path, jsonData);
+            // File.WriteAllText(path, code);
+            File.WriteAllText(path, jsonData);
 
             Debug.Log($"Save Path : {path}");
         }
@@ -72,12 +72,13 @@ namespace LTH.ColorMatch.Managers
             {
                 StreamReader reader = new StreamReader(path);
                 string code = reader.ReadToEnd();
-                byte[] bytes = System.Convert.FromBase64String(code);
-                string loadJson = System.Text.Encoding.UTF8.GetString(bytes);
+                // byte[] bytes = System.Convert.FromBase64String(code);
+                // string loadJson = System.Text.Encoding.UTF8.GetString(bytes);
                 
-                Debug.Log(loadJson);
-                //
-                loadObj = JsonConvert.DeserializeObject<T>(loadJson);
+                // Debug.Log(loadJson);
+                // loadObj = JsonConvert.DeserializeObject<T>(loadJson);
+                Debug.Log(code);
+                loadObj = JsonConvert.DeserializeObject<T>(code);
             }
             else
             {

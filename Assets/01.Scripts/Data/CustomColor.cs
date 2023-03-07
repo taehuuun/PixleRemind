@@ -1,7 +1,9 @@
+using System;
 using UnityEngine;
 
 namespace LTH.ColorMatch.Data
 {
+    [Serializable]
     public class ColorMatchColor
     {
         public float r;
@@ -23,6 +25,8 @@ namespace LTH.ColorMatch.Data
         public ColorMatchColor originColorMatchColor;
         public ColorMatchColor grayColorMatchColor;
         public bool complete;
+        // public int X;
+        // public int Y;
         
         public CustomColor()
         {
@@ -45,6 +49,8 @@ namespace LTH.ColorMatch.Data
             originColorMatchColor = new ColorMatchColor(r, g, b, a);
             grayColorMatchColor = new ColorMatchColor(grayValue, grayValue, grayValue, a);
             complete = false;
+            // X = x;
+            // Y = y;
         }
         private float GetGaryValue(float r,float g,float b,float a)
         {

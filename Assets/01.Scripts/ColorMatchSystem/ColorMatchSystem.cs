@@ -1,8 +1,6 @@
 using System.Collections.Generic;
-using System.Linq;
 using LTH.ColorMatch.Interfaces;
 using UnityEngine;
-using LTH.ColorMatch.UI;
 
 namespace LTH.ColorMatch.Managers
 {
@@ -24,7 +22,7 @@ namespace LTH.ColorMatch.Managers
         public int Score
         {
             get => _score;
-            set
+            private set
             {
                 _score = value;
                 NotifyObservers();
@@ -32,8 +30,8 @@ namespace LTH.ColorMatch.Managers
         }
         public int Life
         {
-            get { return _life; }
-            set
+            get => _life;
+            private set
             {
                 _life = value;
                 NotifyObservers();
@@ -41,8 +39,8 @@ namespace LTH.ColorMatch.Managers
         }
         public float SimilarRange
         {
-            get { return _similarRange; }
-            set
+            get => _similarRange;
+            private set
             {
                 _similarRange = value;
                 NotifyObservers();
@@ -50,18 +48,12 @@ namespace LTH.ColorMatch.Managers
         }
         public bool IsGameOver
         {
-            get { return _isGameOver; }
-            set
+            get => _isGameOver;
+            private set
             {
                 _isGameOver = value;
                 NotifyObservers();
             }
-        }
-        
-        
-        private void Start()
-        {
-            ReStart();
         }
 
         public void ReStart()
@@ -74,24 +66,39 @@ namespace LTH.ColorMatch.Managers
             GenerateNewPuzzle();
         }
         
-        public void SelectSlot(ColorSlot slot)
+        public bool CheckMatch(ColorSlot slot)
         {
-            if (slot.slotImage.color == targetColorSlot.slotImage.color)
+            bool isMatched = (slot.slotImage.color == targetColorSlot.slotImage.color);
+            
+            if (isMatched)
             {
-                Score++;
-                SimilarRange = Mathf.Clamp(SimilarRange - decRangeValue, 5, 100);
+                IncreaseScore();
                 GenerateNewPuzzle();
             }
-            else
+            else if (Life > 0)
             {
-                if (Life > 0)
-                {
-                    Life--;
+                Handheld.Vibrate();
+                DecreaseLife();
+            }
 
-                    if (Life == 0)
-                    {
-                        IsGameOver = true;
-                    }
+            return isMatched;
+        }
+
+        private void IncreaseScore()
+        {
+            Score++;
+            SimilarRange = Mathf.Clamp(SimilarRange - decRangeValue, 5, 100);
+        }
+
+        private void DecreaseLife()
+        {
+            if (Life > 0)
+            {
+                Life--;
+
+                if (Life == 0)
+                {
+                    IsGameOver = true;
                 }
             }
         }
@@ -112,7 +119,7 @@ namespace LTH.ColorMatch.Managers
             
             for (int i = 0; i < selectColorSlots.Count; i++)
             {
-                Color randColor = new Color();
+                Color randColor;
 
                 if (i == answerIdx)
                 {
