@@ -12,8 +12,6 @@ namespace LTH.ColorMatch.UI
         public TopicSlot topicSlotPrefab;
         public Transform topicGenTrans;
         
-        private List<string> _topics = new List<string>();
-
         private void Start()
         {
             SetPage();
@@ -21,12 +19,13 @@ namespace LTH.ColorMatch.UI
 
         private void SetPage()
         {
-            _topics = DataManager.GetDirectorys();
             CreateTopicSlot();
         }
         private void CreateTopicSlot()
         {
-            foreach (var topic in _topics)
+            List<string> topics = GalleryManager.ins.GetTopicDatas();
+            
+            foreach (var topic in topics)
             {
                 TopicSlot newTopicSlot = Instantiate(topicSlotPrefab, topicGenTrans);
                 newTopicSlot.titleText.text = topic;
