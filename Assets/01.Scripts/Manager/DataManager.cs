@@ -7,21 +7,6 @@ namespace LTH.ColorMatch.Managers
 {
     public class DataManager : MonoBehaviour
     {
-        public static DataManager ins;
-        
-        private void Awake()
-        {
-            if (ins == null)
-            {
-                ins = this;
-                DontDestroyOnLoad(this.gameObject);
-            }
-            else
-            {
-                Destroy(this.gameObject);
-            }
-        }
-
         public static List<string> GetFiles(string topic)
         {
             List<string> files = new List<string>();
