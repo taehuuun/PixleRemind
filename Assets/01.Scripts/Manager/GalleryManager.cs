@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.IO;
 using LTH.ColorMatch.Data;
@@ -7,15 +6,11 @@ using UnityEngine;
 
 namespace LTH.ColorMatch.Managers
 {
-    // 갤러리의 ColorMathch 시스템을 관리
     public class GalleryManager : MonoBehaviour
     {
         public static GalleryManager ins;
-        // TopicPage 에서 선택한 토픽을 저장
-        public string topic;
-        
-        // PixelArtPage 에서 선택한 PixelArt를 저장
-        public string pixelArt;
+        public string selectedTopic;
+        public string selectedPixelArt;
         public bool isMatching;
         
         private void Awake()
@@ -30,55 +25,61 @@ namespace LTH.ColorMatch.Managers
             }
         }
 
+        /// <summary>
+        /// 선택된 토픽의 리스트를 가져오는 함수
+        /// </summary>
+        /// <returns>토픽 리스트</returns>
         public List<string> GetTopics()
         {
-            if (topic == null)
+            if (string.IsNullOrEmpty(selectedTopic))
             {
-                Debug.LogError("잘못된 Topic");
+                Debug.LogWarning("선택된 Topic이 없습니다.");
                 return null;
             }
 
             return DataManager.GetTopics();
         }
+
+        /// <summary>
+        /// 선택된 토픽의 픽셀 아트 리스트를 가져오는 함수
+        /// </summary>
+        /// <returns>픽셀 아트 리스트</returns>
         public List<string> GetPixelArts()
         {
-            if (topic == null)
+            if (string.IsNullOrEmpty(selectedTopic) || string.IsNullOrEmpty(selectedPixelArt))
             {
-                Debug.LogError("잘못된 Topic");
+                Debug.LogWarning("선택된 Topic 또는 PixelArt가 없습니다.");
                 return null;
             }
 
-            if (pixelArt == null)
-            {
-                Debug.LogError("잘못된 PixelArt");
-                return null;
-            }
-            
-            return DataManager.GetPixelArts(topic);
+            return DataManager.GetPixelArts(selectedTopic);
         }
-        public PixelArtData GetPixelArtData()
+
+        /// <summary>
+        /// 선택된 토픽과 픽셀 아트의 데이터를 가져오는 함수
+        /// </summary>
+        /// <returns>PixelArtData 객체</returns>
+        public PixelArtData LoadPixelArtData()
         {
-            if (topic == null)
+            if (string.IsNullOrEmpty(selectedTopic) || string.IsNullOrEmpty(selectedPixelArt))
             {
-                Debug.LogError("잘못된 Topic");
+                Debug.LogWarning("선택된 Topic 또는 PixelArt가 없습니다.");
                 return null;
             }
 
-            if (pixelArt == null)
-            {
-                Debug.LogError("잘못된 PixelArt");
-                return null;
-            }
-
-            string path = Path.Combine(topic, pixelArt);
-            
+            string path = Path.Combine(selectedTopic, selectedPixelArt);
             return DataManager.LoadJsonData<PixelArtData>(path);
         }
+
+        /// <summary>
+        /// 픽셀 아트 데이터를 저장하는 함수
+        /// </summary>
+        /// <param name="data">저장할 PixelArtData 객체</param>
         public void SavePixelArtData(PixelArtData data)
         {
             string jsonData = JsonConvert.SerializeObject(data);
-            string path = Path.Combine(topic, pixelArt);
-            DataManager.SaveJsonData(jsonData,path);
+            string path = Path.Combine(selectedTopic, selectedPixelArt);
+            DataManager.SaveJsonData(jsonData, path);
         }
     }
 }

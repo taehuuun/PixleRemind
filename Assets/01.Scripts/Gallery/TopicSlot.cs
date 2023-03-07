@@ -7,7 +7,7 @@ namespace LTH.ColorMatch.UI
     {
         public override void OnSlotClick()
         {
-            GalleryManager.ins.topic = titleText.text;
+            GalleryManager.ins.selectedTopic = titleText.text;
             Debug.Log($"Topic Slot Click : {titleText.text}");
         }
     }

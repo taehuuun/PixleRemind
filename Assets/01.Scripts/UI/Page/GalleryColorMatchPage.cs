@@ -96,7 +96,7 @@ namespace LTH.ColorMatch.UI
         private void SetPage()
         {
             system.RegisterObserver(this);
-            _data = GalleryManager.ins.GetPixelArtData();
+            _data = GalleryManager.ins.LoadPixelArtData();
             int boardSize = (int)board.rectTransform.rect.width;
             int cellSize = _data.size;
 
