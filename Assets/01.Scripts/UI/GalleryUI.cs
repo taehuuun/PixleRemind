@@ -1,5 +1,5 @@
-using System.Collections.Generic;
 using LTH.ColorMatch.Enums;
+using LTH.ColorMatch.Managers;
 using UnityEngine;
 
 namespace LTH.ColorMatch.UI
@@ -10,7 +10,7 @@ namespace LTH.ColorMatch.UI
         
         protected override void Update()
         {
-            if (Input.GetKeyDown(KeyCode.Escape))
+            if (Input.GetKeyDown(KeyCode.Escape) && !GalleryManager.ins.isMatching)
             {
                 Close();
             }
@@ -28,6 +28,7 @@ namespace LTH.ColorMatch.UI
         {
             if(activePopups.Count > 0)
             {
+                print($"활성화된 페이지가 있음 : {activePopups.Count}");
                 ClosePopup();
             }
             else
