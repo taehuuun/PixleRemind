@@ -41,7 +41,7 @@ namespace LTH.ColorMatch.Utill
         public static PixelArtData ExportPixelData(GalleryTopic topic, string title, Texture2D pixelArtImg, Difficulty difficulty)
         {
             ColorData colorData = ExtractPixelData(pixelArtImg);
-            PixelArtData newData = new PixelArtData(topic, title, colorData, pixelArtImg.width,0,maxFillCnt, difficulty);
+            PixelArtData newData = new PixelArtData(topic, title, colorData, pixelArtImg.width,0,maxFillCnt,false, difficulty);
             
             return newData;
         }
