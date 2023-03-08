@@ -340,10 +340,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2a61912b30a44245a7fdde530f4230e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  testImage: {fileID: 2800000, guid: 9a735899cbad8d645be50a8a11bf9ed3, type: 3}
-  cellParent: {fileID: 658979351}
-  cellPrefabs: {fileID: 2373253982236026741, guid: 538bb1fc90a6a084195a00ca41d9ce23, type: 3}
-  isBlackWhite: 0
+  testImage: {fileID: 2800000, guid: 1243c4419470e7e4382bec85340caece, type: 3}
+  topic: 0
+  difficulty: 0
+  testData:
+    topic: 0
+    title: 
+    size: 0
+    fillCount: 0
+    remainPixel: 0
+    difficulty: 0
 --- !u!4 &850680717
 Transform:
   m_ObjectHideFlags: 0

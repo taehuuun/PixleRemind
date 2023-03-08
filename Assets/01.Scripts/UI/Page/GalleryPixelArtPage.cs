@@ -1,6 +1,10 @@
 using System.Collections.Generic;
+using System.IO;
+using LTH.ColorMatch.Data;
+using LTH.ColorMatch.Enums;
 using LTH.ColorMatch.Managers;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace LTH.ColorMatch.UI
 {
@@ -8,17 +12,30 @@ namespace LTH.ColorMatch.UI
     {
         [SerializeField] private GalleryUI ui;
 
-        private List<string> _pixelArts = new List<string>();
+        public PixelArtSlot pixelArtSlotPrefab;
+        public Transform slotGenTrans;
+
+        private void Start()
+        {
+            SetPage();
+        }
 
         private void SetPage()
         {
-            _pixelArts = DataManager.GetFiles(GalleryManager.topic);
-            
-            Debug.Log(_pixelArts.Count);
+            CreatePixelArtSlot();
+        }
 
-            foreach (var pixelArt in _pixelArts)
+        private void CreatePixelArtSlot()
+        {
+            List<string> pixelArts = GalleryManager.ins.GetPixelArts();
+            
+            foreach (var pixelArt in pixelArts)
             {
-                Debug.Log($"{pixelArt}");
+                PixelArtSlot newPixelArtSlot = Instantiate(pixelArtSlotPrefab, slotGenTrans);
+                newPixelArtSlot.titleText.text = pixelArt;
+                newPixelArtSlot.pixelData =
+                    DataManager.LoadJsonData<PixelArtData>(Path.Combine(GalleryManager.ins.selectedTopic, pixelArt));
+                newPixelArtSlot.GetComponent<Button>().onClick.AddListener(() => ui.SelectPage(GalleryPage.ColorMatch));
             }
         }
     }

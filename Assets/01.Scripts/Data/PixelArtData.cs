@@ -1,5 +1,6 @@
 using System;
 using LTH.ColorMatch.Enums;
+using UnityEngine.Serialization;
 
 namespace LTH.ColorMatch.Data
 {
@@ -9,17 +10,19 @@ namespace LTH.ColorMatch.Data
         public GalleryTopic topic;
         public string title;
         public int size;
+        public int fillCount;
+        public int remainPixel;
         public Difficulty difficulty;
         public ColorData colorData;
-        public ColorData blackWhiteData;
 
-        public PixelArtData(GalleryTopic gt, string t, ColorData c, ColorData b, int s, Difficulty d)
+        public PixelArtData(GalleryTopic gt, string t, ColorData c, int s,int cnt,int remain, Difficulty d)
         {
             topic = gt;
             title = t;
             colorData = c;
-            blackWhiteData = b;
             size = s;
+            remainPixel = remain;
+            fillCount = cnt;
             difficulty = d;
         }
     }
