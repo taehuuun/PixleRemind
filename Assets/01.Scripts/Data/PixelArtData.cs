@@ -8,6 +8,7 @@ namespace LTH.ColorMatch.Data
     {
         public GalleryTopic topic;
         public string title;
+        public string thumbData;
         public int size;
         public int fillCount;
         public bool complete;
@@ -15,15 +16,16 @@ namespace LTH.ColorMatch.Data
         public ColorData colorData;
 
 
-        public PixelArtData(GalleryTopic gt, string t, ColorData c, int s,int cnt, bool cp ,Difficulty d)
+        public PixelArtData(GalleryTopic gt, string t,string td, int s,int cnt, bool cp ,Difficulty d, ColorData c)
         {
             topic = gt;
             title = t;
-            colorData = c;
+            thumbData = td;
             size = s;
             fillCount = cnt;
             complete = cp;
             difficulty = d;
+            colorData = c;
         }
     }
 }
