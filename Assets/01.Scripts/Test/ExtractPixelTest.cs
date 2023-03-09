@@ -1,4 +1,3 @@
-using System.IO;
 using LTH.ColorMatch.Data;
 using LTH.ColorMatch.Enums;
 using LTH.ColorMatch.Managers;
@@ -17,7 +16,7 @@ namespace LTH.ColorMatch.Test
 
         private void Start()
         {
-            testData = PixelDataExtractor.ExportPixelData(topic, testImage.name, testImage, difficulty);
+            testData = PixelArtUtill.ExportPixelData(topic, testImage.name, testImage, difficulty);
             DataManager.SaveJsonData( topic.ToString(),testImage.name,JsonConvert.SerializeObject(testData));
         }
     }
