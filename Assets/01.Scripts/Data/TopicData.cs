@@ -1,9 +1,13 @@
-using UnityEngine;
+using System;
 
 namespace LTH.ColorMatch.Data
 {
-    public class TopicData : MonoBehaviour
+    [Serializable]
+    public class TopicData
     {
-
+        public string title;
+        public int completeCount;
+        public int totalCount;
+        public bool complete;
     }    
 }
