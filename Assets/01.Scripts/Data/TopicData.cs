@@ -1,18 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class TopicData : MonoBehaviour
+namespace LTH.ColorMatch.Data
 {
-    // Start is called before the first frame update
-    void Start()
+    public class TopicData : MonoBehaviour
     {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    }    
 }
