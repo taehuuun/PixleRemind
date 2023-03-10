@@ -1,10 +1,9 @@
 using System.Collections;
-using System.Collections.Generic;
 using LTH.ColorMatch.Data;
 using LTH.ColorMatch.Interfaces;
 using LTH.ColorMatch.Managers;
+using LTH.ColorMatch.Utill;
 using TMPro;
-using UnityEditor.Build.Content;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -16,18 +15,18 @@ namespace LTH.ColorMatch.UI
         public TMP_Text fillCountText;
         public TMP_Text similarText;
         
-        public Cell cellPrefab;
-        public Transform cellGenParent;
+        // public Cell cellPrefab;
+        // public Transform cellGenParent;
         public ColorMatchSystem system;
         
-        private Cell[,] _boardData;
+        // private Cell[,] _boardData;
         private PixelArtData _data;
 
         public MoveUI boardMove;
         public MoveUI playBtnMove;
         public MoveUI matchUIMove;
         
-        private void Start()
+        private void OnEnable()
         {
             SetPage();
             system.ReStart();
@@ -71,9 +70,10 @@ namespace LTH.ColorMatch.UI
                     _data.fillCount--;
                     _data.colorData.remainPixel--;
                     _data.colorData.Pixels[y][x].complete = true;
-                    _boardData[y,x].Fill();
+                    
                     UpdateCountText(_data.fillCount);
                     GalleryManager.ins.SavePixelArtData(_data);
+                    board.sprite = PixelArtUtill.MakeThumbnail(_data.thumbData, _data.size);
                     return;
                 }
             }
@@ -100,26 +100,27 @@ namespace LTH.ColorMatch.UI
             int boardSize = (int)board.rectTransform.rect.width;
             int cellSize = _data.size;
 
-            GenerateBoard(boardSize, cellSize, _data);
+            board.sprite = PixelArtUtill.MakeThumbnail(_data.thumbData, _data.size);
+            // GenerateBoard(boardSize, cellSize, _data);
             UpdateCountText(_data.fillCount);
         }
-        private void GenerateBoard(int boardSize, int cellSize, PixelArtData generateData)
-        {
-            _boardData = new Cell[boardSize, boardSize];
-
-            List<List<CustomColor>> pixelData = generateData.colorData.Pixels;
-            int width = boardSize / cellSize;
-            int height = boardSize / cellSize;
-
-            for (int y = 0; y < cellSize; y++)
-            {
-                for (int x = 0; x < cellSize; x++)
-                {
-                    _boardData[y, x] = Instantiate(cellPrefab);
-                    _boardData[y, x].SetCell(cellGenParent, width, height, x, y, pixelData[y][x]);
-                }
-            }
-        }
+        // private void GenerateBoard(int boardSize, int cellSize, PixelArtData generateData)
+        // {
+        //     _boardData = new Cell[boardSize, boardSize];
+        //
+        //     List<List<CustomColor>> pixelData = generateData.colorData.Pixels;
+        //     int width = boardSize / cellSize;
+        //     int height = boardSize / cellSize;
+        //
+        //     for (int y = 0; y < cellSize; y++)
+        //     {
+        //         for (int x = 0; x < cellSize; x++)
+        //         {
+        //             _boardData[y, x] = Instantiate(cellPrefab);
+        //             _boardData[y, x].SetCell(cellGenParent, width, height, x, y, pixelData[y][x]);
+        //         }
+        //     }
+        // }
         private void UpdateCountText(int count)
         {
             // _data.fillCount++;

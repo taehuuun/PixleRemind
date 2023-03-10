@@ -59,7 +59,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.7877358, b: 0.7877358, a: 0.2784314}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -519,6 +519,14 @@ MonoBehaviour:
   titleText: {fileID: 4069952957565898247}
   thumbnailImb: {fileID: 3360739570310212032}
   difficultyText: {fileID: 5636904248200697275}
+  pixelData:
+    topic: 0
+    title: 
+    thumbData: 
+    size: 0
+    fillCount: 0
+    complete: 0
+    difficulty: 0
 --- !u!114 &8268780959793266187
 MonoBehaviour:
   m_ObjectHideFlags: 0

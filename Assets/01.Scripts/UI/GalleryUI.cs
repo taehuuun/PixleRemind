@@ -17,11 +17,11 @@ namespace LTH.ColorMatch.UI
         }
         public void SelectPage(GalleryPage page)
         {
-            if(activePopups.Count > 0)
-            {
-                ClosePopup();
-            }
-            
+            // if(activePopups.Count > 0)
+            // {
+            //     ClosePopup();
+            // }
+            //
             OpenPopup(pages[(int)page]);
         }
         public void Close()

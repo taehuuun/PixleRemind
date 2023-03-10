@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.IO;
 using LTH.ColorMatch.Data;
+using LTH.ColorMatch.Utill;
 using Newtonsoft.Json;
 using UnityEngine;
 
@@ -61,8 +62,8 @@ namespace LTH.ColorMatch.Managers
                 return null;
             }
 
-            string path = Path.Combine(selectedTopic, selectedPixelArt);
-            return DataManager.LoadJsonData<PixelArtData>(path);
+            string path = Path.Combine(DataManager.GalleryDataPath,selectedTopic);
+            return DataManager.LoadJsonData<PixelArtData>(path,selectedPixelArt);
         }
 
         /// <summary>
@@ -71,9 +72,11 @@ namespace LTH.ColorMatch.Managers
         /// <param name="data">저장할 PixelArtData 객체</param>
         public void SavePixelArtData(PixelArtData data)
         {
+            data.thumbData = PixelArtUtill.ExtractThumbnailData(data.colorData, data.size);
+            
             string jsonData = JsonConvert.SerializeObject(data);
-            string path = Path.Combine(selectedTopic, selectedPixelArt);
-            DataManager.SaveJsonData(selectedTopic, selectedPixelArt, jsonData);
+            string path = Path.Combine(DataManager.GalleryDataPath, selectedTopic);
+            DataManager.SaveJsonData(path, selectedPixelArt, jsonData);
         }
     }
 }

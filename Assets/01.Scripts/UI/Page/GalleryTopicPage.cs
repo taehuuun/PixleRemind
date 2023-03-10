@@ -11,11 +11,23 @@ namespace LTH.ColorMatch.UI
         [SerializeField] private GalleryUI ui;
         public TopicSlot topicSlotPrefab;
         public Transform topicGenTrans;
-        
+
+        // private List<TopicSlot> topicSlots = new List<TopicSlot>();
+
         private void Start()
         {
             SetPage();
         }
+
+        // private void OnDisable()
+        // {
+        //     for (int i = 0; i < topicSlots.Count; i++)
+        //     {
+        //         Destroy(topicSlots[i]);
+        //     }
+        //     
+        //     topicSlots.Clear();
+        // }
 
         private void SetPage()
         {
@@ -30,6 +42,7 @@ namespace LTH.ColorMatch.UI
                 TopicSlot newTopicSlot = Instantiate(topicSlotPrefab, topicGenTrans);
                 newTopicSlot.titleText.text = topic;
                 newTopicSlot.GetComponent<Button>().onClick.AddListener(() => ui.SelectPage(GalleryPage.PixelArt));
+                // topicSlots.Add(newTopicSlot);
             }
         }
     }
