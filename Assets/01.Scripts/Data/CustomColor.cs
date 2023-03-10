@@ -22,9 +22,9 @@ namespace LTH.ColorMatch.Data
     
     public class CustomColor
     {
-        public ColorMatchColor originColorMatchColor;
-        public ColorMatchColor grayColorMatchColor;
-        public bool complete;
+        public readonly ColorMatchColor originColorMatchColor;
+        public readonly ColorMatchColor grayColorMatchColor;
+        public bool isFeel;
         // public int X;
         // public int Y;
         
@@ -32,7 +32,7 @@ namespace LTH.ColorMatch.Data
         {
             originColorMatchColor = new ColorMatchColor(0, 0, 0, 0);
             grayColorMatchColor = new ColorMatchColor(0, 0, 0, 0);
-            complete = false;
+            isFeel = false;
         }
         public CustomColor(ColorMatchColor colorMatchColor)
         {
@@ -40,7 +40,7 @@ namespace LTH.ColorMatch.Data
             
             originColorMatchColor = new ColorMatchColor(colorMatchColor.r, colorMatchColor.g, colorMatchColor.b, colorMatchColor.a);
             grayColorMatchColor = new ColorMatchColor(grayValue, grayValue, grayValue, colorMatchColor.a);
-            complete = false;
+            isFeel = false;
         }
         public CustomColor(float r, float g, float b, float a)
         {
@@ -48,7 +48,7 @@ namespace LTH.ColorMatch.Data
             
             originColorMatchColor = new ColorMatchColor(r, g, b, a);
             grayColorMatchColor = new ColorMatchColor(grayValue, grayValue, grayValue, a);
-            complete = false;
+            isFeel = false;
             // X = x;
             // Y = y;
         }

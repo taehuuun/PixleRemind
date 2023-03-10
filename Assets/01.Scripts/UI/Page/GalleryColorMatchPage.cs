@@ -62,14 +62,14 @@ namespace LTH.ColorMatch.UI
                 int x = Random.Range(0, _data.size);
                 int y = Random.Range(0, _data.size);
 
-                bool complete = _data.colorData.Pixels[y][x].complete;
+                bool complete = _data.colorData.Pixels[y][x].isFeel;
                 ColorMatchColor originColor = _data.colorData.Pixels[y][x].originColorMatchColor;
                 
                 if (!complete && originColor.a != 0)
                 {
                     _data.fillCount--;
                     _data.colorData.remainPixel--;
-                    _data.colorData.Pixels[y][x].complete = true;
+                    _data.colorData.Pixels[y][x].isFeel = true;
                     
                     UpdateCountText(_data.fillCount);
                     GalleryManager.ins.SavePixelArtData(_data);

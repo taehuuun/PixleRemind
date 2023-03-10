@@ -48,7 +48,7 @@ namespace LTH.ColorMatch.Utill
                 for (int x = 0; x < size; x++)
                 {
                     CustomColor customColor = colorData.Pixels[y][x];
-                    ColorMatchColor pixelColor = customColor.complete
+                    ColorMatchColor pixelColor = customColor.isFeel
                         ? customColor.originColorMatchColor
                         : customColor.grayColorMatchColor;
                     Color setColor = new Color(pixelColor.r, pixelColor.g, pixelColor.b, pixelColor.a);
