@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using System.IO;
+using LTH.ColorMatch.Data;
 using LTH.ColorMatch.Enums;
 using LTH.ColorMatch.Managers;
 using UnityEngine;
@@ -39,10 +41,12 @@ namespace LTH.ColorMatch.UI
             
             foreach (var topic in topics)
             {
+                string path = Path.Combine(DataManager.GalleryDataPath, "Topics");
                 TopicSlot newTopicSlot = Instantiate(topicSlotPrefab, topicGenTrans);
                 newTopicSlot.titleText.text = topic;
+                newTopicSlot.data = DataManager.LoadJsonData<TopicData>(path, topic);
                 newTopicSlot.GetComponent<Button>().onClick.AddListener(() => ui.SelectPage(GalleryPage.PixelArt));
-                // topicSlots.Add(newTopicSlot);
+                newTopicSlot.SetSlot();
             }
         }
     }

@@ -14,24 +14,28 @@ namespace LTH.ColorMatch.Utill
             
             for (int y = 0; y < extractTarget.height; y++)
             {
-                List<CustomColor> rowPixelDatas = new List<CustomColor>();
+                // List<CustomColor> rowPixelDatas = new List<CustomColor>();
                 
                 for (int x = 0; x < extractTarget.width; x++)
                 {
                     Color getPixelColor = extractTarget.GetPixel(x, y);
-
-                    CustomColor customColor = new CustomColor(getPixelColor.r,getPixelColor.g,getPixelColor.b,getPixelColor.a);
-                    rowPixelDatas.Add(customColor);
-
+                    
                     if (getPixelColor.a >= 1)
+                    {
+                        CustomColor customColor = new CustomColor(getPixelColor.r,getPixelColor.g,getPixelColor.b,getPixelColor.a,x,y);
+
+                        pixelDatas.Pixels.Add(customColor);
                         pixelDatas.remainPixel++;
+                    }
                 }
-                
-                if(rowPixelDatas.Count > 0)                
-                    pixelDatas.Pixels.Add(rowPixelDatas);
+
+                // if (rowPixelDatas.Count > 0)
+                // {
+                //     pixelDatas.Pixels.Add(rowPixelDatas);
+                // }
             }
             
-            pixelDatas.Pixels.Reverse();
+            // pixelDatas.Pixels.Reverse();
             
             return pixelDatas;
         }
@@ -47,13 +51,19 @@ namespace LTH.ColorMatch.Utill
             {
                 for (int x = 0; x < size; x++)
                 {
-                    CustomColor customColor = colorData.Pixels[y][x];
-                    ColorMatchColor pixelColor = customColor.isFeel
-                        ? customColor.originColorMatchColor
-                        : customColor.grayColorMatchColor;
-                    Color setColor = new Color(pixelColor.r, pixelColor.g, pixelColor.b, pixelColor.a);
-                    thumbNail.SetPixel(x, y, setColor);
+                    thumbNail.SetPixel(x, y, new Color(0,0,0,0));
                 }
+            }
+
+            for (int i = 0; i < colorData.Pixels.Count; i++)
+            {
+                CustomColor customColor = colorData.Pixels[i];
+                ColorMatchColor pixelColor = customColor.isFeel
+                    ? customColor.originColorMatchColor
+                    : customColor.grayColorMatchColor;
+                Color setColor = new Color(pixelColor.r, pixelColor.g, pixelColor.b, pixelColor.a);
+
+                thumbNail.SetPixel(customColor.X, customColor.Y, setColor);
             }
             
             thumbNail.Apply();
@@ -76,13 +86,13 @@ namespace LTH.ColorMatch.Utill
             
             return newSprite;
         }
+        // ReSharper disable Unity.PerformanceAnalysis
         public static PixelArtData ExportPixelData(GalleryTopic topic, string title, Texture2D pixelArtImg, Difficulty difficulty)
         {
             ColorData colorData = ExtractPixelData(pixelArtImg);
             string thumbData = ExtractThumbnailData(colorData, pixelArtImg.width);
             PixelArtData newData = new PixelArtData(topic, title, thumbData, pixelArtImg.width, 0, false, difficulty,
                 colorData);
-            
             return newData;
         }
     }

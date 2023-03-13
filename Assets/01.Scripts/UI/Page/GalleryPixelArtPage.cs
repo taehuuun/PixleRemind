@@ -1,8 +1,10 @@
 using System.Collections.Generic;
 using System.IO;
+using Google.MiniJSON;
 using LTH.ColorMatch.Data;
 using LTH.ColorMatch.Enums;
 using LTH.ColorMatch.Managers;
+using Newtonsoft.Json;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -39,14 +41,11 @@ namespace LTH.ColorMatch.UI
 
         private void CreatePixelArtSlot()
         {
-            List<string> pixelArts = GalleryManager.ins.GetPixelArts();
-            
-            foreach (var pixelArt in pixelArts)
+           foreach (var pixelArtData in GalleryManager.ins.pixelArtDatas)
             {
                 PixelArtSlot newPixelArtSlot = Instantiate(pixelArtSlotPrefab, slotGenTrans);
                 string path = Path.Combine(DataManager.GalleryDataPath, GalleryManager.ins.selectedTopic);
-                newPixelArtSlot.pixelData =
-                    DataManager.LoadJsonData<PixelArtData>(path, pixelArt);
+                newPixelArtSlot.pixelData = pixelArtData;
                 newPixelArtSlot.SetSlot();
                 newPixelArtSlot.GetComponent<Button>().onClick.AddListener(() => ui.SelectPage(GalleryPage.ColorMatch));
                 _pixelArtSlots.Add(newPixelArtSlot);

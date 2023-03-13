@@ -15,11 +15,8 @@ namespace LTH.ColorMatch.UI
         public TMP_Text fillCountText;
         public TMP_Text similarText;
         
-        // public Cell cellPrefab;
-        // public Transform cellGenParent;
         public ColorMatchSystem system;
         
-        // private Cell[,] _boardData;
         private PixelArtData _data;
 
         public MoveUI boardMove;
@@ -34,7 +31,6 @@ namespace LTH.ColorMatch.UI
 
         public void UpdateSubjectState()
         {
-            // UpdateCorrect();
             UpdateGameOver(system.IsGameOver);
             UpdateSimilarity(system.SimilarRange);
         }
@@ -45,37 +41,34 @@ namespace LTH.ColorMatch.UI
         }
         public void FillRandomPixel()
         {
-            while (true)
+            if (_data.fillCount == 0)
             {
-                if (_data.fillCount == 0)
-                {
-                    Debug.LogError("해당 PixelArt의 FillCount가 모두 소진됨");
-                    return;
-                }
+                Debug.LogError("해당 PixelArt의 FillCount가 모두 소진됨");
+                return;
+            }
 
-                if (_data.colorData.remainPixel == 0)
-                {
-                    Debug.LogError("해당 PixelArt을 모두 채움");
-                    return;
-                }
-                
-                int x = Random.Range(0, _data.size);
-                int y = Random.Range(0, _data.size);
+            if (_data.colorData.remainPixel == 0)
+            {
+                Debug.LogError("해당 PixelArt을 모두 채움");
+                _data.complete = true;
+                return;
+            }
 
-                bool complete = _data.colorData.Pixels[y][x].isFeel;
-                ColorMatchColor originColor = _data.colorData.Pixels[y][x].originColorMatchColor;
+            int selectPixel = Random.Range(0, _data.colorData.Pixels.Count);
+
+            bool complete = _data.colorData.Pixels[selectPixel].isFeel;
+            ColorMatchColor originColor = _data.colorData.Pixels[selectPixel].originColorMatchColor;
+            
+            if (!complete && originColor.a != 0)
+            {
+                _data.fillCount--;
+                _data.colorData.remainPixel--;
+                _data.colorData.Pixels[selectPixel].isFeel = true;
+                _data.thumbData = PixelArtUtill.ExtractThumbnailData(_data.colorData, _data.size);
                 
-                if (!complete && originColor.a != 0)
-                {
-                    _data.fillCount--;
-                    _data.colorData.remainPixel--;
-                    _data.colorData.Pixels[y][x].isFeel = true;
-                    
-                    UpdateCountText(_data.fillCount);
-                    GalleryManager.ins.SavePixelArtData(_data);
-                    board.sprite = PixelArtUtill.MakeThumbnail(_data.thumbData, _data.size);
-                    return;
-                }
+                UpdateCountText(_data.fillCount);
+                board.sprite = PixelArtUtill.MakeThumbnail(_data.thumbData, _data.size);
+                GalleryManager.ins.SavePixelArtData(_data);
             }
         }
         public void SelectSlot(ColorSlot slot)
@@ -96,36 +89,17 @@ namespace LTH.ColorMatch.UI
         private void SetPage()
         {
             system.RegisterObserver(this);
-            _data = GalleryManager.ins.LoadPixelArtData();
-            int boardSize = (int)board.rectTransform.rect.width;
-            int cellSize = _data.size;
-
+            _data = GalleryManager.ins.currentPixelArt;
+            Debug.Log(_data.thumbData);
             board.sprite = PixelArtUtill.MakeThumbnail(_data.thumbData, _data.size);
-            // GenerateBoard(boardSize, cellSize, _data);
             UpdateCountText(_data.fillCount);
         }
-        // private void GenerateBoard(int boardSize, int cellSize, PixelArtData generateData)
-        // {
-        //     _boardData = new Cell[boardSize, boardSize];
-        //
-        //     List<List<CustomColor>> pixelData = generateData.colorData.Pixels;
-        //     int width = boardSize / cellSize;
-        //     int height = boardSize / cellSize;
-        //
-        //     for (int y = 0; y < cellSize; y++)
-        //     {
-        //         for (int x = 0; x < cellSize; x++)
-        //         {
-        //             _boardData[y, x] = Instantiate(cellPrefab);
-        //             _boardData[y, x].SetCell(cellGenParent, width, height, x, y, pixelData[y][x]);
-        //         }
-        //     }
-        // }
+
         private void UpdateCountText(int count)
         {
-            // _data.fillCount++;
             fillCountText.text = $"O : {count}";
         }
+        
         private void UpdateGameOver(bool gameOver)
         {
             if (gameOver)

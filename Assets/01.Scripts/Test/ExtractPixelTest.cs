@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.IO;
 using LTH.ColorMatch.Data;
 using LTH.ColorMatch.Enums;
@@ -9,30 +10,75 @@ using UnityEngine.UI;
 
 namespace LTH.ColorMatch.Test
 {
-    public enum TestMode  {Save,Load};
+    public enum TestMode  {Upload,Load};
     public class ExtractPixelTest : MonoBehaviour
     {
         public TestMode mode;
         public Image board;
-        public Texture2D testImage;
+        public List<Texture2D> pixelArts;
         public GalleryTopic topic;
         public Difficulty difficulty;
-        public TopicData testData;
-
-
-        private void Start()
+        public List<TopicData> testData;
+        
+        private async void Start()
         {
-            if (mode == TestMode.Save)
+            if (mode == TestMode.Load)
             {
-                PixelArtData newPixelData = PixelArtUtill.ExportPixelData(topic, testImage.name, testImage, difficulty);
-                string path = Path.Combine(DataManager.GalleryDataPath, topic.ToString());
-                DataManager.SaveJsonData(path, testImage.name,JsonConvert.SerializeObject(testData));
+                if (DataManager.LocalDataExists())
+                {
+                    List<string> topics = DataManager.GetTopics();
+
+                    for (int i = 0; i < topics.Count; i++)
+                    {
+                        string path = Path.Combine(DataManager.GalleryDataPath, "Topics");
+                        TopicData loadTopicData = DataManager.LoadJsonData<TopicData>(path, topics[i]);
+                        testData.Add(loadTopicData);
+                    }
+                }
+                else
+                {
+                    if (await FirebaseManager.ins.CheckCollectionExists("GalleryData"))
+                    {
+                        List<TopicData> topicDataList = await FirebaseManager.ins.GetAllTopicData();
+                        testData.AddRange(topicDataList);
+
+                        for (int i = 0; i < topicDataList.Count; i++)
+                        {
+                            Debug.Log($"{i} : Topic = {topicDataList[i].topic}");
+                            Debug.Log($"{i} : thumData = {topicDataList[i].thumbData}");
+                            Debug.Log($"{i} : completeCount = {topicDataList[i].completeCount}");
+                            Debug.Log($"{i} : totalCount = {topicDataList[i].totalCount}");
+                            Debug.Log($"{i} : complete = {topicDataList[i].complete}");
+                            Debug.Log($"{i} : pixelArts Count = {topicDataList[i].pixelArtDatas.Count}");
+                            
+                            string path = Path.Combine(DataManager.GalleryDataPath, "Topics");
+                            DataManager.SaveJsonData(path, topicDataList[i].topic.ToString(),JsonConvert.SerializeObject(topicDataList[i]));
+                        }
+                    }
+                }
             }
             else
             {
-                string path = Path.Combine(DataManager.GalleryDataPath, "Topics");
-                testData = DataManager.LoadJsonData<TopicData>(path,topic.ToString());
-                board.sprite = PixelArtUtill.MakeThumbnail(testData.pixelArtDatas[1].thumbData,testData.pixelArtDatas[1].size);
+                List<string> pixelArtsDataJson = new List<string>();
+                string topicThumbData = "";
+                int topicThumbSize = 0;
+                for (int i = 0; i < pixelArts.Count; i++)
+                {
+                    PixelArtData extractData =
+                        PixelArtUtill.ExportPixelData(topic, pixelArts[i].name, pixelArts[i], difficulty);
+
+                    if (i == 0)
+                    {
+                        topicThumbData = extractData.thumbData;
+                        topicThumbSize = extractData.size;
+                    }
+                    pixelArtsDataJson.Add(JsonConvert.SerializeObject(extractData));
+                }
+
+                TopicData newTopicData = new TopicData(topic, topicThumbData, 0, pixelArtsDataJson.Count,
+                    topicThumbSize, false, pixelArtsDataJson);
+
+                await FirebaseManager.ins.AddTopicData("GalleryData", topic.ToString(), newTopicData);
             }
         }
     }

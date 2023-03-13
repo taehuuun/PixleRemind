@@ -13,6 +13,8 @@ namespace LTH.ColorMatch.Managers
         public string selectedTopic;
         public string selectedPixelArt;
         public bool isMatching;
+        public PixelArtData currentPixelArt;
+        public List<PixelArtData> pixelArtDatas;
         
         private void Awake()
         {
@@ -75,8 +77,8 @@ namespace LTH.ColorMatch.Managers
             data.thumbData = PixelArtUtill.ExtractThumbnailData(data.colorData, data.size);
             
             string jsonData = JsonConvert.SerializeObject(data);
-            string path = Path.Combine(DataManager.GalleryDataPath, selectedTopic);
-            DataManager.SaveJsonData(path, selectedPixelArt, jsonData);
+            string path = Path.Combine(DataManager.GalleryDataPath, "Topics");
+            DataManager.SaveJsonData(path, data.topic.ToString(), jsonData);
         }
     }
 }

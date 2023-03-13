@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 using Newtonsoft.Json;
+using UnityEditor.U2D.Sprites;
 
 namespace LTH.ColorMatch.Managers
 {
@@ -9,7 +10,7 @@ namespace LTH.ColorMatch.Managers
     {
         public static readonly string BasePath = Application.persistentDataPath;
         public static readonly string GalleryDataPath = Path.Combine(BasePath, "Gallery");
-
+        
         public static List<string> GetPixelArts(string topic)
         {
             return GetPixelArtNames(topic);
@@ -24,7 +25,13 @@ namespace LTH.ColorMatch.Managers
         }
         public static T LoadJsonData<T>(string loadPath, string fileName)
         {
+            // ReSharper disable once Unity.PerformanceCriticalCodeInvocation
             return LoadJsonDataFromFile<T>(loadPath, fileName);
+        }
+        public static bool LocalDataExists()
+        {
+            DirectoryInfo directoryInfo = new DirectoryInfo(GalleryDataPath);
+            return directoryInfo.Exists;
         }
 
         private static List<string> GetPixelArtNames(string topic)
@@ -32,9 +39,12 @@ namespace LTH.ColorMatch.Managers
             var fileNames = new List<string>();
 
             var directoryInfo = new DirectoryInfo(Path.Combine(GalleryDataPath, topic));
-
+            
+            Debug.Log(directoryInfo.Exists);
+            
             foreach (var file in directoryInfo.GetFiles())
             {
+                Debug.Log(file.Name);
                 fileNames.Add(Path.GetFileNameWithoutExtension(file.Name));
             }
 
@@ -43,12 +53,14 @@ namespace LTH.ColorMatch.Managers
         private static List<string> GetTopicNames()
         {
             var directoryNames = new List<string>();
-
-            var directoryInfo = new DirectoryInfo(GalleryDataPath);
-
-            foreach (var dir in directoryInfo.GetDirectories())
+            
+            var directoryInfo = new DirectoryInfo(Path.Combine(GalleryDataPath,"Topics"));
+            
+            foreach (var fileFullName in directoryInfo.GetFiles())
             {
-                directoryNames.Add(dir.Name);
+                var file = Path.GetFileNameWithoutExtension(fileFullName.Name);
+                Debug.Log(file);
+                directoryNames.Add(file);
             }
 
             return directoryNames;
@@ -63,11 +75,9 @@ namespace LTH.ColorMatch.Managers
             }
             
             Debug.Log(path);
-            // var bytes = System.Text.Encoding.UTF8.GetBytes(jsonData);
-            // var code = System.Convert.ToBase64String(bytes);
-            // File.WriteAllText(path, code);
-            
-            File.WriteAllText(path, jsonData);
+            var bytes = System.Text.Encoding.UTF8.GetBytes(jsonData);
+            var code = System.Convert.ToBase64String(bytes);
+            File.WriteAllText(path, code);
         }
         private static T LoadJsonDataFromFile<T>(string loadPath, string fileName)
         {
@@ -79,13 +89,10 @@ namespace LTH.ColorMatch.Managers
             {
                 using (var reader = new StreamReader(path))
                 {
-                    // var code = reader.ReadToEnd();
-                    // var bytes = System.Convert.FromBase64String(code);
-                    // var loadJson = System.Text.Encoding.UTF8.GetString(bytes);
-                    // loadData = JsonConvert.DeserializeObject<T>(loadJson);
-                    
                     var code = reader.ReadToEnd();
-                    loadData = JsonConvert.DeserializeObject<T>(code);
+                    var bytes = System.Convert.FromBase64String(code);
+                    var loadJson = System.Text.Encoding.UTF8.GetString(bytes);
+                    loadData = JsonConvert.DeserializeObject<T>(loadJson);
                 }
             }
             else
@@ -95,6 +102,7 @@ namespace LTH.ColorMatch.Managers
 
             return loadData;
         }
+
         private static bool FileExists(string checkPath,string fileName)
         {
             var path = Path.Combine(checkPath, $"{fileName}.json");

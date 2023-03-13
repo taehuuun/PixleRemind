@@ -1,8 +1,11 @@
 using System;
+using System.Collections.Generic;
+using Firebase.Firestore;
 using LTH.ColorMatch.Enums;
 
 namespace LTH.ColorMatch.Data
 {
+    [FirestoreData]
     [Serializable]
     public class PixelArtData
     {
@@ -27,5 +30,27 @@ namespace LTH.ColorMatch.Data
             difficulty = d;
             colorData = c;
         }
+        
+        [FirestoreProperty]
+        public Dictionary<string, object> ToDictionary
+        {
+            get
+            {
+                var dictionary = new Dictionary<string, object>
+                {
+                    { "topic", topic },
+                    { "title", title },
+                    { "thumbData", thumbData },
+                    { "size", size },
+                    { "fillCount", fillCount },
+                    { "complete", complete },
+                    { "difficulty", difficulty },
+                    { "colorData", colorData.ToDictionary }
+                };
+
+                return dictionary;
+            }
+        }
+
     }
 }

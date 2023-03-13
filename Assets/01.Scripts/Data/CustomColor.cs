@@ -25,8 +25,8 @@ namespace LTH.ColorMatch.Data
         public readonly ColorMatchColor originColorMatchColor;
         public readonly ColorMatchColor grayColorMatchColor;
         public bool isFeel;
-        // public int X;
-        // public int Y;
+        public int X;
+        public int Y;
         
         public CustomColor()
         {
@@ -42,15 +42,16 @@ namespace LTH.ColorMatch.Data
             grayColorMatchColor = new ColorMatchColor(grayValue, grayValue, grayValue, colorMatchColor.a);
             isFeel = false;
         }
-        public CustomColor(float r, float g, float b, float a)
+
+        public CustomColor(float r, float g, float b, float a, int x, int y)
         {
             float grayValue = GetGaryValue(r,g,b,a);
             
             originColorMatchColor = new ColorMatchColor(r, g, b, a);
             grayColorMatchColor = new ColorMatchColor(grayValue, grayValue, grayValue, a);
             isFeel = false;
-            // X = x;
-            // Y = y;
+            X = x;
+            Y = y;
         }
         private float GetGaryValue(float r,float g,float b,float a)
         {

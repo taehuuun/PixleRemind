@@ -5031,6 +5031,15 @@ MonoBehaviour:
   selectedTopic: 
   selectedPixelArt: 
   isMatching: 0
+  currentPixelArt:
+    topic: 0
+    title: 
+    thumbData: 
+    size: 0
+    fillCount: 0
+    complete: 0
+    difficulty: 0
+  pixelArtDatas: []
 --- !u!224 &1855316204 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 9116493556728247438, guid: 38095e1a2d7b4d945b0ec4532e922a36, type: 3}
