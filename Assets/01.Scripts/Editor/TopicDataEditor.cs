@@ -6,7 +6,6 @@ using LTH.ColorMatch.Data;
 using LTH.ColorMatch.Enums;
 using LTH.ColorMatch.Managers;
 using LTH.ColorMatch.Utill;
-using Newtonsoft.Json;
 
 public class TopicDataEditor : EditorWindow
 {
@@ -65,13 +64,12 @@ public class TopicDataEditor : EditorWindow
         if (GUILayout.Button("Check"))
         {
             string path = Path.Combine(DataManager.GalleryDataPath, "Topics");
+
             // ReSharper disable once Unity.PerformanceCriticalCodeInvocation
             TopicData topicData = DataManager.LoadJsonData<TopicData>(path, _topicType.ToString());
             
             if (topicData != null)
             {
-                // topicData = (TopicData)EditorGUILayout.ObjectField("Topic Data", topicData, typeof(TopicData), false);
-
             }
         }
 
@@ -88,23 +86,11 @@ public class TopicDataEditor : EditorWindow
                 PixelArtData pixelArtData = PixelArtUtill.ExportPixelData(new GalleryTopic(), _textureList[i].name, _textureList[i], _topicDifficulty);
                 pixelArtDataList.Add(pixelArtData);
             }
-
-            // TopicData topicData = new TopicData();
-            // topicData.topic = _topicType;
-            // topicData.thumbData = pixelArtDataList[0].thumbData;
-            // topicData.completeCount = 0;
-            // topicData.totalCount = pixelArtDataList.Count;
-            // topicData.complete = false;
-            // topicData.pixelArtDatas = pixelArtDataList;
-            //
-            // string json = JsonConvert.SerializeObject(topicData);
             
             string path = Path.Combine(DataManager.GalleryDataPath, "Topics");
 
             if (path.Length > 0)
             {
-                // ReSharper disable once Unity.PerformanceCriticalCodeInvocation
-                // DataManager.SaveJsonData(path,_topicType.ToString() ,json);
                 AssetDatabase.Refresh();
             }
         }
