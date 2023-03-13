@@ -63,10 +63,11 @@ namespace LTH.ColorMatch.Managers
             }
             
             Debug.Log(path);
-            var bytes = System.Text.Encoding.UTF8.GetBytes(jsonData);
-            var code = System.Convert.ToBase64String(bytes);
-
-            File.WriteAllText(path, code);
+            // var bytes = System.Text.Encoding.UTF8.GetBytes(jsonData);
+            // var code = System.Convert.ToBase64String(bytes);
+            // File.WriteAllText(path, code);
+            
+            File.WriteAllText(path, jsonData);
         }
         private static T LoadJsonDataFromFile<T>(string loadPath, string fileName)
         {
@@ -78,10 +79,13 @@ namespace LTH.ColorMatch.Managers
             {
                 using (var reader = new StreamReader(path))
                 {
+                    // var code = reader.ReadToEnd();
+                    // var bytes = System.Convert.FromBase64String(code);
+                    // var loadJson = System.Text.Encoding.UTF8.GetString(bytes);
+                    // loadData = JsonConvert.DeserializeObject<T>(loadJson);
+                    
                     var code = reader.ReadToEnd();
-                    var bytes = System.Convert.FromBase64String(code);
-                    var loadJson = System.Text.Encoding.UTF8.GetString(bytes);
-                    loadData = JsonConvert.DeserializeObject<T>(loadJson);
+                    loadData = JsonConvert.DeserializeObject<T>(code);
                 }
             }
             else

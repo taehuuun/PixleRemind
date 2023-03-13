@@ -17,24 +17,23 @@ namespace LTH.ColorMatch.Test
         public Texture2D testImage;
         public GalleryTopic topic;
         public Difficulty difficulty;
-        public PixelArtData testData;
+        public TopicData testData;
 
 
         private void Start()
         {
             if (mode == TestMode.Save)
             {
-                testData = PixelArtUtill.ExportPixelData(topic, testImage.name, testImage, difficulty);
+                PixelArtData newPixelData = PixelArtUtill.ExportPixelData(topic, testImage.name, testImage, difficulty);
                 string path = Path.Combine(DataManager.GalleryDataPath, topic.ToString());
                 DataManager.SaveJsonData(path, testImage.name,JsonConvert.SerializeObject(testData));
             }
             else
             {
-                string path = Path.Combine(DataManager.GalleryDataPath, topic.ToString());
-                testData = DataManager.LoadJsonData<PixelArtData>(path,testImage.name);
-                board.sprite = PixelArtUtill.MakeThumbnail(testData.thumbData,testData.size);
+                string path = Path.Combine(DataManager.GalleryDataPath, "Topics");
+                testData = DataManager.LoadJsonData<TopicData>(path,topic.ToString());
+                board.sprite = PixelArtUtill.MakeThumbnail(testData.pixelArtDatas[1].thumbData,testData.pixelArtDatas[1].size);
             }
-
         }
     }
 }
