@@ -5,7 +5,6 @@ using LTH.ColorMatch.Enums;
 using LTH.ColorMatch.Interfaces;
 using LTH.ColorMatch.Managers;
 using LTH.ColorMatch.Utill;
-using Newtonsoft.Json;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -102,24 +101,24 @@ namespace LTH.ColorMatch.UI
         {
             UpdateUI(new GameOverUiUpdate(this,system.IsGameOver));
             UpdateUI(new SimilarityUIUpdate(this,system.SimilarRange));
-            UpdateUI(new FillCountUIUpdate(this, _data.fillCount));
+            UpdateUI(new FillCountUIUpdate(this, _data.FillCount));
         }        
         public void FillRandomPixel()
         {
-            if (_data.fillCount == 0)
+            if (_data.FillCount == 0)
             {
                 Debug.LogError("해당 PixelArt의 FillCount가 모두 소진됨");
                 return;
             }
 
-            if (_data.colorData.RemainPixel == 0)
+            if (_data.ColorData.RemainPixel == 0)
             {
                 Debug.LogError("해당 PixelArt을 모두 채움");
-                _data.complete = true;
+                _data.Complete = true;
                 return;
             }
             
-            var availablePixels = _data.colorData.Pixels.Where(p => !p.IsFeel).ToList();
+            var availablePixels = _data.ColorData.Pixels.Where(p => !p.IsFeel).ToList();
 
             if (availablePixels.Count == 0)
             {
@@ -132,25 +131,26 @@ namespace LTH.ColorMatch.UI
             // Use var keyword to reduce repetition
             var selectedPixel = availablePixels[selectPixel];
             
-            _data.fillCount--;
-            _data.colorData.RemainPixel--;
+            _data.FillCount--;
+            _data.ColorData.RemainPixel--;
             selectedPixel.IsFeel = true;
-            _data.thumbData = PixelArtUtill.ExtractThumbnailData(_data.colorData, _data.size);
+            _data.ThumbData = PixelArtUtill.ExtractThumbnailData(_data.ColorData, _data.Size);
             
-            UpdateCountText(_data.fillCount);
-            board.sprite = PixelArtUtill.MakeThumbnail(_data.thumbData, _data.size);
+            // UpdateCountText(_data.fillCount);
+            board.sprite = PixelArtUtill.MakeThumbnail(_data.ThumbData, _data.Size);
 
             int selIdx = GalleryManager.ins.SelPixelArtIdx;
 
-            GalleryManager.ins.CurrentTopicArt.PixelArtDatas[selIdx] = JsonConvert.SerializeObject(_data);
+            GalleryManager.ins.CurrentTopicArt.PixelArtDatas[selIdx] =_data;
             GalleryManager.ins.SavePixelArtData(GalleryManager.ins.CurrentTopicArt);
+            UpdateSubjectState();
         }
         public void SelectSlot(ColorSlot slot)
         {
             if (system.CheckMatch(slot))
             {
-                _data.fillCount++;
-                UpdateCountText(_data.fillCount);
+                _data.FillCount++;
+                UpdateSubjectState();
             }
         }
         public void PlayBtnEvent()
@@ -163,12 +163,8 @@ namespace LTH.ColorMatch.UI
         {
             system.RegisterObserver(this);
             _data = GalleryManager.ins.PixelArtDatas[GalleryManager.ins.SelPixelArtIdx];
-            board.sprite = PixelArtUtill.MakeThumbnail(_data.thumbData, _data.size);
-            UpdateCountText(_data.fillCount);
-        }
-        private void UpdateCountText(int count)
-        {
-            fillCountText.text = $"O : {count}";
+            board.sprite = PixelArtUtill.MakeThumbnail(_data.ThumbData, _data.Size);
+            UpdateSubjectState();
         }
         private IEnumerator CheckPlaying()
         {

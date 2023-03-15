@@ -49,7 +49,7 @@ namespace LTH.ColorMatch.UI
                for (int i = 0 ; i < GalleryManager.ins.PixelArtDatas.Count; i++)
                 {
                     PixelArtSlot newPixelArtSlot = Instantiate(pixelArtSlotPrefab, slotGenTrans);
-                    string path = Path.Combine(DataManager.GalleryDataPath, GalleryManager.ins.PixelArtDatas[i].topic.ToString());
+                    string path = Path.Combine(DataManager.GalleryDataPath, GalleryManager.ins.PixelArtDatas[i].Topic.ToString());
                     newPixelArtSlot.pixelData = GalleryManager.ins.PixelArtDatas[i];
                     newPixelArtSlot.SetSlot();
                     var i1 = i;

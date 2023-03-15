@@ -33,11 +33,11 @@ namespace LTH.ColorMatch.UI
 
         private void SetPage()
         {
-            foreach (var data in GalleryManager.ins.PixelArtDatas)
-            {
-                GalleryManager.ins.PixelArtDatas.Remove(data);
-            }
-            GalleryManager.ins.PixelArtDatas.Clear();
+            // foreach (var data in GalleryManager.ins.PixelArtDatas)
+            // {
+            //     GalleryManager.ins.PixelArtDatas.Remove(data);
+            // }
+            // GalleryManager.ins.PixelArtDatas.Clear();
             GalleryManager.ins.CurPage = GalleryPage.Topic;
             CreateTopicSlot();
         }

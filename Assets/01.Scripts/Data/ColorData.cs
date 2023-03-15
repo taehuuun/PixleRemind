@@ -3,6 +3,7 @@ using Firebase.Firestore;
 
 namespace LTH.ColorMatch.Data
 {
+    [FirestoreData]
     public class ColorData
     {
         [FirestoreProperty]
@@ -11,18 +12,14 @@ namespace LTH.ColorMatch.Data
         [FirestoreProperty]
         public List<CustomColor> Pixels { get; set; } = new List<CustomColor>();
 
-        [FirestoreProperty]
-        public Dictionary<string, object> ToDictionary
+        public Dictionary<string, object> ToDictionary()
         {
-            get
+            var dictionary = new Dictionary<string, object>
             {
-                var dictionary = new Dictionary<string, object>
-                {
-                    { "RemainPixel", RemainPixel },
-                    {"Pixels",Pixels}
-                };
-                return dictionary;
-            }
+                { "RemainPixel", RemainPixel },
+                {"Pixels",Pixels}
+            };
+            return dictionary;
         }
     }
 }

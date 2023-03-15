@@ -17,9 +17,9 @@ namespace LTH.ColorMatch.UI
 
         public override void SetSlot()
         {
-            difficultyText.text = pixelData.difficulty.ToString();
-            titleText.text = pixelData.title;
-            thumbnailImb.sprite = PixelArtUtill.MakeThumbnail(pixelData.thumbData, pixelData.size);
+            difficultyText.text = pixelData.Difficulty.ToString();
+            titleText.text = pixelData.Title;
+            thumbnailImb.sprite = PixelArtUtill.MakeThumbnail(pixelData.ThumbData, pixelData.Size);
         }
     }
 }

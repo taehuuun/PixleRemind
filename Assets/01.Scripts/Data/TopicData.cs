@@ -14,11 +14,11 @@ namespace LTH.ColorMatch.Data
         [FirestoreProperty] public int TotalCount {get;set;}
         [FirestoreProperty] public int ThumbSize { get; set; }
         [FirestoreProperty] public bool Complete {get;set;}
-        [FirestoreProperty] public List<string> PixelArtDatas { get; set; }
+        [FirestoreProperty] public List<PixelArtData> PixelArtDatas { get; set; }
 
         public TopicData() {}
         public TopicData(GalleryTopic topic, string thumbData, int completeCount, int totalCount,int thumbSize, bool complete
-            , List<string> pixelArtDatas)
+            , List<PixelArtData> pixelArtDatas)
         {
             Topic = topic;
             ThumbData = thumbData;
@@ -29,22 +29,18 @@ namespace LTH.ColorMatch.Data
             PixelArtDatas = pixelArtDatas;
         }
                 
-        [FirestoreProperty]
-        public Dictionary<string, object> ToDictionary
+        public Dictionary<string, object> ToDictionary()
         {
-            get
+            var dictionary = new Dictionary<string, object>
             {
-                var dictionary = new Dictionary<string, object>
-                {
-                    { "Topic", Topic },
-                    { "ThumbData", ThumbData },
-                    { "CompleteCount", CompleteCount },
-                    { "TotalCount", TotalCount },
-                    { "Complete", Complete },
-                    { "PixelArtDatas", PixelArtDatas }
-                };
-                return dictionary;
-            }
+                { "Topic", Topic },
+                { "ThumbData", ThumbData },
+                { "CompleteCount", CompleteCount },
+                { "TotalCount", TotalCount },
+                { "Complete", Complete },
+                { "PixelArtDatas", PixelArtDatas }
+            };
+            return dictionary;
         }
     }    
 }

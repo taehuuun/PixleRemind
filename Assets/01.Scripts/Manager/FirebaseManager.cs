@@ -97,28 +97,28 @@ namespace LTH.ColorMatch.Managers
         {
             var documentReference = db.Collection(collectionName).Document(documentName);
             
-            await documentReference.SetAsync(topicData.ToDictionary);
+            await documentReference.SetAsync(topicData);
             
-            Debug.Log($"{topicData.ToDictionary.Count}");
+            Debug.Log($"{topicData.ToDictionary().Count}");
         }
 
         public async Task UpdateTopicData(string collectionName, string documentName, TopicData topicData)
         {
             var documentReference = db.Collection(collectionName).Document(documentName);
             
-            await documentReference.UpdateAsync(topicData.ToDictionary);
+            await documentReference.SetAsync(topicData, SetOptions.MergeAll);
         }
 
-        public async Task AddPixelArtData(string collectionName, string documentName, PixelArtData pixelArtData)
-        {
-            var documentReference = db.Collection(collectionName).Document(documentName);
-            await documentReference.SetAsync(pixelArtData);
-        }
-
-        public async Task UpdatePixelArtData(string collectionName, string documentName, PixelArtData pixelArtData)
-        {
-            var documentReference = db.Collection(collectionName).Document(documentName);
-            await documentReference.UpdateAsync(pixelArtData.ToDictionary);
-        }
+        // public async Task AddPixelArtData(string collectionName, string documentName, PixelArtData pixelArtData)
+        // {
+        //     var documentReference = db.Collection(collectionName).Document(documentName);
+        //     await documentReference.SetAsync(pixelArtData);
+        // }
+        //
+        // public async Task UpdatePixelArtData(string collectionName, string documentName, PixelArtData pixelArtData)
+        // {
+        //     var documentReference = db.Collection(collectionName).Document(documentName);
+        //     await documentReference.UpdateAsync(pixelArtData.ToDictionary());
+        // }
     }
 }

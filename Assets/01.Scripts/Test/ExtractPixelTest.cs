@@ -59,24 +59,26 @@ namespace LTH.ColorMatch.Test
             }
             else
             {
-                List<string> pixelArtsDataJson = new List<string>();
                 string topicThumbData = "";
                 int topicThumbSize = 0;
+
+                List<PixelArtData> pixelArtDatas = new List<PixelArtData>();
+                
                 for (int i = 0; i < pixelArts.Count; i++)
                 {
-                    PixelArtData extractData =
+                    PixelArtData newPixelArtData =
                         PixelArtUtill.ExportPixelData(topic, pixelArts[i].name, pixelArts[i], difficulty);
+                    pixelArtDatas.Add(newPixelArtData);
 
                     if (i == 0)
                     {
-                        topicThumbData = extractData.thumbData;
-                        topicThumbSize = extractData.size;
+                        topicThumbData = newPixelArtData.ThumbData;
+                        topicThumbSize = newPixelArtData.Size;
                     }
-                    pixelArtsDataJson.Add(JsonConvert.SerializeObject(extractData));
                 }
 
-                TopicData newTopicData = new TopicData(topic, topicThumbData, 0, pixelArtsDataJson.Count,
-                    topicThumbSize, false, pixelArtsDataJson);
+                TopicData newTopicData = new TopicData(topic, topicThumbData, 0, pixelArtDatas.Count,
+                    topicThumbSize, false, pixelArtDatas);
 
                 await FirebaseManager.ins.AddTopicData("GalleryData", topic.ToString(), newTopicData);
             }

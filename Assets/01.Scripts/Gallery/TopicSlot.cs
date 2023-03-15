@@ -3,6 +3,7 @@ using LTH.ColorMatch.Data;
 using LTH.ColorMatch.Managers;
 using LTH.ColorMatch.Utill;
 using Newtonsoft.Json;
+using UnityEngine;
 
 namespace LTH.ColorMatch.UI
 {
@@ -11,7 +12,12 @@ namespace LTH.ColorMatch.UI
         public TopicData data;
         public override void OnSlotClick()
         {
-            GalleryManager.ins.PixelArtDatas.AddRange(data.PixelArtDatas.Select(JsonConvert.DeserializeObject<PixelArtData>));
+            // GalleryManager.ins.PixelArtDatas.AddRange(data.PixelArtDatas.Select(JsonConvert.DeserializeObject<PixelArtData>));
+            for (int i = 0; i < data.PixelArtDatas.Count; i++)
+            {
+                Debug.Log(data.PixelArtDatas[i]);
+                GalleryManager.ins.PixelArtDatas.Add(data.PixelArtDatas[i]);
+            }
             GalleryManager.ins.CurrentTopicArt = data;
         }
 
