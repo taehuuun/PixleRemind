@@ -14,6 +14,62 @@ namespace LTH.ColorMatch.UI
 {
     public class GalleryColorMatchPage : Page,IObserver
     {
+        private abstract class UIUpdate
+        {
+            protected readonly GalleryColorMatchPage Page;
+            protected UIUpdate(GalleryColorMatchPage page)
+            {
+                Page = page;
+            }
+
+            public abstract void UpdateUI();
+        }
+        private class SimilarityUIUpdate : UIUpdate
+        {
+            private readonly float _similarity;
+
+            public SimilarityUIUpdate(GalleryColorMatchPage page, float similarity) : base(page)
+            {
+                _similarity = similarity;
+            }
+            public override void UpdateUI()
+            {
+                float result = 100 - _similarity;
+                Page.similarText.text = $"유사도 : {result:N2}";
+            }
+        }
+        private class FillCountUIUpdate : UIUpdate
+        {
+            private readonly int _count;
+
+            public FillCountUIUpdate(GalleryColorMatchPage page, int count) : base(page)
+            {
+                _count = count;
+            }
+
+            public override void UpdateUI()
+            {
+                Page.fillCountText.text = $"O : {_count}";
+            }
+        }
+        private class  GameOverUiUpdate : UIUpdate
+        {
+            private readonly bool _gameOver;
+
+            public GameOverUiUpdate(GalleryColorMatchPage page, bool gameOver) : base(page)
+            {
+                _gameOver = gameOver;
+            }
+
+            public override void UpdateUI()
+            {
+                if (_gameOver)
+                {
+                    GalleryManager.ins.SavePixelArtData(GalleryManager.ins.currentTopicArt);
+                }
+            }
+        }
+        
         public Image board;
         public TMP_Text fillCountText;
         public TMP_Text similarText;
@@ -28,21 +84,26 @@ namespace LTH.ColorMatch.UI
         
         private void OnEnable()
         {
+            system.RegisterObserver(this);
+            InitializePage();
+        }
+        private void InitializePage()
+        {
             GalleryManager.ins.curPage = GalleryPage.ColorMatch;
             SetPage();
             system.ReStart();
         }
-
+        private void UpdateUI(UIUpdate uiUpdate)
+        {
+            uiUpdate.UpdateUI();
+        }
+        
         public void UpdateSubjectState()
         {
-            UpdateGameOver(system.IsGameOver);
-            UpdateSimilarity(system.SimilarRange);
-        }
-        public void UpdateSimilarity(float similarity)
-        {
-            float result = 100 - similarity;
-            similarText.text =$"유사도 : {result:N2})";
-        }
+            UpdateUI(new GameOverUiUpdate(this,system.IsGameOver));
+            UpdateUI(new SimilarityUIUpdate(this,system.SimilarRange));
+            UpdateUI(new FillCountUIUpdate(this, _data.fillCount));
+        }        
         public void FillRandomPixel()
         {
             if (_data.fillCount == 0)
@@ -58,7 +119,7 @@ namespace LTH.ColorMatch.UI
                 return;
             }
             
-            var availablePixels = _data.colorData.Pixels.Where(p => !p.isFeel && p.originColorMatchColor.a == 0).ToList();
+            var availablePixels = _data.colorData.Pixels.Where(p => !p.isFeel).ToList();
 
             if (availablePixels.Count == 0)
             {
@@ -94,7 +155,6 @@ namespace LTH.ColorMatch.UI
         }
         public void PlayBtnEvent()
         {
-            print("GalleryMode 플레이 시작");
             StartCoroutine(CheckPlaying());
             StartCoroutine(ShowMatchUI());
         }
@@ -106,31 +166,18 @@ namespace LTH.ColorMatch.UI
             board.sprite = PixelArtUtill.MakeThumbnail(_data.thumbData, _data.size);
             UpdateCountText(_data.fillCount);
         }
-
         private void UpdateCountText(int count)
         {
             fillCountText.text = $"O : {count}";
         }
-        
-        private void UpdateGameOver(bool gameOver)
-        {
-            if (gameOver)
-            {
-                GalleryManager.ins.SavePixelArtData(GalleryManager.ins.currentTopicArt);
-            }
-        }
-
         private IEnumerator CheckPlaying()
         {
-            print("CheckPlaying 시작");
             GalleryManager.ins.isMatching = true;
             yield return new WaitUntil(() => system.IsGameOver);
-            print("CheckPlaying 종료");
             StartCoroutine(HideMatchUI());
         }
         private IEnumerator ShowMatchUI()
         {
-            print("ShowMatchUI 시작");
             boardMove.StartMove();
             playBtnMove.StartMove();
 
@@ -139,7 +186,6 @@ namespace LTH.ColorMatch.UI
         }
         private IEnumerator HideMatchUI()
         {
-            print("HideMatchUI 시작");
             matchUIMove.Return();
             yield return new WaitUntil(() => matchUIMove.isComplete);
             GalleryManager.ins.isMatching = false;
