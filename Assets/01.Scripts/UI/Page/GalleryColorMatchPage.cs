@@ -119,7 +119,7 @@ namespace LTH.ColorMatch.UI
                 return;
             }
             
-            var availablePixels = _data.colorData.Pixels.Where(p => !p.isFeel).ToList();
+            var availablePixels = _data.colorData.Pixels.Where(p => !p.IsFeel).ToList();
 
             if (availablePixels.Count == 0)
             {
@@ -134,7 +134,7 @@ namespace LTH.ColorMatch.UI
             
             _data.fillCount--;
             _data.colorData.RemainPixel--;
-            selectedPixel.isFeel = true;
+            selectedPixel.IsFeel = true;
             _data.thumbData = PixelArtUtill.ExtractThumbnailData(_data.colorData, _data.size);
             
             UpdateCountText(_data.fillCount);

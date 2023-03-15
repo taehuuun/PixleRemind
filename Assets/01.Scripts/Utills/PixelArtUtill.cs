@@ -58,10 +58,10 @@ namespace LTH.ColorMatch.Utill
             for (int i = 0; i < colorData.Pixels.Count; i++)
             {
                 CustomColor customColor = colorData.Pixels[i];
-                ColorMatchColor pixelColor = customColor.isFeel
-                    ? customColor.originColorMatchColor
-                    : customColor.grayColorMatchColor;
-                Color setColor = new Color(pixelColor.r, pixelColor.g, pixelColor.b, pixelColor.a);
+                ColorMatchColor pixelColor = customColor.IsFeel
+                    ? customColor.OriginColorMatchColor
+                    : customColor.GrayColorMatchColor;
+                Color setColor = new Color(pixelColor.R, pixelColor.G, pixelColor.B, pixelColor.A);
 
                 thumbNail.SetPixel(customColor.X, customColor.Y, setColor);
             }
