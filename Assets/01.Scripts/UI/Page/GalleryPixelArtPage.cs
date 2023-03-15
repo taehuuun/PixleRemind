@@ -33,30 +33,30 @@ namespace LTH.ColorMatch.UI
                 _pixelArtSlots.Remove(slot);
             }
             _pixelArtSlots.Clear();
-            GalleryManager.ins.pixelArtDatas.Clear();
+            GalleryManager.ins.PixelArtDatas.Clear();
         }
 
         private void SetPage()
         {
-            GalleryManager.ins.curPage = GalleryPage.PixelArt;
+            GalleryManager.ins.CurPage = GalleryPage.PixelArt;
             CreatePixelArtSlot();
         }
 
         private void CreatePixelArtSlot()
         {
-            if (_pixelArtSlots.Count != GalleryManager.ins.pixelArtDatas.Count)
+            if (_pixelArtSlots.Count != GalleryManager.ins.PixelArtDatas.Count)
             {
-               for (int i = 0 ; i < GalleryManager.ins.pixelArtDatas.Count; i++)
+               for (int i = 0 ; i < GalleryManager.ins.PixelArtDatas.Count; i++)
                 {
                     PixelArtSlot newPixelArtSlot = Instantiate(pixelArtSlotPrefab, slotGenTrans);
-                    string path = Path.Combine(DataManager.GalleryDataPath, GalleryManager.ins.pixelArtDatas[i].topic.ToString());
-                    newPixelArtSlot.pixelData = GalleryManager.ins.pixelArtDatas[i];
+                    string path = Path.Combine(DataManager.GalleryDataPath, GalleryManager.ins.PixelArtDatas[i].topic.ToString());
+                    newPixelArtSlot.pixelData = GalleryManager.ins.PixelArtDatas[i];
                     newPixelArtSlot.SetSlot();
                     var i1 = i;
                     newPixelArtSlot.GetComponent<Button>().onClick.AddListener(() =>
                     {
                         ui.SelectPage(GalleryPage.ColorMatch);
-                        GalleryManager.ins.selPixelArtIdx = i1;
+                        GalleryManager.ins.SelPixelArtIdx = i1;
                     });
                     _pixelArtSlots.Add(newPixelArtSlot);
                 }

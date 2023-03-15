@@ -10,11 +10,11 @@ namespace LTH.ColorMatch.Managers
     public class GalleryManager : MonoBehaviour
     {
         public static GalleryManager ins;
-        public bool isMatching;
-        public TopicData currentTopicArt;
-        public int selPixelArtIdx;
-        public List<PixelArtData> pixelArtDatas;
-        public GalleryPage curPage;
+        public bool IsMatching { get; set; }
+        public TopicData CurrentTopicArt { get; set; }
+        public int SelPixelArtIdx {get; set; }
+        public List<PixelArtData> PixelArtDatas{get; set; }
+        public GalleryPage CurPage{get; set; }
         
         private void Awake()
         {

@@ -65,7 +65,7 @@ namespace LTH.ColorMatch.UI
             {
                 if (_gameOver)
                 {
-                    GalleryManager.ins.SavePixelArtData(GalleryManager.ins.currentTopicArt);
+                    GalleryManager.ins.SavePixelArtData(GalleryManager.ins.CurrentTopicArt);
                 }
             }
         }
@@ -89,7 +89,7 @@ namespace LTH.ColorMatch.UI
         }
         private void InitializePage()
         {
-            GalleryManager.ins.curPage = GalleryPage.ColorMatch;
+            GalleryManager.ins.CurPage = GalleryPage.ColorMatch;
             SetPage();
             system.ReStart();
         }
@@ -140,10 +140,10 @@ namespace LTH.ColorMatch.UI
             UpdateCountText(_data.fillCount);
             board.sprite = PixelArtUtill.MakeThumbnail(_data.thumbData, _data.size);
 
-            int selIdx = GalleryManager.ins.selPixelArtIdx;
+            int selIdx = GalleryManager.ins.SelPixelArtIdx;
 
-            GalleryManager.ins.currentTopicArt.pixelArtDatas[selIdx] = JsonConvert.SerializeObject(_data);
-            GalleryManager.ins.SavePixelArtData(GalleryManager.ins.currentTopicArt);
+            GalleryManager.ins.CurrentTopicArt.pixelArtDatas[selIdx] = JsonConvert.SerializeObject(_data);
+            GalleryManager.ins.SavePixelArtData(GalleryManager.ins.CurrentTopicArt);
         }
         public void SelectSlot(ColorSlot slot)
         {
@@ -162,7 +162,7 @@ namespace LTH.ColorMatch.UI
         private void SetPage()
         {
             system.RegisterObserver(this);
-            _data = GalleryManager.ins.pixelArtDatas[GalleryManager.ins.selPixelArtIdx];
+            _data = GalleryManager.ins.PixelArtDatas[GalleryManager.ins.SelPixelArtIdx];
             board.sprite = PixelArtUtill.MakeThumbnail(_data.thumbData, _data.size);
             UpdateCountText(_data.fillCount);
         }
@@ -172,7 +172,7 @@ namespace LTH.ColorMatch.UI
         }
         private IEnumerator CheckPlaying()
         {
-            GalleryManager.ins.isMatching = true;
+            GalleryManager.ins.IsMatching = true;
             yield return new WaitUntil(() => system.IsGameOver);
             StartCoroutine(HideMatchUI());
         }
@@ -188,7 +188,7 @@ namespace LTH.ColorMatch.UI
         {
             matchUIMove.Return();
             yield return new WaitUntil(() => matchUIMove.isComplete);
-            GalleryManager.ins.isMatching = false;
+            GalleryManager.ins.IsMatching = false;
             boardMove.Return();
             playBtnMove.Return();
         }

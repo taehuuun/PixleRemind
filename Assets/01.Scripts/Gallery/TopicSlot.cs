@@ -11,8 +11,8 @@ namespace LTH.ColorMatch.UI
         public TopicData data;
         public override void OnSlotClick()
         {
-            GalleryManager.ins.pixelArtDatas.AddRange(data.pixelArtDatas.Select(JsonConvert.DeserializeObject<PixelArtData>));
-            GalleryManager.ins.currentTopicArt = data;
+            GalleryManager.ins.PixelArtDatas.AddRange(data.pixelArtDatas.Select(JsonConvert.DeserializeObject<PixelArtData>));
+            GalleryManager.ins.CurrentTopicArt = data;
         }
 
         public override void SetSlot()

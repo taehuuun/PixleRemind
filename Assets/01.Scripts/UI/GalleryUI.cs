@@ -11,7 +11,7 @@ namespace LTH.ColorMatch.UI
         
         protected override void Update()
         {
-            if (Input.GetKeyDown(KeyCode.Escape) && !GalleryManager.ins.isMatching)
+            if (Input.GetKeyDown(KeyCode.Escape) && !GalleryManager.ins.IsMatching)
             {
                 Close();
             }
@@ -43,7 +43,7 @@ namespace LTH.ColorMatch.UI
                     ClosePopup();
                 }
                 
-                SelectPage(GalleryManager.ins.curPage - 1);
+                SelectPage(GalleryManager.ins.CurPage - 1);
             }
             else
             {
