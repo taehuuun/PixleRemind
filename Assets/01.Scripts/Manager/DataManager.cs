@@ -8,11 +8,19 @@ namespace LTH.ColorMatch.Managers
     public class DataManager : MonoBehaviour
     {
         public static readonly string BasePath = Application.persistentDataPath;
-        public static readonly string GalleryDataPath = Path.Combine(BasePath, "Gallery");
         
-        public static List<string> GetTopics()
+        public static List<string> GetTargetFolderFileNames(string path)
         {
-            return GetTopicNames();
+            List<string> targetDirectoryFileNames = new List<string>();
+            DirectoryInfo directoryInfo = new DirectoryInfo(path);
+
+            foreach (var fileFullName in directoryInfo.GetFiles())
+            {
+                var fileName = Path.GetFileNameWithoutExtension(fileFullName.Name);
+                targetDirectoryFileNames.Add(fileName);
+            }
+
+            return targetDirectoryFileNames;
         }
         public static void SaveJsonData(string savePath, string fileName, string jsonData)
         {
@@ -23,27 +31,12 @@ namespace LTH.ColorMatch.Managers
             // ReSharper disable once Unity.PerformanceCriticalCodeInvocation
             return LoadJsonDataFromFile<T>(loadPath, fileName);
         }
-        public static bool LocalDataExists()
+        public static bool LocalDirectoryExists(string path)
         {
-            DirectoryInfo directoryInfo = new DirectoryInfo(GalleryDataPath);
+            DirectoryInfo directoryInfo = new DirectoryInfo(path);
             return directoryInfo.Exists;
         }
 
-        private static List<string> GetTopicNames()
-        {
-            var directoryNames = new List<string>();
-            
-            var directoryInfo = new DirectoryInfo(Path.Combine(GalleryDataPath,"Topics"));
-            
-            foreach (var fileFullName in directoryInfo.GetFiles())
-            {
-                var file = Path.GetFileNameWithoutExtension(fileFullName.Name);
-                Debug.Log(file);
-                directoryNames.Add(file);
-            }
-
-            return directoryNames;
-        }
         private static void SaveJsonDataToFile(string savePath, string fileName, string jsonData)
         {
             var path = Path.Combine(savePath, $"{fileName}.json");
