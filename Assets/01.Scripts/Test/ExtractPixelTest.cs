@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.IO;
 using LTH.ColorMatch.Data;
 using LTH.ColorMatch.Enums;
 using LTH.ColorMatch.Managers;
@@ -22,16 +21,16 @@ namespace LTH.ColorMatch.Test
         
         private async void Start()
         {
+            string cummonPath = DataManager.GalleryDataPath;
             if (mode == TestMode.Load)
             {
-                if (DataManager.LocalDataExists())
+                if (DataManager.LocalDirectoryExists(cummonPath))
                 {
-                    List<string> topics = DataManager.GetTopics();
+                    List<string> topics = DataManager.GetTargetFolderFileNames(cummonPath);
 
                     for (int i = 0; i < topics.Count; i++)
                     {
-                        string path = Path.Combine(DataManager.GalleryDataPath, "Topics");
-                        TopicData loadTopicData = DataManager.LoadJsonData<TopicData>(path, topics[i]);
+                        TopicData loadTopicData = DataManager.LoadJsonData<TopicData>(cummonPath, topics[i]);
                         testData.Add(loadTopicData);
                     }
                 }
@@ -42,17 +41,9 @@ namespace LTH.ColorMatch.Test
                         List<TopicData> topicDataList = await FirebaseManager.ins.GetAllTopicData();
                         testData.AddRange(topicDataList);
 
-                        for (int i = 0; i < topicDataList.Count; i++)
+                        foreach (var topicData in topicDataList)
                         {
-                            Debug.Log($"{i} : Topic = {topicDataList[i].Topic}");
-                            Debug.Log($"{i} : thumData = {topicDataList[i].ThumbData}");
-                            Debug.Log($"{i} : completeCount = {topicDataList[i].CompleteCount}");
-                            Debug.Log($"{i} : totalCount = {topicDataList[i].TotalCount}");
-                            Debug.Log($"{i} : complete = {topicDataList[i].Complete}");
-                            Debug.Log($"{i} : pixelArts Count = {topicDataList[i].PixelArtDatas.Count}");
-                            
-                            string path = Path.Combine(DataManager.GalleryDataPath, "Topics");
-                            DataManager.SaveJsonData(path, topicDataList[i].Topic.ToString(),JsonConvert.SerializeObject(topicDataList[i]));
+                            DataManager.SaveJsonData(cummonPath, topicData.Topic.ToString(),JsonConvert.SerializeObject(topicData));
                         }
                     }
                 }
