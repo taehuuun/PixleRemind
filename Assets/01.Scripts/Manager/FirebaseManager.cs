@@ -34,63 +34,109 @@ namespace LTH.ColorMatch.Managers
 
         public async Task<bool> CheckDocumentExists(string collection, string document)
         {
-            var docRef = _db.Collection(collection).Document(document);
-            var docSnapShot = await docRef.GetSnapshotAsync();
+            try
+            {
+                var docRef = _db.Collection(collection).Document(document);
+                var docSnapShot = await docRef.GetSnapshotAsync();
 
-            return docSnapShot.Exists;
+                return docSnapShot.Exists;
+            }
+            catch (Exception e)
+            {
+                Debug.LogError(e);
+                throw;
+            }
         }
 
         public async Task<bool> CheckCollectionExists(string collection)
         {
-            var colRef = _db.Collection(collection);
-            var colSnapShot = await colRef.GetSnapshotAsync();
+            try
+            {
+                var colRef = _db.Collection(collection);
+                var colSnapShot = await colRef.GetSnapshotAsync();
 
-            return colSnapShot.Count > 0;
+                return colSnapShot.Count > 0;
+            }
+            catch (Exception e)
+            {
+                Debug.LogError(e);
+                throw;
+            }
         }
 
         public async Task<TopicData> GetTopicData(string collection, string document)
         {
-            var docRef = _db.Collection(collection).Document(document);
-            var docSnapShot = await docRef.GetSnapshotAsync();
-
-            if (!docSnapShot.Exists)
+            try
             {
-                Debug.LogError("Document does not Exists");
-                return null;
-            }
+                var docRef = _db.Collection(collection).Document(document);
+                var docSnapShot = await docRef.GetSnapshotAsync();
 
-            var topicData = docSnapShot.ConvertTo<TopicData>();
-            return topicData;
+                if (!docSnapShot.Exists)
+                {
+                    Debug.LogError("Document does not Exists");
+                    return null;
+                }
+
+                var topicData = docSnapShot.ConvertTo<TopicData>();
+                return topicData;
+            }
+            catch (Exception e)
+            {
+                Debug.LogError(e);
+                throw;
+            }
         }
 
         public async Task<List<TopicData>> GetAllTopicData()
         {
-            var snapshot = await _db.Collection("GalleryData").GetSnapshotAsync();
-            var topicDataList = new List<TopicData>();
-
-            foreach (var document in snapshot.Documents)
+            try
             {
-                Debug.Log(document.Id);
-                var topicData = document.ConvertTo<TopicData>();
-                topicDataList.Add(topicData);
-            }
+                var snapshot = await _db.Collection("GalleryData").GetSnapshotAsync();
+                var topicDataList = new List<TopicData>();
 
-            return topicDataList;
+                foreach (var document in snapshot.Documents)
+                {
+                    Debug.Log(document.Id);
+                    var topicData = document.ConvertTo<TopicData>();
+                    topicDataList.Add(topicData);
+                }
+
+                return topicDataList;
+            }
+            catch (Exception e)
+            {
+                Debug.LogError(e);
+                throw;
+            }
         }
         public async Task AddTopicData(string collectionName, string documentName, TopicData topicData)
         {
-            var documentReference = _db.Collection(collectionName).Document(documentName);
-            
-            await documentReference.SetAsync(topicData);
-            
-            Debug.Log($"{topicData.ToDictionary().Count}");
+            try
+            {
+                var documentReference = _db.Collection(collectionName).Document(documentName);
+                
+                await documentReference.SetAsync(topicData);
+            }
+            catch (Exception e)
+            {
+                Debug.LogError(e);
+                throw;
+            }
         }
 
         public async Task UpdateTopicData(string collectionName, string documentName, TopicData topicData)
         {
-            var documentReference = _db.Collection(collectionName).Document(documentName);
-            
-            await documentReference.SetAsync(topicData, SetOptions.MergeAll);
+            try
+            {
+                var documentReference = _db.Collection(collectionName).Document(documentName);
+                
+                await documentReference.SetAsync(topicData, SetOptions.MergeAll);
+            }
+            catch (Exception e)
+            {
+                Debug.LogError(e);
+                throw;
+            }
         }
     }
 }
