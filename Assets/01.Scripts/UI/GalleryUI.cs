@@ -18,19 +18,15 @@ namespace LTH.ColorMatch.UI
         }
         public void SelectPage(GalleryPage page)
         {
-            // if(activePopups.Count > 0)
-            // {
-            //     ClosePopup();
-            // }
-            //
-            for (int i = 0; i < pages.Length; i++)
+            foreach (var Page in pages)
             {
-                if (i <= (int)page)
+                if (Page.gameObject.activeSelf)
                 {
-                    OpenPopup(pages[i]);        
-                    Debug.Log(pages[i].name);
+                    Page.gameObject.SetActive(false);
                 }
             }
+            
+            pages[(int)page].gameObject.SetActive(true);
         }
         public void Close()
         {
