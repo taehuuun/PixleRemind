@@ -1,15 +1,15 @@
 using System;
-using UnityEngine;
+using Firebase.Firestore;
 
 namespace LTH.ColorMatch.Data
 {
-    [Serializable]
+    [FirestoreData,Serializable]
     public class ColorMatchColor
     {
-        public float R { get; set; }
-        public float G { get; set; }
-        public float B { get; set; }
-        public float A { get; set; }
+        [FirestoreProperty] public float R { get; set; }
+        [FirestoreProperty] public float G { get; set; }
+        [FirestoreProperty] public float B { get; set; }
+        [FirestoreProperty] public float A { get; set; }
 
         public ColorMatchColor(float r, float g, float b, float a)
         {
@@ -20,13 +20,14 @@ namespace LTH.ColorMatch.Data
         }
     }
     
+    [FirestoreData, Serializable]
     public class CustomColor
     {
-        public ColorMatchColor OriginColorMatchColor { get; set; }
-        public ColorMatchColor GrayColorMatchColor { get; set; }
-        public bool IsFeel { get; set; }
-        public int X { get; set;  }
-        public int Y { get; set; }
+        [FirestoreProperty] public ColorMatchColor OriginColorMatchColor { get; set; }
+        [FirestoreProperty] public ColorMatchColor GrayColorMatchColor { get; set; }
+        [FirestoreProperty] public bool IsFeel { get; set; }
+        [FirestoreProperty] public int X { get; set;  }
+        [FirestoreProperty] public int Y { get; set; }
 
         public CustomColor()
         {
