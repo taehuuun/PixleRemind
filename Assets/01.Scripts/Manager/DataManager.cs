@@ -1,9 +1,7 @@
 using System.Collections.Generic;
 using System.IO;
-using Google.MiniJSON;
 using UnityEngine;
 using Newtonsoft.Json;
-using UnityEditor.U2D.Sprites;
 
 namespace LTH.ColorMatch.Managers
 {
@@ -12,10 +10,6 @@ namespace LTH.ColorMatch.Managers
         public static readonly string BasePath = Application.persistentDataPath;
         public static readonly string GalleryDataPath = Path.Combine(BasePath, "Gallery");
         
-        public static List<string> GetPixelArts(string topic)
-        {
-            return GetPixelArtNames(topic);
-        }
         public static List<string> GetTopics()
         {
             return GetTopicNames();
@@ -35,22 +29,6 @@ namespace LTH.ColorMatch.Managers
             return directoryInfo.Exists;
         }
 
-        private static List<string> GetPixelArtNames(string topic)
-        {
-            var fileNames = new List<string>();
-
-            var directoryInfo = new DirectoryInfo(Path.Combine(GalleryDataPath, topic));
-            
-            Debug.Log(directoryInfo.Exists);
-            
-            foreach (var file in directoryInfo.GetFiles())
-            {
-                Debug.Log(file.Name);
-                fileNames.Add(Path.GetFileNameWithoutExtension(file.Name));
-            }
-
-            return fileNames;
-        }
         private static List<string> GetTopicNames()
         {
             var directoryNames = new List<string>();
@@ -106,7 +84,6 @@ namespace LTH.ColorMatch.Managers
 
             return loadData;
         }
-
         private static bool FileExists(string checkPath,string fileName)
         {
             var path = Path.Combine(checkPath, $"{fileName}.json");
