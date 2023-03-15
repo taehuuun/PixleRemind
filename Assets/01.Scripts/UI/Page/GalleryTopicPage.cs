@@ -51,7 +51,7 @@ namespace LTH.ColorMatch.UI
                 TopicSlot newTopicSlot = Instantiate(topicSlotPrefab, topicGenTrans);
                 newTopicSlot.titleText.text = topic;
                 newTopicSlot.data = DataManager.LoadJsonData<TopicData>(path, topic);
-                Debug.Log($"TEST : {newTopicSlot.data.pixelArtDatas.Count}");
+                Debug.Log($"TEST : {newTopicSlot.data.PixelArtDatas.Count}");
                 newTopicSlot.GetComponent<Button>().onClick.AddListener(() =>
                 {
                     ui.SelectPage(GalleryPage.PixelArt);

@@ -34,7 +34,7 @@ namespace LTH.ColorMatch.Managers
         {
             string jsonData = JsonConvert.SerializeObject(data);
             string path = Path.Combine(DataManager.GalleryDataPath, "Topics");
-            DataManager.SaveJsonData(path, data.topic.ToString(), jsonData);
+            DataManager.SaveJsonData(path, data.Topic.ToString(), jsonData);
         }
     }
 }

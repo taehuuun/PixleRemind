@@ -142,7 +142,7 @@ namespace LTH.ColorMatch.UI
 
             int selIdx = GalleryManager.ins.SelPixelArtIdx;
 
-            GalleryManager.ins.CurrentTopicArt.pixelArtDatas[selIdx] = JsonConvert.SerializeObject(_data);
+            GalleryManager.ins.CurrentTopicArt.PixelArtDatas[selIdx] = JsonConvert.SerializeObject(_data);
             GalleryManager.ins.SavePixelArtData(GalleryManager.ins.CurrentTopicArt);
         }
         public void SelectSlot(ColorSlot slot)

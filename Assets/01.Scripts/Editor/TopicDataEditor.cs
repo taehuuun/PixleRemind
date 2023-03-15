@@ -99,7 +99,7 @@ public class TopicDataEditor : EditorWindow
 
                 if (_topicData != null)
                 {
-                    EditorGUILayout.LabelField("Topic Name", _topicData.topic.ToString());
+                    EditorGUILayout.LabelField("Topic Name", _topicData.Topic.ToString());
 
                     // GUILayout.Label("Textures", EditorStyles.boldLabel);
                     //

@@ -11,14 +11,14 @@ namespace LTH.ColorMatch.UI
         public TopicData data;
         public override void OnSlotClick()
         {
-            GalleryManager.ins.PixelArtDatas.AddRange(data.pixelArtDatas.Select(JsonConvert.DeserializeObject<PixelArtData>));
+            GalleryManager.ins.PixelArtDatas.AddRange(data.PixelArtDatas.Select(JsonConvert.DeserializeObject<PixelArtData>));
             GalleryManager.ins.CurrentTopicArt = data;
         }
 
         public override void SetSlot()
         {
-            titleText.text = data.topic.ToString();
-            thumbnailImb.sprite = PixelArtUtill.MakeThumbnail(data.thumbData, data.thumbSize);
+            titleText.text = data.Topic.ToString();
+            thumbnailImb.sprite = PixelArtUtill.MakeThumbnail(data.ThumbData, data.ThumbSize);
         }
     }
 }

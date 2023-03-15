@@ -44,15 +44,15 @@ namespace LTH.ColorMatch.Test
 
                         for (int i = 0; i < topicDataList.Count; i++)
                         {
-                            Debug.Log($"{i} : Topic = {topicDataList[i].topic}");
-                            Debug.Log($"{i} : thumData = {topicDataList[i].thumbData}");
-                            Debug.Log($"{i} : completeCount = {topicDataList[i].completeCount}");
-                            Debug.Log($"{i} : totalCount = {topicDataList[i].totalCount}");
-                            Debug.Log($"{i} : complete = {topicDataList[i].complete}");
-                            Debug.Log($"{i} : pixelArts Count = {topicDataList[i].pixelArtDatas.Count}");
+                            Debug.Log($"{i} : Topic = {topicDataList[i].Topic}");
+                            Debug.Log($"{i} : thumData = {topicDataList[i].ThumbData}");
+                            Debug.Log($"{i} : completeCount = {topicDataList[i].CompleteCount}");
+                            Debug.Log($"{i} : totalCount = {topicDataList[i].TotalCount}");
+                            Debug.Log($"{i} : complete = {topicDataList[i].Complete}");
+                            Debug.Log($"{i} : pixelArts Count = {topicDataList[i].PixelArtDatas.Count}");
                             
                             string path = Path.Combine(DataManager.GalleryDataPath, "Topics");
-                            DataManager.SaveJsonData(path, topicDataList[i].topic.ToString(),JsonConvert.SerializeObject(topicDataList[i]));
+                            DataManager.SaveJsonData(path, topicDataList[i].Topic.ToString(),JsonConvert.SerializeObject(topicDataList[i]));
                         }
                     }
                 }

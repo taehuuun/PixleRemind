@@ -8,15 +8,27 @@ namespace LTH.ColorMatch.Data
     [FirestoreData, Serializable]
     public class TopicData
     {
-        [FirestoreProperty] public GalleryTopic topic {get;set;}
-        [FirestoreProperty] public string thumbData {get;set;}
-        [FirestoreProperty] public int completeCount {get;set;}
-        [FirestoreProperty] public int totalCount {get;set;}
-        [FirestoreProperty] public int thumbSize { get; set; }
-        [FirestoreProperty] public bool complete {get;set;}
-        [FirestoreProperty] public List<string> pixelArtDatas { get; set; }
-        
-        
+        [FirestoreProperty] public GalleryTopic Topic {get;set;}
+        [FirestoreProperty] public string ThumbData {get;set;}
+        [FirestoreProperty] public int CompleteCount {get;set;}
+        [FirestoreProperty] public int TotalCount {get;set;}
+        [FirestoreProperty] public int ThumbSize { get; set; }
+        [FirestoreProperty] public bool Complete {get;set;}
+        [FirestoreProperty] public List<string> PixelArtDatas { get; set; }
+
+        public TopicData() {}
+        public TopicData(GalleryTopic topic, string thumbData, int completeCount, int totalCount,int thumbSize, bool complete
+            , List<string> pixelArtDatas)
+        {
+            Topic = topic;
+            ThumbData = thumbData;
+            CompleteCount = completeCount;
+            TotalCount = totalCount;
+            ThumbSize = thumbSize;
+            Complete = complete;
+            PixelArtDatas = pixelArtDatas;
+        }
+                
         [FirestoreProperty]
         public Dictionary<string, object> ToDictionary
         {
@@ -24,29 +36,15 @@ namespace LTH.ColorMatch.Data
             {
                 var dictionary = new Dictionary<string, object>
                 {
-                    { "topic", topic },
-                    { "thumbData", thumbData },
-                    { "completeCount", completeCount },
-                    { "totalCount", totalCount },
-                    { "complete", complete },
-                    { "pixelArtDatas", pixelArtDatas }
+                    { "topic", Topic },
+                    { "thumbData", ThumbData },
+                    { "completeCount", CompleteCount },
+                    { "totalCount", TotalCount },
+                    { "complete", Complete },
+                    { "pixelArtDatas", PixelArtDatas }
                 };
                 return dictionary;
             }
         }
-
-        public TopicData(GalleryTopic tp, string th, int cC, int total,int size, bool cb
-            , List<string> p)
-        {
-            topic = tp;
-            thumbData = th;
-            completeCount = cC;
-            totalCount = total;
-            thumbSize = size;
-            complete = cb;
-            pixelArtDatas = p;
-        }
-        
-        public TopicData() {}
     }    
 }
