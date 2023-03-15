@@ -8,6 +8,7 @@ namespace LTH.ColorMatch.Managers
     public class DataManager : MonoBehaviour
     {
         public static readonly string BasePath = Application.persistentDataPath;
+        public static readonly string GalleryDataPath = Path.Combine(DataManager.BasePath, "Gallery","Topics");
         
         public static List<string> GetTargetFolderFileNames(string path)
         {
