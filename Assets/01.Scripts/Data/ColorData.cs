@@ -18,7 +18,7 @@ namespace LTH.ColorMatch.Data
             {
                 var dictionary = new Dictionary<string, object>
                 {
-                    { "remainPixel", RemainPixel },
+                    { "RemainPixel", RemainPixel },
                     {"Pixels",Pixels}
                 };
                 return dictionary;

@@ -36,12 +36,12 @@ namespace LTH.ColorMatch.Data
             {
                 var dictionary = new Dictionary<string, object>
                 {
-                    { "topic", Topic },
-                    { "thumbData", ThumbData },
-                    { "completeCount", CompleteCount },
-                    { "totalCount", TotalCount },
-                    { "complete", Complete },
-                    { "pixelArtDatas", PixelArtDatas }
+                    { "Topic", Topic },
+                    { "ThumbData", ThumbData },
+                    { "CompleteCount", CompleteCount },
+                    { "TotalCount", TotalCount },
+                    { "Complete", Complete },
+                    { "PixelArtDatas", PixelArtDatas }
                 };
                 return dictionary;
             }
