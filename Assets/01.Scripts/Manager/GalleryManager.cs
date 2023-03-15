@@ -13,7 +13,7 @@ namespace LTH.ColorMatch.Managers
         public bool IsMatching { get; set; }
         public TopicData CurrentTopicArt { get; set; }
         public int SelPixelArtIdx {get; set; }
-        public List<PixelArtData> PixelArtDatas{get; set; }
+        public List<PixelArtData> PixelArtDatas { get; set; } = new List<PixelArtData>();
         public GalleryPage CurPage{get; set; }
         
         private void Awake()
