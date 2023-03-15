@@ -6,7 +6,7 @@ namespace LTH.ColorMatch.Data
     public class ColorData
     {
         [FirestoreProperty]
-        public int remainPixel { get; set; }
+        public int RemainPixel { get; set; }
 
         [FirestoreProperty]
         public List<CustomColor> Pixels { get; set; } = new List<CustomColor>();
@@ -18,7 +18,7 @@ namespace LTH.ColorMatch.Data
             {
                 var dictionary = new Dictionary<string, object>
                 {
-                    { "remainPixel", remainPixel },
+                    { "remainPixel", RemainPixel },
                     {"Pixels",Pixels}
                 };
                 return dictionary;

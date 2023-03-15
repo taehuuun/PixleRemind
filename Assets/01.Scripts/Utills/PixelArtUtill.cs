@@ -25,7 +25,7 @@ namespace LTH.ColorMatch.Utill
                         CustomColor customColor = new CustomColor(getPixelColor.r,getPixelColor.g,getPixelColor.b,getPixelColor.a,x,y);
 
                         pixelDatas.Pixels.Add(customColor);
-                        pixelDatas.remainPixel++;
+                        pixelDatas.RemainPixel++;
                     }
                 }
 

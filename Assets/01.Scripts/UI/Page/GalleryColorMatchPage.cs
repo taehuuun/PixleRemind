@@ -112,7 +112,7 @@ namespace LTH.ColorMatch.UI
                 return;
             }
 
-            if (_data.colorData.remainPixel == 0)
+            if (_data.colorData.RemainPixel == 0)
             {
                 Debug.LogError("해당 PixelArt을 모두 채움");
                 _data.complete = true;
@@ -133,7 +133,7 @@ namespace LTH.ColorMatch.UI
             var selectedPixel = availablePixels[selectPixel];
             
             _data.fillCount--;
-            _data.colorData.remainPixel--;
+            _data.colorData.RemainPixel--;
             selectedPixel.isFeel = true;
             _data.thumbData = PixelArtUtill.ExtractThumbnailData(_data.colorData, _data.size);
             
