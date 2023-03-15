@@ -1,26 +1,35 @@
 using UnityEngine;
 using UnityEditor;
 using System.Collections.Generic;
-using System.IO;
+using System.Threading.Tasks;
 using LTH.ColorMatch.Data;
 using LTH.ColorMatch.Enums;
-using LTH.ColorMatch.Managers;
-using LTH.ColorMatch.Utill;
+using Firebase.Firestore;
 
 public class TopicDataEditor : EditorWindow
 {
     private List<Texture2D> _textureList = new List<Texture2D>();
     private GalleryTopic _topicType;
     private Difficulty _topicDifficulty = Difficulty.Easy;
-
+    private FirebaseFirestore db;
+    private TopicData _topicData;
+    private bool _topicDataExists;
+    
     [MenuItem("Window/Topic Data Editor")]
     public static void ShowWindow()
     {
         EditorWindow.GetWindow(typeof(TopicDataEditor));
     }
 
-    private void OnGUI()
+    private async void OnGUI()
     {
+        db = FirebaseFirestore.DefaultInstance;
+
+        if (_topicType == GalleryTopic.None)
+        {
+            _topicDataExists = false;
+        }
+        
         GUILayout.Label("Topic Data Editor", EditorStyles.boldLabel);
 
         GUILayout.Space(10f);
@@ -58,41 +67,80 @@ public class TopicDataEditor : EditorWindow
         }
 
         GUILayout.Space(10f);
-        
+
         GUI.enabled = (_topicType != GalleryTopic.None); // TopicType이 None이 아니면 버튼 활성화
 
         if (GUILayout.Button("Check"))
         {
-            string path = Path.Combine(DataManager.GalleryDataPath, "Topics");
+            // Check버튼을 통해 해당하는 TopicData가 Firestore에 존재하는 체크 하는 코드
+            EditorUtility.DisplayProgressBar("Checking", "Checking Topic Data...",0f);
 
-            // ReSharper disable once Unity.PerformanceCriticalCodeInvocation
-            TopicData topicData = DataManager.LoadJsonData<TopicData>(path, _topicType.ToString());
-            
-            if (topicData != null)
-            {
-            }
+            _topicDataExists = await CheckDocumentExists("GalleryData", _topicType.ToString());      
+
+            Debug.Log(_topicDataExists);
+
+            EditorUtility.ClearProgressBar();
         }
 
-        GUI.enabled = true; // 버튼 활성화
+        GUI.enabled = (_topicDataExists); // 버튼 활성화
 
         GUILayout.Space(10f);
 
-        if (GUILayout.Button("Create"))
+        if (GUILayout.Button("View"))
         {
-            List<PixelArtData> pixelArtDataList = new List<PixelArtData>();
-
-            for (int i = 0; i < _textureList.Count; i++)
+            if (_topicDataExists)
             {
-                PixelArtData pixelArtData = PixelArtUtill.ExportPixelData(new GalleryTopic(), _textureList[i].name, _textureList[i], _topicDifficulty);
-                pixelArtDataList.Add(pixelArtData);
+                EditorUtility.DisplayProgressBar("Loading", "Loading Topic Data...",0f);
+                // ReSharper disable once Unity.PerformanceCriticalCodeInvocation
+                _topicData = await GetTopicData("GalleryData", _topicType.ToString());
+                EditorUtility.ClearProgressBar();
+
+                GUILayout.Label("Topic Data Editor", EditorStyles.boldLabel);
+
+                if (_topicData != null)
+                {
+                    EditorGUILayout.LabelField("Topic Name", _topicData.topic.ToString());
+
+                    // GUILayout.Label("Textures", EditorStyles.boldLabel);
+                    //
+                    // foreach (var pixelArtData in _topicData.pixelArtDatas)
+                    // {
+                    //     GUILayout.Label(pixelArtData);
+                    // }
+                }
+                else
+                {
+                    EditorGUILayout.HelpBox("Failed to load topic data.", MessageType.Info);
+                }
             }
-            
-            string path = Path.Combine(DataManager.GalleryDataPath, "Topics");
-
-            if (path.Length > 0)
+            else
             {
-                AssetDatabase.Refresh();
+                EditorGUILayout.HelpBox("Please select a topic and click the Check button.", MessageType.Info);
             }
         }
+    }
+    private async Task<bool> CheckDocumentExists(string collection, string document)
+    {
+        var docRef = db.Collection(collection).Document(document);
+        var docSnapShot = await docRef.GetSnapshotAsync();
+
+        return docSnapShot.Exists;
+    }
+
+    // ReSharper disable Unity.PerformanceAnalysis
+    private async Task<TopicData> GetTopicData(string collection, string document)
+    {
+        var docRef = db.Collection(collection).Document(document);
+        var docSnapShot = await docRef.GetSnapshotAsync();
+
+        if (!docSnapShot.Exists)
+        {
+            Debug.LogError("Document does not Exists");
+            return null;
+        }
+
+        TopicData newLoadData = docSnapShot.ConvertTo<TopicData>(); 
+       
+        return newLoadData;
     }
 }

@@ -1,8 +1,8 @@
+using System.Linq;
 using LTH.ColorMatch.Data;
 using LTH.ColorMatch.Managers;
 using LTH.ColorMatch.Utill;
 using Newtonsoft.Json;
-using UnityEngine;
 
 namespace LTH.ColorMatch.UI
 {
@@ -11,12 +11,8 @@ namespace LTH.ColorMatch.UI
         public TopicData data;
         public override void OnSlotClick()
         {
-            for (int i = 0; i < data.pixelArtDatas.Count; i++)
-            {
-                GalleryManager.ins.pixelArtDatas.Add(JsonConvert.DeserializeObject<PixelArtData>(data.pixelArtDatas[i]));
-            }
-            
-            GalleryManager.ins.selectedTopic = data.topic.ToString();
+            GalleryManager.ins.pixelArtDatas.AddRange(data.pixelArtDatas.Select(JsonConvert.DeserializeObject<PixelArtData>));
+            GalleryManager.ins.currentTopicArt = data;
         }
 
         public override void SetSlot()

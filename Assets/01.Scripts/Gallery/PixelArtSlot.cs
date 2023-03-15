@@ -12,7 +12,7 @@ namespace LTH.ColorMatch.UI
         
         public override void OnSlotClick()
         {
-            GalleryManager.ins.currentPixelArt = pixelData;
+            // GalleryManager.ins.selPixelArtIdx = pixelData;
         }
 
         public override void SetSlot()

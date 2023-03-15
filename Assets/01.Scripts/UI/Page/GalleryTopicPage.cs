@@ -33,6 +33,12 @@ namespace LTH.ColorMatch.UI
 
         private void SetPage()
         {
+            foreach (var data in GalleryManager.ins.pixelArtDatas)
+            {
+                GalleryManager.ins.pixelArtDatas.Remove(data);
+            }
+            GalleryManager.ins.pixelArtDatas.Clear();
+            GalleryManager.ins.curPage = GalleryPage.Topic;
             CreateTopicSlot();
         }
         private void CreateTopicSlot()
@@ -45,7 +51,11 @@ namespace LTH.ColorMatch.UI
                 TopicSlot newTopicSlot = Instantiate(topicSlotPrefab, topicGenTrans);
                 newTopicSlot.titleText.text = topic;
                 newTopicSlot.data = DataManager.LoadJsonData<TopicData>(path, topic);
-                newTopicSlot.GetComponent<Button>().onClick.AddListener(() => ui.SelectPage(GalleryPage.PixelArt));
+                Debug.Log($"TEST : {newTopicSlot.data.pixelArtDatas.Count}");
+                newTopicSlot.GetComponent<Button>().onClick.AddListener(() =>
+                {
+                    ui.SelectPage(GalleryPage.PixelArt);
+                });
                 newTopicSlot.SetSlot();
             }
         }

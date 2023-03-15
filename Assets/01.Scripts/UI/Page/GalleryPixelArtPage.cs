@@ -17,7 +17,7 @@ namespace LTH.ColorMatch.UI
         public PixelArtSlot pixelArtSlotPrefab;
         public Transform slotGenTrans;
 
-        private List<PixelArtSlot> _pixelArtSlots = new List<PixelArtSlot>();
+        public List<PixelArtSlot> _pixelArtSlots = new List<PixelArtSlot>();
 
         private void OnEnable()
         {
@@ -26,29 +26,40 @@ namespace LTH.ColorMatch.UI
 
         private void OnDisable()
         {
+            Debug.Log("Disable");
             foreach (var slot in _pixelArtSlots)
             {
                 Destroy(slot.gameObject);
+                _pixelArtSlots.Remove(slot);
             }
-
             _pixelArtSlots.Clear();
+            GalleryManager.ins.pixelArtDatas.Clear();
         }
 
         private void SetPage()
         {
+            GalleryManager.ins.curPage = GalleryPage.PixelArt;
             CreatePixelArtSlot();
         }
 
         private void CreatePixelArtSlot()
         {
-           foreach (var pixelArtData in GalleryManager.ins.pixelArtDatas)
+            if (_pixelArtSlots.Count != GalleryManager.ins.pixelArtDatas.Count)
             {
-                PixelArtSlot newPixelArtSlot = Instantiate(pixelArtSlotPrefab, slotGenTrans);
-                string path = Path.Combine(DataManager.GalleryDataPath, GalleryManager.ins.selectedTopic);
-                newPixelArtSlot.pixelData = pixelArtData;
-                newPixelArtSlot.SetSlot();
-                newPixelArtSlot.GetComponent<Button>().onClick.AddListener(() => ui.SelectPage(GalleryPage.ColorMatch));
-                _pixelArtSlots.Add(newPixelArtSlot);
+               for (int i = 0 ; i < GalleryManager.ins.pixelArtDatas.Count; i++)
+                {
+                    PixelArtSlot newPixelArtSlot = Instantiate(pixelArtSlotPrefab, slotGenTrans);
+                    string path = Path.Combine(DataManager.GalleryDataPath, GalleryManager.ins.pixelArtDatas[i].topic.ToString());
+                    newPixelArtSlot.pixelData = GalleryManager.ins.pixelArtDatas[i];
+                    newPixelArtSlot.SetSlot();
+                    var i1 = i;
+                    newPixelArtSlot.GetComponent<Button>().onClick.AddListener(() =>
+                    {
+                        ui.SelectPage(GalleryPage.ColorMatch);
+                        GalleryManager.ins.selPixelArtIdx = i1;
+                    });
+                    _pixelArtSlots.Add(newPixelArtSlot);
+                }
             }
         }
     }

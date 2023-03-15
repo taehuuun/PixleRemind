@@ -1,8 +1,11 @@
 using System.Collections;
+using System.Linq;
 using LTH.ColorMatch.Data;
+using LTH.ColorMatch.Enums;
 using LTH.ColorMatch.Interfaces;
 using LTH.ColorMatch.Managers;
 using LTH.ColorMatch.Utill;
+using Newtonsoft.Json;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -25,6 +28,7 @@ namespace LTH.ColorMatch.UI
         
         private void OnEnable()
         {
+            GalleryManager.ins.curPage = GalleryPage.ColorMatch;
             SetPage();
             system.ReStart();
         }
@@ -37,7 +41,7 @@ namespace LTH.ColorMatch.UI
         public void UpdateSimilarity(float similarity)
         {
             float result = 100 - similarity;
-            similarText.text =$"유사도 : {string.Format("{0:N2}", result)}";
+            similarText.text =$"유사도 : {result:N2})";
         }
         public void FillRandomPixel()
         {
@@ -53,23 +57,32 @@ namespace LTH.ColorMatch.UI
                 _data.complete = true;
                 return;
             }
-
-            int selectPixel = Random.Range(0, _data.colorData.Pixels.Count);
-
-            bool complete = _data.colorData.Pixels[selectPixel].isFeel;
-            ColorMatchColor originColor = _data.colorData.Pixels[selectPixel].originColorMatchColor;
             
-            if (!complete && originColor.a != 0)
+            var availablePixels = _data.colorData.Pixels.Where(p => !p.isFeel && p.originColorMatchColor.a == 0).ToList();
+
+            if (availablePixels.Count == 0)
             {
-                _data.fillCount--;
-                _data.colorData.remainPixel--;
-                _data.colorData.Pixels[selectPixel].isFeel = true;
-                _data.thumbData = PixelArtUtill.ExtractThumbnailData(_data.colorData, _data.size);
-                
-                UpdateCountText(_data.fillCount);
-                board.sprite = PixelArtUtill.MakeThumbnail(_data.thumbData, _data.size);
-                GalleryManager.ins.SavePixelArtData(_data);
+                Debug.LogError("더 이상 채울 픽셀이 없음");
+                return;
             }
+            
+            int selectPixel = Random.Range(0, availablePixels.Count);
+
+            // Use var keyword to reduce repetition
+            var selectedPixel = availablePixels[selectPixel];
+            
+            _data.fillCount--;
+            _data.colorData.remainPixel--;
+            selectedPixel.isFeel = true;
+            _data.thumbData = PixelArtUtill.ExtractThumbnailData(_data.colorData, _data.size);
+            
+            UpdateCountText(_data.fillCount);
+            board.sprite = PixelArtUtill.MakeThumbnail(_data.thumbData, _data.size);
+
+            int selIdx = GalleryManager.ins.selPixelArtIdx;
+
+            GalleryManager.ins.currentTopicArt.pixelArtDatas[selIdx] = JsonConvert.SerializeObject(_data);
+            GalleryManager.ins.SavePixelArtData(GalleryManager.ins.currentTopicArt);
         }
         public void SelectSlot(ColorSlot slot)
         {
@@ -89,8 +102,7 @@ namespace LTH.ColorMatch.UI
         private void SetPage()
         {
             system.RegisterObserver(this);
-            _data = GalleryManager.ins.currentPixelArt;
-            Debug.Log(_data.thumbData);
+            _data = GalleryManager.ins.pixelArtDatas[GalleryManager.ins.selPixelArtIdx];
             board.sprite = PixelArtUtill.MakeThumbnail(_data.thumbData, _data.size);
             UpdateCountText(_data.fillCount);
         }
@@ -104,7 +116,7 @@ namespace LTH.ColorMatch.UI
         {
             if (gameOver)
             {
-                GalleryManager.ins.SavePixelArtData(_data);
+                GalleryManager.ins.SavePixelArtData(GalleryManager.ins.currentTopicArt);
             }
         }
 
