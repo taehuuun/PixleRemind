@@ -10,7 +10,7 @@ namespace LTH.ColorMatch.Data
         [FirestoreProperty] public float G { get; set; }
         [FirestoreProperty] public float B { get; set; }
         [FirestoreProperty] public float A { get; set; }
-
+        public ColorMatchColor() { }
         public ColorMatchColor(float r, float g, float b, float a)
         {
             R = r;
