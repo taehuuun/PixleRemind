@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-using System.IO;
 using LTH.ColorMatch.Data;
 using LTH.ColorMatch.Enums;
 using LTH.ColorMatch.Managers;
@@ -11,52 +9,48 @@ namespace LTH.ColorMatch.UI
     public class GalleryTopicPage : Page
     {
         [SerializeField] private GalleryUI ui;
-        public TopicSlot topicSlotPrefab;
-        public Transform topicGenTrans;
+        public TopicSlot[] topicSlots;
 
-        // private List<TopicSlot> topicSlots = new List<TopicSlot>();
-
-        private void Start()
+        private void OnEnable()
         {
+            GalleryManager.ins.TopicDatas.Clear();
+            GalleryManager.ins.LoadTopicData();
+            
             SetPage();
         }
 
-        // private void OnDisable()
-        // {
-        //     for (int i = 0; i < topicSlots.Count; i++)
-        //     {
-        //         Destroy(topicSlots[i]);
-        //     }
-        //     
-        //     topicSlots.Clear();
-        // }
+        private void OnDisable()
+        {
+            for (int i = 0; i < topicSlots.Length; i++)
+            {
+                topicSlots[i].gameObject.SetActive(false);
+                topicSlots[i].data = null;
+            }
+        }
 
         private void SetPage()
         {
-            // foreach (var data in GalleryManager.ins.PixelArtDatas)
-            // {
-            //     GalleryManager.ins.PixelArtDatas.Remove(data);
-            // }
-            // GalleryManager.ins.PixelArtDatas.Clear();
             GalleryManager.ins.CurPage = GalleryPage.Topic;
-            CreateTopicSlot();
+            SetTopicSlot();
         }
-        private void CreateTopicSlot()
+        private void SetTopicSlot()
         {
-            List<string> topics = GalleryManager.ins.GetTopics();
-            
-            foreach (var topic in topics)
+            for (int i = 0; i < GalleryManager.ins.TopicDatas.Count; i++)
             {
-                string path = Path.Combine(DataManager.GalleryDataPath, "Topics");
-                TopicSlot newTopicSlot = Instantiate(topicSlotPrefab, topicGenTrans);
-                newTopicSlot.titleText.text = topic;
-                newTopicSlot.data = DataManager.LoadJsonData<TopicData>(path, topic);
-                Debug.Log($"TEST : {newTopicSlot.data.PixelArtDatas.Count}");
-                newTopicSlot.GetComponent<Button>().onClick.AddListener(() =>
+                TopicData curTopicData = GalleryManager.ins.TopicDatas[i];
+                topicSlots[i].gameObject.SetActive(true);
+                topicSlots[i].titleText.text = curTopicData.Topic.ToString();
+                topicSlots[i].data = curTopicData;
+
+                int topicDataIdx = i;
+                GalleryPage page = GalleryPage.PixelArt;
+                
+                topicSlots[i].GetComponent<Button>().onClick.AddListener(() =>
                 {
-                    ui.SelectPage(GalleryPage.PixelArt);
+                    GalleryManager.ins.SelTopicIdx = topicDataIdx;
+                    ui.SelectPage(page);
                 });
-                newTopicSlot.SetSlot();
+                topicSlots[i].SetSlot();
             }
         }
     }

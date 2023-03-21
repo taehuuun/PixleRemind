@@ -1,29 +1,29 @@
-using System.Linq;
 using LTH.ColorMatch.Data;
 using LTH.ColorMatch.Managers;
 using LTH.ColorMatch.Utill;
-using Newtonsoft.Json;
+using TMPro;
 using UnityEngine;
 
 namespace LTH.ColorMatch.UI
 {
     public class TopicSlot : GallerySlot
     {
+        public TMP_Text completeCountText;
+        public GameObject completeMark;
         public TopicData data;
         public override void OnSlotClick()
         {
-            // GalleryManager.ins.PixelArtDatas.AddRange(data.PixelArtDatas.Select(JsonConvert.DeserializeObject<PixelArtData>));
-            for (int i = 0; i < data.PixelArtDatas.Count; i++)
+            foreach (var pixelArtData in data.PixelArtDatas)
             {
-                Debug.Log(data.PixelArtDatas[i]);
-                GalleryManager.ins.PixelArtDatas.Add(data.PixelArtDatas[i]);
+                GalleryManager.ins.PixelArtDatas.Add(pixelArtData);
             }
-            GalleryManager.ins.CurrentTopicArt = data;
         }
 
         public override void SetSlot()
         {
             titleText.text = data.Topic.ToString();
+            completeMark.SetActive(data.Complete);
+            completeCountText.text = $"{data.CompleteCount} / {data.TotalCount}";
             thumbnailImb.sprite = PixelArtUtill.MakeThumbnail(data.ThumbData, data.ThumbSize);
         }
     }

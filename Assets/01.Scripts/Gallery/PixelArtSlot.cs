@@ -1,7 +1,7 @@
 using LTH.ColorMatch.Data;
-using LTH.ColorMatch.Managers;
 using LTH.ColorMatch.Utill;
 using TMPro;
+using UnityEngine;
 
 namespace LTH.ColorMatch.UI
 {
@@ -9,6 +9,7 @@ namespace LTH.ColorMatch.UI
     {
         public TMP_Text difficultyText;
         public PixelArtData pixelData;
+        public GameObject completeMark;
         
         public override void OnSlotClick()
         {
@@ -20,6 +21,7 @@ namespace LTH.ColorMatch.UI
             difficultyText.text = pixelData.Difficulty.ToString();
             titleText.text = pixelData.Title;
             thumbnailImb.sprite = PixelArtUtill.MakeThumbnail(pixelData.ThumbData, pixelData.Size);
+            completeMark.SetActive(pixelData.Complete);
         }
     }
 }

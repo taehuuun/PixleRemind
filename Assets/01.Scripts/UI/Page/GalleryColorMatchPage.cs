@@ -6,6 +6,7 @@ using LTH.ColorMatch.Interfaces;
 using LTH.ColorMatch.Managers;
 using LTH.ColorMatch.Utill;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -51,23 +52,6 @@ namespace LTH.ColorMatch.UI
                 Page.fillCountText.text = $"O : {_count}";
             }
         }
-        private class  GameOverUiUpdate : UIUpdate
-        {
-            private readonly bool _gameOver;
-
-            public GameOverUiUpdate(GalleryColorMatchPage page, bool gameOver) : base(page)
-            {
-                _gameOver = gameOver;
-            }
-
-            public override void UpdateUI()
-            {
-                if (_gameOver)
-                {
-                    GalleryManager.ins.SavePixelArtData(GalleryManager.ins.CurrentTopicArt);
-                }
-            }
-        }
         
         public Image board;
         public TMP_Text fillCountText;
@@ -80,7 +64,7 @@ namespace LTH.ColorMatch.UI
         public MoveUI boardMove;
         public MoveUI playBtnMove;
         public MoveUI matchUIMove;
-        
+       
         private void OnEnable()
         {
             system.RegisterObserver(this);
@@ -99,9 +83,11 @@ namespace LTH.ColorMatch.UI
         
         public void UpdateSubjectState()
         {
-            UpdateUI(new GameOverUiUpdate(this,system.IsGameOver));
+            // UpdateUI(new GameOverUiUpdate(this,system.IsGameOver));
             UpdateUI(new SimilarityUIUpdate(this,system.SimilarRange));
             UpdateUI(new FillCountUIUpdate(this, _data.FillCount));
+
+            GalleryManager.ins.UpdateAndSavePixelArtData(_data);
         }        
         public void FillRandomPixel()
         {
@@ -111,38 +97,31 @@ namespace LTH.ColorMatch.UI
                 return;
             }
 
+            if (_data.ColorData.RemainPixel > 0)
+            {
+                var availablePixels = _data.ColorData.Pixels.Where(p => !p.IsFeel).ToList();
+                
+                int selectPixelIdx = Random.Range(0, availablePixels.Count);
+
+                var selectedPixel = availablePixels[selectPixelIdx];
+                
+                _data.FillCount--;
+                _data.ColorData.RemainPixel--;
+                selectedPixel.IsFeel = true;
+                _data.ThumbData = PixelArtUtill.ExtractThumbnailData(_data.ColorData, _data.Size);
+                
+                board.sprite = PixelArtUtill.MakeThumbnail(_data.ThumbData, _data.Size);
+            }
+
             if (_data.ColorData.RemainPixel == 0)
             {
-                Debug.LogError("해당 PixelArt을 모두 채움");
+                Debug.Log("해당 PixelArt을 모두 채움");
                 _data.Complete = true;
-                return;
+                system.IsGameOver = true;
+                // playBtnMove.gameObject.SetActive(false);
+                GalleryManager.ins.TopicDatas[GalleryManager.ins.SelTopicIdx].CompleteCount++;
             }
-            
-            var availablePixels = _data.ColorData.Pixels.Where(p => !p.IsFeel).ToList();
 
-            if (availablePixels.Count == 0)
-            {
-                Debug.LogError("더 이상 채울 픽셀이 없음");
-                return;
-            }
-            
-            int selectPixel = Random.Range(0, availablePixels.Count);
-
-            // Use var keyword to reduce repetition
-            var selectedPixel = availablePixels[selectPixel];
-            
-            _data.FillCount--;
-            _data.ColorData.RemainPixel--;
-            selectedPixel.IsFeel = true;
-            _data.ThumbData = PixelArtUtill.ExtractThumbnailData(_data.ColorData, _data.Size);
-            
-            // UpdateCountText(_data.fillCount);
-            board.sprite = PixelArtUtill.MakeThumbnail(_data.ThumbData, _data.Size);
-
-            int selIdx = GalleryManager.ins.SelPixelArtIdx;
-
-            GalleryManager.ins.CurrentTopicArt.PixelArtDatas[selIdx] =_data;
-            GalleryManager.ins.SavePixelArtData(GalleryManager.ins.CurrentTopicArt);
             UpdateSubjectState();
         }
         public void SelectSlot(ColorSlot slot)
@@ -163,6 +142,7 @@ namespace LTH.ColorMatch.UI
         {
             system.RegisterObserver(this);
             _data = GalleryManager.ins.PixelArtDatas[GalleryManager.ins.SelPixelArtIdx];
+            playBtnMove.gameObject.SetActive(!_data.Complete);
             board.sprite = PixelArtUtill.MakeThumbnail(_data.ThumbData, _data.Size);
             UpdateSubjectState();
         }

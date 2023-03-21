@@ -49,7 +49,7 @@ namespace LTH.ColorMatch.Managers
         public bool IsGameOver
         {
             get => _isGameOver;
-            private set
+            set
             {
                 _isGameOver = value;
                 NotifyObservers();

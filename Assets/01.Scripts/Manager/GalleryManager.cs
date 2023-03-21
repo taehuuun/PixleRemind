@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.IO;
 using LTH.ColorMatch.Data;
 using LTH.ColorMatch.Enums;
 using Newtonsoft.Json;
@@ -16,7 +15,6 @@ namespace LTH.ColorMatch.Managers
         public int SelTopicIdx { get; set; }
         public List<PixelArtData> PixelArtDatas { get; private set; }
         public List<TopicData> TopicDatas { get; set; }
-        // public TopicData CurrentTopicArt { get; set; }
 
         public bool IsMatching { get; set; }
         
@@ -50,11 +48,13 @@ namespace LTH.ColorMatch.Managers
             PixelArtDatas = topicData.PixelArtDatas;
         }
 
-        public void UpdateAndSavePixelArtData(int index, PixelArtData updateData)
+        public void UpdateAndSavePixelArtData(PixelArtData updateData)
         {
-            PixelArtDatas[index] = updateData;
-            CurrentTopicArt.PixelArtDatas[index] = updateData;
-            SavePixelArtData(CurrentTopicArt);
+            TopicData saveTopic = TopicDatas[SelTopicIdx]; 
+            saveTopic.PixelArtDatas[SelPixelArtIdx] = updateData;
+            saveTopic.Complete = saveTopic.CompleteCount == saveTopic.TotalCount;
+            saveTopic.ThumbData = updateData.ThumbData;
+            SavePixelArtData(saveTopic);
         }
 
         public void SavePixelArtData(TopicData data)
