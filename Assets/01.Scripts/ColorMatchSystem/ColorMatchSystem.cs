@@ -49,7 +49,7 @@ namespace LTH.ColorMatch.Managers
         public bool IsGameOver
         {
             get => _isGameOver;
-            private set
+            set
             {
                 _isGameOver = value;
                 NotifyObservers();
@@ -58,11 +58,7 @@ namespace LTH.ColorMatch.Managers
 
         public void ReStart()
         {
-            Life = maxLife;
-            Score = 0;
-            SimilarRange = maxSimilarRange;
-            IsGameOver = false;
-
+            ResetStats();
             GenerateNewPuzzle();
         }
         
@@ -72,24 +68,38 @@ namespace LTH.ColorMatch.Managers
             
             if (isMatched)
             {
-                IncreaseScore();
-                GenerateNewPuzzle();
+                OnCorrectMatch();
             }
             else if (Life > 0)
             {
-                Handheld.Vibrate();
-                DecreaseLife();
+                OnIncorrectMatch();
             }
 
             return isMatched;
         }
 
+        private void OnCorrectMatch()
+        {
+            IncreaseScore();
+            GenerateNewPuzzle();
+        }
+        private void OnIncorrectMatch()
+        {
+            Handheld.Vibrate();
+            DecreaseLife();
+        }
+        private void ResetStats()
+        {
+            Life = maxLife;
+            Score = 0;
+            SimilarRange = maxSimilarRange;
+            _isGameOver = false;
+        }
         private void IncreaseScore()
         {
             Score++;
             SimilarRange = Mathf.Clamp(SimilarRange - decRangeValue, 5, 100);
         }
-
         private void DecreaseLife()
         {
             if (Life > 0)
@@ -138,7 +148,6 @@ namespace LTH.ColorMatch.Managers
                 selectColorSlots[i].SetSlot(randColor);
             }
         }
-        
         private Color GetRandomSimilarColor(Color targetColor, float variance)
         {
             float range = variance * 0.01f;
@@ -156,7 +165,6 @@ namespace LTH.ColorMatch.Managers
                 observers.Add(observer);
             }
         }
-
         public void RemoveObserver(IObserver observer)
         {
             if (observers.Contains(observer))
@@ -164,7 +172,6 @@ namespace LTH.ColorMatch.Managers
                 observers.Remove(observer);
             }
         }
-
         public void NotifyObservers()
         {
             foreach (IObserver observer in observers)

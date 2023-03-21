@@ -8,7 +8,8 @@ namespace LTH.ColorMatch.UI
     {
         public TMP_Text titleText;
         public Image thumbnailImb;
-
+        
         public virtual void OnSlotClick() { }
+        public virtual void SetSlot() { }
     }
 }

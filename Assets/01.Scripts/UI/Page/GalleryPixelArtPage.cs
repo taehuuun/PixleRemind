@@ -1,6 +1,5 @@
 using System.Collections.Generic;
-using System.IO;
-using LTH.ColorMatch.Data;
+using System.Linq.Expressions;
 using LTH.ColorMatch.Enums;
 using LTH.ColorMatch.Managers;
 using UnityEngine;
@@ -11,31 +10,56 @@ namespace LTH.ColorMatch.UI
     public class GalleryPixelArtPage : Page
     {
         [SerializeField] private GalleryUI ui;
-
+        
         public PixelArtSlot pixelArtSlotPrefab;
         public Transform slotGenTrans;
 
-        private void Start()
+        [SerializeField] private PixelArtSlot[] _pixelArtSlots;
+
+        private void OnEnable()
         {
-            SetPage();
+           if (GalleryManager.ins.TopicDatas.Count > 0 && GalleryManager.ins.SelTopicIdx >= 0 &&
+                GalleryManager.ins.SelTopicIdx < GalleryManager.ins.TopicDatas.Count)
+            {
+                var selectTopicData = GalleryManager.ins.TopicDatas[GalleryManager.ins.SelTopicIdx];
+                GalleryManager.ins.LoadPixelData(selectTopicData);
+                SetPage();
+            }
+            else
+            {
+                Debug.LogError("Invalid TopicData index");
+                return;
+            }
+        }
+
+        private void OnDisable()
+        {
+            foreach (var pixelArtSlot in _pixelArtSlots)
+            {
+                pixelArtSlot.gameObject.SetActive(false);
+            }
         }
 
         private void SetPage()
         {
-            CreatePixelArtSlot();
+            GalleryManager.ins.CurPage = GalleryPage.PixelArt;
+            SetPixelArtSlot();
         }
 
-        private void CreatePixelArtSlot()
+        private void SetPixelArtSlot()
         {
-            List<string> pixelArts = GalleryManager.ins.GetPixelArts();
-            
-            foreach (var pixelArt in pixelArts)
+            for (int i = 0 ; i < GalleryManager.ins.PixelArtDatas.Count; i++)
             {
-                PixelArtSlot newPixelArtSlot = Instantiate(pixelArtSlotPrefab, slotGenTrans);
-                newPixelArtSlot.titleText.text = pixelArt;
-                newPixelArtSlot.pixelData =
-                    DataManager.LoadJsonData<PixelArtData>(Path.Combine(GalleryManager.ins.selectedTopic, pixelArt));
-                newPixelArtSlot.GetComponent<Button>().onClick.AddListener(() => ui.SelectPage(GalleryPage.ColorMatch));
+                _pixelArtSlots[i].gameObject.SetActive(true);
+                _pixelArtSlots[i].pixelData = GalleryManager.ins.PixelArtDatas[i];
+                _pixelArtSlots[i].SetSlot();
+                
+                var pixelArtDataIdx = i;
+                _pixelArtSlots[i].GetComponent<Button>().onClick.AddListener(() =>
+                {
+                    GalleryManager.ins.SelPixelArtIdx = pixelArtDataIdx;
+                    ui.SelectPage(GalleryPage.ColorMatch);
+                });
             }
         }
     }

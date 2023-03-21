@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+using LTH.ColorMatch.Data;
 using LTH.ColorMatch.Enums;
 using LTH.ColorMatch.Managers;
 using UnityEngine;
@@ -9,27 +9,48 @@ namespace LTH.ColorMatch.UI
     public class GalleryTopicPage : Page
     {
         [SerializeField] private GalleryUI ui;
-        public TopicSlot topicSlotPrefab;
-        public Transform topicGenTrans;
-        
-        private void Start()
+        public TopicSlot[] topicSlots;
+
+        private void OnEnable()
         {
+            GalleryManager.ins.TopicDatas.Clear();
+            GalleryManager.ins.LoadTopicData();
+            
             SetPage();
+        }
+
+        private void OnDisable()
+        {
+            for (int i = 0; i < topicSlots.Length; i++)
+            {
+                topicSlots[i].gameObject.SetActive(false);
+                topicSlots[i].data = null;
+            }
         }
 
         private void SetPage()
         {
-            CreateTopicSlot();
+            GalleryManager.ins.CurPage = GalleryPage.Topic;
+            SetTopicSlot();
         }
-        private void CreateTopicSlot()
+        private void SetTopicSlot()
         {
-            List<string> topics = GalleryManager.ins.GetTopics();
-            
-            foreach (var topic in topics)
+            for (int i = 0; i < GalleryManager.ins.TopicDatas.Count; i++)
             {
-                TopicSlot newTopicSlot = Instantiate(topicSlotPrefab, topicGenTrans);
-                newTopicSlot.titleText.text = topic;
-                newTopicSlot.GetComponent<Button>().onClick.AddListener(() => ui.SelectPage(GalleryPage.PixelArt));
+                TopicData curTopicData = GalleryManager.ins.TopicDatas[i];
+                topicSlots[i].gameObject.SetActive(true);
+                topicSlots[i].titleText.text = curTopicData.Topic.ToString();
+                topicSlots[i].data = curTopicData;
+
+                int topicDataIdx = i;
+                GalleryPage page = GalleryPage.PixelArt;
+                
+                topicSlots[i].GetComponent<Button>().onClick.AddListener(() =>
+                {
+                    GalleryManager.ins.SelTopicIdx = topicDataIdx;
+                    ui.SelectPage(page);
+                });
+                topicSlots[i].SetSlot();
             }
         }
     }

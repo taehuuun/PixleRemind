@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using LTH.ColorMatch.Enums;
 using LTH.ColorMatch.Managers;
 using UnityEngine;
@@ -6,35 +7,52 @@ namespace LTH.ColorMatch.UI
 {
     public class GalleryUI : BodyUI
     {
-        public Page[] pages;
-        
+        public GameObject[] pages;
+        public Stack<GalleryPage> pageHistory;
+
+        private void Start()
+        {
+            pageHistory = new Stack<GalleryPage>();
+            SelectPage(GalleryPage.Topic);
+        }
         protected override void Update()
         {
-            if (Input.GetKeyDown(KeyCode.Escape) && !GalleryManager.ins.isMatching)
+            // base.Update();
+            if (Input.GetKeyDown(KeyCode.Escape) && !GalleryManager.ins.IsMatching && pageHistory.Count > 0)
             {
                 Close();
             }
         }
         public void SelectPage(GalleryPage page)
         {
-            if(activePopups.Count > 0)
+            if (pageHistory.Count > 0 && pageHistory.Peek() == page)
             {
-                ClosePopup();
+                return;
             }
             
-            OpenPopup(pages[(int)page]);
+            if (pageHistory.Count > 0)
+            {
+                pages[(int)pageHistory.Peek()].SetActive(false);
+            }
+            
+            pages[(int)page].SetActive(true);
+            pageHistory.Push(page);
+            
+            Debug.Log(pageHistory.Count);
         }
         public void Close()
         {
-            if(activePopups.Count > 0)
+            if (pageHistory.Count > 1)
             {
-                print($"활성화된 페이지가 있음 : {activePopups.Count}");
-                ClosePopup();
+                pages[(int)pageHistory.Pop()].SetActive(false);
+                pages[(int)pageHistory.Peek()].SetActive(true);
             }
             else
             {
                 MoveScene("MainScene");
             }
+            
+            Debug.Log(pageHistory.Count);
         }
     }
 }
