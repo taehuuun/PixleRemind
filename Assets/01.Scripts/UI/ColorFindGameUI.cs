@@ -1,5 +1,3 @@
-using System;
-using System.Runtime.CompilerServices;
 using LTH.ColorMatch.Interfaces;
 using LTH.ColorMatch.Managers;
 using TMPro;
