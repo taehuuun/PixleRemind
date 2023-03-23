@@ -52,6 +52,7 @@ namespace LTH.ColorMatch.Managers
             set
             {
                 _isGameOver = value;
+                Debug.Log($"TEST : {_isGameOver}");
                 NotifyObservers();
             }
         }
@@ -90,10 +91,10 @@ namespace LTH.ColorMatch.Managers
         }
         private void ResetStats()
         {
+            _isGameOver = false;
             Life = maxLife;
             Score = 0;
             SimilarRange = maxSimilarRange;
-            _isGameOver = false;
         }
         private void IncreaseScore()
         {

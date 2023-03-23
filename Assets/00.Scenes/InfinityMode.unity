@@ -199,8 +199,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 273597663}
-        m_TargetAssemblyTypeName: LTH.ColorMatch.Managers.ColorFindGameManager, Assembly-CSharp
+      - m_Target: {fileID: 538852426}
+        m_TargetAssemblyTypeName: LTH.ColorMatch.UI.ColorFindGameUI, Assembly-CSharp
         m_MethodName: SelectSlot
         m_Mode: 2
         m_Arguments:
@@ -287,8 +287,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 273597663}
-        m_TargetAssemblyTypeName: LTH.ColorMatch.Managers.ColorFindGameManager, Assembly-CSharp
+      - m_Target: {fileID: 538852426}
+        m_TargetAssemblyTypeName: LTH.ColorMatch.UI.ColorFindGameUI, Assembly-CSharp
         m_MethodName: SelectSlot
         m_Mode: 2
         m_Arguments:
@@ -375,8 +375,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 273597663}
-        m_TargetAssemblyTypeName: LTH.ColorMatch.Managers.ColorFindGameManager, Assembly-CSharp
+      - m_Target: {fileID: 538852426}
+        m_TargetAssemblyTypeName: LTH.ColorMatch.UI.ColorFindGameUI, Assembly-CSharp
         m_MethodName: SelectSlot
         m_Mode: 2
         m_Arguments:
@@ -605,9 +605,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 273597663}
-        m_TargetAssemblyTypeName: LTH.ColorMatch.Managers.ColorFindGameManager, Assembly-CSharp
-        m_MethodName: ReStart
+      - m_Target: {fileID: 538852426}
+        m_TargetAssemblyTypeName: LTH.ColorMatch.UI.ColorFindGameUI, Assembly-CSharp
+        m_MethodName: Restart
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1163,7 +1163,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slotImage: {fileID: 845702267}
-  slotHexCode: 
 --- !u!1001 &857337041
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2234,8 +2233,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 273597663}
-        m_TargetAssemblyTypeName: LTH.ColorMatch.Managers.ColorFindGameManager, Assembly-CSharp
+      - m_Target: {fileID: 538852426}
+        m_TargetAssemblyTypeName: LTH.ColorMatch.UI.ColorFindGameUI, Assembly-CSharp
         m_MethodName: SelectSlot
         m_Mode: 2
         m_Arguments:
@@ -2322,8 +2321,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 273597663}
-        m_TargetAssemblyTypeName: LTH.ColorMatch.Managers.ColorFindGameManager, Assembly-CSharp
+      - m_Target: {fileID: 538852426}
+        m_TargetAssemblyTypeName: LTH.ColorMatch.UI.ColorFindGameUI, Assembly-CSharp
         m_MethodName: SelectSlot
         m_Mode: 2
         m_Arguments:
@@ -3308,8 +3307,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 273597663}
-        m_TargetAssemblyTypeName: LTH.ColorMatch.Managers.ColorFindGameManager, Assembly-CSharp
+      - m_Target: {fileID: 538852426}
+        m_TargetAssemblyTypeName: LTH.ColorMatch.UI.ColorFindGameUI, Assembly-CSharp
         m_MethodName: SelectSlot
         m_Mode: 2
         m_Arguments:
@@ -3396,8 +3395,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 273597663}
-        m_TargetAssemblyTypeName: LTH.ColorMatch.Managers.ColorFindGameManager, Assembly-CSharp
+      - m_Target: {fileID: 538852426}
+        m_TargetAssemblyTypeName: LTH.ColorMatch.UI.ColorFindGameUI, Assembly-CSharp
         m_MethodName: SelectSlot
         m_Mode: 2
         m_Arguments:
@@ -3716,8 +3715,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 273597663}
-        m_TargetAssemblyTypeName: LTH.ColorMatch.Managers.ColorFindGameManager, Assembly-CSharp
+      - m_Target: {fileID: 538852426}
+        m_TargetAssemblyTypeName: LTH.ColorMatch.UI.ColorFindGameUI, Assembly-CSharp
         m_MethodName: SelectSlot
         m_Mode: 2
         m_Arguments:
@@ -3804,8 +3803,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 273597663}
-        m_TargetAssemblyTypeName: LTH.ColorMatch.Managers.ColorFindGameManager, Assembly-CSharp
+      - m_Target: {fileID: 538852426}
+        m_TargetAssemblyTypeName: LTH.ColorMatch.UI.ColorFindGameUI, Assembly-CSharp
         m_MethodName: SelectSlot
         m_Mode: 2
         m_Arguments:

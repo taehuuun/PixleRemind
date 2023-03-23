@@ -23,7 +23,6 @@ namespace LTH.ColorMatch.UI
         private void Awake()
         {
             system.RegisterObserver(this);
-            scoreText.text = "0";
         }
 
         private void Start()
@@ -31,6 +30,18 @@ namespace LTH.ColorMatch.UI
             system.ReStart();
         }
 
+        public void SelectSlot(ColorSlot slot)
+        {
+            if (system.CheckMatch(slot))
+            {
+            }
+        }
+
+        public void Restart()
+        {
+            gameOverPopup.gameObject.SetActive(false);
+            system.ReStart();
+        }
         public void UpdateScore(int score)
         {
             scoreText.text = score.ToString();
