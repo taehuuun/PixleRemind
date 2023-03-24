@@ -4,14 +4,14 @@ using Firebase.Firestore;
 namespace LTH.ColorMatch.Data
 {
     [FirestoreData,Serializable]
-    public class ColorMatchColor
+    public class ColorValue
     {
         [FirestoreProperty] public float R { get; set; }
         [FirestoreProperty] public float G { get; set; }
         [FirestoreProperty] public float B { get; set; }
         [FirestoreProperty] public float A { get; set; }
-        public ColorMatchColor() { }
-        public ColorMatchColor(float r, float g, float b, float a)
+        public ColorValue() { }
+        public ColorValue(float r, float g, float b, float a)
         {
             R = r;
             G = g;
@@ -23,38 +23,38 @@ namespace LTH.ColorMatch.Data
     [FirestoreData, Serializable]
     public class CustomPixel
     {
-        [FirestoreProperty] public ColorMatchColor OriginColorMatchColor { get; set; }
-        [FirestoreProperty] public ColorMatchColor GrayColorMatchColor { get; set; }
-        [FirestoreProperty] public bool IsFeel { get; set; }
+        [FirestoreProperty] public ColorValue OriginalColor { get; set; }
+        [FirestoreProperty] public ColorValue GrayColor { get; set; }
+        [FirestoreProperty] public bool IsFilled { get; set; }
         [FirestoreProperty] public int X { get; set;  }
         [FirestoreProperty] public int Y { get; set; }
 
         public CustomPixel()
         {
-            OriginColorMatchColor = new ColorMatchColor(0, 0, 0, 0);
-            GrayColorMatchColor = new ColorMatchColor(0, 0, 0, 0);
-            IsFeel = false;
+            OriginalColor = new ColorValue(0, 0, 0, 0);
+            GrayColor = new ColorValue(0, 0, 0, 0);
+            IsFilled = false;
         }
-        public CustomPixel(ColorMatchColor colorMatchColor)
+        public CustomPixel(ColorValue colorValue)
         {
-            float grayValue = GetGaryValue(colorMatchColor.R, colorMatchColor.G, colorMatchColor.B, colorMatchColor.A);
+            float grayValue = GetGrayValue(colorValue.R, colorValue.G, colorValue.B, colorValue.A);
             
-            OriginColorMatchColor = new ColorMatchColor(colorMatchColor.R, colorMatchColor.G, colorMatchColor.B, colorMatchColor.A);
-            GrayColorMatchColor = new ColorMatchColor(grayValue, grayValue, grayValue, colorMatchColor.A);
-            IsFeel = false;
+            OriginalColor = new ColorValue(colorValue.R, colorValue.G, colorValue.B, colorValue.A);
+            GrayColor = new ColorValue(grayValue, grayValue, grayValue, colorValue.A);
+            IsFilled = false;
         }
 
         public CustomPixel(float r, float g, float b, float a, int x, int y)
         {
-            float grayValue = GetGaryValue(r,g,b,a);
+            float grayValue = GetGrayValue(r,g,b,a);
             
-            OriginColorMatchColor = new ColorMatchColor(r, g, b, a);
-            GrayColorMatchColor = new ColorMatchColor(grayValue, grayValue, grayValue, a);
-            IsFeel = false;
+            OriginalColor = new ColorValue(r, g, b, a);
+            GrayColor = new ColorValue(grayValue, grayValue, grayValue, a);
+            IsFilled = false;
             X = x;
             Y = y;
         }
-        private float GetGaryValue(float r,float g,float b,float a)
+        private float GetGrayValue(float r,float g,float b,float a)
         {
             return (r + g + b) / 3;
         }

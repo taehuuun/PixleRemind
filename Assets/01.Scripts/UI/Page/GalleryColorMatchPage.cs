@@ -99,7 +99,7 @@ namespace LTH.ColorMatch.UI
 
             if (_data.PixelColorData.RemainingPixels > 0)
             {
-                var availablePixels = _data.PixelColorData.CustomPixels.Where(p => !p.IsFeel).ToList();
+                var availablePixels = _data.PixelColorData.CustomPixels.Where(p => !p.IsFilled).ToList();
                 
                 int selectPixelIdx = Random.Range(0, availablePixels.Count);
 
@@ -107,7 +107,7 @@ namespace LTH.ColorMatch.UI
                 
                 _data.RemainingFills--;
                 _data.PixelColorData.RemainingPixels--;
-                selectedPixel.IsFeel = true;
+                selectedPixel.IsFilled = true;
                 _data.ThumbnailData = PixelArtUtill.ExtractThumbnailData(_data.PixelColorData, _data.Size);
                 
                 board.sprite = PixelArtUtill.MakeThumbnail(_data.ThumbnailData, _data.Size);
