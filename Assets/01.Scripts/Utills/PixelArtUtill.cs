@@ -8,9 +8,9 @@ namespace LTH.ColorMatch.Utill
 {
     public class PixelArtUtill
     {
-        private static ColorData ExtractPixelData(Texture2D extractTarget)
+        private static PixelColorData ExtractPixelData(Texture2D extractTarget)
         {
-            ColorData pixelDatas = new ColorData();
+            PixelColorData pixelDatas = new PixelColorData();
             
             for (int y = 0; y < extractTarget.height; y++)
             {
@@ -40,7 +40,7 @@ namespace LTH.ColorMatch.Utill
             return pixelDatas;
         }
 
-        public static string ExtractThumbnailData(ColorData colorData, int size)
+        public static string ExtractThumbnailData(PixelColorData pixelColorData, int size)
         {
             Texture2D thumbNail = new Texture2D(size, size, TextureFormat.RGBA32, false)
             {
@@ -55,9 +55,9 @@ namespace LTH.ColorMatch.Utill
                 }
             }
 
-            for (int i = 0; i < colorData.Pixels.Count; i++)
+            for (int i = 0; i < pixelColorData.Pixels.Count; i++)
             {
-                CustomColor customColor = colorData.Pixels[i];
+                CustomColor customColor = pixelColorData.Pixels[i];
                 ColorMatchColor pixelColor = customColor.IsFeel
                     ? customColor.OriginColorMatchColor
                     : customColor.GrayColorMatchColor;
@@ -89,10 +89,10 @@ namespace LTH.ColorMatch.Utill
         // ReSharper disable Unity.PerformanceAnalysis
         public static PixelArtData ExportPixelData(GalleryTopic topic, string title, Texture2D pixelArtImg, Difficulty difficulty)
         {
-            ColorData colorData = ExtractPixelData(pixelArtImg);
-            string thumbData = ExtractThumbnailData(colorData, pixelArtImg.width);
+            PixelColorData pixelColorData = ExtractPixelData(pixelArtImg);
+            string thumbData = ExtractThumbnailData(pixelColorData, pixelArtImg.width);
             PixelArtData newData = new PixelArtData(topic, title, thumbData, pixelArtImg.width, 0, false, difficulty,
-                colorData);
+                pixelColorData);
             return newData;
         }
     }

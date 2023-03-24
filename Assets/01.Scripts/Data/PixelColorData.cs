@@ -4,7 +4,7 @@ using Firebase.Firestore;
 namespace LTH.ColorMatch.Data
 {
     [FirestoreData]
-    public class ColorData
+    public class PixelColorData
     {
         [FirestoreProperty]
         public int RemainPixel { get; set; }

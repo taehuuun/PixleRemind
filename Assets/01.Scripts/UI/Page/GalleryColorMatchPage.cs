@@ -85,38 +85,38 @@ namespace LTH.ColorMatch.UI
         {
             // UpdateUI(new GameOverUiUpdate(this,system.IsGameOver));
             UpdateUI(new SimilarityUIUpdate(this,system.SimilarRange));
-            UpdateUI(new FillCountUIUpdate(this, _data.FillCount));
+            UpdateUI(new FillCountUIUpdate(this, _data.RemainingFills));
 
             GalleryManager.ins.UpdateAndSavePixelArtData(_data);
         }        
         public void FillRandomPixel()
         {
-            if (_data.FillCount == 0)
+            if (_data.RemainingFills == 0)
             {
                 Debug.LogError("해당 PixelArt의 FillCount가 모두 소진됨");
                 return;
             }
 
-            if (_data.ColorData.RemainPixel > 0)
+            if (_data.PixelColorData.RemainPixel > 0)
             {
-                var availablePixels = _data.ColorData.Pixels.Where(p => !p.IsFeel).ToList();
+                var availablePixels = _data.PixelColorData.Pixels.Where(p => !p.IsFeel).ToList();
                 
                 int selectPixelIdx = Random.Range(0, availablePixels.Count);
 
                 var selectedPixel = availablePixels[selectPixelIdx];
                 
-                _data.FillCount--;
-                _data.ColorData.RemainPixel--;
+                _data.RemainingFills--;
+                _data.PixelColorData.RemainPixel--;
                 selectedPixel.IsFeel = true;
-                _data.ThumbData = PixelArtUtill.ExtractThumbnailData(_data.ColorData, _data.Size);
+                _data.ThumbnailData = PixelArtUtill.ExtractThumbnailData(_data.PixelColorData, _data.Size);
                 
-                board.sprite = PixelArtUtill.MakeThumbnail(_data.ThumbData, _data.Size);
+                board.sprite = PixelArtUtill.MakeThumbnail(_data.ThumbnailData, _data.Size);
             }
 
-            if (_data.ColorData.RemainPixel == 0)
+            if (_data.PixelColorData.RemainPixel == 0)
             {
                 Debug.Log("해당 PixelArt을 모두 채움");
-                _data.Complete = true;
+                _data.IsCompleted = true;
                 system.IsGameOver = true;
                 // playBtnMove.gameObject.SetActive(false);
                 GalleryManager.ins.TopicDatas[GalleryManager.ins.SelTopicIdx].CompleteCount++;
@@ -128,7 +128,7 @@ namespace LTH.ColorMatch.UI
         {
             if (system.CheckMatch(slot))
             {
-                _data.FillCount++;
+                _data.RemainingFills++;
                 UpdateSubjectState();
             }
         }
@@ -142,8 +142,8 @@ namespace LTH.ColorMatch.UI
         {
             system.RegisterObserver(this);
             _data = GalleryManager.ins.PixelArtDatas[GalleryManager.ins.SelPixelArtIdx];
-            playBtnMove.gameObject.SetActive(!_data.Complete);
-            board.sprite = PixelArtUtill.MakeThumbnail(_data.ThumbData, _data.Size);
+            playBtnMove.gameObject.SetActive(!_data.IsCompleted);
+            board.sprite = PixelArtUtill.MakeThumbnail(_data.ThumbnailData, _data.Size);
             UpdateSubjectState();
         }
         private IEnumerator CheckPlaying()

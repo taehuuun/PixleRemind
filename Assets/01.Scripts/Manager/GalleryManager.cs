@@ -53,7 +53,7 @@ namespace LTH.ColorMatch.Managers
             TopicData saveTopic = TopicDatas[SelTopicIdx]; 
             saveTopic.PixelArtDatas[SelPixelArtIdx] = updateData;
             saveTopic.Complete = saveTopic.CompleteCount == saveTopic.TotalCount;
-            saveTopic.ThumbData = updateData.ThumbData;
+            saveTopic.ThumbData = updateData.ThumbnailData;
             SavePixelArtData(saveTopic);
         }
 

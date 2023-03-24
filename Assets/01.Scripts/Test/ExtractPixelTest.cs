@@ -63,7 +63,7 @@ namespace LTH.ColorMatch.Test
 
                     if (i == 0)
                     {
-                        topicThumbData = newPixelArtData.ThumbData;
+                        topicThumbData = newPixelArtData.ThumbnailData;
                         topicThumbSize = newPixelArtData.Size;
                     }
                 }

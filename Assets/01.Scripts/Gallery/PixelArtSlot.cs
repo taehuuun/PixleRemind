@@ -20,8 +20,8 @@ namespace LTH.ColorMatch.UI
         {
             difficultyText.text = pixelData.Difficulty.ToString();
             titleText.text = pixelData.Title;
-            thumbnailImb.sprite = PixelArtUtill.MakeThumbnail(pixelData.ThumbData, pixelData.Size);
-            completeMark.SetActive(pixelData.Complete);
+            thumbnailImb.sprite = PixelArtUtill.MakeThumbnail(pixelData.ThumbnailData, pixelData.Size);
+            completeMark.SetActive(pixelData.IsCompleted);
         }
     }
 }

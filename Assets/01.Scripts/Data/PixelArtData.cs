@@ -10,41 +10,39 @@ namespace LTH.ColorMatch.Data
     {
         [FirestoreProperty] public GalleryTopic Topic{get;set;}
         [FirestoreProperty] public string Title{get;set;}
-        [FirestoreProperty] public string ThumbData{get;set;}
+        [FirestoreProperty] public string ThumbnailData{get;set;}
         [FirestoreProperty] public int Size{get;set;}
-        [FirestoreProperty] public int FillCount{get;set;}
-        [FirestoreProperty] public bool Complete{get;set;}
+        [FirestoreProperty] public int RemainingFills{get;set;}
+        [FirestoreProperty] public bool IsCompleted{get;set;}
         [FirestoreProperty] public Difficulty Difficulty{get;set;}
-        [FirestoreProperty] public ColorData ColorData{get;set;}
+        [FirestoreProperty] public PixelColorData PixelColorData{get;set;}
 
         public PixelArtData()
         {
         }
-
-        public PixelArtData(GalleryTopic gt, string t, string td, int s, int cnt, bool cp, Difficulty d, ColorData c)
+        public PixelArtData(GalleryTopic topic, string title, string thumbnailData, int size, int remainingFills, bool isComplete, Difficulty difficulty, PixelColorData pixelColorData)
         {
-            Topic = gt;
-            Title = t;
-            ThumbData = td;
-            Size = s;
-            FillCount = cnt;
-            Complete = cp;
-            Difficulty = d;
-            ColorData = c;
+            Topic = topic;
+            Title = title;
+            ThumbnailData = thumbnailData;
+            Size = size;
+            RemainingFills = remainingFills;
+            IsCompleted = isComplete;
+            Difficulty = difficulty;
+            PixelColorData = pixelColorData;
         }
-
         public Dictionary<string, object> ToDictionary()
         {
             var dictionary = new Dictionary<string, object>
             {
                 { "Topic", Topic },
                 { "Title", Title },
-                { "ThumbData", ThumbData },
+                { "ThumbnailData", ThumbnailData },
                 { "Size", Size },
-                { "FillCount", FillCount },
-                { "Complete", Complete },
+                { "RemainingFills", RemainingFills },
+                { "IsCompleted", IsCompleted },
                 { "Difficulty", Difficulty },
-                { "ColorData", ColorData.ToDictionary() }
+                { "PixelColorData", PixelColorData.ToDictionary() }
             };
 
             return dictionary;
