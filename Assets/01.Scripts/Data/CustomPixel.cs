@@ -29,6 +29,7 @@ namespace LTH.ColorMatch.Data
         [FirestoreProperty] public int Y { get; set; }
         
         public PixelCoord() {}
+
         public PixelCoord(int x, int y)
         {
             X = x;

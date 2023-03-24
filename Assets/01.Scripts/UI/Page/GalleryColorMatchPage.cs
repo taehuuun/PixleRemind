@@ -99,17 +99,29 @@ namespace LTH.ColorMatch.UI
 
             if (_data.PixelColorData.RemainingPixels > 0)
             {
-                var availablePixels = _data.PixelColorData.CustomPixels.Where(p => !p.IsFilled).ToList();
+                int selectPixelIdx = Random.Range(0, _data.PixelColorData.CustomPixels.Count);
                 
-                int selectPixelIdx = Random.Range(0, availablePixels.Count);
+                var selectedPixel = _data.PixelColorData.CustomPixels[selectPixelIdx];
+                int selectedCoord = Random.Range(0, selectedPixel.PixelCoords.Count);
 
-                var selectedPixel = availablePixels[selectPixelIdx];
+                Texture2D pixelArt = PixelArtUtill.SpriteToTexture2D(board.sprite);
+                
+                Color origin = new Color(selectedPixel.OriginalColor.R, selectedPixel.OriginalColor.G, selectedPixel.OriginalColor.B, selectedPixel.OriginalColor.A);
+                
+                pixelArt.SetPixel(selectedPixel.PixelCoords[selectedCoord].X,selectedPixel.PixelCoords[selectedCoord].Y,origin);
+                pixelArt.Apply();
+                
+                selectedPixel.PixelCoords.RemoveAt(selectedCoord);
+
+                if (_data.PixelColorData.CustomPixels[selectPixelIdx].PixelCoords.Count == 0)
+                {
+                    Debug.Log($"{origin} 컬러 값과 해당하는 좌표들을 모두 채웠음 해당 컬러를 리스트에서 제거");
+                    _data.PixelColorData.CustomPixels.RemoveAt(selectPixelIdx);
+                }
                 
                 _data.RemainingFills--;
                 _data.PixelColorData.RemainingPixels--;
-                selectedPixel.IsFilled = true;
-                _data.ThumbnailData = PixelArtUtill.ExtractThumbnailData(_data.PixelColorData, _data.Size);
-                
+                _data.ThumbnailData = PixelArtUtill.ExtractThumbnailData(pixelArt);
                 board.sprite = PixelArtUtill.MakeThumbnail(_data.ThumbnailData, _data.Size);
             }
 
@@ -118,7 +130,6 @@ namespace LTH.ColorMatch.UI
                 Debug.Log("해당 PixelArt을 모두 채움");
                 _data.IsCompleted = true;
                 system.IsGameOver = true;
-                // playBtnMove.gameObject.SetActive(false);
                 GalleryManager.ins.TopicDatas[GalleryManager.ins.SelTopicIdx].CompleteCount++;
             }
 
