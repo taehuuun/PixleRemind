@@ -22,10 +22,10 @@ namespace LTH.ColorMatch.Utill
                     
                     if (getPixelColor.a >= 1)
                     {
-                        CustomColor customColor = new CustomColor(getPixelColor.r,getPixelColor.g,getPixelColor.b,getPixelColor.a,x,y);
+                        CustomPixel customPixel = new CustomPixel(getPixelColor.r,getPixelColor.g,getPixelColor.b,getPixelColor.a,x,y);
 
-                        pixelDatas.Pixels.Add(customColor);
-                        pixelDatas.RemainPixel++;
+                        pixelDatas.CustomPixels.Add(customPixel);
+                        pixelDatas.RemainingPixels++;
                     }
                 }
 
@@ -55,15 +55,15 @@ namespace LTH.ColorMatch.Utill
                 }
             }
 
-            for (int i = 0; i < pixelColorData.Pixels.Count; i++)
+            for (int i = 0; i < pixelColorData.CustomPixels.Count; i++)
             {
-                CustomColor customColor = pixelColorData.Pixels[i];
-                ColorMatchColor pixelColor = customColor.IsFeel
-                    ? customColor.OriginColorMatchColor
-                    : customColor.GrayColorMatchColor;
+                CustomPixel customPixel = pixelColorData.CustomPixels[i];
+                ColorMatchColor pixelColor = customPixel.IsFeel
+                    ? customPixel.OriginColorMatchColor
+                    : customPixel.GrayColorMatchColor;
                 Color setColor = new Color(pixelColor.R, pixelColor.G, pixelColor.B, pixelColor.A);
 
-                thumbNail.SetPixel(customColor.X, customColor.Y, setColor);
+                thumbNail.SetPixel(customPixel.X, customPixel.Y, setColor);
             }
             
             thumbNail.Apply();

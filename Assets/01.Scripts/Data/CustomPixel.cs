@@ -21,7 +21,7 @@ namespace LTH.ColorMatch.Data
     }
     
     [FirestoreData, Serializable]
-    public class CustomColor
+    public class CustomPixel
     {
         [FirestoreProperty] public ColorMatchColor OriginColorMatchColor { get; set; }
         [FirestoreProperty] public ColorMatchColor GrayColorMatchColor { get; set; }
@@ -29,13 +29,13 @@ namespace LTH.ColorMatch.Data
         [FirestoreProperty] public int X { get; set;  }
         [FirestoreProperty] public int Y { get; set; }
 
-        public CustomColor()
+        public CustomPixel()
         {
             OriginColorMatchColor = new ColorMatchColor(0, 0, 0, 0);
             GrayColorMatchColor = new ColorMatchColor(0, 0, 0, 0);
             IsFeel = false;
         }
-        public CustomColor(ColorMatchColor colorMatchColor)
+        public CustomPixel(ColorMatchColor colorMatchColor)
         {
             float grayValue = GetGaryValue(colorMatchColor.R, colorMatchColor.G, colorMatchColor.B, colorMatchColor.A);
             
@@ -44,7 +44,7 @@ namespace LTH.ColorMatch.Data
             IsFeel = false;
         }
 
-        public CustomColor(float r, float g, float b, float a, int x, int y)
+        public CustomPixel(float r, float g, float b, float a, int x, int y)
         {
             float grayValue = GetGaryValue(r,g,b,a);
             

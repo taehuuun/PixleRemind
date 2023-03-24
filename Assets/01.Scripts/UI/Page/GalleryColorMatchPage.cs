@@ -97,23 +97,23 @@ namespace LTH.ColorMatch.UI
                 return;
             }
 
-            if (_data.PixelColorData.RemainPixel > 0)
+            if (_data.PixelColorData.RemainingPixels > 0)
             {
-                var availablePixels = _data.PixelColorData.Pixels.Where(p => !p.IsFeel).ToList();
+                var availablePixels = _data.PixelColorData.CustomPixels.Where(p => !p.IsFeel).ToList();
                 
                 int selectPixelIdx = Random.Range(0, availablePixels.Count);
 
                 var selectedPixel = availablePixels[selectPixelIdx];
                 
                 _data.RemainingFills--;
-                _data.PixelColorData.RemainPixel--;
+                _data.PixelColorData.RemainingPixels--;
                 selectedPixel.IsFeel = true;
                 _data.ThumbnailData = PixelArtUtill.ExtractThumbnailData(_data.PixelColorData, _data.Size);
                 
                 board.sprite = PixelArtUtill.MakeThumbnail(_data.ThumbnailData, _data.Size);
             }
 
-            if (_data.PixelColorData.RemainPixel == 0)
+            if (_data.PixelColorData.RemainingPixels == 0)
             {
                 Debug.Log("해당 PixelArt을 모두 채움");
                 _data.IsCompleted = true;
