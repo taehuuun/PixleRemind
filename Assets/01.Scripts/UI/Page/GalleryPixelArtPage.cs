@@ -22,7 +22,7 @@ namespace LTH.ColorMatch.UI
                 GalleryManager.ins.SelTopicIdx < GalleryManager.ins.TopicDatas.Count)
             {
                 var selectTopicData = GalleryManager.ins.TopicDatas[GalleryManager.ins.SelTopicIdx];
-                GalleryManager.ins.LoadPixelData(selectTopicData);
+                GalleryManager.ins.LoadPixelDataForTopic(selectTopicData);
                 SetPage();
             }
             else
