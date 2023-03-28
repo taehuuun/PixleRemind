@@ -11,11 +11,6 @@ namespace LTH.ColorMatch.UI
         public PixelArtData pixelData;
         public GameObject completeMark;
         
-        public override void OnSlotClick()
-        {
-            // GalleryManager.ins.selPixelArtIdx = pixelData;
-        }
-
         public override void SetSlot()
         {
             difficultyText.text = pixelData.Difficulty.ToString();
