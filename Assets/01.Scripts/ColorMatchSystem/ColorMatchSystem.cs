@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using LTH.ColorMatch.Data;
 using LTH.ColorMatch.Interfaces;
 using UnityEngine;
 
@@ -6,6 +7,7 @@ namespace LTH.ColorMatch.Managers
 {
     public class ColorMatchSystem : MonoBehaviour, ISubject
     {
+        public PixelColorData pixelColorData;
         public ColorSlot targetColorSlot;
         public List<ColorSlot> selectColorSlots;
 
@@ -116,13 +118,43 @@ namespace LTH.ColorMatch.Managers
        
         private void GenerateNewPuzzle()
         {
-            SetRandomTargetColor();
+            SetRandomTargetColorFromPixelArtData();
             SetRandomSelectColorSlots();            
+        }
+
+        private void SetRandomTargetColorFromPixelArtData()
+        {
+            if (pixelColorData == null || pixelColorData.CustomPixels.Count == 0)
+            {
+                Debug.LogWarning("No Pixel Art Data Found, Using Random Color");
+                SetRandomTargetColor();
+                return;
+            }
+
+            int randIdx = Random.Range(0, pixelColorData.CustomPixels.Count);
+            ColorValue colorValue = pixelColorData.CustomPixels[randIdx].OriginalColor;
+            Color randColor = new Color(colorValue.R, colorValue.G, colorValue.B, colorValue.A);
+
+            float brightVar = Random.Range(-0.1f, 0.1f);
+            randColor = AdjustBrightness(randColor, brightVar);
+            
+            targetColorSlot.SetSlot(randColor);
         }
         private void SetRandomTargetColor()
         {
             var randColor = Random.ColorHSV();
             targetColorSlot.SetSlot(randColor);
+        }
+
+        private Color AdjustBrightness(Color color, float brightnessVar)
+        {
+            float h, s, v;
+            
+            Color.RGBToHSV(color,out h ,out s, out v);
+            v = Mathf.Clamp(v + brightnessVar, 0f, 1f);
+            Color newColor = Color.HSVToRGB(h, s, v);
+            
+            return newColor;
         }
         private void SetRandomSelectColorSlots()
         {

@@ -1,12 +1,10 @@
 using System.Collections;
-using System.Linq;
 using LTH.ColorMatch.Data;
 using LTH.ColorMatch.Enums;
 using LTH.ColorMatch.Interfaces;
 using LTH.ColorMatch.Managers;
 using LTH.ColorMatch.Utill;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -24,20 +22,20 @@ namespace LTH.ColorMatch.UI
 
             public abstract void UpdateUI();
         }
-        private class SimilarityUIUpdate : UIUpdate
-        {
-            private readonly float _similarity;
-
-            public SimilarityUIUpdate(GalleryColorMatchPage page, float similarity) : base(page)
-            {
-                _similarity = similarity;
-            }
-            public override void UpdateUI()
-            {
-                float result = 100 - _similarity;
-                Page.similarText.text = $"유사도 : {result:N2}";
-            }
-        }
+        // private class SimilarityUIUpdate : UIUpdate
+        // {
+        //     private readonly float _similarity;
+        //
+        //     public SimilarityUIUpdate(GalleryColorMatchPage page, float similarity) : base(page)
+        //     {
+        //         _similarity = similarity;
+        //     }
+        //     public override void UpdateUI()
+        //     {
+        //         float result = 100 - _similarity;
+        //         Page.similarText.text = $"유사도 : {result:N2}";
+        //     }
+        // }
         private class FillCountUIUpdate : UIUpdate
         {
             private readonly int _count;
@@ -84,7 +82,7 @@ namespace LTH.ColorMatch.UI
         public void UpdateSubjectState()
         {
             // UpdateUI(new GameOverUiUpdate(this,system.IsGameOver));
-            UpdateUI(new SimilarityUIUpdate(this,system.SimilarRange));
+            // UpdateUI(new SimilarityUIUpdate(this,system.SimilarRange));
             UpdateUI(new FillCountUIUpdate(this, _data.RemainingFills));
 
             GalleryManager.ins.UpdateAndSavePixelArtData(_data);
@@ -122,6 +120,7 @@ namespace LTH.ColorMatch.UI
                 _data.RemainingFills--;
                 _data.PixelColorData.RemainingPixels--;
                 _data.ThumbnailData = PixelArtUtill.ExtractThumbnailData(pixelArt);
+                
                 board.sprite = PixelArtUtill.MakeThumbnail(_data.ThumbnailData, _data.Size);
             }
 
@@ -132,7 +131,9 @@ namespace LTH.ColorMatch.UI
                 system.IsGameOver = true;
                 GalleryManager.ins.TopicDatas[GalleryManager.ins.SelTopicIdx].CompleteCount++;
             }
-
+            
+            system.pixelColorData = _data.PixelColorData;
+            
             UpdateSubjectState();
         }
         public void SelectSlot(ColorSlot slot)
@@ -153,6 +154,7 @@ namespace LTH.ColorMatch.UI
         {
             system.RegisterObserver(this);
             _data = GalleryManager.ins.PixelArtDatas[GalleryManager.ins.SelPixelArtIdx];
+            system.pixelColorData = _data.PixelColorData;
             playBtnMove.gameObject.SetActive(!_data.IsCompleted);
             board.sprite = PixelArtUtill.MakeThumbnail(_data.ThumbnailData, _data.Size);
             UpdateSubjectState();
