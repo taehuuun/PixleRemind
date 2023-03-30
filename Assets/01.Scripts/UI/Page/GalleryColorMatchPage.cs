@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using LTH.ColorMatch.Data;
 using LTH.ColorMatch.Enums;
@@ -6,7 +7,9 @@ using LTH.ColorMatch.Managers;
 using LTH.ColorMatch.Utill;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 namespace LTH.ColorMatch.UI
 {
@@ -34,13 +37,13 @@ namespace LTH.ColorMatch.UI
 
             public override void UpdateUI()
             {
-                Page.fillCountText.text = $"O : {_count}";
+                Page.remainPixelText.text = $"O : {_count}";
             }
         }
         
         public Image board;
-        public TMP_Text fillCountText;
-        public TMP_Text similarText;
+        public TMP_Text remainPixelText;
+        public TMP_Text playTimeText;
         
         public ColorMatchSystem system;
         
@@ -49,17 +52,26 @@ namespace LTH.ColorMatch.UI
         public MoveUI boardMove;
         public MoveUI playBtnMove;
         public MoveUI matchUIMove;
+
+        private readonly WaitForSeconds _timerDelay = new WaitForSeconds(1f);
        
         private void OnEnable()
         {
             system.RegisterObserver(this);
             InitializePage();
         }
+        private void OnDisable()
+        {
+            GalleryManager.ins.UpdateAndSavePixelArtData(_data);
+        }
+
         private void InitializePage()
         {
             GalleryManager.ins.CurPage = GalleryPage.ColorMatch;
             SetPage();
             system.ReStart();
+            playTimeText.text = FormatSecondsToTimeString(_data.PlayTime);
+            StartCoroutine(PlayTimer());
         }
         private void UpdateUI(UIUpdate uiUpdate)
         {
@@ -145,6 +157,24 @@ namespace LTH.ColorMatch.UI
             playBtnMove.gameObject.SetActive(!_data.IsCompleted);
             board.sprite = PixelArtUtill.MakeThumbnail(_data.ThumbnailData, _data.Size);
             UpdateSubjectState();
+        }
+        private string FormatSecondsToTimeString(int totalSeconds)
+        {
+            int hours = totalSeconds / 3600;
+            int minutes = (totalSeconds % 3600) / 60;
+            int seconds = totalSeconds % 60;
+
+            return $"{hours:D2}:{minutes:D2}:{seconds:D2}";
+        }
+
+        private IEnumerator PlayTimer()
+        {
+            while (!system.IsGameOver)
+            {
+                yield return _timerDelay;
+                _data.PlayTime++;
+                playTimeText.text = FormatSecondsToTimeString(_data.PlayTime);
+            }
         }
         private IEnumerator CheckPlaying()
         {
