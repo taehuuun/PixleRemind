@@ -70,8 +70,14 @@ namespace LTH.ColorMatch.UI
             GalleryManager.ins.CurPage = GalleryPage.ColorMatch;
             SetPage();
             system.ReStart();
-            playTimeText.text = FormatSecondsToTimeString(_data.PlayTime);
-            StartCoroutine(PlayTimer());
+
+            playTimeText.text = PixelArtUtill.FormatSecondsToTimeString(_data.PlayTime);
+            remainPixelText.gameObject.SetActive(!_data.IsCompleted);
+
+            if (!_data.IsCompleted)
+            {
+                StartCoroutine(PlayTimer());
+            }
         }
         private void UpdateUI(UIUpdate uiUpdate)
         {
@@ -155,14 +161,6 @@ namespace LTH.ColorMatch.UI
             board.sprite = PixelArtUtill.MakeThumbnail(_data.ThumbnailData, _data.Size);
             UpdateSubjectState();
         }
-        private string FormatSecondsToTimeString(int totalSeconds)
-        {
-            int hours = totalSeconds / 3600;
-            int minutes = (totalSeconds % 3600) / 60;
-            int seconds = totalSeconds % 60;
-
-            return $"{hours:D2}:{minutes:D2}:{seconds:D2}";
-        }
 
         private IEnumerator PlayTimer()
         {
@@ -170,7 +168,7 @@ namespace LTH.ColorMatch.UI
             {
                 yield return _timerDelay;
                 _data.PlayTime++;
-                playTimeText.text = FormatSecondsToTimeString(_data.PlayTime);
+                playTimeText.text = PixelArtUtill.FormatSecondsToTimeString(_data.PlayTime);
             }
         }
         private IEnumerator CheckPlaying()
