@@ -26,18 +26,18 @@ namespace LTH.ColorMatch.UI
             public abstract void UpdateUI();
         }
     
-        private class FillCountUIUpdate : UIUpdate
+        private class RemainPixelCountUIUpdate : UIUpdate
         {
             private readonly int _count;
 
-            public FillCountUIUpdate(GalleryColorMatchPage page, int count) : base(page)
+            public RemainPixelCountUIUpdate(GalleryColorMatchPage page, int count) : base(page)
             {
                 _count = count;
             }
 
             public override void UpdateUI()
             {
-                Page.remainPixelText.text = $"O : {_count}";
+                Page.remainPixelText.text = $"남은 픽셀 : {_count}";
             }
         }
         
@@ -80,17 +80,15 @@ namespace LTH.ColorMatch.UI
         
         public void UpdateSubjectState()
         {
-            // UpdateUI(new GameOverUiUpdate(this,system.IsGameOver));
-            // UpdateUI(new SimilarityUIUpdate(this,system.SimilarRange));
-            UpdateUI(new FillCountUIUpdate(this, _data.RemainingFills));
+            UpdateUI(new RemainPixelCountUIUpdate(this, _data.PixelColorData.RemainingPixels));
 
             GalleryManager.ins.UpdateAndSavePixelArtData(_data);
         }        
         public void FillRandomPixel()
         {
-            if (_data.RemainingFills == 0)
+            if (_data.PixelColorData.RemainingPixels == 0)
             {
-                Debug.LogError("해당 PixelArt의 FillCount가 모두 소진됨");
+                Debug.LogError("해당 PixelArt가 모두 채워짐");
                 return;
             }
 
@@ -139,7 +137,7 @@ namespace LTH.ColorMatch.UI
         {
             if (system.CheckMatch(slot))
             {
-                _data.RemainingFills++;
+                FillRandomPixel();
                 UpdateSubjectState();
             }
         }
