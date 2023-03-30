@@ -473,7 +473,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &68341796
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2806,17 +2806,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 2583386927080418831, guid: 1a913f459eff67a45be63fceb7129dff, type: 3}
   m_PrefabInstance: {fileID: 810872637}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &810872639 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 957204027320086142, guid: 1a913f459eff67a45be63fceb7129dff, type: 3}
-  m_PrefabInstance: {fileID: 810872637}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 265364790}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3883f0ac434c7ef4c810b74c71e1d396, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &810872640 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2583386927080418830, guid: 1a913f459eff67a45be63fceb7129dff, type: 3}
@@ -2877,13 +2866,24 @@ MonoBehaviour:
         m_MethodName: SelectSlot
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 810872639}
+          m_ObjectArgument: {fileID: 810872644}
           m_ObjectArgumentAssemblyTypeName: LTH.ColorMatch.ColorSlot, Assembly-CSharp
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &810872644 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 957204027320086142, guid: 1a913f459eff67a45be63fceb7129dff, type: 3}
+  m_PrefabInstance: {fileID: 810872637}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 265364790}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3883f0ac434c7ef4c810b74c71e1d396, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &876090078
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6584,12 +6584,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5904ac3e0600654448952837574e9ddf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetColorSlot:
-    slotImage: {fileID: 0}
+  targetColorSlot: {fileID: 150639728}
   selectColorSlots:
-  - slotImage: {fileID: 0}
-  - slotImage: {fileID: 0}
-  - slotImage: {fileID: 0}
+  - {fileID: 2020661321}
+  - {fileID: 916501438}
+  - {fileID: 810872644}
   decRangeValue: 0.05
   maxLife: 1
   maxSimilarRange: 80
