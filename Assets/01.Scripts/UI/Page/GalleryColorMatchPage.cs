@@ -22,20 +22,7 @@ namespace LTH.ColorMatch.UI
 
             public abstract void UpdateUI();
         }
-        // private class SimilarityUIUpdate : UIUpdate
-        // {
-        //     private readonly float _similarity;
-        //
-        //     public SimilarityUIUpdate(GalleryColorMatchPage page, float similarity) : base(page)
-        //     {
-        //         _similarity = similarity;
-        //     }
-        //     public override void UpdateUI()
-        //     {
-        //         float result = 100 - _similarity;
-        //         Page.similarText.text = $"유사도 : {result:N2}";
-        //     }
-        // }
+    
         private class FillCountUIUpdate : UIUpdate
         {
             private readonly int _count;
