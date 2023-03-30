@@ -13,7 +13,6 @@ namespace LTH.ColorMatch.Data
         [FirestoreProperty] public string ThumbnailData{get;set;}
         [FirestoreProperty] public int PlayTime { get; set; }
         [FirestoreProperty] public int Size{get;set;}
-        [FirestoreProperty] public int RemainingFills{get;set;}
         [FirestoreProperty] public bool IsCompleted{get;set;}
         [FirestoreProperty] public Difficulty Difficulty{get;set;}
         [FirestoreProperty] public PixelColorData PixelColorData{get;set;}
@@ -21,14 +20,13 @@ namespace LTH.ColorMatch.Data
         public PixelArtData()
         {
         }
-        public PixelArtData(GalleryTopic topic, string title, string thumbnailData, int playTime,int size, int remainingFills, bool isComplete, Difficulty difficulty, PixelColorData pixelColorData)
+        public PixelArtData(GalleryTopic topic, string title, string thumbnailData, int playTime,int size, bool isComplete, Difficulty difficulty, PixelColorData pixelColorData)
         {
             Topic = topic;
             Title = title;
             ThumbnailData = thumbnailData;
             PlayTime = playTime;
             Size = size;
-            RemainingFills = remainingFills;
             IsCompleted = isComplete;
             Difficulty = difficulty;
             PixelColorData = pixelColorData;
@@ -42,7 +40,6 @@ namespace LTH.ColorMatch.Data
                 { "ThumbnailData", ThumbnailData },
                 {"PlayTime",PlayTime},
                 { "Size", Size },
-                { "RemainingFills", RemainingFills },
                 { "IsCompleted", IsCompleted },
                 { "Difficulty", Difficulty },
                 { "PixelColorData", PixelColorData.ToDictionary() }

@@ -106,7 +106,7 @@ namespace LTH.ColorMatch.Utill
         {
             PixelColorData pixelColorData = ExtractPixelData(pixelArtImg);
             string thumbData = ExtractGrayThumbnailData(pixelArtImg);
-            PixelArtData newData = new PixelArtData(topic, title, thumbData,0, pixelArtImg.width, 0, false, difficulty,
+            PixelArtData newData = new PixelArtData(topic, title, thumbData,0, pixelArtImg.width, false, difficulty,
                 pixelColorData);
             return newData;
         }

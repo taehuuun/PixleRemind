@@ -114,7 +114,6 @@ namespace LTH.ColorMatch.UI
                     _data.PixelColorData.CustomPixels.RemoveAt(selectPixelIdx);
                 }
                 
-                _data.RemainingFills--;
                 _data.PixelColorData.RemainingPixels--;
                 _data.ThumbnailData = PixelArtUtill.ExtractThumbnailData(pixelArt);
                 
