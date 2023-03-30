@@ -809,6 +809,7 @@ MonoBehaviour:
   titleText: {fileID: 4069952957565898247}
   thumbnailImb: {fileID: 3360739570310212032}
   difficultyText: {fileID: 5636904248200697275}
+  playTimeText: {fileID: 437232404052797037}
   completeMark: {fileID: 3122552307537697832}
 --- !u!114 &8268780959793266187
 MonoBehaviour:

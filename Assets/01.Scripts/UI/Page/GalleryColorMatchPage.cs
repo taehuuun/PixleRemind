@@ -63,6 +63,8 @@ namespace LTH.ColorMatch.UI
         private void OnDisable()
         {
             GalleryManager.ins.UpdateAndSavePixelArtData(_data);
+            remainPixelText.gameObject.SetActive(false);
+            playTimeText.gameObject.SetActive(false);
         }
 
         private void InitializePage()
@@ -70,14 +72,6 @@ namespace LTH.ColorMatch.UI
             GalleryManager.ins.CurPage = GalleryPage.ColorMatch;
             SetPage();
             system.ReStart();
-
-            playTimeText.text = PixelArtUtill.FormatSecondsToTimeString(_data.PlayTime);
-            remainPixelText.gameObject.SetActive(!_data.IsCompleted);
-
-            if (!_data.IsCompleted)
-            {
-                StartCoroutine(PlayTimer());
-            }
         }
         private void UpdateUI(UIUpdate uiUpdate)
         {
@@ -148,8 +142,13 @@ namespace LTH.ColorMatch.UI
         }
         public void PlayBtnEvent()
         {
+            playTimeText.text = PixelArtUtill.FormatSecondsToTimeString(_data.PlayTime);
+            remainPixelText.gameObject.SetActive(true);
+            playTimeText.gameObject.SetActive(true);
+            
             StartCoroutine(CheckPlaying());
             StartCoroutine(ShowMatchUI());
+            StartCoroutine(PlayTimer());
         }
         
         private void SetPage()
