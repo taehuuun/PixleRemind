@@ -514,8 +514,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isLock: 0
   board: {fileID: 1367677081}
-  fillCountText: {fileID: 1810655133}
-  similarText: {fileID: 38030492}
+  remainPixelText: {fileID: 1365193615}
+  playTimeText: {fileID: 1499925662}
   system: {fileID: 1778827304}
   boardMove: {fileID: 1367677083}
   playBtnMove: {fileID: 1062324178}
@@ -1728,7 +1728,7 @@ GameObject:
   - component: {fileID: 591841773}
   - component: {fileID: 591841772}
   m_Layer: 5
-  m_Name: TimerText (1)
+  m_Name: RemainPixelText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
