@@ -110,13 +110,5 @@ namespace LTH.ColorMatch.Utill
                 pixelColorData);
             return newData;
         }
-        public static string FormatSecondsToTimeString(int totalSeconds)
-        {
-            int hours = totalSeconds / 3600;
-            int minutes = (totalSeconds % 3600) / 60;
-            int seconds = totalSeconds % 60;
-
-            return $"{hours:D2}:{minutes:D2}:{seconds:D2}";
-        }
     }
 }
