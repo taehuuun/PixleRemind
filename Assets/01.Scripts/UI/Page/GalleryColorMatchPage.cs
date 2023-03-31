@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using LTH.ColorMatch.Data;
 using LTH.ColorMatch.Enums;
@@ -7,12 +6,11 @@ using LTH.ColorMatch.Managers;
 using LTH.ColorMatch.Utill;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
 namespace LTH.ColorMatch.UI
-{
+{   
     public class GalleryColorMatchPage : Page,IObserver
     {
         private abstract class UIUpdate
@@ -54,6 +52,7 @@ namespace LTH.ColorMatch.UI
         public MoveUI matchUIMove;
 
         private readonly WaitForSeconds _timerDelay = new WaitForSeconds(1f);
+        public enum FadeType {In, Out}
        
         private void OnEnable()
         {
@@ -142,6 +141,8 @@ namespace LTH.ColorMatch.UI
         }
         public void PlayBtnEvent()
         {
+            StartCoroutine(FadeEffect(playTimeText, 0.5f, FadeType.In));
+            StartCoroutine(FadeEffect(remainPixelText, 0.5f, FadeType.In));
             playTimeText.text = PixelArtUtill.FormatSecondsToTimeString(_data.PlayTime);
             remainPixelText.gameObject.SetActive(true);
             playTimeText.gameObject.SetActive(true);
@@ -175,6 +176,8 @@ namespace LTH.ColorMatch.UI
             GalleryManager.ins.IsMatching = true;
             yield return new WaitUntil(() => system.IsGameOver);
             StartCoroutine(HideMatchUI());
+            StartCoroutine(FadeEffect(playTimeText, 0.5f, FadeType.Out));
+            StartCoroutine(FadeEffect(remainPixelText, 0.5f, FadeType.Out));
         }
         private IEnumerator ShowMatchUI()
         {
@@ -191,6 +194,21 @@ namespace LTH.ColorMatch.UI
             GalleryManager.ins.IsMatching = false;
             boardMove.Return();
             playBtnMove.Return();
+        }
+        private IEnumerator FadeEffect(Graphic ui, float duration, FadeType type)
+        {
+            float elapsedTime = 0f;
+            Color color = ui.color;
+
+            while (elapsedTime < duration)
+            {
+                elapsedTime += Time.deltaTime;
+
+                color.a = type == FadeType.In ? Mathf.Lerp(0, 1, elapsedTime / duration) : Mathf.Lerp(1, 0, elapsedTime / duration);
+                
+                ui.color = color;
+                yield return null;
+            }
         }
     }
 }
