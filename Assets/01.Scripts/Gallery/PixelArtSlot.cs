@@ -22,7 +22,7 @@ namespace LTH.ColorMatch.UI
             {
                 completeMark.SetActive(true);
                 playTimeText.gameObject.SetActive(true);
-                playTimeText.text = PixelArtUtill.FormatSecondsToTimeString(pixelData.PlayTime);
+                playTimeText.text = UIHelper.FormatSecondsToTimeString(pixelData.PlayTime);
             }
             
             completeMark.SetActive(pixelData.IsCompleted);
