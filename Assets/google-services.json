@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "565323698511",
-    "project_id": "pixelremind",
-    "storage_bucket": "pixelremind.appspot.com"
+    "project_number": "236469788536",
+    "project_id": "pixelremind-a109b",
+    "storage_bucket": "pixelremind-a109b.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:565323698511:android:6bfd5ab959eeb04b9cb53a",
+        "mobilesdk_app_id": "1:236469788536:android:303b4fc3434463ae21728d",
         "android_client_info": {
           "package_name": "com.LTH.PixelRemind"
         }
       },
       "oauth_client": [
         {
-          "client_id": "565323698511-jjilvhem15mjl83gjfugt75cir3i0t7n.apps.googleusercontent.com",
+          "client_id": "236469788536-0o88qq1od011159n7gfdmqpbnmpkge9d.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDBqUoqXBAUykXthiDThJ6QZBs1x3P8a6k"
+          "current_key": "AIzaSyBGAVgxuqkKEi4-mLdr0kpZOy_pDzmmVVo"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "565323698511-jjilvhem15mjl83gjfugt75cir3i0t7n.apps.googleusercontent.com",
+              "client_id": "236469788536-0o88qq1od011159n7gfdmqpbnmpkge9d.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

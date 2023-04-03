@@ -5,6 +5,7 @@ using LTH.ColorMatch.Interfaces;
 using LTH.ColorMatch.Managers;
 using LTH.ColorMatch.Utill;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
@@ -123,6 +124,7 @@ namespace LTH.ColorMatch.UI
                 Debug.Log("해당 PixelArt을 모두 채움");
                 _data.IsCompleted = true;
                 system.IsGameOver = true;
+                playBtnMove.gameObject.SetActive(false);
                 GalleryManager.ins.TopicDatas[GalleryManager.ins.SelTopicIdx].CompleteCount++;
             }
             
