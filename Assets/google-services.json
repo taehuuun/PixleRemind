@@ -14,6 +14,22 @@
       },
       "oauth_client": [
         {
+          "client_id": "236469788536-8pv3j5lhfa7969dut5ru11em2qoncl2f.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.LTH.PixelRemind",
+            "certificate_hash": "22f1895da4112a92eb4e5fd7006ae35abaff85e3"
+          }
+        },
+        {
+          "client_id": "236469788536-lsn4alsdr37l3g1eirtuqg11q0l9sm6a.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.LTH.PixelRemind",
+            "certificate_hash": "39d97ef289826d1f19031df2615b5c0e4c4a04fe"
+          }
+        },
+        {
           "client_id": "236469788536-0o88qq1od011159n7gfdmqpbnmpkge9d.apps.googleusercontent.com",
           "client_type": 3
         }
