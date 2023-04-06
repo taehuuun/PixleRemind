@@ -76,3 +76,4 @@ crashlytics-build.properties
 # Unity build settings
 ProjectSettings/EditorBuildSettings.asset
 PixelRemind_BackUpThisFolder_ButDontShipItWithYourGame/il2cppOutput/__Generated.cpp
+PixelRemind_BackUpThisFolder_ButDontShipItWithYourGame/il2cppOutput/__Generated_CodeGen.c
