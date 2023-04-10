@@ -1,10 +1,11 @@
 <?xml version='1.0' encoding='utf-8'?>
-<resources xmlns:tools="http://schemas.android.com/tools" tools:keep="@string/gcm_defaultSenderId,@string/google_storage_bucket,@string/project_id,@string/google_api_key,@string/google_crash_reporting_api_key,@string/google_app_id,@string/default_web_client_id">
-  <string name="gcm_defaultSenderId" translatable="false">565323698511</string>
-  <string name="google_storage_bucket" translatable="false">pixelremind.appspot.com</string>
-  <string name="project_id" translatable="false">pixelremind</string>
-  <string name="google_api_key" translatable="false">AIzaSyDBqUoqXBAUykXthiDThJ6QZBs1x3P8a6k</string>
-  <string name="google_crash_reporting_api_key" translatable="false">AIzaSyDBqUoqXBAUykXthiDThJ6QZBs1x3P8a6k</string>
-  <string name="google_app_id" translatable="false">1:565323698511:android:6bfd5ab959eeb04b9cb53a</string>
-  <string name="default_web_client_id" translatable="false">565323698511-jjilvhem15mjl83gjfugt75cir3i0t7n.apps.googleusercontent.com</string>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:keep="@string/gcm_defaultSenderId,@string/google_storage_bucket,@string/project_id,@string/google_api_key,@string/google_crash_reporting_api_key,@string/google_app_id,@string/default_android_client_id,@string/default_web_client_id">
+  <string name="gcm_defaultSenderId" translatable="false">236469788536</string>
+  <string name="google_storage_bucket" translatable="false">pixelremind-a109b.appspot.com</string>
+  <string name="project_id" translatable="false">pixelremind-a109b</string>
+  <string name="google_api_key" translatable="false">AIzaSyBGAVgxuqkKEi4-mLdr0kpZOy_pDzmmVVo</string>
+  <string name="google_crash_reporting_api_key" translatable="false">AIzaSyBGAVgxuqkKEi4-mLdr0kpZOy_pDzmmVVo</string>
+  <string name="google_app_id" translatable="false">1:236469788536:android:303b4fc3434463ae21728d</string>
+  <string name="default_android_client_id" translatable="false">236469788536-8pv3j5lhfa7969dut5ru11em2qoncl2f.apps.googleusercontent.com</string>
+  <string name="default_web_client_id" translatable="false">236469788536-0o88qq1od011159n7gfdmqpbnmpkge9d.apps.googleusercontent.com</string>
 </resources>

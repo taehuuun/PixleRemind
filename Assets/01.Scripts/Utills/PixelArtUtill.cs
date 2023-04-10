@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using LTH.ColorMatch.Data;
 using LTH.ColorMatch.Enums;
 using UnityEngine;
@@ -8,67 +9,82 @@ namespace LTH.ColorMatch.Utill
 {
     public class PixelArtUtill
     {
-        private static ColorData ExtractPixelData(Texture2D extractTarget)
+        private static PixelColorData ExtractPixelData(Texture2D extractTarget)
         {
-            ColorData pixelDatas = new ColorData();
-            
+            PixelColorData pixelColorData = new PixelColorData();
+            Dictionary<string, CustomPixel> colorGroups = new Dictionary<string, CustomPixel>();
+
             for (int y = 0; y < extractTarget.height; y++)
             {
-                // List<CustomColor> rowPixelDatas = new List<CustomColor>();
-                
                 for (int x = 0; x < extractTarget.width; x++)
                 {
                     Color getPixelColor = extractTarget.GetPixel(x, y);
                     
                     if (getPixelColor.a >= 1)
                     {
-                        CustomColor customColor = new CustomColor(getPixelColor.r,getPixelColor.g,getPixelColor.b,getPixelColor.a,x,y);
+                        string colorKey = $"{getPixelColor.r}_{getPixelColor.g}_{getPixelColor.b}_{getPixelColor.a}";
 
-                        pixelDatas.Pixels.Add(customColor);
-                        pixelDatas.RemainPixel++;
+                        if (!colorGroups.ContainsKey(colorKey))
+                        {
+                            CustomPixel customPixel = new CustomPixel(getPixelColor.r, getPixelColor.g, getPixelColor.b,
+                                getPixelColor.a);
+                            colorGroups[colorKey] = customPixel;
+                        }
+
+                        PixelCoord coord = new PixelCoord(x, y);
+                        colorGroups[colorKey].PixelCoords.Add(coord);
+                        pixelColorData.RemainingPixels++;
                     }
                 }
-
-                // if (rowPixelDatas.Count > 0)
-                // {
-                //     pixelDatas.Pixels.Add(rowPixelDatas);
-                // }
             }
-            
-            // pixelDatas.Pixels.Reverse();
-            
-            return pixelDatas;
-        }
 
-        public static string ExtractThumbnailData(ColorData colorData, int size)
-        {
-            Texture2D thumbNail = new Texture2D(size, size, TextureFormat.RGBA32, false)
-            {
-                filterMode = FilterMode.Point
-            };
+            pixelColorData.CustomPixels = colorGroups.Values.ToList();
             
-            for (int y = 0; y < size; y++)
-            {
-                for (int x = 0; x < size; x++)
+            return pixelColorData;
+        }
+        public static string ExtractThumbnailData(Texture2D pixelArtThumbnail)
+        {
+            pixelArtThumbnail.filterMode = FilterMode.Point;
+            byte[] bytes = pixelArtThumbnail.EncodeToPNG();
+            string textureData = Convert.ToBase64String(bytes);
+            return textureData;
+        }
+        public static Texture2D SpriteToTexture2D(Sprite sprite)
+        {
+            Texture2D texture = new Texture2D((int)sprite.rect.width, (int)sprite.rect.height);
+
+            Color[] pixels = sprite.texture.GetPixels((int)sprite.textureRect.x,
+                (int)sprite.textureRect.y,
+                (int)sprite.textureRect.width,
+                (int)sprite.textureRect.height);
+            texture.SetPixels(pixels);
+            texture.Apply();
+
+            return texture;
+        }
+        private static string ExtractGrayThumbnailData(Texture2D pixelArtThumbnail)
+        {
+            Texture2D grayThumbnail =
+                new Texture2D(pixelArtThumbnail.width, pixelArtThumbnail.height, TextureFormat.RGBA32, false)
                 {
-                    thumbNail.SetPixel(x, y, new Color(0,0,0,0));
+                    filterMode = FilterMode.Point
+                };
+
+            for (int y = 0; y < pixelArtThumbnail.height; y++)
+            {
+                for (int x = 0; x < pixelArtThumbnail.width; x++)
+                {
+                    Color originalColor = pixelArtThumbnail.GetPixel(x, y);
+
+                    float grayValue = (originalColor.r + originalColor.g + originalColor.b) / 3;
+                    Color grayColor = new Color(grayValue, grayValue, grayValue, originalColor.a);
+                    
+                    grayThumbnail.SetPixel(x,y,grayColor);
                 }
             }
-
-            for (int i = 0; i < colorData.Pixels.Count; i++)
-            {
-                CustomColor customColor = colorData.Pixels[i];
-                ColorMatchColor pixelColor = customColor.IsFeel
-                    ? customColor.OriginColorMatchColor
-                    : customColor.GrayColorMatchColor;
-                Color setColor = new Color(pixelColor.R, pixelColor.G, pixelColor.B, pixelColor.A);
-
-                thumbNail.SetPixel(customColor.X, customColor.Y, setColor);
-            }
             
-            thumbNail.Apply();
-            
-            byte[] bytes = thumbNail.EncodeToPNG();
+            grayThumbnail.Apply();
+            byte[] bytes = grayThumbnail.EncodeToPNG();
             string textureData = Convert.ToBase64String(bytes);
             return textureData;
         }
@@ -86,13 +102,12 @@ namespace LTH.ColorMatch.Utill
             
             return newSprite;
         }
-        // ReSharper disable Unity.PerformanceAnalysis
         public static PixelArtData ExportPixelData(GalleryTopic topic, string title, Texture2D pixelArtImg, Difficulty difficulty)
         {
-            ColorData colorData = ExtractPixelData(pixelArtImg);
-            string thumbData = ExtractThumbnailData(colorData, pixelArtImg.width);
-            PixelArtData newData = new PixelArtData(topic, title, thumbData, pixelArtImg.width, 0, false, difficulty,
-                colorData);
+            PixelColorData pixelColorData = ExtractPixelData(pixelArtImg);
+            string thumbData = ExtractGrayThumbnailData(pixelArtImg);
+            PixelArtData newData = new PixelArtData(topic, title, thumbData,0, pixelArtImg.width, false, difficulty,
+                pixelColorData);
             return newData;
         }
     }

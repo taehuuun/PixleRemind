@@ -340,7 +340,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2a61912b30a44245a7fdde530f4230e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mode: 1
+  mode: 0
   board: {fileID: 1491075702}
   pixelArts:
   - {fileID: 2800000, guid: 9a735899cbad8d645be50a8a11bf9ed3, type: 3}
@@ -469,7 +469,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c60996914b3efb44790efbf9ab393bbd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  testTopic: []
 --- !u!4 &1590706216
 Transform:
   m_ObjectHideFlags: 0

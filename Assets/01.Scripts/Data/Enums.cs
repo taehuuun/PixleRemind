@@ -4,4 +4,5 @@ namespace LTH.ColorMatch.Enums
     public enum Difficulty {Easy, Normal, Hard}
     public enum GalleryTopic { None, Animal }
     public enum GalleryPage { Topic, PixelArt, ColorMatch }
+    public enum FadeType {In, Out}
 }

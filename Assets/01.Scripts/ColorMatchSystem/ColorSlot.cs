@@ -1,9 +1,11 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace LTH.ColorMatch
 {
-    public class ColorSlot : MonoBehaviour
+    [Serializable]
+    public class ColorSlot
     {
         public Image slotImage; 
 

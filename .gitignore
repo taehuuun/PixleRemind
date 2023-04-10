@@ -75,5 +75,7 @@ crashlytics-build.properties
 
 # Unity build settings
 ProjectSettings/EditorBuildSettings.asset
-PixelRemind_BackUpThisFolder_ButDontShipItWithYourGame/
-PixelRemind_BurstDebugInformation_DoNotShip/
+ProjectSettings/GvhProjectSettings.xml
+
+/PixelRemind_BackUpThisFolder_ButDontShipItWithYourGame
+/PixelRemind_BurstDebugInformation_DoNotShip

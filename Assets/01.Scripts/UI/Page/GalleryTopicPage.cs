@@ -14,7 +14,7 @@ namespace LTH.ColorMatch.UI
         private void OnEnable()
         {
             GalleryManager.ins.TopicDatas.Clear();
-            GalleryManager.ins.LoadTopicData();
+            GalleryManager.ins.LoadTopicDataFromFiles();
             
             SetPage();
         }

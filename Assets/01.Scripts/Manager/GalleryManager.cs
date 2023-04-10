@@ -20,20 +20,19 @@ namespace LTH.ColorMatch.Managers
         
         private void Awake()
         {
-            if (ins == null)
-            {
-                ins = this;
-            }
-            else
+            if (ins != null && ins != this)
             {
                 Destroy(this.gameObject);
+                return;
             }
+            ins = this;
+            DontDestroyOnLoad(this.gameObject);
 
             TopicDatas = new List<TopicData>();
             PixelArtDatas = new List<PixelArtData>();
         }
-
-        public void LoadTopicData()
+        
+        public void LoadTopicDataFromFiles()
         {
             List<string> topicNames = DataManager.GetTargetFolderFileNames(DataManager.GalleryDataPath);
 
@@ -42,28 +41,24 @@ namespace LTH.ColorMatch.Managers
                 TopicDatas.Add(GetTopicData(topicName));
             }
         }
-
-        public void LoadPixelData(TopicData topicData)
+        public void LoadPixelDataForTopic(TopicData topicData)
         {
             PixelArtDatas = topicData.PixelArtDatas;
         }
-
         public void UpdateAndSavePixelArtData(PixelArtData updateData)
         {
             TopicData saveTopic = TopicDatas[SelTopicIdx]; 
             saveTopic.PixelArtDatas[SelPixelArtIdx] = updateData;
             saveTopic.Complete = saveTopic.CompleteCount == saveTopic.TotalCount;
-            saveTopic.ThumbData = updateData.ThumbData;
+            saveTopic.ThumbData = updateData.ThumbnailData;
             SavePixelArtData(saveTopic);
         }
-
-        public void SavePixelArtData(TopicData data)
+        private void SavePixelArtData(TopicData data)
         {
             string jsonData = JsonConvert.SerializeObject(data);
             DataManager.SaveJsonData(DataManager.GalleryDataPath, data.Topic.ToString(), jsonData);
         }
-        
-        public static TopicData GetTopicData(string topicName)
+        private static TopicData GetTopicData(string topicName)
         {
             return DataManager.LoadJsonData<TopicData>(DataManager.GalleryDataPath, topicName);
         }

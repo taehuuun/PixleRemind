@@ -10,7 +10,7 @@ namespace LTH.ColorMatch.Managers
     public class FirebaseManager : MonoBehaviour
     {
         public static FirebaseManager ins;
-        private FirebaseFirestore _db;
+        private FirebaseFirestore _firestore;
 
         private void Awake()
         {
@@ -29,14 +29,14 @@ namespace LTH.ColorMatch.Managers
 
         private void Initialization()
         {
-            _db = FirebaseFirestore.DefaultInstance;
+            _firestore = FirebaseFirestore.DefaultInstance;
         }
 
         public async Task<bool> CheckDocumentExists(string collection, string document)
         {
             try
             {
-                var docRef = _db.Collection(collection).Document(document);
+                var docRef = _firestore.Collection(collection).Document(document);
                 var docSnapShot = await docRef.GetSnapshotAsync();
 
                 return docSnapShot.Exists;
@@ -52,7 +52,7 @@ namespace LTH.ColorMatch.Managers
         {
             try
             {
-                var colRef = _db.Collection(collection);
+                var colRef = _firestore.Collection(collection);
                 var colSnapShot = await colRef.GetSnapshotAsync();
 
                 return colSnapShot.Count > 0;
@@ -68,7 +68,7 @@ namespace LTH.ColorMatch.Managers
         {
             try
             {
-                var docRef = _db.Collection(collection).Document(document);
+                var docRef = _firestore.Collection(collection).Document(document);
                 var docSnapShot = await docRef.GetSnapshotAsync();
 
                 if (!docSnapShot.Exists)
@@ -91,7 +91,7 @@ namespace LTH.ColorMatch.Managers
         {
             try
             {
-                var snapshot = await _db.Collection("GalleryData").GetSnapshotAsync();
+                var snapshot = await _firestore.Collection("GalleryData").GetSnapshotAsync();
                 var topicDataList = new List<TopicData>();
 
                 foreach (var document in snapshot.Documents)
@@ -113,7 +113,7 @@ namespace LTH.ColorMatch.Managers
         {
             try
             {
-                var documentReference = _db.Collection(collectionName).Document(documentName);
+                var documentReference = _firestore.Collection(collectionName).Document(documentName);
                 
                 await documentReference.SetAsync(topicData);
             }
@@ -128,7 +128,7 @@ namespace LTH.ColorMatch.Managers
         {
             try
             {
-                var documentReference = _db.Collection(collectionName).Document(documentName);
+                var documentReference = _firestore.Collection(collectionName).Document(documentName);
                 
                 await documentReference.SetAsync(topicData, SetOptions.MergeAll);
             }

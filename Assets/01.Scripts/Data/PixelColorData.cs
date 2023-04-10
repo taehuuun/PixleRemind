@@ -1,23 +1,23 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Firebase.Firestore;
 
 namespace LTH.ColorMatch.Data
 {
     [FirestoreData]
-    public class ColorData
+    public class PixelColorData
     {
         [FirestoreProperty]
-        public int RemainPixel { get; set; }
+        public int RemainingPixels { get; set; }
 
         [FirestoreProperty]
-        public List<CustomColor> Pixels { get; set; } = new List<CustomColor>();
+        public List<CustomPixel> CustomPixels { get; set; } = new List<CustomPixel>();
 
         public Dictionary<string, object> ToDictionary()
         {
             var dictionary = new Dictionary<string, object>
             {
-                { "RemainPixel", RemainPixel },
-                {"Pixels",Pixels}
+                { "RemainingPixels", RemainingPixels },
+                { "CustomPixels", CustomPixels }
             };
             return dictionary;
         }
