@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Firebase.Firestore;
 
 namespace LTH.ColorMatch.Data
