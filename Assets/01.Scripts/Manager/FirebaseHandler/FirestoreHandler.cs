@@ -9,7 +9,7 @@ namespace LTH.ColorMatch.Handlers
 {
     public class FirestoreHandler
     {
-        private FirebaseFirestore _firestore;
+        private readonly FirebaseFirestore _firestore;
 
         public FirestoreHandler()
         {
