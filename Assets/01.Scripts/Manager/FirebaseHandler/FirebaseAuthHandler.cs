@@ -24,12 +24,14 @@ namespace LTH.ColorMatch.Handlers
         {
             try
             {
+                Debug.Log("111111111");
                 // ID 토큰을 사용한 Credential 생성
                 Credential credential = GoogleAuthProvider.GetCredential(idToken, null);
                 
                 // Credential을 사용한 비동기 로그인 시도 후 결과 반환
                 await _auth.SignInWithCredentialAsync(credential).ContinueWith(task =>
                 {
+                    Debug.Log("2222222222222");
                     // 취소된 경우 로그 출력후 false 반환
                     if (task.IsCanceled)
                     {

@@ -24,7 +24,7 @@ public static class GPGSUtill
         PlayGamesPlatform.InitializeInstance(config);
         
         // 디버그 로그를 비활성화
-        PlayGamesPlatform.DebugLogEnabled = false;
+        PlayGamesPlatform.DebugLogEnabled = true;
         
         // PlayGamesPlatform을 활성화
         PlayGamesPlatform.Activate();

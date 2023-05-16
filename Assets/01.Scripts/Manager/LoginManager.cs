@@ -22,9 +22,12 @@ namespace LTH.ColorMatch.Managers
                 // Login 메소드를 호출하고 반환값인 idToken을 받음
                 string idToken = await Login(); 
                 
+                Debug.Log("!!!!!");
                 // Firebase authentication을 시도하고 반환값인 firebaseLoginSuccess를 받음
                 bool firebaseLoginSuccess = await FirebaseManager.ins.FireAuth.TryFirebaseLogin(idToken);
-
+                
+                Debug.Log($"@@@@@@ : {idToken}");
+                
                 if (!firebaseLoginSuccess)
                 {
                     // Firebase authentication이 실패하면 로그를 출력
