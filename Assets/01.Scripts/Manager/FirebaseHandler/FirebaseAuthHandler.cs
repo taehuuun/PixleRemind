@@ -1,7 +1,6 @@
 using System;
 using System.Threading.Tasks;
 using Firebase.Auth;
-using Firebase.Extensions;
 using UnityEngine;
 
 namespace LTH.ColorMatch.Handlers
@@ -29,7 +28,7 @@ namespace LTH.ColorMatch.Handlers
                 Credential credential = GoogleAuthProvider.GetCredential(idToken, null);
                 
                 // Credential을 사용한 비동기 로그인 시도 후 결과 반환
-                await _auth.SignInWithCredentialAsync(credential).ContinueWithOnMainThread(task =>
+                await _auth.SignInWithCredentialAsync(credential).ContinueWith(task =>
                 {
                     // 취소된 경우 로그 출력후 false 반환
                     if (task.IsCanceled)

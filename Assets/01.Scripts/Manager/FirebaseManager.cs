@@ -1,9 +1,4 @@
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 using UnityEngine;
-using Firebase.Firestore;
-using LTH.ColorMatch.Data;
 using LTH.ColorMatch.Handlers;
 
 namespace LTH.ColorMatch.Managers

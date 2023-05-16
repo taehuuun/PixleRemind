@@ -49,20 +49,23 @@ public static class GPGSUtill
         // 사용자 인증을 수행 후 결과를 콜백 함수로 리턴
         Social.localUser.Authenticate((success =>
         {
-            // 성공 하였을 경우, ID토큰을 가져옴
-            if (success)
+            if (!Social.localUser.authenticated)
             {
-                string idToken = ((PlayGamesLocalUser)Social.localUser).GetIdToken();
-                Debug.Log($"로그인 성공! ID Token : {idToken}");
-                
-                // 콜백 함수에 결과 리턴
-                callback(true, idToken);
-            }
-            else
-            {
-                // 실패 하였을 경우, 실패내역 콜백 전달
-                Debug.LogError("로그인 실패");
-                callback(false, "");
+                // 성공 하였을 경우, ID토큰을 가져옴
+                if (success)
+                {
+                    string idToken = ((PlayGamesLocalUser)Social.localUser).GetIdToken();
+                    Debug.Log($"로그인 성공! ID Token : {idToken}");
+                    
+                    // 콜백 함수에 결과 리턴
+                    callback(true, idToken);
+                }
+                else
+                {
+                    // 실패 하였을 경우, 실패내역 콜백 전달
+                    Debug.LogError("로그인 실패");
+                    callback(false, "");
+                }
             }
         }));
     }
