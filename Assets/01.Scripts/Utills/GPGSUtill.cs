@@ -28,6 +28,8 @@ public static class GPGSUtill
         
         // PlayGamesPlatform을 활성화
         PlayGamesPlatform.Activate();
+
+        _initialized = true;
     }
     
     /// <summary>
