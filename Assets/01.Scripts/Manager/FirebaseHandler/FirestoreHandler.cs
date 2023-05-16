@@ -1,18 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class FirestoreHandler : MonoBehaviour
+namespace LTH.ColorMatch.Handlers
 {
-    // Start is called before the first frame update
-    void Start()
+    public class FirestoreHandler : MonoBehaviour
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }
