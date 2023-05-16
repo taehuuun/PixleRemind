@@ -28,7 +28,8 @@ public static class GPGSUtill
         
         // PlayGamesPlatform을 활성화
         PlayGamesPlatform.Activate();
-
+        
+        // 초기화 상태 변경
         _initialized = true;
     }
     
