@@ -1,4 +1,9 @@
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
+using Firebase.Firestore;
+using LTH.ColorMatch.Data;
 using LTH.ColorMatch.Handlers;
 
 namespace LTH.ColorMatch.Managers
@@ -7,7 +12,7 @@ namespace LTH.ColorMatch.Managers
     {
         public static FirebaseManager ins;
         public FirestoreHandler Firestore;
-        public FirebaseAuthHandler FirebaseAuth;
+        public FirebaseAuthHandler FireAuth;
 
         private void Awake()
         {
@@ -22,7 +27,7 @@ namespace LTH.ColorMatch.Managers
             }
 
             Firestore = new FirestoreHandler();
-            FirebaseAuth = new FirebaseAuthHandler();
+            FireAuth = new FirebaseAuthHandler();
         }
     }
 }
