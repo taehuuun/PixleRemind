@@ -8,10 +8,12 @@ namespace LTH.ColorMatch.Managers
     {
         private void Start()
         {
+            Debug.Log("GPGS Init");
             // GPGSUtill을 초기화
             GPGSUtill.Init(); 
 
             // LoginAsync를 호출
+            Debug.Log("LoginAsync");
             LoginAsync(); 
         }
 
@@ -19,6 +21,7 @@ namespace LTH.ColorMatch.Managers
         {
             try
             {
+                Debug.Log("LoginAsync Start");
                 // Login 메소드를 호출하고 반환값인 idToken을 받음
                 string idToken = await Login(); 
                 
@@ -43,12 +46,14 @@ namespace LTH.ColorMatch.Managers
 
         private Task<string> Login()
         {
+            Debug.Log("Login Start");
             // TaskCompletionSource를 생성
             var tcs = new TaskCompletionSource<string>(); 
             
             // GPGSUtill 로그인 메소드에 콜백을 등록
             GPGSUtill.Login((success, token) => 
             {
+                Debug.Log($"Login : {success}");
                 if (success)
                 {
                     // 성공하면 반환값을 TaskCompletionSource에 설정
@@ -60,7 +65,8 @@ namespace LTH.ColorMatch.Managers
                     tcs.SetException(new Exception("Google Game Services login failed.")); 
                 }
             });
-
+            
+            Debug.Log($"Login Result: {tcs.Task}");
             // TaskCompletionSource.Task를 반환
             return tcs.Task; 
         }
