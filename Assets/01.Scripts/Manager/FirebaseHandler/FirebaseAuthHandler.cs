@@ -1,14 +1,23 @@
 using System;
 using System.Threading.Tasks;
 using Firebase.Auth;
+using LTH.ColorMatch.Managers;
+using UnityEditor.PackageManager;
 using UnityEngine;
 
 namespace LTH.ColorMatch.Handlers
 {
     public class FirebaseAuthHandler : MonoBehaviour
     {
+        // 사용자의 Firebase UID 속성을 외부에서 수정할수 없도록 함 
+        public string FUID { get; private set; }
+
+        // FirebaseAuth클래스의 인스턴스를 참조하는 필드
         private readonly FirebaseAuth _auth;
         
+        /// <summary>
+        /// 생성자에서 FirebaseAuth의 기본 인스턴스를 초기화
+        /// </summary>
         public FirebaseAuthHandler()
         {
             // FirebaseAuth 인스턴스를 초기화
@@ -16,53 +25,39 @@ namespace LTH.ColorMatch.Handlers
         }
         
         /// <summary>
-        /// Firebase를 통해 로그인을 시도 하는 함수
+        /// Firebase를 통해 Auth로그인을 시도하는 메서드
         /// </summary>
-        /// <param name="idToken">구글 플레이 게임 서비스로부터 받은 IdToken</param>
-        /// <returns>로그인 성공 여부</returns>
-        public async Task<bool> TryFirebaseLogin(string idToken)
+        public void TryFirebaseLogin()
         {
-            try
+            // GoogleAuthProvider를 사용하여 IdToken을 기반으로 로그인 자격 증명을 생성합니다.
+            Credential credential = GoogleAuthProvider.GetCredential(GPGSUtill.IdToken, null);
+            
+            // FirebaseAuth 인스턴스의 SignInWithCredentialAsync 메서드를 사용해 Firebase에 로그인을 시도하고,
+            // 그 결과를 비동기 작업으로 받습니다.
+            _auth.SignInWithCredentialAsync(credential).ContinueWith(task =>
             {
-                Debug.Log("111111111");
-                // ID 토큰을 사용한 Credential 생성
-                Credential credential = GoogleAuthProvider.GetCredential(idToken, null);
-                
-                // Credential을 사용한 비동기 로그인 시도 후 결과 반환
-                await _auth.SignInWithCredentialAsync(credential).ContinueWith(task =>
+                // 로그인 작업이 취소되었는지 확인
+                if (task.IsCanceled)
                 {
-                    Debug.Log("2222222222222");
-                    // 취소된 경우 로그 출력후 false 반환
-                    if (task.IsCanceled)
-                    {
-                        Debug.LogError($"Firebase Login Cancled");
-                        return false;
-                    }
-                    
-                    // 문제가 발생한 경우 로그 출력후 false 반환
-                    if (task.IsFaulted)
-                    {
-                        Debug.LogError("Firebase login failed");
-                        return false;
-                    }
+                    // 에러 로그를 출력하고 리턴
+                    Debug.LogError("Firebase Auth 로그인 취소");
+                    return;
+                }
 
-                    // 로그인 성공 시 FirebaseUser 객체를 얻고 로그를 출력
-                    FirebaseUser user = task.Result;
-                    
-                    Debug.Log($"Firebase user logged in : {user.DisplayName} {user.UserId}");
-                    
-                    // 로그인 성공 반환 
-                    return true;
-                });
-            }
-            catch (Exception e)
-            {
-                // 예외 발생 시 로그를 출력하고 false를 반환
-                Debug.LogError($"Firebase Login Error : {e.Message}");
-                return false;
-            }
+                // 로그인 작업 중에 오류가 발생했을 경우
+                if (task.IsFaulted)
+                {
+                    // 에러 로그를 출력하고 리턴
+                    Debug.LogError($"Firebase Auth 로그인 중 오류 발생 : {task.Exception}");
+                    return;
+                }
 
-            return false;
+                // 작업이 성공적으로 완료되었다면 FirebaseUser 인스턴스를 가져와 사용자의 Firebase UID를 저장
+                FirebaseUser newUser = task.Result;
+                FUID = newUser.UserId;
+                
+                Debug.Log("Firebase Auth 로그인 성공");
+            });
         }
     }
 }
