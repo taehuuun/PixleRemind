@@ -9,8 +9,8 @@ namespace LTH.ColorMatch.Managers
         public static FirebaseManager ins;
         
         // FirestoreHandler와 FirebaseAuthHandler 객체에 대한 참조
-        public FirestoreHandler Firestore;
-        public FirebaseAuthHandler FireAuth;
+        public FirestoreHandler Firestore { get; private set; }
+        public FirebaseAuthHandler FireAuth { get; private set; }
 
         private void Awake()
         {
