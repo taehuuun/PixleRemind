@@ -1,8 +1,4 @@
-using System;
-using System.Threading.Tasks;
 using Firebase.Auth;
-using LTH.ColorMatch.Managers;
-using UnityEditor.PackageManager;
 using UnityEngine;
 
 namespace LTH.ColorMatch.Managers.FirebaseHandlers
