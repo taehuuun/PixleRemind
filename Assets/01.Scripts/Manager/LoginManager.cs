@@ -8,6 +8,7 @@ namespace LTH.ColorMatch.Managers
         private async void Start()
         {
             Debug.Log("GPGS Init");
+            
             // GPGSUtill을 초기화
             GPGSUtill.Init(); 
 
