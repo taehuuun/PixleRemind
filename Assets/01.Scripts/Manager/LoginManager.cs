@@ -27,7 +27,7 @@ namespace LTH.ColorMatch.Managers
             if (await GPGSUtill.LoginAsync())
             {
                 // 로그인이 성공하면, Firebase Auth 로그인을 시도
-                FirebaseManager.ins.FireAuth.TryFirebaseLogin();
+                await FirebaseManager.ins.FireAuth.TryFirebaseLogin();
                 
                 // GPGSUtill의 IdToken과 FUID를 로그로 출력
                 Debug.Log($"IdToken : {GPGSUtill.IdToken}");
