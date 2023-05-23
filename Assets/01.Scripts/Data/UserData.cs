@@ -1,19 +1,15 @@
-
-using System.Collections;
+using System;
 using System.Collections.Generic;
+using Firebase.Firestore;
 using UnityEngine;
 
-public class UserData : MonoBehaviour
+namespace LTH.ColorMatch.Data
 {
-    // Start is called before the first frame update
-    void Start()
+    [FirestoreData, Serializable]
+    public class UserData : MonoBehaviour
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        [FirestoreProperty] public List<string> LocalTopicDataIDs { get; set; }
+        [FirestoreProperty] public int LocalTopicDataVersion { get; set; }
+        public UserData() { }
     }
 }
