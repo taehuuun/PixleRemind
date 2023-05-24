@@ -6,7 +6,7 @@ using UnityEngine;
 namespace LTH.ColorMatch.Data
 {
     [FirestoreData, Serializable]
-    public class UserData : MonoBehaviour
+    public class UserData
     {
         [FirestoreProperty] public List<string> LocalTopicDataIDs { get; set; }
         [FirestoreProperty] public int LocalTopicDataVersion { get; set; }

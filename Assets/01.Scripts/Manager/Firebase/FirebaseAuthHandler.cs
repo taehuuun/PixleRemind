@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace LTH.ColorMatch.Managers.FirebaseHandlers
 {
-    public class FirebaseAuthHandler : MonoBehaviour
+    public class FirebaseAuthHandler
     {
         // 사용자의 Firebase UID 속성을 외부에서 수정할수 없도록 함 
         public string FUID { get; private set; }
