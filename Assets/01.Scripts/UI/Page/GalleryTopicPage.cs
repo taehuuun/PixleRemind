@@ -1,10 +1,10 @@
-using LTH.ColorMatch.Data;
-using LTH.ColorMatch.Enums;
-using LTH.ColorMatch.Managers;
+using LTH.PixelRemind.Data;
+using LTH.PixelRemind.Enums;
+using LTH.PixelRemind.Managers;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace LTH.ColorMatch.UI
+namespace LTH.PixelRemind.UI
 {
     public class GalleryTopicPage : Page
     {

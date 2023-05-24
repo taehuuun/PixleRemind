@@ -1,16 +1,16 @@
 using System.Collections;
-using LTH.ColorMatch.Data;
-using LTH.ColorMatch.Enums;
-using LTH.ColorMatch.Interfaces;
-using LTH.ColorMatch.Managers;
-using LTH.ColorMatch.Utill;
+using LTH.PixelRemind.Data;
+using LTH.PixelRemind.Enums;
+using LTH.PixelRemind.Interfaces;
+using LTH.PixelRemind.Managers;
+using LTH.PixelRemind.Utill;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
-namespace LTH.ColorMatch.UI
+namespace LTH.PixelRemind.UI
 {   
     public class GalleryColorMatchPage : Page,IObserver
     {

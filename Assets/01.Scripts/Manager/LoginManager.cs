@@ -1,7 +1,7 @@
 using System.Threading.Tasks;
 using UnityEngine;
 
-namespace LTH.ColorMatch.Managers
+namespace LTH.PixelRemind.Managers
 {
     public class LoginManager : MonoBehaviour
     {

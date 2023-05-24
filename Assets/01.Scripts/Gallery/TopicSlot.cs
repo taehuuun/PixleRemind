@@ -1,10 +1,10 @@
-using LTH.ColorMatch.Data;
-using LTH.ColorMatch.Managers;
-using LTH.ColorMatch.Utill;
+using LTH.PixelRemind.Data;
+using LTH.PixelRemind.Managers;
+using LTH.PixelRemind.Utill;
 using TMPro;
 using UnityEngine;
 
-namespace LTH.ColorMatch.UI
+namespace LTH.PixelRemind.UI
 {
     public class TopicSlot : GallerySlot
     {

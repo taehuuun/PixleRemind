@@ -1,8 +1,8 @@
 using System.Threading.Tasks;
 using UnityEngine;
-using LTH.ColorMatch.Managers.FirebaseHandlers;
+using LTH.PixelRemind.Managers.FirebaseHandlers;
 
-namespace LTH.ColorMatch.Managers.FirebaseController
+namespace LTH.PixelRemind.Managers.FirebaseController
 {
     public class TopicDataController : MonoBehaviour
     {

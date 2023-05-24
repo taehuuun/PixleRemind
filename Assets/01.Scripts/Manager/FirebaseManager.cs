@@ -1,7 +1,7 @@
 using UnityEngine;
-using LTH.ColorMatch.Managers.FirebaseHandlers;
+using LTH.PixelRemind.Managers.FirebaseHandlers;
 
-namespace LTH.ColorMatch.Managers
+namespace LTH.PixelRemind.Managers
 {
     public class FirebaseManager : MonoBehaviour
     {

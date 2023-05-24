@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace LTH.ColorMatch.UI
+namespace LTH.PixelRemind.UI
 {
     public abstract class BodyUI : MonoBehaviour
     {

@@ -1,10 +1,10 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
-using LTH.ColorMatch.Managers;
-using LTH.ColorMatch.Enums;
+using LTH.PixelRemind.Managers;
+using LTH.PixelRemind.Enums;
 
-namespace LTH.ColorMatch.UI
+namespace LTH.PixelRemind.UI
 {
     public class SmoothImageColorChange : MonoBehaviour
     {

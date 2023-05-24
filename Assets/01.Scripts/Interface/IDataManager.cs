@@ -1,7 +1,7 @@
 using System.Collections.Generic;
-using LTH.ColorMatch.Data;
+using LTH.PixelRemind.Data;
 
-namespace LTH.ColorMatch.Interfaces
+namespace LTH.PixelRemind.Interfaces
 {
     public interface IDataManager
     {

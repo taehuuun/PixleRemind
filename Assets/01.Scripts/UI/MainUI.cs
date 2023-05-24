@@ -1,4 +1,4 @@
-namespace LTH.ColorMatch.UI
+namespace LTH.PixelRemind.UI
 {
     public class MainUI : BodyUI
     {

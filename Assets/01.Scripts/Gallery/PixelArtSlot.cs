@@ -1,9 +1,9 @@
-using LTH.ColorMatch.Data;
-using LTH.ColorMatch.Utill;
+using LTH.PixelRemind.Data;
+using LTH.PixelRemind.Utill;
 using TMPro;
 using UnityEngine;
 
-namespace LTH.ColorMatch.UI
+namespace LTH.PixelRemind.UI
 {
     public class PixelArtSlot : GallerySlot
     {

@@ -1,4 +1,4 @@
-namespace LTH.ColorMatch.Enums
+namespace LTH.PixelRemind.Enums
 {
     public enum ChangeColorType { Red, Green, Blue }
     public enum Difficulty {Easy, Normal, Hard}

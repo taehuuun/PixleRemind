@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using Firebase.Auth;
 using UnityEngine;
 
-namespace LTH.ColorMatch.Managers.FirebaseHandlers
+namespace LTH.PixelRemind.Managers.FirebaseHandlers
 {
     public class FirebaseAuthHandler
     {

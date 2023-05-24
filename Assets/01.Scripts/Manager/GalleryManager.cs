@@ -1,10 +1,10 @@
 using System.Collections.Generic;
-using LTH.ColorMatch.Data;
-using LTH.ColorMatch.Enums;
+using LTH.PixelRemind.Data;
+using LTH.PixelRemind.Enums;
 using Newtonsoft.Json;
 using UnityEngine;
 
-namespace LTH.ColorMatch.Managers
+namespace LTH.PixelRemind.Managers
 {
     public class GalleryManager : MonoBehaviour
     {

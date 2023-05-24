@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
 using Firebase.Firestore;
-using LTH.ColorMatch.Enums;
+using LTH.PixelRemind.Enums;
 
-namespace LTH.ColorMatch.Data
+namespace LTH.PixelRemind.Data
 {
     [FirestoreData, Serializable]
     public class PixelArtData

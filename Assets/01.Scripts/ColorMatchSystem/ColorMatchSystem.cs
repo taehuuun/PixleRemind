@@ -1,9 +1,9 @@
 using System.Collections.Generic;
-using LTH.ColorMatch.Data;
-using LTH.ColorMatch.Interfaces;
+using LTH.PixelRemind.Data;
+using LTH.PixelRemind.Interfaces;
 using UnityEngine;
 
-namespace LTH.ColorMatch.Managers
+namespace LTH.PixelRemind.Managers
 {
     public class ColorMatchSystem : MonoBehaviour, ISubject
     {

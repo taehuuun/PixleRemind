@@ -1,9 +1,9 @@
 ﻿using System.Collections;
-using LTH.ColorMatch.Enums;
+using LTH.PixelRemind.Enums;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace LTH.ColorMatch.Utill
+namespace LTH.PixelRemind.Utill
 {
     public class UIHelper
     {

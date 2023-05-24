@@ -3,7 +3,7 @@ using System.IO;
 using UnityEngine;
 using Newtonsoft.Json;
 
-namespace LTH.ColorMatch.Managers
+namespace LTH.PixelRemind.Managers
 {
     public class DataManager : MonoBehaviour
     {

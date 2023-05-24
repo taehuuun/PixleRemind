@@ -1,13 +1,13 @@
 using System.Collections.Generic;
-using LTH.ColorMatch.Data;
-using LTH.ColorMatch.Enums;
-using LTH.ColorMatch.Managers;
-using LTH.ColorMatch.Utill;
+using LTH.PixelRemind.Data;
+using LTH.PixelRemind.Enums;
+using LTH.PixelRemind.Managers;
+using LTH.PixelRemind.Utill;
 using Newtonsoft.Json;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace LTH.ColorMatch.Test
+namespace LTH.PixelRemind.Test
 {
     public enum TestMode  {Upload,Load};
     public class ExtractPixelTest : MonoBehaviour

@@ -1,4 +1,4 @@
-namespace LTH.ColorMatch.Interfaces
+namespace LTH.PixelRemind.Interfaces
 {
     public interface ISubject
     {

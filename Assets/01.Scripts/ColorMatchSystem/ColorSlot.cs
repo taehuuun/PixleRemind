@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace LTH.ColorMatch
+namespace LTH.PixelRemind
 {
     [Serializable]
     public class ColorSlot

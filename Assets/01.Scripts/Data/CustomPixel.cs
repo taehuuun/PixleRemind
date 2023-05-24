@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Firebase.Firestore;
 
-namespace LTH.ColorMatch.Data
+namespace LTH.PixelRemind.Data
 {
     [FirestoreData,Serializable]
     public class ColorValue

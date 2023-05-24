@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Firebase.Firestore;
 using UnityEngine;
 
-namespace LTH.ColorMatch.Data
+namespace LTH.PixelRemind.Data
 {
     [FirestoreData, Serializable]
     public class UserData

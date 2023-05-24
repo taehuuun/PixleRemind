@@ -2,8 +2,8 @@ using UnityEngine;
 using UnityEditor;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using LTH.ColorMatch.Data;
-using LTH.ColorMatch.Enums;
+using LTH.PixelRemind.Data;
+using LTH.PixelRemind.Enums;
 using Firebase.Firestore;
 
 public class TopicDataEditor : EditorWindow

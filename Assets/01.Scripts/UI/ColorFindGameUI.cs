@@ -1,9 +1,9 @@
-using LTH.ColorMatch.Interfaces;
-using LTH.ColorMatch.Managers;
+using LTH.PixelRemind.Interfaces;
+using LTH.PixelRemind.Managers;
 using TMPro;
 using UnityEngine;
 
-namespace LTH.ColorMatch.UI
+namespace LTH.PixelRemind.UI
 {
     public class ColorFindGameUI : BodyUI, IObserver
     {
