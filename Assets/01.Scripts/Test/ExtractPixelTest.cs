@@ -38,7 +38,7 @@ namespace LTH.ColorMatch.Test
                 {
                     if (await FirebaseManager.ins.Firestore.CheckCollectionExists("GalleryData"))
                     {
-                        List<TopicData> topicDataList = await FirebaseManager.ins.Firestore.GetAllTopicData();
+                        List<TopicData> topicDataList = await FirebaseManager.ins.Firestore.GetAllData<TopicData>("GalleryData");
                         testData.AddRange(topicDataList);
 
                         foreach (var topicData in topicDataList)
@@ -71,7 +71,7 @@ namespace LTH.ColorMatch.Test
                 TopicData newTopicData = new TopicData(topic, topicThumbData, 0, pixelArtDatas.Count,
                     topicThumbSize, false, pixelArtDatas);
 
-                await FirebaseManager.ins.Firestore.AddTopicData("GalleryData", topic.ToString(), newTopicData);
+                await FirebaseManager.ins.Firestore.AddData("GalleryData", topic.ToString(), newTopicData);
             }
         }
     }
