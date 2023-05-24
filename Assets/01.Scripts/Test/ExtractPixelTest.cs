@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using LTH.PixelRemind.Data;
 using LTH.PixelRemind.Enums;
 using LTH.PixelRemind.Managers;
+using LTH.PixelRemind.Managers.Firebase.Collections;
 using LTH.PixelRemind.Utill;
 using Newtonsoft.Json;
 using UnityEngine;
@@ -36,9 +37,9 @@ namespace LTH.PixelRemind.Test
                 }
                 else
                 {
-                    if (await FirebaseManager.ins.Firestore.CheckCollectionExists("GalleryData"))
+                    if (await FirebaseManager.ins.Firestore.CheckCollectionExists(FirestoreCollections.GalleryData))
                     {
-                        List<TopicData> topicDataList = await FirebaseManager.ins.Firestore.GetAllData<TopicData>("GalleryData");
+                        List<TopicData> topicDataList = await FirebaseManager.ins.Firestore.GetAllData<TopicData>(FirestoreCollections.GalleryData);
                         testData.AddRange(topicDataList);
 
                         foreach (var topicData in topicDataList)
@@ -71,7 +72,7 @@ namespace LTH.PixelRemind.Test
                 TopicData newTopicData = new TopicData(topic, topicThumbData, 0, pixelArtDatas.Count,
                     topicThumbSize, false, pixelArtDatas);
 
-                await FirebaseManager.ins.Firestore.AddData("GalleryData", topic.ToString(), newTopicData);
+                await FirebaseManager.ins.Firestore.AddData(FirestoreCollections.GalleryData, topic.ToString(), newTopicData);
             }
         }
     }
