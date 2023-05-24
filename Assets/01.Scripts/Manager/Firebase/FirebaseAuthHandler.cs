@@ -25,7 +25,7 @@ namespace LTH.PixelRemind.Managers.Firebase.Handler
         /// <summary>
         /// Firebase를 통해 Auth로그인을 시도하는 메서드
         /// </summary>
-        public async Task TryFirebaseLogin()
+        public async Task<bool> TryFirebaseLogin()
         {
             // GoogleAuthProvider를 사용하여 IdToken을 기반으로 로그인 자격 증명을 생성합니다.
             Credential credential = GoogleAuthProvider.GetCredential(GPGSUtill.IdToken, null);
@@ -42,10 +42,12 @@ namespace LTH.PixelRemind.Managers.Firebase.Handler
                 Debug.Log("Firebase Auth 로그인 성공");
                 Debug.Log($"IdToken : {GPGSUtill.IdToken}");
                 Debug.Log($"FUID : {FUID}");
+                return true;
             }
             catch (Exception e)
             {
                 Debug.LogError($"Firebase Auth 로그인 중 오류 발생 : {e}");
+                return false;
             }
         }
     }
