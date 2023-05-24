@@ -170,6 +170,25 @@ namespace LTH.ColorMatch.Managers.FirebaseHandlers
             }
         }
         /// <summary>
+        /// 새로운 UserData를 추가하는 비동기 메서드
+        /// </summary>
+        /// <param name="fuid">유저의 FUID</param>
+        /// <param name="userData">새로 추가할 UserData</param>
+        public async Task AddUserData(string fuid, UserData userData)
+        {
+            try
+            {
+                var docRef = _firestore.Collection("UserData").Document(fuid);
+                await docRef.SetAsync(userData);
+            }
+            catch (Exception e)
+            {
+                Debug.LogError(e);
+                // Console.WriteLine(e);
+                throw;
+            }
+        }
+        /// <summary>
         /// 기존 TopicData를 업데이트하는 비동기 메서드
         /// </summary>
         /// <param name="collectionName">컬렉션 이름</param>
