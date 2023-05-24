@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using LTH.PixelRemind.Enums;
-using LTH.PixelRemind.Managers;
+using LTH.PixelRemind.Managers.Gallery;
 using UnityEngine;
 
 namespace LTH.PixelRemind.UI

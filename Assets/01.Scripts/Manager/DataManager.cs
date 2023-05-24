@@ -3,7 +3,7 @@ using System.IO;
 using UnityEngine;
 using Newtonsoft.Json;
 
-namespace LTH.PixelRemind.Managers
+namespace LTH.PixelRemind.Managers.Data
 {
     public class DataManager : MonoBehaviour
     {

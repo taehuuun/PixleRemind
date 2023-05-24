@@ -1,6 +1,6 @@
 using System.Threading.Tasks;
 using UnityEngine;
-using LTH.PixelRemind.Managers.FirebaseHandlers;
+using LTH.PixelRemind.Managers.Firebase.Handler;
 
 namespace LTH.PixelRemind.Managers.FirebaseController
 {

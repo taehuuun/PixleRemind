@@ -4,8 +4,7 @@ using System.Threading.Tasks;
 using Firebase.Firestore;
 using UnityEngine;
 
-// ReSharper disable once CheckNamespace
-namespace LTH.PixelRemind.Managers.FirebaseHandlers
+namespace LTH.PixelRemind.Managers.Firebase.Handler
 {
     /// <summary>
     /// Firebase의 Firestore의 기능을 담당하는 핸들러

@@ -1,10 +1,11 @@
 using System.Collections.Generic;
 using LTH.PixelRemind.Data;
 using LTH.PixelRemind.Enums;
+using LTH.PixelRemind.Managers.Data;
 using Newtonsoft.Json;
 using UnityEngine;
 
-namespace LTH.PixelRemind.Managers
+namespace LTH.PixelRemind.Managers.Gallery
 {
     public class GalleryManager : MonoBehaviour
     {

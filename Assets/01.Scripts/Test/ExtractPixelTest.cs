@@ -1,7 +1,8 @@
 using System.Collections.Generic;
 using LTH.PixelRemind.Data;
 using LTH.PixelRemind.Enums;
-using LTH.PixelRemind.Managers;
+using LTH.PixelRemind.Managers.Data;
+using LTH.PixelRemind.Managers.Firebase;
 using LTH.PixelRemind.Managers.Firebase.Collections;
 using LTH.PixelRemind.Utill;
 using Newtonsoft.Json;

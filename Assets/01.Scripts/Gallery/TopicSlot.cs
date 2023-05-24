@@ -1,5 +1,5 @@
 using LTH.PixelRemind.Data;
-using LTH.PixelRemind.Managers;
+using LTH.PixelRemind.Managers.Gallery;
 using LTH.PixelRemind.Utill;
 using TMPro;
 using UnityEngine;

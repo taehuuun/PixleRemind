@@ -1,7 +1,7 @@
 using UnityEngine;
-using LTH.PixelRemind.Managers.FirebaseHandlers;
+using LTH.PixelRemind.Managers.Firebase.Handler;
 
-namespace LTH.PixelRemind.Managers
+namespace LTH.PixelRemind.Managers.Firebase
 {
     public class FirebaseManager : MonoBehaviour
     {

@@ -1,7 +1,5 @@
-using System.Collections.Generic;
-using System.Linq.Expressions;
 using LTH.PixelRemind.Enums;
-using LTH.PixelRemind.Managers;
+using LTH.PixelRemind.Managers.Gallery;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -18,7 +16,8 @@ namespace LTH.PixelRemind.UI
 
         private void OnEnable()
         {
-           if (GalleryManager.ins.TopicDatas.Count > 0 && GalleryManager.ins.SelTopicIdx >= 0 &&
+           if (
+               GalleryManager.ins.TopicDatas.Count > 0 && GalleryManager.ins.SelTopicIdx >= 0 &&
                 GalleryManager.ins.SelTopicIdx < GalleryManager.ins.TopicDatas.Count)
             {
                 var selectTopicData = GalleryManager.ins.TopicDatas[GalleryManager.ins.SelTopicIdx];

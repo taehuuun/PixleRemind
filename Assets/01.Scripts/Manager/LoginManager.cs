@@ -1,7 +1,8 @@
 using System.Threading.Tasks;
+using LTH.PixelRemind.Managers.Firebase;
 using UnityEngine;
 
-namespace LTH.PixelRemind.Managers
+namespace LTH.PixelRemind.Managers.Login
 {
     public class LoginManager : MonoBehaviour
     {
