@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using LTH.PixelRemind.Data;
 using LTH.PixelRemind.Enums;
@@ -17,7 +18,7 @@ namespace LTH.PixelRemind.Test
         public TestMode mode;
         public Image board;
         public List<Texture2D> pixelArts;
-        public GalleryTopic topic;
+        public string id;
         public Difficulty difficulty;
         public List<TopicData> testData;
         
@@ -45,7 +46,7 @@ namespace LTH.PixelRemind.Test
 
                         foreach (var topicData in topicDataList)
                         {
-                            DataManager.SaveJsonData(cummonPath, topicData.Topic.ToString(),JsonConvert.SerializeObject(topicData));
+                            DataManager.SaveJsonData(cummonPath, topicData.ID,JsonConvert.SerializeObject(topicData));
                         }
                     }
                 }
@@ -60,7 +61,7 @@ namespace LTH.PixelRemind.Test
                 for (int i = 0; i < pixelArts.Count; i++)
                 {
                     PixelArtData newPixelArtData =
-                        PixelArtUtill.ExportPixelData(topic, pixelArts[i].name, pixelArts[i], difficulty);
+                        PixelArtUtill.ExportPixelData(id, pixelArts[i].name, pixelArts[i], difficulty);
                     pixelArtDatas.Add(newPixelArtData);
 
                     if (i == 0)
@@ -70,10 +71,10 @@ namespace LTH.PixelRemind.Test
                     }
                 }
 
-                TopicData newTopicData = new TopicData(topic, topicThumbData, 0, pixelArtDatas.Count,
-                    topicThumbSize, false, pixelArtDatas);
+                TopicData newTopicData = new TopicData(id, topicThumbData, 0, pixelArtDatas.Count,
+                    topicThumbSize, false,false,DateTime.Now, pixelArtDatas);
 
-                await FirebaseManager.ins.Firestore.AddData(FirestoreCollections.GalleryData, topic.ToString(), newTopicData);
+                await FirebaseManager.ins.Firestore.AddData(FirestoreCollections.GalleryData, id, newTopicData);
             }
         }
     }

@@ -9,7 +9,7 @@ using Firebase.Firestore;
 public class TopicDataEditor : EditorWindow
 {
     private List<Texture2D> _textureList = new List<Texture2D>();
-    private GalleryTopic _topicType;
+    private string _topicId;
     private Difficulty _topicDifficulty = Difficulty.Easy;
     private FirebaseFirestore db;
     private TopicData _topicData;
@@ -25,7 +25,7 @@ public class TopicDataEditor : EditorWindow
     {
         db = FirebaseFirestore.DefaultInstance;
 
-        if (_topicType == GalleryTopic.None)
+        if (string.IsNullOrEmpty(_topicId))
         {
             _topicDataExists = false;
         }
@@ -34,7 +34,7 @@ public class TopicDataEditor : EditorWindow
 
         GUILayout.Space(10f);
 
-        _topicType = (GalleryTopic)EditorGUILayout.EnumPopup("Topic Title", _topicType);
+        // _topicId = EditorGUILayout.Popup("Topic Title", _topicId);
         _topicDifficulty = (Difficulty)EditorGUILayout.EnumPopup("Difficulty", _topicDifficulty);
 
         GUILayout.Space(10f);
@@ -68,14 +68,14 @@ public class TopicDataEditor : EditorWindow
 
         GUILayout.Space(10f);
 
-        GUI.enabled = (_topicType != GalleryTopic.None); // TopicType이 None이 아니면 버튼 활성화
+        GUI.enabled = !string.IsNullOrEmpty(_topicId); // TopicType이 None이 아니면 버튼 활성화
 
         if (GUILayout.Button("Check"))
         {
             // Check버튼을 통해 해당하는 TopicData가 Firestore에 존재하는 체크 하는 코드
             EditorUtility.DisplayProgressBar("Checking", "Checking Topic Data...",0f);
 
-            _topicDataExists = await CheckDocumentExists("GalleryData", _topicType.ToString());      
+            _topicDataExists = await CheckDocumentExists("GalleryData", _topicId.ToString());      
 
             Debug.Log(_topicDataExists);
 
@@ -92,14 +92,14 @@ public class TopicDataEditor : EditorWindow
             {
                 EditorUtility.DisplayProgressBar("Loading", "Loading Topic Data...",0f);
                 // ReSharper disable once Unity.PerformanceCriticalCodeInvocation
-                _topicData = await GetTopicData("GalleryData", _topicType.ToString());
+                _topicData = await GetTopicData("GalleryData", _topicId.ToString());
                 EditorUtility.ClearProgressBar();
 
                 GUILayout.Label("Topic Data Editor", EditorStyles.boldLabel);
 
                 if (_topicData != null)
                 {
-                    EditorGUILayout.LabelField("Topic Name", _topicData.Topic.ToString());
+                    EditorGUILayout.LabelField("Topic Name", _topicData.ID);
 
                     // GUILayout.Label("Textures", EditorStyles.boldLabel);
                     //

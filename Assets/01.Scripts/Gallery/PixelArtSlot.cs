@@ -15,7 +15,7 @@ namespace LTH.PixelRemind.UI
         public override void SetSlot()
         {
             difficultyText.text = pixelData.Difficulty.ToString();
-            titleText.text = pixelData.Title;
+            titleText.text = pixelData.ID;
             thumbnailImb.sprite = PixelArtUtill.MakeThumbnail(pixelData.ThumbnailData, pixelData.Size);
 
             if (pixelData.IsCompleted)

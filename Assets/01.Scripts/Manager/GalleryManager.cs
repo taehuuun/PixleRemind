@@ -57,7 +57,7 @@ namespace LTH.PixelRemind.Managers.Gallery
         private void SavePixelArtData(TopicData data)
         {
             string jsonData = JsonConvert.SerializeObject(data);
-            DataManager.SaveJsonData(DataManager.GalleryDataPath, data.Topic.ToString(), jsonData);
+            DataManager.SaveJsonData(DataManager.GalleryDataPath, data.ID, jsonData);
         }
         private static TopicData GetTopicData(string topicName)
         {

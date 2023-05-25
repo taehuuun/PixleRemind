@@ -102,11 +102,11 @@ namespace LTH.PixelRemind.Utill
             
             return newSprite;
         }
-        public static PixelArtData ExportPixelData(GalleryTopic topic, string title, Texture2D pixelArtImg, Difficulty difficulty)
+        public static PixelArtData ExportPixelData(string id, string title, Texture2D pixelArtImg, Difficulty difficulty)
         {
             PixelColorData pixelColorData = ExtractPixelData(pixelArtImg);
             string thumbData = ExtractGrayThumbnailData(pixelArtImg);
-            PixelArtData newData = new PixelArtData(topic, title, thumbData,0, pixelArtImg.width, false, difficulty,
+            PixelArtData newData = new PixelArtData(id, thumbData,0, pixelArtImg.width, false, difficulty,
                 pixelColorData);
             return newData;
         }

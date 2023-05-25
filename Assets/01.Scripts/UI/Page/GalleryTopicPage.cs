@@ -39,7 +39,7 @@ namespace LTH.PixelRemind.UI
             {
                 TopicData curTopicData = GalleryManager.ins.TopicDatas[i];
                 topicSlots[i].gameObject.SetActive(true);
-                topicSlots[i].titleText.text = curTopicData.Topic.ToString();
+                topicSlots[i].titleText.text = curTopicData.ID;
                 topicSlots[i].data = curTopicData;
 
                 int topicDataIdx = i;
