@@ -1,12 +1,11 @@
 using System;
 using Firebase.Firestore;
 using LTH.PixelRemind.Enums;
-using UnityEngine;
 
 namespace LTH.PixelRemind.Data.Conditions
 {
     [FirestoreData, Serializable]
-    public class UnlockCondition : MonoBehaviour
+    public class UnlockCondition
     {
         [FirestoreProperty] public UnlockType Type { get; set; }
         [FirestoreProperty] public int Count { get; set; }
