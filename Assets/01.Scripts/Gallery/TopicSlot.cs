@@ -21,7 +21,7 @@ namespace LTH.PixelRemind.UI
 
         public override void SetSlot()
         {
-            titleText.text = data.Topic.ToString();
+            titleText.text = data.ID;
             completeMark.SetActive(data.Complete);
             completeCountText.text = $"{data.CompleteCount} / {data.TotalCount}";
             thumbnailImb.sprite = PixelArtUtill.MakeThumbnail(data.ThumbData, data.ThumbSize);

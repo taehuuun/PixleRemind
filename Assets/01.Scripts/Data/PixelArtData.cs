@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using Firebase.Firestore;
 using LTH.PixelRemind.Enums;
 
