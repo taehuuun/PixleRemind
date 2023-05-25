@@ -9,6 +9,7 @@ namespace LTH.PixelRemind.Data
     public class TopicData
     {
         [FirestoreProperty] public string ID { get; set; }
+        [FirestoreProperty] public string Title { get; set; }
         [FirestoreProperty] public string ThumbData {get;set;}
         [FirestoreProperty] public int CompleteCount {get;set;}
         [FirestoreProperty] public int TotalCount {get;set;}
@@ -22,6 +23,7 @@ namespace LTH.PixelRemind.Data
 
         public TopicData() {}
         public TopicData(
+            string title,
             string thumbData,
             int completeCount,
             int totalCount,
@@ -33,6 +35,7 @@ namespace LTH.PixelRemind.Data
             DateTime lastUpdated, 
             List<PixelArtData> pixelArtDatas)
         {
+            Title = title;
             ThumbData = thumbData;
             CompleteCount = completeCount;
             TotalCount = totalCount;
