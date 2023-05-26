@@ -113,6 +113,7 @@ namespace LTH.PixelRemind.Managers.Firebase.Handler
                 throw;
             }
         }
+        
         /// <summary>
         /// 새로운 Data를 추가하는 비동기 메서드
         /// </summary>
@@ -137,6 +138,29 @@ namespace LTH.PixelRemind.Managers.Firebase.Handler
                 throw;
             }
         }
+        /// <summary>
+        /// 새로운 Data를 추가하는 비동기 메서드
+        /// </summary>
+        /// <param name="collection">컬렉션 이름</param>
+        /// <param name="data">추가할 데이터</param>
+        /// <typeparam name="T">데이터 타입</typeparam>
+        /// <returns>DocumentReference</returns>
+        public async Task<DocumentReference> AddData<T>(string collection, T data)
+        {
+            try
+            {
+                var collectionReference = _firestore.Collection(collection);
+                var documentReference = await collectionReference.AddAsync(data);
+
+                return documentReference;
+            }
+            catch (Exception e)
+            {
+                Debug.LogError(e);
+                throw;
+            }
+        }
+        
         /// <summary>
         /// 기존 Data를 업데이트하는 비동기 메서드
         /// </summary>
