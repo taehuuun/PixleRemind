@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using Firebase.Firestore;
-using UnityEngine;
 
 namespace LTH.PixelRemind.Data
 {
@@ -9,7 +8,7 @@ namespace LTH.PixelRemind.Data
     public class UserData
     {
         [FirestoreProperty] public List<string> LocalTopicDataIDs { get; set; }
-        [FirestoreProperty] public int LocalTopicDataVersion { get; set; }
+        [FirestoreProperty] public DateTime LastUpdated { get; set; }
         public UserData() { }
     }
 }
