@@ -7,7 +7,7 @@ namespace LTH.PixelRemind.Data
     [FirestoreData, Serializable]
     public class PixelArtData
     {
-        [FirestoreProperty] public string ID {get;set;}
+        [FirestoreProperty] public string TitleID {get;set;}
         [FirestoreProperty] public string ThumbnailData{get;set;}
         [FirestoreProperty] public int PlayTime { get; set; }
         [FirestoreProperty] public int Size{get;set;}
@@ -16,9 +16,9 @@ namespace LTH.PixelRemind.Data
         [FirestoreProperty] public PixelColorData PixelColorData{get;set;}
         
         public PixelArtData() { }
-        public PixelArtData(string id, string thumbnailData, int playTime,int size, bool isComplete, Difficulty difficulty, PixelColorData pixelColorData)
+        public PixelArtData(string titleID, string thumbnailData, int playTime,int size, bool isComplete, Difficulty difficulty, PixelColorData pixelColorData)
         {
-            ID = id;
+            TitleID = titleID;
             ThumbnailData = thumbnailData;
             PlayTime = playTime;
             Size = size;
