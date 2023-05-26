@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Firebase.Firestore;
 using LTH.PixelRemind.Enums;
 
@@ -14,8 +15,22 @@ namespace LTH.PixelRemind.Data
         [FirestoreProperty] public bool IsCompleted{get;set;}
         [FirestoreProperty] public Difficulty Difficulty{get;set;}
         [FirestoreProperty] public PixelColorData PixelColorData{get;set;}
-        
-        public PixelArtData() { }
+
+        public PixelArtData()
+        {
+            TitleID = "";
+            ThumbnailData = "";
+            PlayTime = 0;
+            Size = 0;
+            IsCompleted = false;
+            Difficulty = Difficulty.Easy;
+
+            PixelColorData = new PixelColorData()
+            {
+                RemainingPixels = 0,
+                CustomPixels = new List<CustomPixel>()
+            };
+        }
         public PixelArtData(string titleID, string thumbnailData, int playTime,int size, bool isComplete, Difficulty difficulty, PixelColorData pixelColorData)
         {
             TitleID = titleID;

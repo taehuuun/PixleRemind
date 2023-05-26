@@ -26,8 +26,12 @@ namespace LTH.PixelRemind.Data
     {
         [FirestoreProperty] public int X { get; set; }
         [FirestoreProperty] public int Y { get; set; }
-        
-        public PixelCoord() {}
+
+        public PixelCoord()
+        {
+            X = 0;
+            Y = 0;
+        }
 
         public PixelCoord(int x, int y)
         {
@@ -47,6 +51,7 @@ namespace LTH.PixelRemind.Data
         {
             OriginalColor = new ColorValue(0, 0, 0, 0);
             GrayColor = new ColorValue(0, 0, 0, 0);
+            PixelCoords = new List<PixelCoord>();
         }
         public CustomPixel(ColorValue colorValue)
         {
