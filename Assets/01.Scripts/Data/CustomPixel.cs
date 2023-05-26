@@ -11,7 +11,14 @@ namespace LTH.PixelRemind.Data
         [FirestoreProperty] public float G { get; set; }
         [FirestoreProperty] public float B { get; set; }
         [FirestoreProperty] public float A { get; set; }
-        public ColorValue() { }
+
+        public ColorValue()
+        {
+            R = 0;
+            G = 0;
+            B = 0;
+            A = 0;
+        }
         public ColorValue(float r, float g, float b, float a)
         {
             R = r;

@@ -25,11 +25,7 @@ namespace LTH.PixelRemind.Data
             IsCompleted = false;
             Difficulty = Difficulty.Easy;
 
-            PixelColorData = new PixelColorData()
-            {
-                RemainingPixels = 0,
-                CustomPixels = new List<CustomPixel>()
-            };
+            PixelColorData = new PixelColorData();
         }
         public PixelArtData(string titleID, string thumbnailData, int playTime,int size, bool isComplete, Difficulty difficulty, PixelColorData pixelColorData)
         {

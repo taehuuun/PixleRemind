@@ -12,6 +12,10 @@ namespace LTH.PixelRemind.Data
         [FirestoreProperty]
         public List<CustomPixel> CustomPixels { get; set; } = new List<CustomPixel>();
 
-        public PixelColorData() { }
+        public PixelColorData()
+        {
+            RemainingPixels = 0;
+            CustomPixels = new List<CustomPixel>();
+        }
     }
 }

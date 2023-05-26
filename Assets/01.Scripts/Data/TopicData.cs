@@ -21,7 +21,20 @@ namespace LTH.PixelRemind.Data
         [FirestoreProperty] public DateTime LastUpdated { get; set; }
         [FirestoreProperty] public List<PixelArtData> PixelArtDatas { get; set; }
 
-        public TopicData() {}
+        public TopicData()
+        {
+            Title = "";
+            ThumbData = "";
+            CompleteCount = 0;
+            TotalCount = 0;
+            ThumbSize = 0;
+            Complete = false;
+            Updateable = false;
+            IsLocked = false;
+            UnlockCondition = new UnlockCondition();
+            LastUpdated = DateTime.Now;
+            PixelArtDatas = new List<PixelArtData>();
+        }
         public TopicData(
             string title,
             string thumbData,

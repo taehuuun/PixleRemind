@@ -9,8 +9,12 @@ namespace LTH.PixelRemind.Data.Conditions
     {
         [FirestoreProperty] public UnlockType Type { get; set; }
         [FirestoreProperty] public int Count { get; set; }
-        
-        public UnlockCondition (){}
+
+        public UnlockCondition()
+        {
+            Type = UnlockType.CoinPurchase;
+            Count = 0;
+        }
 
         public UnlockCondition(UnlockType type, int count)
         {
