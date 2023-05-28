@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.IO;
+using LTH.PixelRemind.Data;
 using UnityEngine;
 using Newtonsoft.Json;
 
@@ -7,9 +8,30 @@ namespace LTH.PixelRemind.Managers.Data
 {
     public class DataManager : MonoBehaviour
     {
+        private static DataManager _instance;
+        public static DataManager Instance
+        {
+            get
+            {
+                if (_instance == null)
+                {
+                    _instance = FindObjectOfType<DataManager>();
+                    if (_instance == null)
+                    {
+                        GameObject obj = new GameObject();
+                        obj.name = nameof(DataManager);
+                        _instance = obj.AddComponent<DataManager>();
+                    }
+                }
+                return _instance;
+            }
+        }
+
+        public UserData userData;
+        
         public static readonly string BasePath = Application.persistentDataPath;
         public static readonly string GalleryDataPath = Path.Combine(DataManager.BasePath, "Gallery","Topics");
-        
+
         public static List<string> GetTargetFolderFileNames(string path)
         {
             List<string> targetDirectoryFileNames = new List<string>();
