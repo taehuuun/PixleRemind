@@ -138,6 +138,20 @@ namespace LTH.PixelRemind.Managers.Firebase.Handler
                 throw;
             }
         }
+
+        public async Task DeleteData(string collection, string document)
+        {
+            try
+            {
+                var documentReference = _firestore.Collection(collection).Document(document);
+                await documentReference.DeleteAsync();
+            }
+            catch (Exception e)
+            {
+                Debug.LogError(e);
+                throw;
+            }
+        }
         /// <summary>
         /// 새로운 Data를 추가하는 비동기 메서드
         /// </summary>
