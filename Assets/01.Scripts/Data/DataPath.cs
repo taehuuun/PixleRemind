@@ -1,18 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 
-public class DataPath : MonoBehaviour
+namespace LTH.PixelRemind.Managers.Data.Paths
 {
-    // Start is called before the first frame update
-    void Start()
+    public class DataPath : MonoBehaviour
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        public static readonly string BasePath = Application.persistentDataPath;
+        public static readonly string GalleryDataPath = Path.Combine(BasePath, "Gallery","Topics");
     }
 }
