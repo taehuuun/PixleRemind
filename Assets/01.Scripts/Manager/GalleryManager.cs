@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using LTH.PixelRemind.Data;
 using LTH.PixelRemind.Enums;
 using LTH.PixelRemind.Managers.Data;
+using LTH.PixelRemind.Managers.Data.Paths;
 using Newtonsoft.Json;
 using UnityEngine;
 
@@ -35,7 +36,7 @@ namespace LTH.PixelRemind.Managers.Gallery
         
         public void LoadTopicDataFromFiles()
         {
-            List<string> topicNames = DataManager.GetTargetFolderFileNames(DataManager.GalleryDataPath);
+            List<string> topicNames = DataManager.GetTargetFolderFileNames(DataPath.GalleryDataPath);
 
             foreach (var topicName in topicNames)
             {
@@ -57,11 +58,11 @@ namespace LTH.PixelRemind.Managers.Gallery
         private void SavePixelArtData(TopicData data)
         {
             string jsonData = JsonConvert.SerializeObject(data);
-            DataManager.SaveJsonData(DataManager.GalleryDataPath, data.ID, jsonData);
+            DataManager.SaveJsonData(DataPath.GalleryDataPath, data.ID, jsonData);
         }
         private static TopicData GetTopicData(string topicName)
         {
-            return DataManager.LoadJsonData<TopicData>(DataManager.GalleryDataPath, topicName);
+            return DataManager.LoadJsonData<TopicData>(DataPath.GalleryDataPath, topicName);
         }
     }
 }

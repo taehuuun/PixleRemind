@@ -29,8 +29,7 @@ namespace LTH.PixelRemind.Managers.Data
 
         public UserData userData;
         
-        public static readonly string BasePath = Application.persistentDataPath;
-        public static readonly string GalleryDataPath = Path.Combine(DataManager.BasePath, "Gallery","Topics");
+        
 
         public static List<string> GetTargetFolderFileNames(string path)
         {
