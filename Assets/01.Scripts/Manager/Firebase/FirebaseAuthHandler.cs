@@ -1,6 +1,7 @@
 using System;
 using System.Threading.Tasks;
 using Firebase.Auth;
+using LTH.PixelRemind.Util;
 using UnityEngine;
 
 namespace LTH.PixelRemind.Managers.Firebase.Handler
@@ -28,7 +29,7 @@ namespace LTH.PixelRemind.Managers.Firebase.Handler
         public async Task<bool> TryFirebaseLogin()
         {
             // GoogleAuthProvider를 사용하여 IdToken을 기반으로 로그인 자격 증명을 생성합니다.
-            Credential credential = GoogleAuthProvider.GetCredential(GPGSUtill.IdToken, null);
+            Credential credential = GoogleAuthProvider.GetCredential(GPGSUtil.IdToken, null);
 
             try
             {
@@ -40,7 +41,7 @@ namespace LTH.PixelRemind.Managers.Firebase.Handler
                 FUID = newUser.UserId;
 
                 Debug.Log("Firebase Auth 로그인 성공");
-                Debug.Log($"IdToken : {GPGSUtill.IdToken}");
+                Debug.Log($"IdToken : {GPGSUtil.IdToken}");
                 Debug.Log($"FUID : {FUID}");
                 return true;
             }

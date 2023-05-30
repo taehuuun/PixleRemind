@@ -6,7 +6,7 @@ using LTH.PixelRemind.Data.Conditions;
 using LTH.PixelRemind.Enums;
 using LTH.PixelRemind.Managers.Firebase.Collections;
 using LTH.PixelRemind.Managers.Firebase.Handler;
-using LTH.PixelRemind.Utill;
+using LTH.PixelRemind.Util;
 using UnityEditor;
 using UnityEngine;
 

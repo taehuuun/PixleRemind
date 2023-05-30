@@ -5,7 +5,7 @@ using LTH.PixelRemind.Interfaces;
 using LTH.PixelRemind.Managers;
 using LTH.PixelRemind.Managers.Gallery;
 using LTH.PixelRemind.UI.Slots;
-using LTH.PixelRemind.Utill;
+using LTH.PixelRemind.Util;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -99,7 +99,7 @@ namespace LTH.PixelRemind.UI
                 var selectedPixel = _data.PixelColorData.CustomPixels[selectPixelIdx];
                 int selectedCoord = Random.Range(0, selectedPixel.PixelCoords.Count);
 
-                Texture2D pixelArt = PixelArtUtill.SpriteToTexture2D(board.sprite);
+                Texture2D pixelArt = PixelArtUtil.SpriteToTexture2D(board.sprite);
                 
                 Color origin = new Color(selectedPixel.OriginalColor.R, selectedPixel.OriginalColor.G, selectedPixel.OriginalColor.B, selectedPixel.OriginalColor.A);
                 
@@ -115,9 +115,9 @@ namespace LTH.PixelRemind.UI
                 }
                 
                 _data.PixelColorData.RemainingPixels--;
-                _data.ThumbnailData = PixelArtUtill.ExtractThumbnailData(pixelArt);
+                _data.ThumbnailData = PixelArtUtil.ExtractThumbnailData(pixelArt);
                 
-                board.sprite = PixelArtUtill.MakeThumbnail(_data.ThumbnailData, _data.Size);
+                board.sprite = PixelArtUtil.MakeThumbnail(_data.ThumbnailData, _data.Size);
             }
 
             if (_data.PixelColorData.RemainingPixels == 0)
@@ -160,7 +160,7 @@ namespace LTH.PixelRemind.UI
             _data = GalleryManager.ins.PixelArtDatas[GalleryManager.ins.SelPixelArtIdx];
             system.pixelColorData = _data.PixelColorData;
             playBtnMove.gameObject.SetActive(!_data.IsCompleted);
-            board.sprite = PixelArtUtill.MakeThumbnail(_data.ThumbnailData, _data.Size);
+            board.sprite = PixelArtUtil.MakeThumbnail(_data.ThumbnailData, _data.Size);
             UpdateSubjectState();
         }
 

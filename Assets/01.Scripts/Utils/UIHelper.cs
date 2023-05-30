@@ -3,9 +3,9 @@ using LTH.PixelRemind.Enums;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace LTH.PixelRemind.Utill
+namespace LTH.PixelRemind.Util
 {
-    public class UIHelper
+    public static class UIHelper
     {
         public static string FormatSecondsToTimeString(int totalSeconds)
         {

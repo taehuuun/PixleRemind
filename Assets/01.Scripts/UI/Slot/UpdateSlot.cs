@@ -1,5 +1,5 @@
 using LTH.PixelRemind.Data;
-using LTH.PixelRemind.Utill;
+using LTH.PixelRemind.Util;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -24,7 +24,7 @@ namespace LTH.PixelRemind.UI.Slots
         public void SetSlot(TopicData topicData, bool isMissing)
         {
             _topicData = topicData;
-            thumbnailImg.sprite = PixelArtUtill.MakeThumbnail(_topicData.ThumbData, _topicData.ThumbSize);
+            thumbnailImg.sprite = PixelArtUtil.MakeThumbnail(_topicData.ThumbData, _topicData.ThumbSize);
             titleText.text = $"{_topicData.Title} 픽셀아트 {_topicData.TotalCount}개";
             introductionText.text = _topicData.Introduction;
             iconImg.sprite = isMissing ? missingIcon : updateIcon;

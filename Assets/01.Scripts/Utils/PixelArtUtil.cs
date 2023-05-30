@@ -5,9 +5,9 @@ using LTH.PixelRemind.Data;
 using LTH.PixelRemind.Enums;
 using UnityEngine;
 
-namespace LTH.PixelRemind.Utill
+namespace LTH.PixelRemind.Util
 {
-    public class PixelArtUtill
+    public static class PixelArtUtil
     {
         private static PixelColorData ExtractPixelData(Texture2D extractTarget)
         {

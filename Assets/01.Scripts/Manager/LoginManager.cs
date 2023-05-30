@@ -4,6 +4,7 @@ using LTH.PixelRemind.Data;
 using LTH.PixelRemind.Managers.Data;
 using LTH.PixelRemind.Managers.Firebase;
 using LTH.PixelRemind.Managers.Firebase.Collections;
+using LTH.PixelRemind.Util;
 using UnityEngine;
 
 namespace LTH.PixelRemind.Managers.Login
@@ -15,7 +16,7 @@ namespace LTH.PixelRemind.Managers.Login
             Debug.Log("GPGS Init");
             
             // GPGSUtill을 초기화
-            GPGSUtill.Init(); 
+            GPGSUtil.Init(); 
 
             // LoginAsync를 호출
             Debug.Log("LoginAsync");

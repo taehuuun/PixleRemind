@@ -1,7 +1,7 @@
 using System;
 using LTH.PixelRemind.Data;
 using LTH.PixelRemind.Enums;
-using LTH.PixelRemind.Utill;
+using LTH.PixelRemind.Util;
 using UnityEditor;
 using UnityEngine;
 
@@ -32,7 +32,7 @@ namespace LTH.PixelRemind.Editor
             {
                 if (_tmpPixelArt != null && !string.IsNullOrEmpty(_tmpTitleID))
                 {
-                    var newPixelArtData = PixelArtUtill.ExportPixelData(_tmpTitleID, _tmpPixelArt, _tmpDifficulty);
+                    var newPixelArtData = PixelArtUtil.ExportPixelData(_tmpTitleID, _tmpPixelArt, _tmpDifficulty);
                     _onConfirm?.Invoke(newPixelArtData);
                     Close();
                 }

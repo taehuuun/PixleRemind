@@ -1,5 +1,5 @@
 using LTH.PixelRemind.Data;
-using LTH.PixelRemind.Utill;
+using LTH.PixelRemind.Util;
 using TMPro;
 using UnityEngine;
 
@@ -16,7 +16,7 @@ namespace LTH.PixelRemind.UI.Slots
         {
             difficultyText.text = pixelData.Difficulty.ToString();
             titleText.text = pixelData.TitleID;
-            thumbnailImb.sprite = PixelArtUtill.MakeThumbnail(pixelData.ThumbnailData, pixelData.Size);
+            thumbnailImb.sprite = PixelArtUtil.MakeThumbnail(pixelData.ThumbnailData, pixelData.Size);
 
             if (pixelData.IsCompleted)
             {

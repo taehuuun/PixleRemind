@@ -1,6 +1,6 @@
 using LTH.PixelRemind.Data;
 using LTH.PixelRemind.Managers.Gallery;
-using LTH.PixelRemind.Utill;
+using LTH.PixelRemind.Util;
 using TMPro;
 using UnityEngine;
 
@@ -24,7 +24,7 @@ namespace LTH.PixelRemind.UI.Slots
             titleText.text = data.ID;
             completeMark.SetActive(data.Complete);
             completeCountText.text = $"{data.CompleteCount} / {data.TotalCount}";
-            thumbnailImb.sprite = PixelArtUtill.MakeThumbnail(data.ThumbData, data.ThumbSize);
+            thumbnailImb.sprite = PixelArtUtil.MakeThumbnail(data.ThumbData, data.ThumbSize);
         }
     }
 }
