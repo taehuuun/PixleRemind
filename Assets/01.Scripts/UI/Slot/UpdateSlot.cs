@@ -34,5 +34,10 @@ namespace LTH.PixelRemind.UI.Slots
             IsSelected = !IsSelected;
             select.SetActive(IsSelected);
         }
+
+        public TopicData GetTopicData()
+        {
+            return _topicData;
+        }
     }
 }
