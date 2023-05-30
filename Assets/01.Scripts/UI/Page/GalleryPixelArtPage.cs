@@ -1,5 +1,6 @@
 using LTH.PixelRemind.Enums;
 using LTH.PixelRemind.Managers.Gallery;
+using LTH.PixelRemind.UI.Slots;
 using UnityEngine;
 using UnityEngine.UI;
 

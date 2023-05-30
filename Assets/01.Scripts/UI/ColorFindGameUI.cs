@@ -1,5 +1,6 @@
 using LTH.PixelRemind.Interfaces;
 using LTH.PixelRemind.Managers;
+using LTH.PixelRemind.UI.Slots;
 using TMPro;
 using UnityEngine;
 

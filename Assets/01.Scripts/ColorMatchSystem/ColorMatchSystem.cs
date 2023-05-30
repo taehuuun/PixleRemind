@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using LTH.PixelRemind.Data;
 using LTH.PixelRemind.Interfaces;
+using LTH.PixelRemind.UI.Slots;
 using UnityEngine;
 
 namespace LTH.PixelRemind.Managers

@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace LTH.PixelRemind
+namespace LTH.PixelRemind.UI.Slots
 {
     [Serializable]
     public class ColorSlot : MonoBehaviour

@@ -3,7 +3,7 @@ using LTH.PixelRemind.Utill;
 using TMPro;
 using UnityEngine;
 
-namespace LTH.PixelRemind.UI
+namespace LTH.PixelRemind.UI.Slots
 {
     public class PixelArtSlot : GallerySlot
     {

@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-namespace LTH.PixelRemind.UI
+namespace LTH.PixelRemind.UI.Slots
 {
     public class GallerySlot : MonoBehaviour
     {
