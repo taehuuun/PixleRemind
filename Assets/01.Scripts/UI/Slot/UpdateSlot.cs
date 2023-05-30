@@ -1,6 +1,7 @@
 using LTH.PixelRemind.Data;
 using LTH.PixelRemind.Utill;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace LTH.PixelRemind.UI.Slots
@@ -8,21 +9,30 @@ namespace LTH.PixelRemind.UI.Slots
     public class UpdateSlot : MonoBehaviour
     {
         public Image thumbnailImg;
+        public Image iconImg;
         public Text titleText;
         public Text introductionText;
-        public GameObject checkIcon;
-        public GameObject updateIcon;
-        public GameObject missingIcon;
+        public GameObject select;
+        public Sprite updateIcon;
+        public Sprite missingIcon;
         
         private TopicData _topicData;
         
-        public void SetSlot(TopicData topicData, bool update, bool missing)
+        public bool IsSelected { get; private set; }
+        
+        public void SetSlot(TopicData topicData, bool isMissing)
         {
-            thumbnailImg.sprite = PixelArtUtill.MakeThumbnail(topicData.ThumbData, topicData.ThumbSize);
-            titleText.text = $"{topicData.Title} 픽셀아트 {topicData.TotalCount}개";
-            introductionText.text = topicData.Introduction;
-            updateIcon.SetActive(update);
-            missingIcon.SetActive(missing);
+            _topicData = topicData;
+            thumbnailImg.sprite = PixelArtUtill.MakeThumbnail(_topicData.ThumbData, _topicData.ThumbSize);
+            titleText.text = $"{_topicData.Title} 픽셀아트 {_topicData.TotalCount}개";
+            introductionText.text = _topicData.Introduction;
+            iconImg.sprite = isMissing ? missingIcon : updateIcon;
+        }
+
+        public void ToggleSelection()
+        {
+            IsSelected = !IsSelected;
+            select.SetActive(IsSelected);
         }
     }
 }
