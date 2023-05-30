@@ -11,6 +11,7 @@ namespace LTH.PixelRemind.Data
         [FirestoreProperty] public string ID { get; set; }
         [FirestoreProperty] public string Title { get; set; }
         [FirestoreProperty] public string ThumbData {get;set;}
+        [FirestoreProperty] public string Introduction { get; set; }
         [FirestoreProperty] public int CompleteCount {get;set;}
         [FirestoreProperty] public int TotalCount {get;set;}
         [FirestoreProperty] public int ThumbSize { get; set; }
@@ -25,6 +26,7 @@ namespace LTH.PixelRemind.Data
         {
             Title = "";
             ThumbData = "";
+            Introduction = "";
             CompleteCount = 0;
             TotalCount = 0;
             ThumbSize = 0;
@@ -38,6 +40,7 @@ namespace LTH.PixelRemind.Data
         public TopicData(
             string title,
             string thumbData,
+            string introduction,
             int completeCount,
             int totalCount,
             int thumbSize,
@@ -50,6 +53,7 @@ namespace LTH.PixelRemind.Data
         {
             Title = title;
             ThumbData = thumbData;
+            Introduction = introduction;
             CompleteCount = completeCount;
             TotalCount = totalCount;
             ThumbSize = thumbSize;
