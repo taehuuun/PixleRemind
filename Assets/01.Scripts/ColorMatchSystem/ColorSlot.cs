@@ -5,7 +5,7 @@ using UnityEngine.UI;
 namespace LTH.PixelRemind
 {
     [Serializable]
-    public class ColorSlot
+    public class ColorSlot : MonoBehaviour
     {
         public Image slotImage; 
 
