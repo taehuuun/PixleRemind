@@ -1,5 +1,6 @@
 using LTH.PixelRemind.Data;
 using LTH.PixelRemind.Utill;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
@@ -10,8 +11,8 @@ namespace LTH.PixelRemind.UI.Slots
     {
         public Image thumbnailImg;
         public Image iconImg;
-        public Text titleText;
-        public Text introductionText;
+        public TMP_Text titleText;
+        public TMP_Text introductionText;
         public GameObject select;
         public Sprite updateIcon;
         public Sprite missingIcon;

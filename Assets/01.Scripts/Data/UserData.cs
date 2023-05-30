@@ -9,6 +9,10 @@ namespace LTH.PixelRemind.Data
     {
         [FirestoreProperty] public List<string> LocalTopicDataIDs { get; set; }
         [FirestoreProperty] public DateTime LastUpdated { get; set; }
-        public UserData() { }
+
+        public UserData()
+        {
+            LocalTopicDataIDs = new List<string>();
+        }
     }
 }

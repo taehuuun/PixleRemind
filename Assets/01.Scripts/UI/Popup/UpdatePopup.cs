@@ -14,6 +14,7 @@ namespace LTH.PixelRemind.UI
         public Transform contentParent;
         public UpdateSlot updateTopicSlotPrefab;
         public Button updateButton;
+        public Button closeButton;
 
         public UpdateManager updateManager;
 
@@ -22,10 +23,13 @@ namespace LTH.PixelRemind.UI
         private void Start()
         {
             updateButton.onClick.AddListener(OnUpdateButtonClicked);
+            closeButton.onClick.AddListener(OnCloseButtonClicked);
         }
 
         public void Show(List<TopicData> updateDataList, List<TopicData> missingDataList)
         {
+            gameObject.SetActive(true);
+            
             foreach (var topicSlot in _topicSlots)
             {
                 Destroy(topicSlot.gameObject);
@@ -51,8 +55,11 @@ namespace LTH.PixelRemind.UI
         private async void OnUpdateButtonClicked()
         {
             var selectedSlots = _topicSlots.Where(slot => slot.IsSelected).ToList();
-
-            if (selectedSlots.Count == 0 && DataManager.Instance.userData.LocalTopicDataIDs.Count == 0)
+            
+            Debug.Log($"!@#!@#@!#!@# : {selectedSlots ==null}");
+            Debug.Log($"!@#!@#@!#!@# : {selectedSlots ==null}");
+            
+            if (DataManager.Instance.userData.LocalTopicDataIDs.Count == 0)
             {
                 Debug.Log("최소 1개 이상 슬롯을 선택 해야 합니다.");
                 return;
@@ -63,6 +70,21 @@ namespace LTH.PixelRemind.UI
                 Debug.Log($"선택된 Topic : {slot.titleText.text}");
                 await updateManager.DownloadTopicData(slot.GetTopicData().ID);
             }
+        }
+
+        private void OnCloseButtonClicked()
+        {
+            var selectedSlots = _topicSlots.Where(slot => slot.IsSelected).ToList();
+            
+            Debug.Log($"2222222222222222 : {selectedSlots ==null}");
+            
+            if (DataManager.Instance.userData.LocalTopicDataIDs.Count == 0)
+            {
+                Debug.Log("최소 1개 이상 슬롯을 선택 해야 합니다.");
+                return;
+            }
+            
+            gameObject.SetActive(false);
         }
     }
 }

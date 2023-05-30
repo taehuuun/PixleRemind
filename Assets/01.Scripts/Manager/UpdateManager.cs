@@ -23,11 +23,16 @@ namespace LTH.PixelRemind.Managers
         {
             _topicDataList =
                 await FirebaseManager.ins.Firestore.GetAllData<TopicData>(FirestoreCollections.GalleryData);
+
+            if (DataManager.Instance.userData.LocalTopicDataIDs == null)
+            {
+                DataManager.Instance.userData.LocalTopicDataIDs = new List<string>();
+            }
             
             await CheckForUpdated();
         }
 
-        private async Task CheckForUpdated()
+        private Task CheckForUpdated()
         {
             List<string> localTopicDataIDs = DataManager.Instance.userData.LocalTopicDataIDs;
             List<string> missingDataIDs = new List<string>();
@@ -38,11 +43,14 @@ namespace LTH.PixelRemind.Managers
             
             if (localTopicDataIDs == null || localTopicDataIDs.Count == 0)
             {
+                Debug.Log("로컬 데이터가 없음");
                 foreach (var topicData in _topicDataList)
                 {
                     missingDataIDs.Add(topicData.Title);
                     missingDataList.Add(topicData);
                 }
+
+                updatePopup.Show(outdatedDataList, missingDataList);
             }
             else
             {
@@ -68,6 +76,8 @@ namespace LTH.PixelRemind.Managers
             {
                 updatePopup.Show(outdatedDataList,missingDataList);
             }
+
+            return Task.CompletedTask;
         }
 
         public async Task DownloadTopicData(string topicID)
