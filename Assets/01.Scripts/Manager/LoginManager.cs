@@ -2,6 +2,7 @@ using System;
 using System.Threading.Tasks;
 using LTH.PixelRemind.Data;
 using LTH.PixelRemind.Managers.Data;
+using LTH.PixelRemind.Managers.Data.Paths;
 using LTH.PixelRemind.Managers.Firebase;
 using LTH.PixelRemind.Managers.Firebase.Collections;
 using LTH.PixelRemind.Util;
@@ -13,14 +14,12 @@ namespace LTH.PixelRemind.Managers.Login
     {
         private async void Start()
         {
-            Debug.Log("GPGS Init");
+            Debug.Log("LoginManager Start");
             
             // GPGSUtill을 초기화
             GPGSUtil.Init(); 
 
             // LoginAsync를 호출
-            Debug.Log("LoginAsync");
-            
             await Login(); 
         }
         
@@ -29,6 +28,7 @@ namespace LTH.PixelRemind.Managers.Login
         /// </summary>
         private async Task Login()
         {
+            Debug.Log("LoginManager Login");
 #if UNITY_ANDROID && !UNITY_EDITOR
             // GPGSUtill을 통해 로그인을 시도
             if (await GPGSUtill.LoginAsync())
@@ -57,6 +57,7 @@ namespace LTH.PixelRemind.Managers.Login
 
         private async Task Initialize()
         {
+            Debug.Log("LoginManager Initialize");
 #if UNITY_ANDROID && !UNITY_EDITOR
             string FUID = FirebaseManager.ins.FireAuth.FUID;
 #else
@@ -78,6 +79,9 @@ namespace LTH.PixelRemind.Managers.Login
                 DataManager.Instance.userData =
                     await FirebaseManager.ins.Firestore.GetData<UserData>(FirestoreCollections.UserData, FUID);
             }
+
+            DataManager.Instance.userData.LocalTopicDataIDs =
+                DataManager.GetTargetFolderFileNames(DataPath.GalleryDataPath);
         }
     }
 }

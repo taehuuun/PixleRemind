@@ -22,12 +22,14 @@ namespace LTH.PixelRemind.UI
 
         private void Start()
         {
+            Debug.Log("UpdatePopup Start");
             updateButton.onClick.AddListener(OnUpdateButtonClicked);
             closeButton.onClick.AddListener(OnCloseButtonClicked);
         }
 
         public void Show(List<TopicData> updateDataList, List<TopicData> missingDataList)
         {
+            Debug.Log("UpdatePopup Show");
             gameObject.SetActive(true);
             
             foreach (var topicSlot in _topicSlots)
@@ -54,12 +56,10 @@ namespace LTH.PixelRemind.UI
 
         private async void OnUpdateButtonClicked()
         {
+            Debug.Log("UpdatePopup OnUpdateButtonClicked");
             var selectedSlots = _topicSlots.Where(slot => slot.IsSelected).ToList();
             
-            Debug.Log($"!@#!@#@!#!@# : {selectedSlots ==null}");
-            Debug.Log($"!@#!@#@!#!@# : {selectedSlots ==null}");
-            
-            if (DataManager.Instance.userData.LocalTopicDataIDs.Count == 0)
+            if (DataManager.Instance.userData.LocalTopicDataIDs.Count == 0 && selectedSlots.Count == 0)
             {
                 Debug.Log("최소 1개 이상 슬롯을 선택 해야 합니다.");
                 return;
@@ -74,11 +74,10 @@ namespace LTH.PixelRemind.UI
 
         private void OnCloseButtonClicked()
         {
+            Debug.Log("UpdatePopup OnCloseButtonClicked");
             var selectedSlots = _topicSlots.Where(slot => slot.IsSelected).ToList();
             
-            Debug.Log($"2222222222222222 : {selectedSlots ==null}");
-            
-            if (DataManager.Instance.userData.LocalTopicDataIDs.Count == 0)
+            if (DataManager.Instance.userData.LocalTopicDataIDs.Count == 0 && selectedSlots.Count == 0)
             {
                 Debug.Log("최소 1개 이상 슬롯을 선택 해야 합니다.");
                 return;

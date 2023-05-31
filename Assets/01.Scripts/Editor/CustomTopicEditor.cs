@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using LTH.PixelRemind.Comparer;
 using LTH.PixelRemind.Data;
 using LTH.PixelRemind.Data.Conditions;
 using LTH.PixelRemind.Enums;
@@ -207,6 +208,7 @@ namespace LTH.PixelRemind.Editor
         private async Task LoadTopicDatas()
         {
             _firestoreTopicDatas = await _firestore.GetAllData<TopicData>(FirestoreCollections.GalleryData);
+            _firestoreTopicDatas.Sort(new TopicDataListComparer());
             Debug.Log("Data Load");
             Debug.Log($"Load Topic Data Count : {_firestoreTopicDatas.Count}");
         }

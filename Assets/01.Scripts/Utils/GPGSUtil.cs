@@ -29,7 +29,7 @@ namespace LTH.PixelRemind.Util
             PlayGamesPlatform.InitializeInstance(config);
             
             // 디버그 로그를 활성, 비활성
-            PlayGamesPlatform.DebugLogEnabled = true;
+            PlayGamesPlatform.DebugLogEnabled = false;
             
             // PlayGamesPlatform을 활성화
             PlayGamesPlatform.Activate();

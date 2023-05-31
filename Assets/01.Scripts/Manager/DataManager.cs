@@ -32,7 +32,8 @@ namespace LTH.PixelRemind.Managers.Data
         
 
         public static List<string> GetTargetFolderFileNames(string path)
-        {
+        { 
+            Debug.Log("DataManager GetTargetFolderFileNames");
             List<string> targetDirectoryFileNames = new List<string>();
             DirectoryInfo directoryInfo = new DirectoryInfo(path);
 

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using LTH.PixelRemind.Comparer;
 using LTH.PixelRemind.Data;
 using LTH.PixelRemind.Managers.Data;
 using LTH.PixelRemind.Managers.Data.Paths;
@@ -21,9 +22,12 @@ namespace LTH.PixelRemind.Managers
 
         private async void Start()
         {
+            Debug.Log("UpdateManager Start");
             _topicDataList =
                 await FirebaseManager.ins.Firestore.GetAllData<TopicData>(FirestoreCollections.GalleryData);
-
+            
+            _topicDataList.Sort(new TopicDataListComparer());
+            
             if (DataManager.Instance.userData.LocalTopicDataIDs == null)
             {
                 DataManager.Instance.userData.LocalTopicDataIDs = new List<string>();
@@ -34,6 +38,7 @@ namespace LTH.PixelRemind.Managers
 
         private Task CheckForUpdated()
         {
+            Debug.Log("UpdateManager CheckForUpdated");
             List<string> localTopicDataIDs = DataManager.Instance.userData.LocalTopicDataIDs;
             List<string> missingDataIDs = new List<string>();
             List<string> outdatedDataIDs = new List<string>();
@@ -82,6 +87,7 @@ namespace LTH.PixelRemind.Managers
 
         public async Task DownloadTopicData(string topicID)
         {
+            Debug.Log("UpdateManager DownloadTopicData");
             TopicData serverData = _topicDataList.Find(data => data.ID == topicID);
 
             if (serverData != null)
