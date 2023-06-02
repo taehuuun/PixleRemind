@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace LTH.PixelRemind.Data
 {
-    public class TaskData : MonoBehaviour
+    public class TaskData
     {
         public Func<Task> Task { get; private set; }
         public string Name { get; private set; }
