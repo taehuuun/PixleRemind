@@ -15,8 +15,10 @@ namespace LTH.PixelRemind.Managers.Login
         /// <summary>
         /// Login 메서드
         /// </summary>
-        public async Task Login()
+        public static async Task Login()
         {
+            GPGSUtil.Init();
+            
             Debug.Log("LoginManager Login");
 #if UNITY_ANDROID && !UNITY_EDITOR
             // GPGSUtill을 통해 로그인을 시도
@@ -44,7 +46,7 @@ namespace LTH.PixelRemind.Managers.Login
 #endif
         }
 
-        private async Task Initialize()
+        private static async Task Initialize()
         {
             Debug.Log("LoginManager Initialize");
 #if UNITY_ANDROID && !UNITY_EDITOR
