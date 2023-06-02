@@ -12,21 +12,10 @@ namespace LTH.PixelRemind.Managers.Login
 {
     public class LoginManager : MonoBehaviour
     {
-        private async void Start()
-        {
-            Debug.Log("LoginManager Start");
-            
-            // GPGSUtill을 초기화
-            GPGSUtil.Init(); 
-
-            // LoginAsync를 호출
-            await Login(); 
-        }
-        
         /// <summary>
         /// Login 메서드
         /// </summary>
-        private async Task Login()
+        public async Task Login()
         {
             Debug.Log("LoginManager Login");
 #if UNITY_ANDROID && !UNITY_EDITOR
