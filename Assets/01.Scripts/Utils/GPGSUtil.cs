@@ -16,7 +16,7 @@ namespace LTH.PixelRemind.Util
         /// <summary>
         /// 구글 플레이 서비스에서 사용되는 PlayGamesPlatform 객체를 초기화 시키는 메서드
         /// </summary>
-        public static void Init()
+        public static Task Init()
         {
             // PlayGamesClientConfiguration을 사용하여 구성 객체를 만듭니다.
             PlayGamesClientConfiguration config = new PlayGamesClientConfiguration.Builder()
@@ -36,6 +36,7 @@ namespace LTH.PixelRemind.Util
 
             // 초기화 상태를 true로 변경
             _initialized = true;
+            return Task.CompletedTask;
         }
         
         /// <summary>
