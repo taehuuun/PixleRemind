@@ -48,9 +48,9 @@ namespace LTH.PixelRemind.Editor
 
         private void OnGUI()
         {
-            if (GUILayout.Button("Save to Firestore"))
+            if (GUILayout.Button("Upload to Firestore"))
             {
-                SaveToFirestore();
+                UploadToFirestore();
             }
             
             if (GUILayout.Button("Add TopicData"))
@@ -221,7 +221,7 @@ namespace LTH.PixelRemind.Editor
                 await _firestore.DeleteData(FirestoreCollections.GalleryData, id);
             }
         }
-        private async void SaveToFirestore()
+        private async void UploadToFirestore()
         {
             foreach (var topicData in _firestoreTopicDatas)      
             {
