@@ -41,12 +41,10 @@ namespace LTH.PixelRemind.Managers.Login
             {
                 Debug.LogError("GPGS 로그인 실패");
             }
-#else
-            await LoadUserData();
 #endif
         }
 
-        private static async Task LoadUserData()
+        public static async Task LoadUserData()
         {
             Debug.Log("LoginManager Initialize");
 #if UNITY_ANDROID && !UNITY_EDITOR
