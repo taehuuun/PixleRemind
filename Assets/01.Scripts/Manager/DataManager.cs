@@ -9,26 +9,18 @@ namespace LTH.PixelRemind.Managers.Data
 {
     public class DataManager : MonoBehaviour
     {
-        private static DataManager _instance;
-        public static DataManager Instance
-        {
-            get
-            {
-                if (_instance == null)
-                {
-                    _instance = FindObjectOfType<DataManager>();
-                    if (_instance == null)
-                    {
-                        GameObject obj = new GameObject();
-                        obj.name = nameof(DataManager);
-                        _instance = obj.AddComponent<DataManager>();
-                    }
-                }
-                return _instance;
-            }
-        }
+        public static DataManager Instance;
 
         public UserData userData;
+
+        private void Awake()
+        {
+            if (Instance == null)
+            {
+                Instance = this;
+                DontDestroyOnLoad(this);
+            }
+        }
         
         public static List<string> GetTargetFolderFileNames(string path)
         { 
