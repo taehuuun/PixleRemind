@@ -1,21 +1,16 @@
 using System.Threading.Tasks;
 using UnityEngine;
-using LTH.PixelRemind.Managers.Firebase.Handler;
 
-namespace LTH.PixelRemind.Managers.FirebaseController
+public class TopicDataController : MonoBehaviour
 {
-    public class TopicDataController : MonoBehaviour
+    private readonly FirestoreHandler _firestore;
+
+    public TopicDataController(FirestoreHandler firestore)
     {
-        private readonly FirestoreHandler _firestore;
+        _firestore = firestore;
+    }
 
-        public TopicDataController(FirestoreHandler firestore)
-        {
-            _firestore = firestore;
-        }
-
-        public async Task CheckAndUpdateTopic()
-        {
-            
-        }
+    public async Task CheckAndUpdateTopic()
+    {
     }
 }

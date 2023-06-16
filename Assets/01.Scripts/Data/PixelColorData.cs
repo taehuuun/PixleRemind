@@ -1,21 +1,16 @@
 ﻿using System.Collections.Generic;
 using Firebase.Firestore;
 
-namespace LTH.PixelRemind.Data
+[FirestoreData]
+public class PixelColorData
 {
-    [FirestoreData]
-    public class PixelColorData
+    [FirestoreProperty] public int RemainingPixels { get; set; }
+
+    [FirestoreProperty] public List<CustomPixel> CustomPixels { get; set; } = new List<CustomPixel>();
+
+    public PixelColorData()
     {
-        [FirestoreProperty]
-        public int RemainingPixels { get; set; }
-
-        [FirestoreProperty]
-        public List<CustomPixel> CustomPixels { get; set; } = new List<CustomPixel>();
-
-        public PixelColorData()
-        {
-            RemainingPixels = 0;
-            CustomPixels = new List<CustomPixel>();
-        }
+        RemainingPixels = 0;
+        CustomPixels = new List<CustomPixel>();
     }
 }

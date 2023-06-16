@@ -1,8 +1,5 @@
 using UnityEngine;
 
-namespace LTH.PixelRemind.Data.Updater
+public class TopicDataUpdater : MonoBehaviour
 {
-    public class TopicDataUpdater : MonoBehaviour
-    {
-    }
 }

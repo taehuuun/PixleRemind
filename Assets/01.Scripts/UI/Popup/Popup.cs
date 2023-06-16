@@ -1,17 +1,14 @@
 using UnityEngine;
 
-namespace LTH.PixelRemind.UI
+public class Popup : CloseAbleUI
 {
-    public class Popup : CloseAbleUI
+    public virtual void Open()
     {
-        public virtual void Open()
-        {
-            gameObject.SetActive(true);
-        }
+        gameObject.SetActive(true);
+    }
 
-        public virtual void Close()
-        {
-            gameObject.SetActive(false);
-        }
+    public virtual void Close()
+    {
+        gameObject.SetActive(false);
     }
 }
