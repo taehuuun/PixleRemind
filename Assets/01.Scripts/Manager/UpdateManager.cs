@@ -9,6 +9,8 @@ public class UpdateManager : MonoBehaviour
 {
     public UpdatePopup updatePopup;
 
+    public event Action<bool> OnUpdateCheckCompleted;
+    
     private List<TopicData> _topicDataList;
 
     private async void Start()
@@ -25,11 +27,11 @@ public class UpdateManager : MonoBehaviour
         {
             DataManager.Instance.userData.LocalTopicDataIDs = new List<string>();
         }
-
+        
         await CheckForUpdated();
     }
 
-    private Task CheckForUpdated()
+    public Task CheckForUpdated()
     {
         Debug.Log("UpdateManager CheckForUpdated");
         List<string> localTopicDataIDs = DataManager.Instance.userData.LocalTopicDataIDs;
@@ -74,7 +76,9 @@ public class UpdateManager : MonoBehaviour
         {
             updatePopup.Show(outdatedDataList, missingDataList);
         }
-
+        
+        OnUpdateCheckCompleted?.Invoke(missingDataList.Count >0 || outdatedDataList.Count > 0);
+        
         return Task.CompletedTask;
     }
 

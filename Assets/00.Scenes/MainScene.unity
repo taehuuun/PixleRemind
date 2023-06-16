@@ -3362,6 +3362,7 @@ GameObject:
   - component: {fileID: 715005141}
   - component: {fileID: 715005140}
   - component: {fileID: 715005139}
+  - component: {fileID: 715005142}
   m_Layer: 5
   m_Name: UpdateButton
   m_TagString: Untagged
@@ -3433,7 +3434,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 715005140}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1612123442}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &715005140
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3472,6 +3485,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 715005137}
   m_CullTransparentMesh: 1
+--- !u!114 &715005142
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 715005137}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65a5c7658d651f54e977fe8203cf9e34, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  noticeIcon: {fileID: 2110365189}
+  updateManager: {fileID: 1612123445}
 --- !u!1 &717664550
 GameObject:
   m_ObjectHideFlags: 0
