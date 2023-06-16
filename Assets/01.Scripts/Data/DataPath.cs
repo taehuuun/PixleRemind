@@ -5,7 +5,7 @@ namespace LTH.PixelRemind.Managers.Data.Paths
 {
     public class DataPath : MonoBehaviour
     {
-        public static readonly string BasePath = Application.persistentDataPath;
+        private static readonly string BasePath = Application.persistentDataPath;
         public static readonly string GalleryDataPath = Path.Combine(BasePath, "Gallery","Topics");
     }
 }

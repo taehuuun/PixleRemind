@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.IO;
 using LTH.PixelRemind.Data;
@@ -29,21 +30,27 @@ namespace LTH.PixelRemind.Managers.Data
 
         public UserData userData;
         
-        
-
         public static List<string> GetTargetFolderFileNames(string path)
         { 
-            Debug.Log("DataManager GetTargetFolderFileNames");
-            List<string> targetDirectoryFileNames = new List<string>();
-            DirectoryInfo directoryInfo = new DirectoryInfo(path);
-
-            foreach (var fileFullName in directoryInfo.GetFiles())
+            try
             {
-                var fileName = Path.GetFileNameWithoutExtension(fileFullName.Name);
-                targetDirectoryFileNames.Add(fileName);
-            }
+                Debug.Log("DataManager GetTargetFolderFileNames");
+                List<string> targetDirectoryFileNames = new List<string>();
+                DirectoryInfo directoryInfo = new DirectoryInfo(path);
 
-            return targetDirectoryFileNames;
+                foreach (var fileFullName in directoryInfo.GetFiles())
+                {
+                    var fileName = Path.GetFileNameWithoutExtension(fileFullName.Name);
+                    targetDirectoryFileNames.Add(fileName);
+                }
+
+                return targetDirectoryFileNames;
+            }
+            catch (Exception ex)
+            {
+                Debug.LogError($"Failed to get filenames from directory {path}. Exception: {ex}");
+                return new List<string>();  // Return an empty list to prevent null reference exceptions
+            }
         }
         public static void SaveJsonData(string savePath, string fileName, string jsonData)
         {

@@ -31,6 +31,7 @@ namespace LTH.PixelRemind.UI
             {
                 _loadingBar.fillAmount = LoadingTaskManager.Instance.TaskProgress;
                 _taskText.text = LoadingTaskManager.Instance.CurrentTask;
+                
                 yield return null;
             }
 

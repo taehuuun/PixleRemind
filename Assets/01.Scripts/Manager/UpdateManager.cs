@@ -26,6 +26,8 @@ namespace LTH.PixelRemind.Managers
             _topicDataList =
                 await FirebaseManager.ins.Firestore.GetAllData<TopicData>(FirestoreCollections.GalleryData);
             
+            Debug.Log(_topicDataList.Count);
+            
             _topicDataList.Sort(new TopicDataListComparer());
             
             if (DataManager.Instance.userData.LocalTopicDataIDs == null)

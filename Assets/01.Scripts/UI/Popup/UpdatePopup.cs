@@ -30,6 +30,8 @@ namespace LTH.PixelRemind.UI
         public void Show(List<TopicData> updateDataList, List<TopicData> missingDataList)
         {
             Debug.Log("UpdatePopup Show");
+            Debug.Log($"Update List Count : {updateDataList.Count}");
+            Debug.Log($"Missing List Count : {missingDataList.Count}");
             gameObject.SetActive(true);
             
             foreach (var topicSlot in _topicSlots)
@@ -68,6 +70,7 @@ namespace LTH.PixelRemind.UI
             foreach (var slot in selectedSlots)
             {
                 Debug.Log($"선택된 Topic : {slot.titleText.text}");
+                Debug.Log($"선택된 Topic ID : {slot.titleText.text}");
                 await updateManager.DownloadTopicData(slot.GetTopicData().ID);
             }
         }

@@ -37,13 +37,15 @@ namespace LTH.PixelRemind.Managers
 
         public async Task RunTasks()
         {
+            CurrentTask = "";            
             for (int i = 0; i < _tasks.Count; i++)
             {
                 CurrentTask = _tasks[i].Name;
                 await _tasks[i].Task.Invoke();
                 TaskProgress = (float)(i + 1) / _tasks.Count;
+                CurrentTask = $"{_tasks[i].Name} 완료!";
+                await Task.Delay(1000);
             }
-
             AllTaskComplete = true;
         }
 

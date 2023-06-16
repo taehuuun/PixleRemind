@@ -17,8 +17,6 @@ namespace LTH.PixelRemind.Managers.Login
         /// </summary>
         public static async Task Login()
         {
-            GPGSUtil.Init();
-            
             Debug.Log("LoginManager Login");
 #if UNITY_ANDROID && !UNITY_EDITOR
             // GPGSUtill을 통해 로그인을 시도
@@ -46,31 +44,49 @@ namespace LTH.PixelRemind.Managers.Login
 
         public static async Task LoadUserData()
         {
-            Debug.Log("LoginManager Initialize");
-#if UNITY_ANDROID && !UNITY_EDITOR
-            string FUID = FirebaseManager.ins.FireAuth.FUID;
-#else
-            string FUID = "Test";
-#endif
-            bool userDataExists =
-                await FirebaseManager.ins.Firestore.CheckDocumentExists(FirestoreCollections.UserData, FUID);
-
-            if (!userDataExists)
+            try
             {
-                Debug.Log("최초 접속 유저");
-                DataManager.Instance.userData = new UserData();
-                DataManager.Instance.userData.LastUpdated = DateTime.Now;
-                await FirebaseManager.ins.Firestore.AddData(FirestoreCollections.UserData,FUID, DataManager.Instance.userData);
-            }
-            else
-            {
-                Debug.Log("기존 유저");
-                DataManager.Instance.userData =
-                    await FirebaseManager.ins.Firestore.GetData<UserData>(FirestoreCollections.UserData, FUID);
-            }
+                Debug.Log("LoginManager LoadUserData");
+    #if UNITY_ANDROID && !UNITY_EDITOR
+        string FUID = FirebaseManager.ins.FireAuth.FUID;
+    #else
+                string FUID = "Test";
+    #endif
+                bool userDataExists = 
+                    await FirebaseManager.ins.Firestore.CheckDocumentExists(FirestoreCollections.UserData, FUID);
+                Debug.Log("LoginManager LoadUserData 1");
+                if (DataManager.Instance.userData == null)
+                {
+                    DataManager.Instance.userData = new UserData();
+                }
+                
+                Debug.Log("LoginManager LoadUserData 2");
 
-            DataManager.Instance.userData.LocalTopicDataIDs =
+                if (!userDataExists)
+                {
+                    Debug.Log("LoginManager LoadUserData 3");
+                    Debug.Log("최초 접속 유저");
+                    DataManager.Instance.userData.LastUpdated = DateTime.Now;
+                    await FirebaseManager.ins.Firestore.AddData(FirestoreCollections.UserData,FUID, DataManager.Instance.userData);
+                }
+                else
+                {
+                    Debug.Log("LoginManager LoadUserData 3");
+                    Debug.Log("기존 유저");
+                    DataManager.Instance.userData = 
+                        await FirebaseManager.ins.Firestore.GetData<UserData>(FirestoreCollections.UserData, FUID);
+                }
+
+                Debug.Log("LoginManager LoadUserData 4");
+                
+                DataManager.Instance.userData.LocalTopicDataIDs =
                 DataManager.GetTargetFolderFileNames(DataPath.GalleryDataPath);
+            }
+            catch (Exception ex)
+            {
+                Debug.LogError($"Failed to get topic data ids. Exception: {ex}");
+            }
         }
+
     }
 }

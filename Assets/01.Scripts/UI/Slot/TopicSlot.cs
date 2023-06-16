@@ -11,12 +11,14 @@ namespace LTH.PixelRemind.UI.Slots
         public TMP_Text completeCountText;
         public GameObject completeMark;
         public TopicData data;
+
+        public delegate void TopicSlotClickHandler(TopicData clickedTopicData);
+        public event TopicSlotClickHandler OnClick;
+        
         public override void OnSlotClick()
         {
-            foreach (var pixelArtData in data.PixelArtDatas)
-            {
-                GalleryManager.ins.PixelArtDatas.Add(pixelArtData);
-            }
+            // GalleryManager.ins.LoadPixelDataForTopic(data);
+            OnClick?.Invoke(data);
         }
 
         public override void SetSlot()
