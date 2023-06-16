@@ -5368,11 +5368,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playBtn: {fileID: 512245641}
-  topicSlotContainer: {fileID: 0}
-  pixelArtSlotContainer: {fileID: 0}
+  topicSlotContainer: {fileID: 1385469032}
+  pixelArtSlotContainer: {fileID: 645085931}
   topicSlotPrefab: {fileID: 2594523969052836803, guid: 62c2cdf390e2557448bb03ebf0948291, type: 3}
-  pixelArtSlotPrefab: {fileID: 0}
-  galleryScreen: {fileID: 0}
+  pixelArtSlotPrefab: {fileID: 9001983187739698152, guid: 728a633eed3a0f044bca389712b16407, type: 3}
+  galleryScreen: {fileID: 928943891}
 --- !u!1 &1093346755
 GameObject:
   m_ObjectHideFlags: 0
