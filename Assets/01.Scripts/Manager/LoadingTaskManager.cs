@@ -8,21 +8,7 @@ namespace LTH.PixelRemind.Managers
 {
     public class LoadingTaskManager : MonoBehaviour
     {
-        private static LoadingTaskManager _instance;
-        public static LoadingTaskManager Instance
-        {
-            get
-            {
-                if (_instance == null)
-                {
-                    GameObject obj = new GameObject();
-                    obj.name = nameof(LoadingTaskManager);
-                    _instance = obj.AddComponent<LoadingTaskManager>();
-                }
-
-                return _instance;
-            }
-        }
+        public static LoadingTaskManager Instance;
         
         public float TaskProgress { get; private set; }
         public bool AllTaskComplete { get; private set; }
@@ -30,12 +16,21 @@ namespace LTH.PixelRemind.Managers
         public string CurrentTask { get; private set; }
 
         private readonly List<TaskData> _tasks = new List<TaskData>();
+
+        private void Awake()
+        {
+            if (Instance == null)
+            {
+                Instance = this;
+            }
+            
+            DontDestroyOnLoad(this);
+        }
         
         public void AddTask(Func<Task> task, string name)
         {
             _tasks.Add(new TaskData(task,name));
         }
-
         public async Task RunTasks()
         {
             CurrentTask = "";            
@@ -49,7 +44,6 @@ namespace LTH.PixelRemind.Managers
             }
             AllTaskComplete = true;
         }
-
         public void ResetTasks()
         {
             _tasks.Clear();
