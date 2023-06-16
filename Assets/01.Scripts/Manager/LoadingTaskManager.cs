@@ -26,6 +26,7 @@ namespace LTH.PixelRemind.Managers
         
         public float TaskProgress { get; private set; }
         public bool AllTaskComplete { get; private set; }
+        public string NextSceneName { get; set; }
         public string CurrentTask { get; private set; }
 
         private readonly List<TaskData> _tasks = new List<TaskData>();
