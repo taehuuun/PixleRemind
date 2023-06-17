@@ -10,6 +10,7 @@ public class UpdateManager : MonoBehaviour
     public UpdatePopup updatePopup;
 
     public event Action OnDownloadCompleted;
+    public event Action<Exception> OnDownloadFailed; 
     public event Action<bool> OnUpdateCheckCompleted;
     
     private List<TopicData> _topicDataList;
@@ -88,27 +89,36 @@ public class UpdateManager : MonoBehaviour
         Debug.Log("UpdateManager DownloadTopicData");
         TopicData serverData = _topicDataList.Find(data => data.ID == topicID);
 
-        if (serverData != null)
+        try
         {
-            string jsonData = JsonConvert.SerializeObject(serverData);
-            DataManager.SaveJsonData(DataPath.GalleryDataPath, topicID, jsonData);
+            if (serverData != null)
+            {
+                string jsonData = JsonConvert.SerializeObject(serverData);
+                DataManager.SaveJsonData(DataPath.GalleryDataPath, topicID, jsonData);
 
-            DataManager.Instance.userData.LocalTopicDataIDs.Add(topicID);
-            DataManager.Instance.userData.LastUpdated = DateTime.Now;
+                DataManager.Instance.userData.LocalTopicDataIDs.Add(topicID);
+                DataManager.Instance.userData.LastUpdated = DateTime.Now;
 
 #if UNITY_ANDROID && !UNITY_EDITOR
                  string FUID = FirebaseManager.ins.FireAuth.FUID;
 #else
-            string FUID = "Test";
+                string FUID = "Test";
 #endif
-            await FirebaseManager.ins.Firestore.UpdateData<UserData>(FirestoreCollections.UserData, FUID,
-                DataManager.Instance.userData);
+                await FirebaseManager.ins.Firestore.UpdateData<UserData>(FirestoreCollections.UserData, FUID,
+                    DataManager.Instance.userData);
             
-            OnDownloadCompleted?.Invoke();
+                OnDownloadCompleted?.Invoke();
+            }
+            else
+            {
+                Debug.LogError("Topic ID를 서버에서 찾지 못 했습니다.");
+                OnDownloadFailed?.Invoke(new Exception("Topic ID를 서버에서 찾지 못 했습니다."));
+            }
         }
-        else
+        catch (Exception e)
         {
-            Debug.LogError("Topic ID를 서버에서 찾지 못 했습니다.");
+            Debug.LogError($"다운로드 중 오류가 발생 했습니다 : {e.Message}");
+            OnDownloadFailed?.Invoke(e);
         }
     }
 }
