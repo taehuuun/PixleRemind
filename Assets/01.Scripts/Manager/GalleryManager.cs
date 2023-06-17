@@ -42,6 +42,7 @@ public class GalleryManager : MonoBehaviour
     public void LoadPixelDataForTopic(TopicData topicData)
     {
         PixelArtDatas = topicData.PixelArtDatas;
+        SelTopicIdx = TopicDatas.FindIndex(t => t.ID == topicData.ID);
     }
 
     public void UpdateAndSavePixelArtData(PixelArtData updateData)
