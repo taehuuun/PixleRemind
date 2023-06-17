@@ -27,7 +27,7 @@ public class PixelArtDataEditWindow : EditorWindow
         {
             if (_tmpPixelArt != null && !string.IsNullOrEmpty(_tmpTitleID))
             {
-                var newPixelArtData = PixelArtUtil.ExportPixelData(_tmpTitleID, _tmpPixelArt, _tmpDifficulty);
+                var newPixelArtData = PixelArtHelper.ExportPixelData(_tmpTitleID, _tmpPixelArt, _tmpDifficulty);
                 _onConfirm?.Invoke(newPixelArtData);
                 Close();
             }

@@ -94,7 +94,7 @@ public class GalleryColorMatchPage : Page, IObserver
             var selectedPixel = _data.PixelColorData.CustomPixels[selectPixelIdx];
             int selectedCoord = Random.Range(0, selectedPixel.PixelCoords.Count);
 
-            Texture2D pixelArt = PixelArtUtil.SpriteToTexture2D(board.sprite);
+            Texture2D pixelArt = PixelArtHelper.SpriteToTexture2D(board.sprite);
 
             Color origin = new Color(selectedPixel.OriginalColor.R, selectedPixel.OriginalColor.G,
                 selectedPixel.OriginalColor.B, selectedPixel.OriginalColor.A);
@@ -112,9 +112,9 @@ public class GalleryColorMatchPage : Page, IObserver
             }
 
             _data.PixelColorData.RemainingPixels--;
-            _data.ThumbnailData = PixelArtUtil.ExtractThumbnailData(pixelArt);
+            _data.ThumbnailData = PixelArtHelper.ExtractThumbnailData(pixelArt);
 
-            board.sprite = PixelArtUtil.MakeThumbnail(_data.ThumbnailData, _data.Size);
+            board.sprite = PixelArtHelper.MakeThumbnail(_data.ThumbnailData, _data.Size);
         }
 
         if (_data.PixelColorData.RemainingPixels == 0)
@@ -159,7 +159,7 @@ public class GalleryColorMatchPage : Page, IObserver
         _data = GalleryManager.ins.PixelArtDatas[GalleryManager.ins.SelPixelArtIdx];
         system.pixelColorData = _data.PixelColorData;
         playBtnMove.gameObject.SetActive(!_data.IsCompleted);
-        board.sprite = PixelArtUtil.MakeThumbnail(_data.ThumbnailData, _data.Size);
+        board.sprite = PixelArtHelper.MakeThumbnail(_data.ThumbnailData, _data.Size);
         UpdateSubjectState();
     }
 

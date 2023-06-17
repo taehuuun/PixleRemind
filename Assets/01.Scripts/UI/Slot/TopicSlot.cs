@@ -22,6 +22,6 @@ public class TopicSlot : GallerySlot
         titleText.text = data.ID;
         completeMark.SetActive(data.Complete);
         completeCountText.text = $"{data.CompleteCount} / {data.TotalCount}";
-        thumbnailImb.sprite = PixelArtUtil.MakeThumbnail(data.ThumbData, data.ThumbSize);
+        thumbnailImb.sprite = PixelArtHelper.MakeThumbnail(data.ThumbData, data.ThumbSize);
     }
 }

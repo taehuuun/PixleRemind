@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public static class PixelArtUtil
+public static class PixelArtHelper
 {
     private static PixelColorData ExtractPixelData(Texture2D extractTarget)
     {
