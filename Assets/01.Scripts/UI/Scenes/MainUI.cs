@@ -25,6 +25,11 @@ public class MainUI : BodyUI
 
     private IEnumerator SetTopicSlot()
     {
+        foreach (Transform child in topicSlotContainer)
+        {
+            Destroy(child.gameObject);
+        }
+        
         List<string> localTopicIds = DataManager.Instance.userData.LocalTopicDataIDs;
 
         for (int i = 0; i < localTopicIds.Count; i++)

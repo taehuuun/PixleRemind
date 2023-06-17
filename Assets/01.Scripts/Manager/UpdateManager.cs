@@ -38,7 +38,6 @@ public class UpdateManager : MonoBehaviour
         Debug.Log("UpdateManager CheckForUpdated");
         List<string> localTopicDataIDs = DataManager.Instance.userData.LocalTopicDataIDs;
         List<string> missingDataIDs = new List<string>();
-        List<string> outdatedDataIDs = new List<string>();
 
         List<TopicData> missingDataList = new List<TopicData>();
         List<TopicData> outdatedDataList = new List<TopicData>();
@@ -58,6 +57,16 @@ public class UpdateManager : MonoBehaviour
         {
             missingDataIDs = _topicDataList.Select(data => data.ID).Except(localTopicDataIDs).ToList();
 
+            foreach (var id in missingDataIDs)
+            {
+                TopicData serverData = _topicDataList.Find(data => data.ID == id);
+
+                if (serverData != null)
+                {
+                    missingDataList.Add(serverData);
+                }
+            }
+            
             foreach (var id in localTopicDataIDs)
             {
                 TopicData localData = DataManager.LoadJsonData<TopicData>(DataPath.GalleryDataPath, id);
@@ -65,14 +74,13 @@ public class UpdateManager : MonoBehaviour
 
                 if (serverData.LastUpdated > localData.LastUpdated)
                 {
-                    outdatedDataIDs.Add(id);
                     outdatedDataList.Add(serverData);
                 }
             }
         }
 
-        Debug.Log($"Missing Data : {string.Join(", ", missingDataIDs)}");
-        Debug.Log($"Outdated Data : {string.Join(", ", outdatedDataIDs)}");
+        Debug.Log($"Missing Data Count: {missingDataList.Count}");
+        Debug.Log($"Outdated Data Count : {outdatedDataList.Count}");
 
         bool updatedPopupShow = missingDataList.Count > 0 || outdatedDataList.Count > 0;
         
