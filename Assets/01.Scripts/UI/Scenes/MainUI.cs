@@ -37,6 +37,7 @@ public class MainUI : BodyUI
             TopicSlot topicSlot = Instantiate(topicSlotPrefab, topicSlotContainer);
             topicSlot.data = DataManager.LoadJsonData<TopicData>(DataPath.GalleryDataPath, localTopicIds[i]);
             topicSlot.name = topicSlot.data.Title;
+            topicSlot.SetSlot();
             topicSlot.OnClick += HandleTopicSlotClick;
         }
 
