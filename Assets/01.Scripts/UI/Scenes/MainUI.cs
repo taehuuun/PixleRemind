@@ -9,12 +9,7 @@ public class MainUI : BodyUI
     public Button playBtn;
 
     public Transform topicSlotContainer;
-    public Transform pixelArtSlotContainer;
-
     public TopicSlot topicSlotPrefab;
-    public PixelArtSlot pixelArtSlotPrefab;
-
-    public GameObject galleryScreen;
 
     private void Start()
     {
@@ -46,18 +41,7 @@ public class MainUI : BodyUI
     private void HandleTopicSlotClick(TopicData clickedTopicData)
     {
         GalleryManager.ins.LoadPixelDataForTopic(clickedTopicData);
-        galleryScreen.SetActive(true);
-
-        foreach (Transform child in pixelArtSlotContainer)
-        {
-            Destroy(child.gameObject);
-        }
-
-        foreach (var pixelArtData in clickedTopicData.PixelArtDatas)
-        {
-            PixelArtSlot pixelArtSlot = Instantiate(pixelArtSlotPrefab, pixelArtSlotContainer);
-            pixelArtSlot.pixelData = pixelArtData;
-            pixelArtSlot.SetSlot();
-        }
+        LoadingTaskManager.Instance.NextSceneName = SceneNames.GalleryScene;
+        MoveScene(SceneNames.GalleryScene);
     }
 }
