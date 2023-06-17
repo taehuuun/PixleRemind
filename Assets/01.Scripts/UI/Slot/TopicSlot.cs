@@ -19,7 +19,7 @@ public class TopicSlot : GallerySlot
 
     public override void SetSlot()
     {
-        titleText.text = data.ID;
+        titleText.text = data.Title;
         completeMark.SetActive(data.Complete);
         completeCountText.text = $"{data.CompleteCount} / {data.TotalCount}";
         thumbnailImb.sprite = PixelArtHelper.MakeThumbnail(data.ThumbData, data.ThumbSize);
