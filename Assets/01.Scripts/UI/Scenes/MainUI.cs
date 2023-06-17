@@ -42,6 +42,6 @@ public class MainUI : BodyUI
     {
         GalleryManager.ins.LoadPixelDataForTopic(clickedTopicData);
         LoadingTaskManager.Instance.NextSceneName = SceneNames.GalleryScene;
-        MoveScene(SceneNames.GalleryScene);
+        MoveScene(SceneNames.LoadingScene);
     }
 }

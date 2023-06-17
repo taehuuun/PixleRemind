@@ -10,7 +10,6 @@ public class GalleryManager : MonoBehaviour
     public int SelPixelArtIdx { get; set; }
     public int SelTopicIdx { get; set; }
     public List<PixelArtData> PixelArtDatas { get; private set; }
-    public List<TopicData> TopicDatas { get; set; }
 
     public bool IsMatching { get; set; }
 
@@ -22,35 +21,32 @@ public class GalleryManager : MonoBehaviour
             DontDestroyOnLoad(this);
         }
 
-        TopicDatas = new List<TopicData>();
         PixelArtDatas = new List<PixelArtData>();
     }
 
-    public void LoadTopicDataFromFiles()
-    {
-        List<string> topicNames = DataManager.GetTargetFolderFileNames(DataPath.GalleryDataPath);
-
-        foreach (var topicName in topicNames)
-        {
-            TopicDatas.Add(GetTopicData(topicName));
-        }
-    }
+    // public void LoadTopicDataFromFiles()
+    // {
+    //     List<string> topicNames = DataManager.GetTargetFolderFileNames(DataPath.GalleryDataPath);
+    //
+    //     foreach (var topicName in topicNames)
+    //     {
+    //         TopicDatas.Add(GetTopicData(topicName));
+    //     }
+    // }
 
     public void LoadPixelDataForTopic(TopicData topicData)
     {
         PixelArtDatas = topicData.PixelArtDatas;
-        SelTopicIdx = TopicDatas.FindIndex(t => t.ID == topicData.ID);
-        Debug.Log($"SelTopicIdx : {SelTopicIdx}");
     }
 
-    public void UpdateAndSavePixelArtData(PixelArtData updateData)
-    {
-        TopicData saveTopic = TopicDatas[SelTopicIdx];
-        saveTopic.PixelArtDatas[SelPixelArtIdx] = updateData;
-        saveTopic.Complete = saveTopic.CompleteCount == saveTopic.TotalCount;
-        saveTopic.ThumbData = updateData.ThumbnailData;
-        SavePixelArtData(saveTopic);
-    }
+    // public void UpdateAndSavePixelArtData(PixelArtData updateData)
+    // {
+    //     TopicData saveTopic = TopicDatas[SelTopicIdx];
+    //     saveTopic.PixelArtDatas[SelPixelArtIdx] = updateData;
+    //     saveTopic.Complete = saveTopic.CompleteCount == saveTopic.TotalCount;
+    //     saveTopic.ThumbData = updateData.ThumbnailData;
+    //     SavePixelArtData(saveTopic);
+    // }
 
     private void SavePixelArtData(TopicData data)
     {
