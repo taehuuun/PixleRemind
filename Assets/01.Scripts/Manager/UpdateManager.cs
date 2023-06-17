@@ -74,12 +74,14 @@ public class UpdateManager : MonoBehaviour
         Debug.Log($"Missing Data : {string.Join(", ", missingDataIDs)}");
         Debug.Log($"Outdated Data : {string.Join(", ", outdatedDataIDs)}");
 
-        if (outdatedDataList.Count > 0)
+        bool updatedPopupShow = missingDataList.Count > 0 || outdatedDataList.Count > 0;
+        
+        if (updatedPopupShow)
         {
             updatePopup.Show(outdatedDataList, missingDataList);
         }
         
-        OnUpdateCheckCompleted?.Invoke(missingDataList.Count >0 || outdatedDataList.Count > 0);
+        OnUpdateCheckCompleted?.Invoke(updatedPopupShow);
         
         return Task.CompletedTask;
     }
