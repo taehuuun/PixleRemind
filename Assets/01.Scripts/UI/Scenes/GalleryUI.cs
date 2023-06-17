@@ -1,56 +1,19 @@
-using System.Collections.Generic;
 using UnityEngine;
 
 public class GalleryUI : BodyUI
 {
-    public GameObject[] pages;
-    public Stack<GalleryPage> pageHistory;
+    public Transform pixelArtSlotContainer;
+    public PixelArtSlot pixelArtSlotPrefab;
 
     private void Start()
     {
-        pageHistory = new Stack<GalleryPage>();
-        SelectPage(GalleryPage.Topic);
-    }
+        var selectedTopic = GalleryManager.ins.TopicDatas[GalleryManager.ins.SelTopicIdx];
 
-    protected override void Update()
-    {
-        // base.Update();
-        if (Input.GetKeyDown(KeyCode.Escape) && !GalleryManager.ins.IsMatching && pageHistory.Count > 0)
+        foreach (var pixelArtData in selectedTopic.PixelArtDatas)
         {
-            Close();
+            PixelArtSlot pixelArtSlot = Instantiate(pixelArtSlotPrefab, pixelArtSlotContainer);
+            pixelArtSlot.pixelData = pixelArtData;
+            pixelArtSlot.SetSlot();
         }
-    }
-
-    public void SelectPage(GalleryPage page)
-    {
-        if (pageHistory.Count > 0 && pageHistory.Peek() == page)
-        {
-            return;
-        }
-
-        if (pageHistory.Count > 0)
-        {
-            pages[(int)pageHistory.Peek()].SetActive(false);
-        }
-
-        pages[(int)page].SetActive(true);
-        pageHistory.Push(page);
-
-        Debug.Log(pageHistory.Count);
-    }
-
-    public void Close()
-    {
-        if (pageHistory.Count > 1)
-        {
-            pages[(int)pageHistory.Pop()].SetActive(false);
-            pages[(int)pageHistory.Peek()].SetActive(true);
-        }
-        else
-        {
-            MoveScene("MainScene");
-        }
-
-        Debug.Log(pageHistory.Count);
     }
 }
