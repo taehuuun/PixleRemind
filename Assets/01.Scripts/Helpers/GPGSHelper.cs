@@ -3,7 +3,7 @@ using GooglePlayGames;
 using GooglePlayGames.BasicApi;
 using UnityEngine;
 
-public static class GPGSUtil
+public static class GPGSHelper
 {
     // 로그인(인증)후 IdToken을 저장, 해당 함수 내에서만 값 변경 가능
     public static string IdToken { get; private set; }

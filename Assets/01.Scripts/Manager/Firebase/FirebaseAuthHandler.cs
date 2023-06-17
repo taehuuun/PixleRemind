@@ -26,7 +26,7 @@ public class FirebaseAuthHandler
     public async Task<bool> TryFirebaseLogin()
     {
         // GoogleAuthProvider를 사용하여 IdToken을 기반으로 로그인 자격 증명을 생성합니다.
-        Credential credential = GoogleAuthProvider.GetCredential(GPGSUtil.IdToken, null);
+        Credential credential = GoogleAuthProvider.GetCredential(GPGSHelper.IdToken, null);
 
         try
         {
@@ -38,7 +38,7 @@ public class FirebaseAuthHandler
             FUID = newUser.UserId;
 
             Debug.Log("Firebase Auth 로그인 성공");
-            Debug.Log($"IdToken : {GPGSUtil.IdToken}");
+            Debug.Log($"IdToken : {GPGSHelper.IdToken}");
             Debug.Log($"FUID : {FUID}");
             return true;
         }
