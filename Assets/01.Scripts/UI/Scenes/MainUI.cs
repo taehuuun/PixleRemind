@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class MainUI : BodyUI
 {
+    public UpdateManager updateManager;
     public Button playBtn;
 
     public Transform topicSlotContainer;
@@ -18,6 +19,8 @@ public class MainUI : BodyUI
     private void Start()
     {
         StartCoroutine(SetTopicSlot());
+        
+        updateManager.OnDownloadCompleted+= ()=>StartCoroutine(SetTopicSlot());
     }
 
     private IEnumerator SetTopicSlot()

@@ -5517,6 +5517,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71375bf52cb9f4a4e99f968c62d43637, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  updateManager: {fileID: 1612123445}
   playBtn: {fileID: 512245641}
   topicSlotContainer: {fileID: 1385469032}
   pixelArtSlotContainer: {fileID: 645085931}

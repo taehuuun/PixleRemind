@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -16,9 +17,11 @@ public class UpdatePopup : CloseAbleUI
 
     private void Start()
     {
-        Debug.Log("UpdatePopup Start");
         updateButton.onClick.AddListener(OnUpdateButtonClicked);
         closeButton.onClick.AddListener(OnCloseButtonClicked);
+
+        updateManager.OnDownloadCompleted += HandleDownloadCompleted;
+        updateManager.OnDownloadFailed += HandleDownloadFailed;
     }
 
     public void Show(List<TopicData> updateDataList, List<TopicData> missingDataList)
@@ -52,7 +55,6 @@ public class UpdatePopup : CloseAbleUI
 
     private async void OnUpdateButtonClicked()
     {
-        Debug.Log("UpdatePopup OnUpdateButtonClicked");
         var selectedSlots = _topicSlots.Where(slot => slot.IsSelected).ToList();
 
         if (DataManager.Instance.userData.LocalTopicDataIDs.Count == 0 && selectedSlots.Count == 0)
@@ -64,14 +66,12 @@ public class UpdatePopup : CloseAbleUI
         foreach (var slot in selectedSlots)
         {
             Debug.Log($"선택된 Topic : {slot.titleText.text}");
-            Debug.Log($"선택된 Topic ID : {slot.titleText.text}");
+            Debug.Log($"선택된 Topic ID : {slot.GetTopicData().ID}");
             await updateManager.DownloadTopicData(slot.GetTopicData().ID);
         }
     }
-
     private void OnCloseButtonClicked()
     {
-        Debug.Log("UpdatePopup OnCloseButtonClicked");
         var selectedSlots = _topicSlots.Where(slot => slot.IsSelected).ToList();
 
         if (DataManager.Instance.userData.LocalTopicDataIDs.Count == 0 && selectedSlots.Count == 0)
@@ -81,5 +81,14 @@ public class UpdatePopup : CloseAbleUI
         }
 
         gameObject.SetActive(false);
+    }
+    private void HandleDownloadCompleted()
+    {
+        Debug.Log("다운로드를 성공적으로 완료 함");
+        gameObject.SetActive(false);
+    }
+    private void HandleDownloadFailed(Exception e)
+    {
+        Debug.LogError($"다운로드 실패 : {e.Message}");
     }
 }
