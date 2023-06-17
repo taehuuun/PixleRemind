@@ -9,6 +9,7 @@ public class UpdateManager : MonoBehaviour
 {
     public UpdatePopup updatePopup;
 
+    public event Action OnDownloadCompleted;
     public event Action<bool> OnUpdateCheckCompleted;
     
     private List<TopicData> _topicDataList;
@@ -102,6 +103,8 @@ public class UpdateManager : MonoBehaviour
 #endif
             await FirebaseManager.ins.Firestore.UpdateData<UserData>(FirestoreCollections.UserData, FUID,
                 DataManager.Instance.userData);
+            
+            OnDownloadCompleted?.Invoke();
         }
         else
         {
