@@ -16,14 +16,11 @@ public class GalleryManager : MonoBehaviour
 
     private void Awake()
     {
-        if (ins != null && ins != this)
+        if (ins == null)
         {
-            Destroy(this.gameObject);
-            return;
+            ins = this;
+            DontDestroyOnLoad(this);
         }
-
-        ins = this;
-        DontDestroyOnLoad(this.gameObject);
 
         TopicDatas = new List<TopicData>();
         PixelArtDatas = new List<PixelArtData>();
@@ -43,6 +40,7 @@ public class GalleryManager : MonoBehaviour
     {
         PixelArtDatas = topicData.PixelArtDatas;
         SelTopicIdx = TopicDatas.FindIndex(t => t.ID == topicData.ID);
+        Debug.Log($"SelTopicIdx : {SelTopicIdx}");
     }
 
     public void UpdateAndSavePixelArtData(PixelArtData updateData)
