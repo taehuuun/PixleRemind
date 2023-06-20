@@ -8,7 +8,7 @@ public class GalleryUI : BodyUI
     private void Start()
     {
         // var selectedTopic = GalleryManager.ins.TopicDatas[GalleryManager.ins.SelTopicIdx];
-        var pixelArtDatas = GalleryManager.ins.PixelArtDatas;
+        var pixelArtDatas = GalleryManager.ins.SelTopicData.PixelArtDatas;
         
         foreach (var pixelArtData in pixelArtDatas)
         {
