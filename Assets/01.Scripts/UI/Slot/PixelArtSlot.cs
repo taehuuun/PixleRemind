@@ -12,6 +12,11 @@ public class PixelArtSlot : GallerySlot
 
     public event PixelArtSlotClickHandler OnClick;
 
+    public override void OnSlotClick()
+    {
+        OnClick?.Invoke(pixelData);
+    }
+
     public override void SetSlot()
     {
         difficultyText.text = pixelData.Difficulty.ToString();
