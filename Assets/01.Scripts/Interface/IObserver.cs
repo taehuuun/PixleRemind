@@ -1,7 +1,4 @@
-namespace LTH.ColorMatch.Interfaces
+public interface IObserver
 {
-    public interface IObserver
-    {
-        public void UpdateSubjectState();
-    }
+    public void UpdateSubjectState();
 }

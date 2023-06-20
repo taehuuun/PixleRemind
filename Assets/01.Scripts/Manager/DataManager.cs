@@ -1,17 +1,29 @@
+using System;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 using Newtonsoft.Json;
 
-namespace LTH.ColorMatch.Managers
+public class DataManager : MonoBehaviour
 {
-    public class DataManager : MonoBehaviour
+    public static DataManager Instance;
+
+    public UserData userData;
+
+    private void Awake()
     {
-        public static readonly string BasePath = Application.persistentDataPath;
-        public static readonly string GalleryDataPath = Path.Combine(DataManager.BasePath, "Gallery","Topics");
-        
-        public static List<string> GetTargetFolderFileNames(string path)
+        if (Instance == null)
         {
+            Instance = this;
+            DontDestroyOnLoad(this);
+        }
+    }
+
+    public static List<string> GetTargetFolderFileNames(string path)
+    {
+        try
+        {
+            Debug.Log("DataManager GetTargetFolderFileNames");
             List<string> targetDirectoryFileNames = new List<string>();
             DirectoryInfo directoryInfo = new DirectoryInfo(path);
 
@@ -23,65 +35,75 @@ namespace LTH.ColorMatch.Managers
 
             return targetDirectoryFileNames;
         }
-        public static void SaveJsonData(string savePath, string fileName, string jsonData)
+        catch (Exception ex)
         {
-            SaveJsonDataToFile(savePath, fileName, jsonData);
+            Debug.LogError($"Failed to get filenames from directory {path}. Exception: {ex}");
+            return new List<string>(); // Return an empty list to prevent null reference exceptions
         }
-        public static T LoadJsonData<T>(string loadPath, string fileName)
+    }
+
+    public static void SaveJsonData(string savePath, string fileName, string jsonData)
+    {
+        SaveJsonDataToFile(savePath, fileName, jsonData);
+    }
+
+    public static T LoadJsonData<T>(string loadPath, string fileName)
+    {
+        // ReSharper disable once Unity.PerformanceCriticalCodeInvocation
+        return LoadJsonDataFromFile<T>(loadPath, fileName);
+    }
+
+    public static bool LocalDirectoryExists(string path)
+    {
+        DirectoryInfo directoryInfo = new DirectoryInfo(path);
+        return directoryInfo.Exists;
+    }
+
+    private static void SaveJsonDataToFile(string savePath, string fileName, string jsonData)
+    {
+        var path = Path.Combine(savePath, $"{fileName}.json");
+
+        if (!Directory.Exists(savePath))
         {
-            // ReSharper disable once Unity.PerformanceCriticalCodeInvocation
-            return LoadJsonDataFromFile<T>(loadPath, fileName);
-        }
-        public static bool LocalDirectoryExists(string path)
-        {
-            DirectoryInfo directoryInfo = new DirectoryInfo(path);
-            return directoryInfo.Exists;
+            Directory.CreateDirectory(savePath);
         }
 
-        private static void SaveJsonDataToFile(string savePath, string fileName, string jsonData)
-        {
-            var path = Path.Combine(savePath, $"{fileName}.json");
+        File.WriteAllText(path, jsonData);
+        // var bytes = System.Text.Encoding.UTF8.GetBytes(jsonData);
+        // var code = System.Convert.ToBase64String(bytes);
+        // File.WriteAllText(path, code);
+    }
 
-            if (!Directory.Exists(savePath))
+    private static T LoadJsonDataFromFile<T>(string loadPath, string fileName)
+    {
+        var path = Path.Combine(loadPath, $"{fileName}.json");
+
+        T loadData = default;
+
+        if (FileExists(loadPath, fileName))
+        {
+            using (var reader = new StreamReader(path))
             {
-                Directory.CreateDirectory(savePath);
+                // var code = reader.ReadToEnd();
+                // var bytes = System.Convert.FromBase64String(code);
+                // var loadJson = System.Text.Encoding.UTF8.GetString(bytes);
+                // loadData = JsonConvert.DeserializeObject<T>(loadJson);
+
+                var loadJson = reader.ReadToEnd();
+                loadData = JsonConvert.DeserializeObject<T>(loadJson);
             }
-            
-            File.WriteAllText(path,jsonData);
-            // var bytes = System.Text.Encoding.UTF8.GetBytes(jsonData);
-            // var code = System.Convert.ToBase64String(bytes);
-            // File.WriteAllText(path, code);
         }
-        private static T LoadJsonDataFromFile<T>(string loadPath, string fileName)
+        else
         {
-            var path = Path.Combine(loadPath, $"{fileName}.json");
-
-            T loadData = default;
-
-            if (FileExists(loadPath,fileName))
-            {
-                using (var reader = new StreamReader(path))
-                {
-                    // var code = reader.ReadToEnd();
-                    // var bytes = System.Convert.FromBase64String(code);
-                    // var loadJson = System.Text.Encoding.UTF8.GetString(bytes);
-                    // loadData = JsonConvert.DeserializeObject<T>(loadJson);
-
-                    var loadJson = reader.ReadToEnd();
-                    loadData = JsonConvert.DeserializeObject<T>(loadJson);
-                }
-            }
-            else
-            {
-                Debug.LogError($"해당 json 파일이 존재하지 않음: {path}");
-            }
-
-            return loadData;
+            Debug.LogError($"해당 json 파일이 존재하지 않음: {path}");
         }
-        private static bool FileExists(string checkPath,string fileName)
-        {
-            var path = Path.Combine(checkPath, $"{fileName}.json");
-            return File.Exists(path);
-        }
+
+        return loadData;
+    }
+
+    private static bool FileExists(string checkPath, string fileName)
+    {
+        var path = Path.Combine(checkPath, $"{fileName}.json");
+        return File.Exists(path);
     }
 }

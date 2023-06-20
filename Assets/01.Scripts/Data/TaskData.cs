@@ -1,0 +1,15 @@
+using System;
+using System.Threading.Tasks;
+using UnityEngine;
+
+public class TaskData
+{
+    public Func<Task> Task { get; private set; }
+    public string Name { get; private set; }
+
+    public TaskData(Func<Task> task, string name)
+    {
+        Task = task;
+        Name = name;
+    }
+}
