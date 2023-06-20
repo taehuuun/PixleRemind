@@ -8,6 +8,10 @@ public class PixelArtSlot : GallerySlot
     public PixelArtData pixelData;
     public GameObject completeMark;
 
+    public delegate void PixelArtSlotClickHandler(PixelArtData clickPixelArtData);
+
+    public event PixelArtSlotClickHandler OnClick;
+
     public override void SetSlot()
     {
         difficultyText.text = pixelData.Difficulty.ToString();
