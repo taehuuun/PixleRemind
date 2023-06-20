@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using Newtonsoft.Json;
 using UnityEngine;
 
@@ -9,7 +8,6 @@ public class GalleryManager : MonoBehaviour
     public GalleryPage CurPage { get; set; }
     public TopicData SelTopicData { get; set; }
     public PixelArtData SelPixelArtData { get; set; }
-    public List<PixelArtData> PixelArtDatas { get; private set; }
 
     public bool IsMatching { get; set; }
     
@@ -20,29 +18,12 @@ public class GalleryManager : MonoBehaviour
             ins = this;
             DontDestroyOnLoad(this);
         }
-
-        PixelArtDatas = new List<PixelArtData>();
-    }
-
-    // public void LoadTopicDataFromFiles()
-    // {
-    //     List<string> topicNames = DataManager.GetTargetFolderFileNames(DataPath.GalleryDataPath);
-    //
-    //     foreach (var topicName in topicNames)
-    //     {
-    //         TopicDatas.Add(GetTopicData(topicName));
-    //     }
-    // }
-
-    public void LoadPixelDataForTopic(TopicData topicData)
-    {
-        PixelArtDatas = topicData.PixelArtDatas;
     }
 
     public void UpdateAndSavePixelArtData(PixelArtData updateData)
     {
         TopicData saveTopic = SelTopicData;
-        int idx = PixelArtDatas.IndexOf(SelPixelArtData);
+        int idx = SelTopicData.PixelArtDatas.IndexOf(SelPixelArtData);
         saveTopic.PixelArtDatas[idx] = updateData;
         saveTopic.Complete = (saveTopic.CompleteCount == saveTopic.TotalCount);
         saveTopic.ThumbData = updateData.ThumbnailData;
