@@ -477,13 +477,13 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 372512655}
-        m_TargetAssemblyTypeName: LTH.ColorMatch.UI.GalleryColorMatchPage, Assembly-CSharp
+      - m_Target: {fileID: 1599446213}
+        m_TargetAssemblyTypeName: PlayUI, Assembly-CSharp
         m_MethodName: SelectSlot
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 145171598}
-          m_ObjectArgumentAssemblyTypeName: LTH.ColorMatch.ColorSlot, Assembly-CSharp
+          m_ObjectArgumentAssemblyTypeName: ColorSlot, Assembly-CSharp
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -739,13 +739,13 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 372512655}
-        m_TargetAssemblyTypeName: LTH.ColorMatch.UI.GalleryColorMatchPage, Assembly-CSharp
+      - m_Target: {fileID: 1599446213}
+        m_TargetAssemblyTypeName: PlayUI, Assembly-CSharp
         m_MethodName: SelectSlot
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 226873941}
-          m_ObjectArgumentAssemblyTypeName: LTH.ColorMatch.ColorSlot, Assembly-CSharp
+          m_ObjectArgumentAssemblyTypeName: ColorSlot, Assembly-CSharp
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -895,9 +895,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 372512654}
-  - component: {fileID: 372512655}
   m_Layer: 5
-  m_Name: ColorMatchPage
+  m_Name: Main
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -928,18 +927,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -75}
   m_SizeDelta: {x: 0, y: -150}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &372512655
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 372512653}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e28f61fd19224a648bb4ef74f23c5bc4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &613936145
 GameObject:
   m_ObjectHideFlags: 0
@@ -2071,7 +2058,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2095172131}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: LTH.ColorMatch.Managers.ColorMatchSystem, Assembly-CSharp
         m_MethodName: ReStart
         m_Mode: 1
@@ -2146,6 +2133,7 @@ GameObject:
   - component: {fileID: 1599446210}
   - component: {fileID: 1599446209}
   - component: {fileID: 1599446213}
+  - component: {fileID: 1599446214}
   m_Layer: 5
   m_Name: UI
   m_TagString: Untagged
@@ -2254,6 +2242,26 @@ MonoBehaviour:
   boardMove: {fileID: 1895216948}
   playBtnMove: {fileID: 1463665510}
   matchUIMove: {fileID: 48771863}
+--- !u!114 &1599446214
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1599446208}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5904ac3e0600654448952837574e9ddf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetColorSlot: {fileID: 1447006372}
+  selectColorSlots:
+  - {fileID: 226873941}
+  - {fileID: 1926315282}
+  - {fileID: 145171598}
+  decRangeValue: 0.05
+  maxLife: 1
+  maxSimilarRange: 80
 --- !u!1 &1648489786
 GameObject:
   m_ObjectHideFlags: 0
@@ -2474,7 +2482,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 372512655}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: LTH.ColorMatch.UI.GalleryColorMatchPage, Assembly-CSharp
         m_MethodName: FillRandomPixel
         m_Mode: 1
@@ -2715,13 +2723,13 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 372512655}
-        m_TargetAssemblyTypeName: LTH.ColorMatch.UI.GalleryColorMatchPage, Assembly-CSharp
+      - m_Target: {fileID: 1599446213}
+        m_TargetAssemblyTypeName: PlayUI, Assembly-CSharp
         m_MethodName: SelectSlot
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 1926315282}
-          m_ObjectArgumentAssemblyTypeName: LTH.ColorMatch.ColorSlot, Assembly-CSharp
+          m_ObjectArgumentAssemblyTypeName: ColorSlot, Assembly-CSharp
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -2937,55 +2945,3 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2094771598}
   m_CullTransparentMesh: 1
---- !u!1 &2095172129
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2095172130}
-  - component: {fileID: 2095172131}
-  m_Layer: 0
-  m_Name: ColorMatchSystem
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2095172130
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2095172129}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2095172131
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2095172129}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5904ac3e0600654448952837574e9ddf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  targetColorSlot: {fileID: 1447006372}
-  selectColorSlots:
-  - {fileID: 226873941}
-  - {fileID: 1926315282}
-  - {fileID: 145171598}
-  decRangeValue: 0.05
-  maxLife: 1
-  maxSimilarRange: 80
