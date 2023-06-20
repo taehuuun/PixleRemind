@@ -7,7 +7,7 @@ public class GalleryManager : MonoBehaviour
     public static GalleryManager ins;
 
     public GalleryPage CurPage { get; set; }
-    public int SelPixelArtIdx { get; set; }
+    public PixelArtData SelPixelArtData { get; set; }
     public List<PixelArtData> PixelArtDatas { get; private set; }
 
     private void Awake()
