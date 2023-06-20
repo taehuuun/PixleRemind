@@ -8,10 +8,7 @@ public class GalleryManager : MonoBehaviour
 
     public GalleryPage CurPage { get; set; }
     public int SelPixelArtIdx { get; set; }
-    public int SelTopicIdx { get; set; }
     public List<PixelArtData> PixelArtDatas { get; private set; }
-
-    public bool IsMatching { get; set; }
 
     private void Awake()
     {
