@@ -53,24 +53,24 @@ public class ColorFindGameUI : BodyUI, IObserver
         similarText.text = $"유사도 : {string.Format("{0:N2}", result)} (Max : 95%)";
     }
 
-    public void UpdateGameOverPop(bool gameOver)
-    {
-        if (gameOver)
-        {
-            OpenPopup(gameOverPopup);
-            gameOverPopScoreText.text = system.Score.ToString();
-        }
-        else
-        {
-            gameOverPopup.gameObject.SetActive(false);
-        }
-    }
+    // public void UpdateGameOverPop(bool gameOver)
+    // {
+    //     if (gameOver)
+    //     {
+    //         OpenPopup(gameOverPopup);
+    //         gameOverPopScoreText.text = system.Score.ToString();
+    //     }
+    //     else
+    //     {
+    //         gameOverPopup.gameObject.SetActive(false);
+    //     }
+    // }
 
     public void UpdateSubjectState()
     {
         UpdateScore(system.Score);
         UpdateLife(system.Life);
         UpdateSimilarity(system.SimilarRange);
-        UpdateGameOverPop(system.IsGameOver);
+        // UpdateGameOverPop(system.IsGameOver);
     }
 }
