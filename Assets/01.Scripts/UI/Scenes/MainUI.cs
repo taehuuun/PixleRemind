@@ -40,7 +40,7 @@ public class MainUI : BodyUI
 
     private void HandleTopicSlotClick(TopicData clickedTopicData)
     {
-        GalleryManager.ins.LoadPixelDataForTopic(clickedTopicData);
+        GalleryManager.ins.SelTopicData = clickedTopicData;
         LoadingTaskManager.Instance.NextSceneName = SceneNames.GalleryScene;
         MoveScene(SceneNames.LoadingScene);
     }
