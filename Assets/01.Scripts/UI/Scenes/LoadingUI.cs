@@ -1,7 +1,7 @@
-using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections;
 
 public class LoadingUI : BodyUI
 {
@@ -29,6 +29,7 @@ public class LoadingUI : BodyUI
 
         _loadingBar.fillAmount = 1f;
         _taskText.text = $"{LoadingTaskManager.Instance.NextSceneName} 씬으로 이동중..";
+        LoadingTaskManager.Instance.ResetTasks();
         MoveScene(LoadingTaskManager.Instance.NextSceneName);
     }
 }
