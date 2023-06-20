@@ -15,6 +15,14 @@ public class GalleryUI : BodyUI
             PixelArtSlot pixelArtSlot = Instantiate(pixelArtSlotPrefab, pixelArtSlotContainer);
             pixelArtSlot.pixelData = pixelArtData;
             pixelArtSlot.SetSlot();
+            pixelArtSlot.OnClick += HandlePixelSlotClick;
         }
+    }
+
+    private void HandlePixelSlotClick(PixelArtData clickPixelArtData)
+    {
+        GalleryManager.ins.SelPixelArtData = clickPixelArtData;
+        LoadingTaskManager.Instance.NextSceneName = SceneNames.PlayScene;
+        MoveScene(SceneNames.LoadingScene);
     }
 }
