@@ -2236,7 +2236,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 717cdaaa1d63a4148b3cbc387fa214ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  board: {fileID: 678953317}
+  board: {fileID: 1895216949}
   remainPixelText: {fileID: 1240038570}
   playTimeText: {fileID: 1648489788}
   boardMove: {fileID: 1895216948}
