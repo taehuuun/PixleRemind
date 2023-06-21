@@ -18,7 +18,12 @@ public class DataManager : MonoBehaviour
             DontDestroyOnLoad(this);
         }
     }
-
+    
+    /// <summary>
+    /// 타겟 폴더의 모든 파일 이름을 반환하는 메서드
+    /// </summary>
+    /// <param name="path">타겟 폴더 경로</param>
+    /// <returns>리스트 형태의 파일이름</returns>
     public static List<string> GetTargetFolderFileNames(string path)
     {
         try
@@ -41,12 +46,25 @@ public class DataManager : MonoBehaviour
             return new List<string>(); // Return an empty list to prevent null reference exceptions
         }
     }
-
+    
+    /// <summary>
+    /// 로컬에 Josn 데이터를 저장하는 호출용 메서드
+    /// </summary>
+    /// <param name="savePath">저장 경로</param>
+    /// <param name="fileName">저장 파일명</param>
+    /// <param name="jsonData">저장할 JsonData</param>
     public static void SaveJsonData(string savePath, string fileName, string jsonData)
     {
         SaveJsonDataToFile(savePath, fileName, jsonData);
     }
 
+    /// <summary>
+    /// 로컬에서 데이터를 로드하는 호출용 메서드 
+    /// </summary>
+    /// <param name="loadPath">로드 할 경로</param>
+    /// <param name="fileName">로드 할 파일 이름</param>
+    /// <typeparam name="T">로드 할 데이터 타입</typeparam>
+    /// <returns>로드한 데이터</returns>
     public static T LoadJsonData<T>(string loadPath, string fileName)
     {
         // ReSharper disable once Unity.PerformanceCriticalCodeInvocation
@@ -58,7 +76,7 @@ public class DataManager : MonoBehaviour
         DirectoryInfo directoryInfo = new DirectoryInfo(path);
         return directoryInfo.Exists;
     }
-
+    
     private static void SaveJsonDataToFile(string savePath, string fileName, string jsonData)
     {
         var path = Path.Combine(savePath, $"{fileName}.json");
