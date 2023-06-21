@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public class ColorMatchSystem : MonoBehaviour, ISubject
 {
@@ -208,13 +207,7 @@ public class ColorMatchSystem : MonoBehaviour, ISubject
         // targetColor 슬롯의 컬러를 수정함
         targetColorSlot.SetSlot(randColor);
     }
-    
-    private void SetRandomTargetColor()
-    {
-        var randColor = Random.ColorHSV();
-        targetColorSlot.SetSlot(randColor);
-    }
-    
+
     /// <summary>
     /// 입력받은 Color의 명도를 조절하는 메서드
     /// </summary>
