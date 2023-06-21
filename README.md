@@ -7,7 +7,17 @@
 - C#
 - Firebase
 
-## Screenshots
+## 개발 일지
+
+<details>
+<summary>2023.06.21 (Firestore 활용 토픽 업데이트 구현)</summary>
+
+- Firestore 활용 추가 토픽 업데이트 체크 기능 구현
+- 씬 플레이 플로우 수정
+- 전체적인 코드 설명 주석 추가중...
+</details>
+
+## 스크린샷
 
 <p align="center">
  <img src="https://github.com/taehuuun/PixleRemind/assets/43982651/ca9ba177-8d8b-461e-b258-72a2ffc9c40d" width="20%" height="80%"/>
