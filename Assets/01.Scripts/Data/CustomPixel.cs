@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using Firebase.Firestore;
 
+/// <summary>
+/// Firestore 업로드를 위한 커스텀 Color 클래스
+/// </summary>
 [FirestoreData, Serializable]
 public class ColorValue
 {
@@ -49,7 +52,10 @@ public class PixelCoord
 [FirestoreData, Serializable]
 public class CustomPixel
 {
+    // 픽셀 아트의 원본 색상 값
     [FirestoreProperty] public ColorValue OriginalColor { get; set; }
+    
+    // 픽셀 아트의 흑백 색상 값
     [FirestoreProperty] public ColorValue GrayColor { get; set; }
     [FirestoreProperty] public List<PixelCoord> PixelCoords { get; set; } = new List<PixelCoord>();
 
