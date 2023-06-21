@@ -1,21 +1,29 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class ColorMatchSystem : MonoBehaviour, ISubject
 {
+    // 현재 보여질 픽셀 아트의 데이터
     public PixelColorData pixelColorData;
+    
+    // 현제 픽셀 아트 데이터의 컬러 슬롯 UI
     public ColorSlot targetColorSlot;
+    
+    // 컬러 슬롯 UI
     public List<ColorSlot> selectColorSlots;
 
+    // UI 업데이트를 위한 옵저버 리스트
     public List<IObserver> observers = new List<IObserver>();
+    
     private int _score;
     private int _life;
-    private float _similarRange;
+    private float _disSimilarRange;
     private bool _isGameOver = false;
 
     public float decRangeValue = 0.05f;
     public int maxLife;
-    public float maxSimilarRange;
+    public float maxDisSimilarRange;
 
     public int Score
     {
@@ -37,12 +45,12 @@ public class ColorMatchSystem : MonoBehaviour, ISubject
         }
     }
 
-    public float SimilarRange
+    public float DisSimilarRange
     {
-        get => _similarRange;
+        get => _disSimilarRange;
         private set
         {
-            _similarRange = value;
+            _disSimilarRange = value;
             NotifyObservers();
         }
     }
@@ -97,13 +105,13 @@ public class ColorMatchSystem : MonoBehaviour, ISubject
         _isGameOver = false;
         Life = maxLife;
         Score = 0;
-        SimilarRange = maxSimilarRange;
+        DisSimilarRange = maxDisSimilarRange;
     }
 
     private void IncreaseScore()
     {
         Score++;
-        SimilarRange = Mathf.Clamp(SimilarRange - decRangeValue, 5, 100);
+        DisSimilarRange = Mathf.Clamp(DisSimilarRange - decRangeValue, 5, 100);
     }
 
     private void DecreaseLife()
@@ -175,11 +183,11 @@ public class ColorMatchSystem : MonoBehaviour, ISubject
             }
             else
             {
-                randColor = GetRandomSimilarColor(targetColorSlot.slotImage.color, SimilarRange);
+                randColor = GetRandomSimilarColor(targetColorSlot.slotImage.color, DisSimilarRange);
 
                 while (randColor == targetColorSlot.slotImage.color)
                 {
-                    randColor = GetRandomSimilarColor(targetColorSlot.slotImage.color, SimilarRange);
+                    randColor = GetRandomSimilarColor(targetColorSlot.slotImage.color, DisSimilarRange);
                 }
             }
 
