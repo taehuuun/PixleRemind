@@ -6,7 +6,10 @@ using UnityEngine.UI;
 
 public class UpdatePopup : CloseAbleUI
 {
+    // 토픽 데이터들을 추가할 Transform
     public Transform contentParent;
+    
+    // 스크롤뷰에 추가될 UpdateTopicSlot 프리팹
     public UpdateSlot updateTopicSlotPrefab;
     public Button updateButton;
     public Button closeButton;
@@ -24,11 +27,13 @@ public class UpdatePopup : CloseAbleUI
         updateManager.OnDownloadFailed += HandleDownloadFailed;
     }
 
+    /// <summary>
+    /// 업데이트 팝업을 표시하는 메서드
+    /// </summary>
+    /// <param name="updateDataList">새로 추가된 토픽 데이터 리스트</param>
+    /// <param name="missingDataList">아직 다운로드 하지 않은 데이터 리스트</param>
     public void Show(List<TopicData> updateDataList, List<TopicData> missingDataList)
     {
-        Debug.Log("UpdatePopup Show");
-        Debug.Log($"Update List Count : {updateDataList.Count}");
-        Debug.Log($"Missing List Count : {missingDataList.Count}");
         gameObject.SetActive(true);
 
         foreach (var topicSlot in _topicSlots)
@@ -53,6 +58,9 @@ public class UpdatePopup : CloseAbleUI
         }
     }
 
+    /// <summary>
+    /// 업데이트 버튼을 눌렀을때 호출되는 메서드
+    /// </summary>
     private async void OnUpdateButtonClicked()
     {
         var selectedSlots = _topicSlots.Where(slot => slot.IsSelected).ToList();
@@ -65,11 +73,13 @@ public class UpdatePopup : CloseAbleUI
 
         foreach (var slot in selectedSlots)
         {
-            Debug.Log($"선택된 Topic : {slot.titleText.text}");
-            Debug.Log($"선택된 Topic ID : {slot.GetTopicData().ID}");
             await updateManager.DownloadTopicData(slot.GetTopicData().ID);
         }
     }
+    
+    /// <summary>
+    /// 닫기 버튼을 눌렀을 떄 호출되는 메서드
+    /// </summary>
     private void OnCloseButtonClicked()
     {
         var selectedSlots = _topicSlots.Where(slot => slot.IsSelected).ToList();
@@ -82,11 +92,18 @@ public class UpdatePopup : CloseAbleUI
 
         gameObject.SetActive(false);
     }
+    /// <summary>
+    /// 다운로드가 완료되었을 때 호출되는 메서드
+    /// </summary>
     private void HandleDownloadCompleted()
     {
         Debug.Log("다운로드를 성공적으로 완료 함");
         gameObject.SetActive(false);
     }
+    /// <summary>
+    /// 다운로드가 실패 했을 때 호출되는 메서드
+    /// </summary>
+    /// <param name="e">예외 객체</param>
     private void HandleDownloadFailed(Exception e)
     {
         Debug.LogError($"다운로드 실패 : {e.Message}");
