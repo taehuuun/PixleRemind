@@ -13,12 +13,16 @@ public class MainUI : BodyUI
 
     private void Start()
     {
-        StartCoroutine(SetTopicSlot());
+        SetTopicSlot();
         
-        updateManager.OnDownloadCompleted+= ()=>StartCoroutine(SetTopicSlot());
+        // 다운로드 완료시 SetTopicSlot을 호출
+        updateManager.OnDownloadCompleted+= SetTopicSlot;
     }
 
-    private IEnumerator SetTopicSlot()
+    /// <summary>
+    /// 다운로드한 토픅 데이터를 메인 화면에 추가하는 메서드
+    /// </summary>
+    private void SetTopicSlot()
     {
         foreach (Transform child in topicSlotContainer)
         {
@@ -34,10 +38,12 @@ public class MainUI : BodyUI
             topicSlot.SetSlot();
             topicSlot.OnClick += HandleTopicSlotClick;
         }
-
-        yield break;
     }
-
+    
+    /// <summary>
+    /// 해당 토픽 슬롯을 클릭 했을 때 호출되는 메서드
+    /// </summary>
+    /// <param name="clickedTopicData">클릭한 토픽 슬롯</param>
     private void HandleTopicSlotClick(TopicData clickedTopicData)
     {
         GalleryManager.ins.SelTopicData = clickedTopicData;
