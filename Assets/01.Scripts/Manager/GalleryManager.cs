@@ -19,7 +19,11 @@ public class GalleryManager : MonoBehaviour
             DontDestroyOnLoad(this);
         }
     }
-
+    
+    /// <summary>
+    /// 플레이가 끝난 PixelArtData를 업데이트 및 저장하는 메서드
+    /// </summary>
+    /// <param name="updateData">업데이트 할 PixelArtData</param>
     public void UpdateAndSavePixelArtData(PixelArtData updateData)
     {
         TopicData saveTopic = SelTopicData;
@@ -29,7 +33,11 @@ public class GalleryManager : MonoBehaviour
         saveTopic.ThumbData = updateData.ThumbnailData;
         SavePixelArtData(saveTopic);
     }
-
+    
+    /// <summary>
+    /// 데이터를 Json으로 변환 후 실제 로컬에 저장하는 메서드
+    /// </summary>
+    /// <param name="data">변환 할 데이터</param>
     private void SavePixelArtData(TopicData data)
     {
         string jsonData = JsonConvert.SerializeObject(data);
