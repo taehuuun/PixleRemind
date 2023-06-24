@@ -97,7 +97,11 @@ public class UpdateManager : MonoBehaviour
         {
             updatePopup.Show(outdatedDataList, missingDataList);
         }
-        
+        else
+        {
+            PopupManager.Instance.ShowPopup("업데이트 체크 완료", "모든 데이터가 추가되어 있습니다");
+        }
+
         // 업데이트 체크 완료 이벤트 실행
         OnUpdateCheckCompleted?.Invoke(updatedPopupShow);
         
