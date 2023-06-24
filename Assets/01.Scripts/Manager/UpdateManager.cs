@@ -134,13 +134,11 @@ public class UpdateManager : MonoBehaviour
             }
             else
             {
-                Debug.LogError("Topic ID를 서버에서 찾지 못 했습니다.");
                 OnDownloadFailed?.Invoke(new Exception("Topic ID를 서버에서 찾지 못 했습니다."));
             }
         }
         catch (Exception e)
         {
-            Debug.LogError($"다운로드 중 오류가 발생 했습니다 : {e.Message}");
             OnDownloadFailed?.Invoke(e);
         }
     }
