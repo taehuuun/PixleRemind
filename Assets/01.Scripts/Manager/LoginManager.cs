@@ -9,7 +9,6 @@ public class LoginManager : MonoBehaviour
     /// </summary>
     public static async Task Login()
     {
-        Debug.Log("LoginManager Login");
 #if UNITY_ANDROID && !UNITY_EDITOR
             // GPGSUtill을 통해 로그인을 시도
             if (await GPGSUtill.LoginAsync())
@@ -33,12 +32,14 @@ public class LoginManager : MonoBehaviour
             }
 #endif
     }
-
+    
+    /// <summary>
+    /// Firestore를 통해 UserData를 로드하는 메서드
+    /// </summary>
     public static async Task LoadUserData()
     {
         try
         {
-            Debug.Log("LoginManager LoadUserData");
 #if UNITY_ANDROID && !UNITY_EDITOR
         string FUID = FirebaseManager.ins.FireAuth.FUID;
 #else
@@ -46,31 +47,23 @@ public class LoginManager : MonoBehaviour
 #endif
             bool userDataExists =
                 await FirebaseManager.ins.Firestore.CheckDocumentExists(FirestoreCollections.UserData, FUID);
-            Debug.Log("LoginManager LoadUserData 1");
+
             if (DataManager.Instance.userData == null)
             {
                 DataManager.Instance.userData = new UserData();
             }
 
-            Debug.Log("LoginManager LoadUserData 2");
-
             if (!userDataExists)
             {
-                Debug.Log("LoginManager LoadUserData 3");
-                Debug.Log("최초 접속 유저");
                 DataManager.Instance.userData.LastUpdated = DateTime.Now;
                 await FirebaseManager.ins.Firestore.AddData(FirestoreCollections.UserData, FUID,
                     DataManager.Instance.userData);
             }
             else
             {
-                Debug.Log("LoginManager LoadUserData 3");
-                Debug.Log("기존 유저");
                 DataManager.Instance.userData =
                     await FirebaseManager.ins.Firestore.GetData<UserData>(FirestoreCollections.UserData, FUID);
             }
-
-            Debug.Log("LoginManager LoadUserData 4");
 
             DataManager.Instance.userData.LocalTopicDataIDs =
                 DataManager.GetTargetFolderFileNames(DataPath.GalleryDataPath);
