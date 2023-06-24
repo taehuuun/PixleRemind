@@ -67,7 +67,7 @@ public class UpdatePopup : CloseAbleUI
 
         if (DataManager.Instance.userData.LocalTopicDataIDs.Count == 0 && selectedSlots.Count == 0)
         {
-            Debug.Log("최소 1개 이상 슬롯을 선택 해야 합니다.");
+            PopupManager.Instance.ShowPopup("경고",$"최소 1개 이상 슬롯을 선택 해야 합니다.");
             return;
         }
 
@@ -86,7 +86,8 @@ public class UpdatePopup : CloseAbleUI
 
         if (DataManager.Instance.userData.LocalTopicDataIDs.Count == 0 && selectedSlots.Count == 0)
         {
-            Debug.Log("최소 1개 이상 슬롯을 선택 해야 합니다.");
+            PopupManager.Instance.ShowPopup("경고",$"최소 1개 이상 슬롯을 선택 해야 합니다.");
+            // Debug.Log("최소 1개 이상 슬롯을 선택 해야 합니다.");
             return;
         }
 
@@ -97,7 +98,7 @@ public class UpdatePopup : CloseAbleUI
     /// </summary>
     private void HandleDownloadCompleted()
     {
-        Debug.Log("다운로드를 성공적으로 완료 함");
+        PopupManager.Instance.ShowPopup("다운로드 완료",$"데이터를 모두 다운로드 하였습니다");
         gameObject.SetActive(false);
     }
     /// <summary>
@@ -106,6 +107,6 @@ public class UpdatePopup : CloseAbleUI
     /// <param name="e">예외 객체</param>
     private void HandleDownloadFailed(Exception e)
     {
-        Debug.LogError($"다운로드 실패 : {e.Message}");
+        PopupManager.Instance.ShowPopup("다운로드 실패",$"{e.Message}");
     }
 }
