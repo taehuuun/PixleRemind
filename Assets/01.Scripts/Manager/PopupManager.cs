@@ -5,9 +5,13 @@ using System.Collections.Generic;
 public class PopupManager : MonoBehaviour
 {
     public static PopupManager Instance;
+
+    public Popup defaultPopup;
+    
+    public Transform popupParent;
     public Popup popupPrefab;
 
-    private Stack<Popup> popupStack = new Stack<Popup>();
+    private Stack<Popup> _popupStack = new Stack<Popup>();
 
     private void Awake()
     {
@@ -32,33 +36,52 @@ public class PopupManager : MonoBehaviour
 
     public void ShowPopup(string title, string body)
     {
-        var newPopup = Instantiate(popupPrefab);
-        newPopup.SetTitle(title);
-        newPopup.SetBody(body);
-        newPopup.Show();
-        popupStack.Push(newPopup);
+        Popup popup;
+        if (_popupStack.Count == 0)
+        {
+            popup = defaultPopup;
+        }
+        else
+        {
+            popup = Instantiate(popupPrefab, popupParent);
+        }
+        
+        popup.SetTitle(title);
+        popup.SetBody(body);
+        popup.Show();
+        _popupStack.Push(popup);
     }
 
     public void ClosePopup()
     {
-        if (popupStack.Count > 0)
+        if (_popupStack.Count == 0)
         {
-            var topPopup = popupStack.Pop();
-            Destroy(topPopup.gameObject);
+            return;
         }
+        
+        if (_popupStack.Count == 1)
+        {
+            _popupStack.Pop();
+            defaultPopup.Hide();
+            defaultPopup.ClearAddedButtons();
+            return;
+        }
+        
+        var topPopup = _popupStack.Pop();
+        Destroy(topPopup.gameObject);
     }
 
     public void AddButtonToCurrentPopup(string buttonText, UnityAction action)
     {
-        if (popupStack.Count > 0)
+        if (_popupStack.Count > 0)
         {
-            var topPopup = popupStack.Peek();
+            var topPopup = _popupStack.Peek();
             topPopup.AddButton(buttonText, action);
         }
     }
     
     public bool IsPopupOpen()
     {
-        return popupStack.Count > 0;
+        return _popupStack.Count > 0;
     }
 }
