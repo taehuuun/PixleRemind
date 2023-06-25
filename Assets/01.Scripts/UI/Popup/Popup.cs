@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
@@ -32,6 +31,16 @@ public class Popup : MonoBehaviour
     public void SetBody(string body)
     {
         bodyText.text = body;
+    }
+    /// <summary>
+    /// 기본 팝업의 Close버튼을 세팅하는 메서드
+    /// </summary>
+    /// <param name="buttonText">버튼 텍스트</param>
+    /// <param name="action">버튼 이벤트</param>
+    public void SetCloseButton(string buttonText, UnityAction action)
+    {
+        closeButton.GetComponentInChildren<Text>().text = buttonText;
+        closeButton.onClick.AddListener(action);
     }
 
     /// <summary>
