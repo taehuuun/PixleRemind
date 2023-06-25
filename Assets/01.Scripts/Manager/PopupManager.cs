@@ -56,8 +56,8 @@ public class PopupManager : MonoBehaviour
         
         popup.SetTitle(title);
         popup.SetBody(body);
+        popup.SetCloseButton("닫기", ClosePopup);
         popup.Show();
-        popup.closeButton.onClick.AddListener(ClosePopup);
         _popupStack.Push(popup);
     }
 
