@@ -6,10 +6,9 @@ public class PopupManager : MonoBehaviour
 {
     public static PopupManager Instance;
 
-    public Popup defaultPopup;
-    
-    public Transform popupParent;
-    public Popup popupPrefab;
+    [SerializeField] private Popup defaultPopup;
+    [SerializeField] private Transform popupParent;
+    [SerializeField] private Popup popupPrefab;
 
     private Stack<Popup> _popupStack = new Stack<Popup>();
 
@@ -58,6 +57,7 @@ public class PopupManager : MonoBehaviour
         popup.SetTitle(title);
         popup.SetBody(body);
         popup.Show();
+        popup.closeButton.onClick.AddListener(ClosePopup);
         _popupStack.Push(popup);
     }
 
