@@ -6,12 +6,12 @@ using UnityEngine.UI;
 
 public class Popup : MonoBehaviour
 {
-    public TMP_Text titleText;
-    public TMP_Text bodyText;
-    public Button closeButton;
+    [SerializeField] private TMP_Text titleText;
+    [SerializeField] private TMP_Text bodyText;
+    [SerializeField] private Button closeButton;
 
-    public Transform buttonContainer;
-    public Button buttonPrefab;
+    [SerializeField] private Transform buttonContainer;
+    [SerializeField] private Button buttonPrefab;
 
     private List<Button> _addedButtons = new List<Button>();
 
