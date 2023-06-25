@@ -218,6 +218,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1336548516}
     m_Modifications:
+    - target: {fileID: 7836974280295288081, guid: 6bfb38ced583cc046ab9a25d5cfe2073, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: b772446770becea4bb00a5c5c9221f5f, type: 2}
+    - target: {fileID: 7836974280295288081, guid: 6bfb38ced583cc046ab9a25d5cfe2073, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -1968091426454052045, guid: b772446770becea4bb00a5c5c9221f5f, type: 2}
+    - target: {fileID: 8709881329747468930, guid: 6bfb38ced583cc046ab9a25d5cfe2073, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: b772446770becea4bb00a5c5c9221f5f, type: 2}
+    - target: {fileID: 8709881329747468930, guid: 6bfb38ced583cc046ab9a25d5cfe2073, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -1968091426454052045, guid: b772446770becea4bb00a5c5c9221f5f, type: 2}
     - target: {fileID: 8709881329863656640, guid: 6bfb38ced583cc046ab9a25d5cfe2073, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1
@@ -241,6 +257,18 @@ PrefabInstance:
     - target: {fileID: 8709881329863656640, guid: 6bfb38ced583cc046ab9a25d5cfe2073, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -75
+      objectReference: {fileID: 0}
+    - target: {fileID: 8709881329863656641, guid: 6bfb38ced583cc046ab9a25d5cfe2073, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8709881329863656641, guid: 6bfb38ced583cc046ab9a25d5cfe2073, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8709881329863656641, guid: 6bfb38ced583cc046ab9a25d5cfe2073, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8709881330109582680, guid: 6bfb38ced583cc046ab9a25d5cfe2073, type: 3}
       propertyPath: m_Pivot.x
@@ -334,6 +362,14 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8709881330589231031, guid: 6bfb38ced583cc046ab9a25d5cfe2073, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: b772446770becea4bb00a5c5c9221f5f, type: 2}
+    - target: {fileID: 8709881330589231031, guid: 6bfb38ced583cc046ab9a25d5cfe2073, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -1968091426454052045, guid: b772446770becea4bb00a5c5c9221f5f, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6bfb38ced583cc046ab9a25d5cfe2073, type: 3}
 --- !u!114 &131256969 stripped
@@ -730,9 +766,9 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_AdditionalShaderChannelsFlag: 25
+  m_AdditionalShaderChannelsFlag: -1
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_TargetDisplay: 0
 --- !u!224 &1336548516
 RectTransform:
@@ -994,7 +1030,7 @@ MonoBehaviour:
   m_text: "\uB85C\uADF8\uC778\uC911..."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b772446770becea4bb00a5c5c9221f5f, type: 2}
-  m_sharedMaterial: {fileID: -7043172721660109426, guid: b772446770becea4bb00a5c5c9221f5f, type: 2}
+  m_sharedMaterial: {fileID: -1968091426454052045, guid: b772446770becea4bb00a5c5c9221f5f, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
