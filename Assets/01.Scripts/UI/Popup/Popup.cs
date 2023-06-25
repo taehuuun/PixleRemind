@@ -39,7 +39,7 @@ public class Popup : MonoBehaviour
     /// <param name="action">버튼 이벤트</param>
     public void SetCloseButton(string buttonText, UnityAction action)
     {
-        closeButton.GetComponentInChildren<Text>().text = buttonText;
+        closeButton.GetComponentInChildren<TMP_Text>().text = buttonText;
         closeButton.onClick.AddListener(action);
     }
 
