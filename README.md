@@ -10,6 +10,12 @@
 ## 개발 일지
 
 <details>
+<summary>2023.06.26 (팝업 시스템 구현)</summary>
+
+- Popup, PopupManager 구현
+- 기존 팝업 코드를 PopupManager에서 구현 할 수 있도록 수정
+</details>
+<details>
 <summary>2023.06.21 (Firestore 활용 토픽 업데이트 구현)</summary>
 
 - Firestore 활용 추가 토픽 업데이트 체크 기능 구현
