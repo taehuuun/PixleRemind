@@ -20,7 +20,6 @@ public class ColorMatchSystem : MonoBehaviour, ISubject
     private float _disSimilarRange;
     private bool _isGameOver = false;
     
-    // _disSimilarRange 감소 값
     public float decRangeValue = 0.05f;
     public int maxLife;
     public float maxDisSimilarRange;
