@@ -148,11 +148,11 @@ public static class PixelArtHelper
     /// <param name="pixelArtImg">픽셀 아트 텍스쳐</param>
     /// <param name="difficulty">난이도</param>
     /// <returns>PixelArtData</returns>
-    public static PixelArtData ExportPixelData(string titleid, Texture2D pixelArtImg, Difficulty difficulty)
+    public static PixelArtData ExportPixelData(string titleid,string description, Texture2D pixelArtImg, Difficulty difficulty)
     {
         PixelColorData pixelColorData = ExtractPixelData(pixelArtImg);
         string thumbData = ExtractGrayThumbnailData(pixelArtImg);
-        PixelArtData newData = new PixelArtData(titleid, thumbData, 0, pixelArtImg.width, false, difficulty,
+        PixelArtData newData = new PixelArtData(titleid, thumbData,description, 0, pixelArtImg.width, false, difficulty,
             pixelColorData);
         return newData;
     }

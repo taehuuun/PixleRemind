@@ -17,6 +17,7 @@ public class PixelArtData
     {
         Title = "";
         ThumbnailData = "";
+        Description = "";
         PlayTime = 0;
         Size = 0;
         IsCompleted = false;
@@ -25,11 +26,12 @@ public class PixelArtData
         PixelColorData = new PixelColorData();
     }
 
-    public PixelArtData(string title, string thumbnailData, int playTime, int size, bool isComplete,
+    public PixelArtData(string title, string thumbnailData, string description, int playTime, int size, bool isComplete,
         Difficulty difficulty, PixelColorData pixelColorData)
     {
         Title = title;
         ThumbnailData = thumbnailData;
+        Description = description;
         PlayTime = playTime;
         Size = size;
         IsCompleted = isComplete;
