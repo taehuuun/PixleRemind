@@ -29,9 +29,9 @@ public class UpdateManager : MonoBehaviour
         // 로드된 토픽 데이터 리스트를 정렬
         _topicDataList.Sort(new TopicDataListComparer());
 
-        if (DataManager.Instance.userData.LocalTopicDataIDs == null)
+        if (DataManager.instance.userData.LocalTopicDataIDs == null)
         {
-            DataManager.Instance.userData.LocalTopicDataIDs = new List<string>();
+            DataManager.instance.userData.LocalTopicDataIDs = new List<string>();
         }
         
         await CheckForUpdated();
@@ -44,7 +44,7 @@ public class UpdateManager : MonoBehaviour
     public Task CheckForUpdated()
     {
         // 로컬에 저장되어 있는 토픽 데이터 ID 리스트
-        List<string> localTopicDataIDs = DataManager.Instance.userData.LocalTopicDataIDs;
+        List<string> localTopicDataIDs = DataManager.instance.userData.LocalTopicDataIDs;
         
         // 다운로드 하지 않은 토픽 데이터 리스트
         List<TopicData> missingDataList = new List<TopicData>();
@@ -120,11 +120,10 @@ public class UpdateManager : MonoBehaviour
         {
             if (serverData != null)
             {
-                string jsonData = JsonConvert.SerializeObject(serverData);
-                DataManager.SaveJsonData(DataPath.GalleryDataPath, topicID, jsonData);
+                DataManager.SaveJsonData(DataPath.GalleryDataPath, topicID, serverData);
 
-                DataManager.Instance.userData.LocalTopicDataIDs.Add(topicID);
-                DataManager.Instance.userData.LastUpdated = DateTime.Now;
+                DataManager.instance.userData.LocalTopicDataIDs.Add(topicID);
+                DataManager.instance.userData.LastUpdated = DateTime.Now;
 
 #if UNITY_ANDROID && !UNITY_EDITOR
                  string FUID = FirebaseManager.ins.FireAuth.FUID;
@@ -132,7 +131,7 @@ public class UpdateManager : MonoBehaviour
                 string FUID = "Test";
 #endif
                 await FirebaseManager.ins.Firestore.UpdateData<UserData>(FirestoreCollections.UserData, FUID,
-                    DataManager.Instance.userData);
+                    DataManager.instance.userData);
             
                 OnDownloadCompleted?.Invoke();
             }
