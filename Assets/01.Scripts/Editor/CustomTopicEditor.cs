@@ -113,7 +113,7 @@ public class CustomTopicEditor : EditorWindow
                 }
 
                 _foldOutPixelStatus[pixelArtData] =
-                    EditorGUILayout.Foldout(_foldOutPixelStatus[pixelArtData], pixelArtData.TitleID);
+                    EditorGUILayout.Foldout(_foldOutPixelStatus[pixelArtData], pixelArtData.Title);
 
                 if (_foldOutPixelStatus[pixelArtData])
                 {
@@ -188,7 +188,7 @@ public class CustomTopicEditor : EditorWindow
             return;
         }
 
-        pixelArtData.TitleID = EditorGUILayout.TextField("TitleID", pixelArtData.TitleID);
+        pixelArtData.Title = EditorGUILayout.TextField("TitleID", pixelArtData.Title);
         EditorGUILayout.TextField("ThumbnailData", pixelArtData.ThumbnailData);
         EditorGUILayout.TextField("PlayTime", pixelArtData.PlayTime.ToString());
         EditorGUILayout.TextField("Size", pixelArtData.Size.ToString());

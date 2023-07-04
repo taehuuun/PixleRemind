@@ -4,7 +4,7 @@ using Firebase.Firestore;
 [FirestoreData, Serializable]
 public class PixelArtData
 {
-    [FirestoreProperty] public string TitleID { get; set; }
+    [FirestoreProperty] public string Title { get; set; }
     [FirestoreProperty] public string ThumbnailData { get; set; }
     [FirestoreProperty] public int PlayTime { get; set; }
     [FirestoreProperty] public int Size { get; set; }
@@ -14,7 +14,7 @@ public class PixelArtData
 
     public PixelArtData()
     {
-        TitleID = "";
+        Title = "";
         ThumbnailData = "";
         PlayTime = 0;
         Size = 0;
@@ -24,10 +24,10 @@ public class PixelArtData
         PixelColorData = new PixelColorData();
     }
 
-    public PixelArtData(string titleID, string thumbnailData, int playTime, int size, bool isComplete,
+    public PixelArtData(string title, string thumbnailData, int playTime, int size, bool isComplete,
         Difficulty difficulty, PixelColorData pixelColorData)
     {
-        TitleID = titleID;
+        Title = title;
         ThumbnailData = thumbnailData;
         PlayTime = playTime;
         Size = size;

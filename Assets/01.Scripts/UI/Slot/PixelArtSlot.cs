@@ -20,7 +20,7 @@ public class PixelArtSlot : GallerySlot
     public override void SetSlot()
     {
         difficultyText.text = pixelData.Difficulty.ToString();
-        titleText.text = pixelData.TitleID;
+        titleText.text = pixelData.Title;
         thumbnailImb.sprite = PixelArtHelper.MakeThumbnail(pixelData.ThumbnailData, pixelData.Size);
 
         if (pixelData.IsCompleted)
