@@ -188,11 +188,13 @@ public class CustomTopicEditor : EditorWindow
             return;
         }
 
-        pixelArtData.Title = EditorGUILayout.TextField("TitleID", pixelArtData.Title);
+        pixelArtData.Title = EditorGUILayout.TextField("Title", pixelArtData.Title);
         EditorGUILayout.TextField("ThumbnailData", pixelArtData.ThumbnailData);
         EditorGUILayout.TextField("PlayTime", pixelArtData.PlayTime.ToString());
         EditorGUILayout.TextField("Size", pixelArtData.Size.ToString());
         EditorGUILayout.Toggle("IsCompleted", pixelArtData.IsCompleted);
+        EditorGUILayout.LabelField("Description");
+        EditorGUILayout.TextArea(pixelArtData.Description,GUILayout.Height(100));
         pixelArtData.Difficulty = (Difficulty)EditorGUILayout.EnumPopup("Difficulty", pixelArtData.Difficulty);
         ShowPixelColorData(pixelArtData.PixelColorData);
     }
