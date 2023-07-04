@@ -36,8 +36,9 @@ public class GalleryManager : MonoBehaviour
 
     public async void UpdateCollectPixelArtData(CollectPixelArtData data)
     {
-        Debug.Log($"{data.Title}");
         string collection = FirestoreCollections.UserData;
+        
+        DataManager.instance.userData.CollectPixelArtDataList.Add(data);
         
 #if UNITY_EDITOR
         string fuid = "Test";
@@ -45,7 +46,7 @@ public class GalleryManager : MonoBehaviour
         string fuid = FirebaseManager.ins.FireAuth.FUID;
 #endif
 
-        await FirebaseManager.ins.Firestore.UpdateData(collection, fuid, data);
+        await FirebaseManager.ins.Firestore.UpdateData(collection, fuid, DataManager.instance.userData);
     }
     /// <summary>
     /// 데이터를 Json으로 변환 후 실제 로컬에 저장하는 메서드
