@@ -99,11 +99,14 @@ public class PlayUI : BodyUI, IObserver
 
         if (_data.PixelColorData.RemainingPixels == 0)
         {
-            Debug.Log("해당 PixelArt을 모두 채움");
             _data.IsCompleted = true;
             _system.IsGameOver = true;
             playBtnMove.gameObject.SetActive(false);
             GalleryManager.ins.SelTopicData.CompleteCount++;
+
+            CollectPixelArtData newCollectPixelArt = new CollectPixelArtData(_data.Title, _data.Description, _data.ThumbnailData, _data.PlayTime);
+            DataManager.instance.userData.CollectPixelArtDataList.Add(newCollectPixelArt);
+            GalleryManager.ins.UpdateCollectPixelArtData(newCollectPixelArt);
         }
 
         _system.pixelColorData = _data.PixelColorData;
