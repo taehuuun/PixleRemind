@@ -6,6 +6,7 @@ public class PixelArtData
 {
     [FirestoreProperty] public string Title { get; set; }
     [FirestoreProperty] public string ThumbnailData { get; set; }
+    [FirestoreProperty] public string Description { get; set; }
     [FirestoreProperty] public int PlayTime { get; set; }
     [FirestoreProperty] public int Size { get; set; }
     [FirestoreProperty] public bool IsCompleted { get; set; }
