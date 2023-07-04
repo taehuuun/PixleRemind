@@ -105,7 +105,6 @@ public class PlayUI : BodyUI, IObserver
             GalleryManager.ins.SelTopicData.CompleteCount++;
 
             CollectPixelArtData newCollectPixelArt = new CollectPixelArtData(_data.Title, _data.Description, _data.ThumbnailData, _data.PlayTime);
-            DataManager.instance.userData.CollectPixelArtDataList.Add(newCollectPixelArt);
             GalleryManager.ins.UpdateCollectPixelArtData(newCollectPixelArt);
         }
 
