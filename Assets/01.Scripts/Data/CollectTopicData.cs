@@ -5,6 +5,7 @@ using Firebase.Firestore;
 [FirestoreData, Serializable]
 public class CollectTopicData
 {
+    [FirestoreProperty] public string ID { get; set; }
     [FirestoreProperty] public string Title { get; set; }
     [FirestoreProperty] public int CompleteCount { get; set; }
     [FirestoreProperty] public int TotalCount { get; set; }
@@ -12,14 +13,16 @@ public class CollectTopicData
 
     public CollectTopicData()
     {
+        ID = "";
         Title = "";
         CompleteCount = 0;
         TotalCount = 0;
         CollectPixelArtDataList = new List<CollectPixelArtData>();
     }
 
-    public CollectTopicData(string title, int completeCount, int totalCount)
+    public CollectTopicData(string id, string title, int completeCount, int totalCount)
     {
+        ID = id;
         Title = title;
         CompleteCount = completeCount;
         TotalCount = totalCount;
