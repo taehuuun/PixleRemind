@@ -90,6 +90,8 @@ public class CustomTopicEditor : EditorWindow
         EditorGUILayout.TextField("ID", topicData.ID);
         GUI.enabled = true;
         topicData.Title = EditorGUILayout.TextField("Title", topicData.Title);
+        EditorGUILayout.LabelField("Description");
+        topicData.Description = EditorGUILayout.TextArea(topicData.Description, GUILayout.Height(100));
         GUI.enabled = false;
         EditorGUILayout.TextField("ThumbData", topicData.ThumbData);
         EditorGUILayout.TextField("CompleteCount", topicData.CompleteCount.ToString());

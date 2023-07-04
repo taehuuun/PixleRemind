@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class UpdateSlot : MonoBehaviour
@@ -7,7 +8,7 @@ public class UpdateSlot : MonoBehaviour
     public Image thumbnailImg;
     public Image iconImg;
     public TMP_Text titleText;
-    public TMP_Text introductionText;
+    public TMP_Text descriptionText;
     public GameObject select;
     public Sprite updateIcon;
     public Sprite missingIcon;
@@ -21,7 +22,7 @@ public class UpdateSlot : MonoBehaviour
         _topicData = topicData;
         thumbnailImg.sprite = PixelArtHelper.MakeThumbnail(_topicData.ThumbData, _topicData.ThumbSize);
         titleText.text = $"{_topicData.Title} 픽셀아트 {_topicData.TotalCount}개";
-        introductionText.text = _topicData.Introduction;
+        descriptionText.text = _topicData.Description;
         iconImg.sprite = isMissing ? missingIcon : updateIcon;
     }
 

@@ -8,7 +8,7 @@ public class TopicData
     [FirestoreProperty] public string ID { get; set; }
     [FirestoreProperty] public string Title { get; set; }
     [FirestoreProperty] public string ThumbData { get; set; }
-    [FirestoreProperty] public string Introduction { get; set; }
+    [FirestoreProperty] public string Description { get; set; }
     [FirestoreProperty] public int CompleteCount { get; set; }
     [FirestoreProperty] public int TotalCount { get; set; }
     [FirestoreProperty] public int ThumbSize { get; set; }
@@ -23,7 +23,7 @@ public class TopicData
     {
         Title = "";
         ThumbData = "";
-        Introduction = "";
+        Description = "";
         CompleteCount = 0;
         TotalCount = 0;
         ThumbSize = 0;
@@ -38,7 +38,7 @@ public class TopicData
     public TopicData(
         string title,
         string thumbData,
-        string introduction,
+        string description,
         int completeCount,
         int totalCount,
         int thumbSize,
@@ -51,7 +51,7 @@ public class TopicData
     {
         Title = title;
         ThumbData = thumbData;
-        Introduction = introduction;
+        Description = description;
         CompleteCount = completeCount;
         TotalCount = totalCount;
         ThumbSize = thumbSize;
