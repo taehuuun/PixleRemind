@@ -1,5 +1,11 @@
-using UnityEngine;
+using System;
+using Firebase.Firestore;
 
-public class CollectPixelArtData : MonoBehaviour
+[FirestoreData, Serializable]
+public class CollectPixelArtData
 {
+    [FirestoreProperty] public string Title { get; set; }
+    [FirestoreProperty] public string Description { get; set; }
+    [FirestoreProperty] public string ThumbnailData { get; set; }
+    [FirestoreProperty] public int PlayTime { get; set; }
 }
