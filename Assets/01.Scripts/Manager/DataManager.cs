@@ -26,6 +26,9 @@ public class DataManager : MonoBehaviour
     /// <returns>리스트 형태의 파일이름</returns>
     public static List<string> GetTargetFolderFileNames(string path)
     {
+        if (!Directory.Exists(path))
+            return new List<string>();
+        
         try
         {
             Debug.Log("DataManager GetTargetFolderFileNames");
