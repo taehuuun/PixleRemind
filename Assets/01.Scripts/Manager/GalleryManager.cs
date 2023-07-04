@@ -40,8 +40,7 @@ public class GalleryManager : MonoBehaviour
     /// <param name="data">변환 할 데이터</param>
     private void SavePixelArtData(TopicData data)
     {
-        string jsonData = JsonConvert.SerializeObject(data);
-        DataManager.SaveJsonData(DataPath.GalleryDataPath, data.ID, jsonData);
+        DataManager.SaveJsonData(DataPath.GalleryDataPath, data.ID, data);
     }
 
     private static TopicData GetTopicData(string topicName)

@@ -6,15 +6,15 @@ using Newtonsoft.Json;
 
 public class DataManager : MonoBehaviour
 {
-    public static DataManager Instance;
+    public static DataManager instance;
 
     public UserData userData;
 
     private void Awake()
     {
-        if (Instance == null)
+        if (instance == null)
         {
-            Instance = this;
+            instance = this;
             DontDestroyOnLoad(this);
         }
     }
@@ -51,12 +51,12 @@ public class DataManager : MonoBehaviour
     }
     
     /// <summary>
-    /// 로컬에 Josn 데이터를 저장하는 호출용 메서드
+    /// 로컬에 Json 데이터를 저장하는 호출용 메서드
     /// </summary>
     /// <param name="savePath">저장 경로</param>
     /// <param name="fileName">저장 파일명</param>
     /// <param name="jsonData">저장할 JsonData</param>
-    public static void SaveJsonData(string savePath, string fileName, string jsonData)
+    public static void SaveJsonData<T>(string savePath, string fileName, T jsonData)
     {
         SaveJsonDataToFile(savePath, fileName, jsonData);
     }
@@ -80,7 +80,7 @@ public class DataManager : MonoBehaviour
         return directoryInfo.Exists;
     }
     
-    private static void SaveJsonDataToFile(string savePath, string fileName, string jsonData)
+    private static void SaveJsonDataToFile<T>(string savePath, string fileName, T jsonData)
     {
         var path = Path.Combine(savePath, $"{fileName}.json");
 
@@ -89,7 +89,8 @@ public class DataManager : MonoBehaviour
             Directory.CreateDirectory(savePath);
         }
 
-        File.WriteAllText(path, jsonData);
+        string stringJsonData = JsonConvert.SerializeObject(jsonData);
+        File.WriteAllText(path, stringJsonData);
         // var bytes = System.Text.Encoding.UTF8.GetBytes(jsonData);
         // var code = System.Convert.ToBase64String(bytes);
         // File.WriteAllText(path, code);
@@ -103,16 +104,14 @@ public class DataManager : MonoBehaviour
 
         if (FileExists(loadPath, fileName))
         {
-            using (var reader = new StreamReader(path))
-            {
-                // var code = reader.ReadToEnd();
-                // var bytes = System.Convert.FromBase64String(code);
-                // var loadJson = System.Text.Encoding.UTF8.GetString(bytes);
-                // loadData = JsonConvert.DeserializeObject<T>(loadJson);
+            using var reader = new StreamReader(path);
+            // var code = reader.ReadToEnd();
+            // var bytes = System.Convert.FromBase64String(code);
+            // var loadJson = System.Text.Encoding.UTF8.GetString(bytes);
+            // loadData = JsonConvert.DeserializeObject<T>(loadJson);
 
-                var loadJson = reader.ReadToEnd();
-                loadData = JsonConvert.DeserializeObject<T>(loadJson);
-            }
+            var loadJson = reader.ReadToEnd();
+            loadData = JsonConvert.DeserializeObject<T>(loadJson);
         }
         else
         {
