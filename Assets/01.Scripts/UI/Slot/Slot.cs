@@ -1,11 +1,12 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.Serialization;
 
 public abstract class Slot : MonoBehaviour
 {
     public TMP_Text titleText;
-    public Image thumbnailImb;
+    [FormerlySerializedAs("thumbnailImb")] public Image thumbnailImage;
 
     public virtual void OnSlotClick() { }
 
