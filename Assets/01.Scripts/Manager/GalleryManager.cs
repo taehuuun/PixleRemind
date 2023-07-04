@@ -37,8 +37,9 @@ public class GalleryManager : MonoBehaviour
     public async void UpdateCollectPixelArtData(CollectPixelArtData data)
     {
         string collection = FirestoreCollections.UserData;
-        
-        DataManager.instance.userData.CollectPixelArtDataList.Add(data);
+
+        CollectTopicData saveCollectTopic = DataManager.instance.userData.CollectTopicDataList.Find(Data => Data.ID == SelTopicData.ID);
+        saveCollectTopic.CollectPixelArtDataList.Add(data);
         
 #if UNITY_EDITOR
         string fuid = "Test";

@@ -122,6 +122,8 @@ public class UpdateManager : MonoBehaviour
             {
                 DataManager.SaveJsonData(DataPath.GalleryDataPath, topicID, serverData);
 
+                CollectTopicData newCollectTopicData = new CollectTopicData(serverData.ID, serverData.Title, serverData.CompleteCount, serverData.TotalCount);
+                DataManager.instance.userData.CollectTopicDataList.Add(newCollectTopicData);
                 DataManager.instance.userData.LocalTopicDataIDs.Add(topicID);
                 DataManager.instance.userData.LastUpdated = DateTime.Now;
 
