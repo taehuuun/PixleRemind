@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class LoadingTaskManager : MonoBehaviour
 {
@@ -12,6 +14,7 @@ public class LoadingTaskManager : MonoBehaviour
     public string NextSceneName { get; set; }
     public string CurrentTask { get; private set; }
 
+    private AsyncOperation _sceneLoadingOperation;
     private readonly List<TaskData> _tasks = new List<TaskData>();
 
     private void Awake()
@@ -22,6 +25,30 @@ public class LoadingTaskManager : MonoBehaviour
         }
 
         DontDestroyOnLoad(this);
+    }
+
+    public void LoadSceneAsync(string sceneName)
+    {
+        _sceneLoadingOperation = SceneManager.LoadSceneAsync(sceneName);
+        _sceneLoadingOperation.allowSceneActivation = false;
+    }
+
+    public bool IsSceneLoadingCompleted()
+    {
+        if (_sceneLoadingOperation != null)
+        {
+            return _sceneLoadingOperation.isDone;
+        }
+
+        return false;
+    }
+
+    public void ActivateScene()
+    {
+        if (_sceneLoadingOperation != null)
+        {
+            _sceneLoadingOperation.allowSceneActivation = true;
+        }
     }
     
     /// <summary>

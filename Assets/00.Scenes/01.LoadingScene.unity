@@ -321,8 +321,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75555a109339b3b49bcee34f47df7e5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _loadingBar: {fileID: 1617296009}
-  _taskText: {fileID: 1865327926}
+  loadingBar: {fileID: 1617296009}
+  taskText: {fileID: 1865327926}
 --- !u!1 &1617296006
 GameObject:
   m_ObjectHideFlags: 0
@@ -517,8 +517,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\uB85C\uADF8\uC778\uC911..."
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: b772446770becea4bb00a5c5c9221f5f, type: 2}
-  m_sharedMaterial: {fileID: -7043172721660109426, guid: b772446770becea4bb00a5c5c9221f5f, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: a175ee0b6f61b2043b33faf750e94cd7, type: 2}
+  m_sharedMaterial: {fileID: -6672389476189711440, guid: a175ee0b6f61b2043b33faf750e94cd7, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

@@ -14,6 +14,7 @@ public class LoadingUI : BodyUI
         taskText.text = "";
 
         StartCoroutine(ShowLoadingProgress());
+        LoadingTaskManager.Instance.LoadSceneAsync(LoadingTaskManager.Instance.NextSceneName);
         _ = LoadingTaskManager.Instance.RunTasks();
     }
     
@@ -28,7 +29,18 @@ public class LoadingUI : BodyUI
         }
 
         loadingBar.fillAmount = 1f;
-        taskText.text = $"{LoadingTaskManager.Instance.NextSceneName} 씬으로 이동중..";
+        taskText.text = $"{LoadingTaskManager.Instance.NextSceneName} 씬으로 로딩중..";
+        
+        LoadingTaskManager.Instance.ActivateScene();
+
+        while (!LoadingTaskManager.Instance.IsSceneLoadingCompleted())
+        {
+            loadingBar.fillAmount = LoadingTaskManager.Instance.TaskProgress;
+            yield return null;
+        }
+        
+        taskText.text = $"{LoadingTaskManager.Instance.NextSceneName} 씬으로 로딩 완료..";
+        
         LoadingTaskManager.Instance.ResetTasks();
         MoveScene(LoadingTaskManager.Instance.NextSceneName);
     }
