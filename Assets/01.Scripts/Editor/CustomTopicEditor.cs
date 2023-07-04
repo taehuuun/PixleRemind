@@ -86,16 +86,22 @@ public class CustomTopicEditor : EditorWindow
     {
         EditorGUI.indentLevel++;
 
+        GUI.enabled = false;
         EditorGUILayout.TextField("ID", topicData.ID);
+        GUI.enabled = true;
         topicData.Title = EditorGUILayout.TextField("Title", topicData.Title);
+        GUI.enabled = false;
         EditorGUILayout.TextField("ThumbData", topicData.ThumbData);
         EditorGUILayout.TextField("CompleteCount", topicData.CompleteCount.ToString());
         EditorGUILayout.TextField("TotalCount", topicData.TotalCount.ToString());
-        topicData.ThumbData = EditorGUILayout.TextField("ThumbData", topicData.ThumbData);
+        EditorGUILayout.TextField("ThumbData", topicData.ThumbData);
         EditorGUILayout.Toggle("Complete", topicData.Complete);
+        GUI.enabled = true;
         topicData.Updateable = EditorGUILayout.Toggle("Updateable", topicData.Updateable);
         topicData.IsLocked = EditorGUILayout.Toggle("IsLocked", topicData.IsLocked);
+        GUI.enabled = false;
         EditorGUILayout.TextField("LastUpdated", topicData.LastUpdated.ToString());
+        GUI.enabled = true;
 
         if (topicData.IsLocked)
         {
@@ -188,21 +194,17 @@ public class CustomTopicEditor : EditorWindow
             return;
         }
 
+        GUI.enabled = false;
         pixelArtData.Title = EditorGUILayout.TextField("Title", pixelArtData.Title);
         EditorGUILayout.TextField("ThumbnailData", pixelArtData.ThumbnailData);
         EditorGUILayout.TextField("PlayTime", pixelArtData.PlayTime.ToString());
         EditorGUILayout.TextField("Size", pixelArtData.Size.ToString());
         EditorGUILayout.Toggle("IsCompleted", pixelArtData.IsCompleted);
+        EditorGUILayout.IntField("Remaining Pixels", pixelArtData.PixelColorData.RemainingPixels);
         EditorGUILayout.LabelField("Description");
         EditorGUILayout.TextArea(pixelArtData.Description,GUILayout.Height(100));
         pixelArtData.Difficulty = (Difficulty)EditorGUILayout.EnumPopup("Difficulty", pixelArtData.Difficulty);
-        ShowPixelColorData(pixelArtData.PixelColorData);
-    }
-
-    private void ShowPixelColorData(PixelColorData pixelColorData)
-    {
-        pixelColorData.RemainingPixels =
-            EditorGUILayout.IntField("Remaining Pixels", pixelColorData.RemainingPixels);
+        GUI.enabled = true;
     }
 
     #region FireStore

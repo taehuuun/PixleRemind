@@ -29,7 +29,11 @@ public class PixelArtDataEditWindow : EditorWindow
 
         if (GUILayout.Button("Confirm"))
         {
-            if (_tmpPixelArt != null && !string.IsNullOrEmpty(_tmpTitleID))
+            if (string.IsNullOrEmpty(_tmpTitleID) || string.IsNullOrEmpty(_tmpDescription) || _tmpPixelArt == null || _tmpDifficulty == null)
+            {
+                EditorUtility.DisplayDialog("실패", "각 필드의 값들을 모두 채워 주세요", "확인");
+            }
+            else
             {
                 var newPixelArtData = PixelArtHelper.ExportPixelData(_tmpTitleID, _tmpDescription, _tmpPixelArt, _tmpDifficulty);
                 _onConfirm?.Invoke(newPixelArtData);
