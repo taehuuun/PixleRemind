@@ -1,7 +1,7 @@
 using TMPro;
 using UnityEngine;
 
-public class TopicSlot : GallerySlot
+public class TopicSlot : Slot
 {
     public TMP_Text completeCountText;
     public GameObject completeMark;

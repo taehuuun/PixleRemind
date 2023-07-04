@@ -1,7 +1,7 @@
 using TMPro;
 using UnityEngine;
 
-public class PixelArtSlot : GallerySlot
+public class PixelArtSlot : Slot
 {
     public TMP_Text difficultyText;
     public TMP_Text playTimeText;
