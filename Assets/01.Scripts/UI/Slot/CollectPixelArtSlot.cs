@@ -1,19 +1,8 @@
-
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class CollectPixelArtSlot : MonoBehaviour
+public class CollectPixelArtSlot : Slot
 {
-    // Start is called before the first frame update
-    void Start()
+    public PixelArtData pixelArtData;
+    public override void SetSlot()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        thumbnailImage.sprite = PixelArtHelper.MakeThumbnail(pixelArtData.ThumbnailData, pixelArtData.Size);
     }
 }
