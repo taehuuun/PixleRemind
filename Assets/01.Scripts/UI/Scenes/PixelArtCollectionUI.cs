@@ -17,6 +17,12 @@ public class PixelArtCollectionUI : MonoBehaviour
     private List<CollectPixelArtSlot> _collectPixelArtSlots = new List<CollectPixelArtSlot>();
     
     private readonly int _createSlotCnt = 9;
+
+    private void Start()
+    {
+        CreateSlots();    
+    }
+    
     private void CreateSlots()
     {
         for (int i = 0; i < _createSlotCnt; i++)
