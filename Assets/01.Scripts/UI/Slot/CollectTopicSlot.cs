@@ -1,18 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
-public class CollectTopicSlot : MonoBehaviour
+public class CollectTopicSlot : Slot
 {
-    // Start is called before the first frame update
-    void Start()
+    public TMP_Text completeCountTest;
+    public CollectTopicData collectTopicData;
+    public GameObject completeMark;
+    public override void SetSlot()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        titleText.text = collectTopicData.Title;
+        thumbnailImage.sprite = PixelArtHelper.MakeThumbnail(collectTopicData.ThumbnailData, collectTopicData.ThumbnailSize);
     }
 }
