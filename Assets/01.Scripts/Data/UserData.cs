@@ -6,12 +6,12 @@ using Firebase.Firestore;
 public class UserData
 {
     [FirestoreProperty] public List<string> LocalTopicDataIDs { get; set; }
-    [FirestoreProperty] public List<CollectTopicData> CollectTopicDataList { get; set; }
+    // [FirestoreProperty] public List<CollectTopicData> CollectTopicDataList { get; set; }
     [FirestoreProperty] public DateTime LastUpdated { get; set; }
 
     public UserData()
     {
         LocalTopicDataIDs = new List<string>();
-        CollectTopicDataList = new List<CollectTopicData>();
+        // CollectTopicDataList = new List<CollectTopicData>();
     }
 }

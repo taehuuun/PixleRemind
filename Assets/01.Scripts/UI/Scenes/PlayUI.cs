@@ -104,8 +104,8 @@ public class PlayUI : BodyUI, IObserver
             playBtnMove.gameObject.SetActive(false);
             GalleryManager.ins.SelTopicData.CompleteCount++;
 
-            CollectPixelArtData newCollectPixelArt = new CollectPixelArtData(_data.Title, _data.Description, _data.ThumbnailData, _data.PlayTime);
-            GalleryManager.ins.UpdateCollectPixelArtData(newCollectPixelArt);
+            // CollectPixelArtData newCollectPixelArt = new CollectPixelArtData(_data.Title, _data.Description, _data.ThumbnailData, _data.PlayTime);
+            // GalleryManager.ins.UpdateCollectPixelArtData(newCollectPixelArt);
         }
 
         _system.pixelColorData = _data.PixelColorData;

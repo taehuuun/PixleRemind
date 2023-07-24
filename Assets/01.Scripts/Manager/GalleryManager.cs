@@ -34,21 +34,21 @@ public class GalleryManager : MonoBehaviour
         SavePixelArtData(saveTopic);
     }
 
-    public async void UpdateCollectPixelArtData(CollectPixelArtData data)
-    {
-        string collection = FirestoreCollections.UserData;
-
-        CollectTopicData saveCollectTopic = DataManager.instance.userData.CollectTopicDataList.Find(Data => Data.ID == SelTopicData.ID);
-        saveCollectTopic.CollectPixelArtDataList.Add(data);
-        
-#if UNITY_EDITOR
-        string fuid = "Test";
-#else
-        string fuid = FirebaseManager.ins.FireAuth.FUID;
-#endif
-
-        await FirebaseManager.ins.Firestore.UpdateData(collection, fuid, DataManager.instance.userData);
-    }
+//     public async void UpdateCollectPixelArtData(CollectPixelArtData data)
+//     {
+//         string collection = FirestoreCollections.UserData;
+//
+//         CollectTopicData saveCollectTopic = DataManager.instance.userData.CollectTopicDataList.Find(Data => Data.ID == SelTopicData.ID);
+//         saveCollectTopic.CollectPixelArtDataList.Add(data);
+//         
+// #if UNITY_EDITOR
+//         string fuid = "Test";
+// #else
+//         string fuid = FirebaseManager.ins.FireAuth.FUID;
+// #endif
+//
+//         await FirebaseManager.ins.Firestore.UpdateData(collection, fuid, DataManager.instance.userData);
+//     }
     /// <summary>
     /// 데이터를 Json으로 변환 후 실제 로컬에 저장하는 메서드
     /// </summary>
