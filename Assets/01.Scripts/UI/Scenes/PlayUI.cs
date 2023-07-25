@@ -5,32 +5,6 @@ using UnityEngine.UI;
 
 public class PlayUI : BodyUI, IObserver
 {
-    private abstract class UIUpdate
-    {
-        protected readonly PlayUI playUI;
-
-        protected UIUpdate(PlayUI playUI)
-        {
-            this.playUI = playUI;
-        }
-
-        public abstract void UpdateUI();
-    }
-    private class RemainPixelCountUIUpdate : UIUpdate
-    {
-        private readonly int _count;
-
-        public RemainPixelCountUIUpdate(PlayUI playUI, int count) : base(playUI)
-        {
-            _count = count;
-        }
-
-        public override void UpdateUI()
-        {
-            playUI.remainPixelText.text = $"남은 픽셀 : {_count}";
-        }
-    }
-
     public Image board;
     public TMP_Text remainPixelText;
     public TMP_Text playTimeText;
@@ -47,7 +21,8 @@ public class PlayUI : BodyUI, IObserver
     {
         _system = gameObject.GetComponent<ColorMatchSystem>();
         _system.RegisterObserver(this);
-        InitializePage();
+        SetPage();
+        _system.ReStart();
     }
 
     public void SelectSlot(ColorSlot slot)
@@ -67,50 +42,56 @@ public class PlayUI : BodyUI, IObserver
             return;
         }
 
-        if (_data.PixelColorData.RemainingPixels > 0)
-        {
-            int selectPixelIdx = Random.Range(0, _data.PixelColorData.CustomPixels.Count);
-
-            var selectedPixel = _data.PixelColorData.CustomPixels[selectPixelIdx];
-            int selectedCoord = Random.Range(0, selectedPixel.PixelCoords.Count);
-
-            Texture2D pixelArt = PixelArtHelper.SpriteToTexture2D(board.sprite);
-
-            Color origin = new Color(selectedPixel.OriginalColor.R, selectedPixel.OriginalColor.G,
-                selectedPixel.OriginalColor.B, selectedPixel.OriginalColor.A);
-
-            pixelArt.SetPixel(selectedPixel.PixelCoords[selectedCoord].X, selectedPixel.PixelCoords[selectedCoord].Y,
-                origin);
-            pixelArt.Apply();
-
-            selectedPixel.PixelCoords.RemoveAt(selectedCoord);
-
-            if (_data.PixelColorData.CustomPixels[selectPixelIdx].PixelCoords.Count == 0)
-            {
-                Debug.Log($"{origin} 컬러 값과 해당하는 좌표들을 모두 채웠음 해당 컬러를 리스트에서 제거");
-                _data.PixelColorData.CustomPixels.RemoveAt(selectPixelIdx);
-            }
-
-            _data.PixelColorData.RemainingPixels--;
-            _data.ThumbnailData = PixelArtHelper.ExtractThumbnailData(pixelArt);
-
-            board.sprite = PixelArtHelper.MakeThumbnail(_data.ThumbnailData, _data.Size);
-        }
+        FillPixel();
 
         if (_data.PixelColorData.RemainingPixels == 0)
         {
-            _data.IsCompleted = true;
-            _system.IsGameOver = true;
-            playBtnMove.gameObject.SetActive(false);
-            GalleryManager.ins.SelTopicData.CompleteCount++;
-
-            // CollectPixelArtData newCollectPixelArt = new CollectPixelArtData(_data.Title, _data.Description, _data.ThumbnailData, _data.PlayTime);
-            // GalleryManager.ins.UpdateCollectPixelArtData(newCollectPixelArt);
+            GameOver();
         }
 
         _system.pixelColorData = _data.PixelColorData;
 
         UpdateSubjectState();
+    }
+
+    private void FillPixel()
+    {
+        if (_data.PixelColorData.RemainingPixels <= 0) return;
+
+        int selectPixelIdx = Random.Range(0, _data.PixelColorData.CustomPixels.Count);
+
+        var selectedPixel = _data.PixelColorData.CustomPixels[selectPixelIdx];
+        int selectedCoord = Random.Range(0, selectedPixel.PixelCoords.Count);
+
+        Texture2D pixelArt = PixelArtHelper.SpriteToTexture2D(board.sprite);
+
+        Color origin = new Color(selectedPixel.OriginalColor.R, selectedPixel.OriginalColor.G,
+            selectedPixel.OriginalColor.B, selectedPixel.OriginalColor.A);
+
+        pixelArt.SetPixel(selectedPixel.PixelCoords[selectedCoord].X, selectedPixel.PixelCoords[selectedCoord].Y,
+            origin);
+        pixelArt.Apply();
+
+        selectedPixel.PixelCoords.RemoveAt(selectedCoord);
+
+        if (_data.PixelColorData.CustomPixels[selectPixelIdx].PixelCoords.Count == 0)
+        {
+            Debug.Log($"{origin} 컬러 값과 해당하는 좌표들을 모두 채웠음 해당 컬러를 리스트에서 제거");
+            _data.PixelColorData.CustomPixels.RemoveAt(selectPixelIdx);
+        }
+
+        _data.PixelColorData.RemainingPixels--;
+        _data.ThumbnailData = PixelArtHelper.ExtractThumbnailData(pixelArt);
+
+        board.sprite = PixelArtHelper.MakeThumbnail(_data.ThumbnailData, _data.Size);
+    }
+
+    private void GameOver()
+    {
+        _data.IsCompleted = true;
+        _system.IsGameOver = true;
+        playBtnMove.gameObject.SetActive(false);
+        GalleryManager.ins.SelTopicData.CompleteCount++;
     }
 
     public void PlayBtnEvent()
@@ -128,32 +109,25 @@ public class PlayUI : BodyUI, IObserver
     
     public void UpdateSubjectState()
     {
-        UpdateUI(new RemainPixelCountUIUpdate(this, _data.PixelColorData.RemainingPixels));
+        UpdateRemainPixelCountUI(_data.PixelColorData.RemainingPixels);
 
         GalleryManager.ins.UpdateAndSavePixelArtData(_data);
     }
-    
-    private void InitializePage()
-    {
-        GalleryManager.ins.CurPage = GalleryPage.ColorMatch;
-        SetPage();
-        _system.ReStart();
-    }
 
+    private void UpdateRemainPixelCountUI(int count)
+    {
+        remainPixelText.text = $"남은 픽셀 : {count}";
+    }
+    
     private void SetPage()
     {
+        GalleryManager.ins.CurPage = GalleryPage.ColorMatch;
         _system.RegisterObserver(this);
         _data = GalleryManager.ins.SelPixelArtData;
         _system.pixelColorData = _data.PixelColorData;
         playBtnMove.gameObject.SetActive(!_data.IsCompleted);
         board.sprite = PixelArtHelper.MakeThumbnail(_data.ThumbnailData, _data.Size);
         UpdateSubjectState();
-    }
-
-    private void UpdateUI(UIUpdate uiUpdate)
-    {
-        uiUpdate.UpdateUI();
-        GalleryManager.ins.UpdateAndSavePixelArtData(_data);
     }
 
     private IEnumerator PlayTimer()
