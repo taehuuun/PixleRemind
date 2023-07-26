@@ -4,6 +4,7 @@ using Firebase.Firestore;
 [FirestoreData, Serializable]
 public class PixelArtData
 {
+    [FirestoreProperty] public string ID { get; set; }
     [FirestoreProperty] public string Title { get; set; }
     [FirestoreProperty] public string ThumbnailData { get; set; }
     [FirestoreProperty] public string Description { get; set; }
@@ -15,6 +16,7 @@ public class PixelArtData
 
     public PixelArtData()
     {
+        ID = "";
         Title = "";
         ThumbnailData = "";
         Description = "";
