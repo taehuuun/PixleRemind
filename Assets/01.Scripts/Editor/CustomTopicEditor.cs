@@ -197,6 +197,7 @@ public class CustomTopicEditor : EditorWindow
         }
 
         GUI.enabled = false;
+        pixelArtData.ID = EditorGUILayout.TextField("ID", pixelArtData.ID); 
         pixelArtData.Title = EditorGUILayout.TextField("Title", pixelArtData.Title);
         EditorGUILayout.TextField("ThumbnailData", pixelArtData.ThumbnailData);
         EditorGUILayout.TextField("PlayTime", pixelArtData.PlayTime.ToString());
