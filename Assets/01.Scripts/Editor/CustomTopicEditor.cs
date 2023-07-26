@@ -215,6 +215,11 @@ public class CustomTopicEditor : EditorWindow
     private async Task LoadTopicDatas()
     {
         _firestoreTopicDatas = await _firestore.GetAllData<TopicData>(FirestoreCollections.GalleryData);
+
+        if (_firestoreTopicDatas == null)
+        {
+            _firestoreTopicDatas = new List<TopicData>();
+        }
         _firestoreTopicDatas.Sort(new TopicDataListComparer());
         Debug.Log("Data Load");
         Debug.Log($"Load Topic Data Count : {_firestoreTopicDatas.Count}");
