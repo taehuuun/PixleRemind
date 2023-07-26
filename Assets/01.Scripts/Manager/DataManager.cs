@@ -4,21 +4,10 @@ using System.IO;
 using UnityEngine;
 using Newtonsoft.Json;
 
-public class DataManager : MonoBehaviour
+public static class DataManager
 {
-    public static DataManager instance;
+    public static UserData userData;
 
-    public UserData userData;
-
-    private void Awake()
-    {
-        if (instance == null)
-        {
-            instance = this;
-            DontDestroyOnLoad(this);
-        }
-    }
-    
     /// <summary>
     /// 타겟 폴더의 모든 파일 이름을 반환하는 메서드
     /// </summary>

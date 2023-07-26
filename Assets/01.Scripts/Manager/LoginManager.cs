@@ -48,24 +48,23 @@ public class LoginManager : MonoBehaviour
             bool userDataExists =
                 await FirebaseManager.ins.Firestore.CheckDocumentExists(FirestoreCollections.UserData, FUID);
 
-            if (DataManager.instance.userData == null)
+            if (DataManager.userData == null)
             {
-                DataManager.instance.userData = new UserData();
+                DataManager.userData = new UserData();
             }
 
             if (!userDataExists)
             {
-                DataManager.instance.userData.LastUpdated = DateTime.Now;
+                DataManager.userData.LastUpdated = DateTime.Now;
                 await FirebaseManager.ins.Firestore.AddData(FirestoreCollections.UserData, FUID,
-                    DataManager.instance.userData);
+                    DataManager.userData);
             }
             else
             {
-                DataManager.instance.userData =
-                    await FirebaseManager.ins.Firestore.GetData<UserData>(FirestoreCollections.UserData, FUID);
+                DataManager.userData = await FirebaseManager.ins.Firestore.GetData<UserData>(FirestoreCollections.UserData, FUID);
             }
 
-            DataManager.instance.userData.LocalTopicDataIDs =
+            DataManager.userData.LocalTopicDataIDs =
                 DataManager.GetTargetFolderFileNames(DataPath.GalleryDataPath);
         }
         catch (Exception ex)

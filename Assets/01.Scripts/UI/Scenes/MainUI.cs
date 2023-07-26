@@ -29,7 +29,7 @@ public class MainUI : BodyUI
             Destroy(child.gameObject);
         }
         
-        List<string> localTopicIds = DataManager.instance.userData.LocalTopicDataIDs;
+        List<string> localTopicIds = DataManager.userData.LocalTopicDataIDs;
 
         for (int i = 0; i < localTopicIds.Count; i++)
         {

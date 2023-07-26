@@ -29,9 +29,9 @@ public class UpdateManager : MonoBehaviour
         // 로드된 토픽 데이터 리스트를 정렬
         _topicDataList.Sort(new TopicDataListComparer());
 
-        if (DataManager.instance.userData.LocalTopicDataIDs == null)
+        if (DataManager.userData.LocalTopicDataIDs == null)
         {
-            DataManager.instance.userData.LocalTopicDataIDs = new List<string>();
+            DataManager.userData.LocalTopicDataIDs = new List<string>();
         }
         
         await CheckForUpdated();
@@ -44,7 +44,7 @@ public class UpdateManager : MonoBehaviour
     public Task CheckForUpdated()
     {
         // 로컬에 저장되어 있는 토픽 데이터 ID 리스트
-        List<string> localTopicDataIDs = DataManager.instance.userData.LocalTopicDataIDs;
+        List<string> localTopicDataIDs = DataManager.userData.LocalTopicDataIDs;
         
         // 다운로드 하지 않은 토픽 데이터 리스트
         List<TopicData> missingDataList = new List<TopicData>();
@@ -124,8 +124,8 @@ public class UpdateManager : MonoBehaviour
 
                 // CollectTopicData newCollectTopicData = new CollectTopicData(serverData.ID, serverData.Title,serverData.ThumbData,serverData.ThumbSize, serverData.CompleteCount, serverData.TotalCount);
                 // DataManager.instance.userData.CollectTopicDataList.Add(newCollectTopicData);
-                DataManager.instance.userData.LocalTopicDataIDs.Add(topicID);
-                DataManager.instance.userData.LastUpdated = DateTime.Now;
+                DataManager.userData.LocalTopicDataIDs.Add(topicID);
+                DataManager.userData.LastUpdated = DateTime.Now;
 
 #if UNITY_ANDROID && !UNITY_EDITOR
                  string FUID = FirebaseManager.ins.FireAuth.FUID;
@@ -133,7 +133,7 @@ public class UpdateManager : MonoBehaviour
                 string FUID = "Test";
 #endif
                 await FirebaseManager.ins.Firestore.UpdateData<UserData>(FirestoreCollections.UserData, FUID,
-                    DataManager.instance.userData);
+                    DataManager.userData);
             
                 OnDownloadCompleted?.Invoke();
             }
