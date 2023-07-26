@@ -36,6 +36,10 @@ public class PixelArtDataEditWindow : EditorWindow
             else
             {
                 var newPixelArtData = PixelArtHelper.ExportPixelData(_tmpTitleID, _tmpDescription, _tmpPixelArt, _tmpDifficulty);
+
+                string hashInput = $"{_tmpTitleID}{_tmpDescription}{_tmpPixelArt}{_tmpDifficulty}";
+                newPixelArtData.ID = HashGenerator.GeneratorHash(hashInput);
+                
                 _onConfirm?.Invoke(newPixelArtData);
                 Close();
             }
