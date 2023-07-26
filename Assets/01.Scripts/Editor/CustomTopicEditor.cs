@@ -221,15 +221,12 @@ public class CustomTopicEditor : EditorWindow
             _firestoreTopicDatas = new List<TopicData>();
         }
         _firestoreTopicDatas.Sort(new TopicDataListComparer());
-        Debug.Log("Data Load");
-        Debug.Log($"Load Topic Data Count : {_firestoreTopicDatas.Count}");
     }
 
     private async void DeleteTopicData(string id)
     {
         if (await _firestore.CheckDocumentExists(FirestoreCollections.GalleryData, id))
         {
-            Debug.Log($"토픽 데이터 제거 완료 ID : {id}");
             await _firestore.DeleteData(FirestoreCollections.GalleryData, id);
         }
     }
@@ -242,21 +239,24 @@ public class CustomTopicEditor : EditorWindow
 
             if (topicData.ID.StartsWith("_tempTopic_"))
             {
-                var docRef = await _firestore.AddData<TopicData>(FirestoreCollections.GalleryData, topicData);
-                topicData.ID = docRef.Id;
-                Debug.Log($"{topicData.ID} 추가 완료");
+                // Generate a hash for the topic data ID
+                string hashInput = $"{topicData.Title}{topicData.Description}{topicData.ThumbData}{topicData.CompleteCount}{topicData.TotalCount}{topicData.Complete}{topicData.Updateable}{topicData.IsLocked}{topicData.LastUpdated}";
+                string generatedHash = HashGenerator.GenerateHash(hashInput);
+                topicData.ID = generatedHash;
 
-                await _firestore.UpdateData<TopicData>(FirestoreCollections.GalleryData, topicData.ID, topicData);
+                // Only add the data with the hashed ID
+                await _firestore.AddData(FirestoreCollections.GalleryData, topicData.ID,topicData);
             }
             else
             {
-                await _firestore.UpdateData<TopicData>(FirestoreCollections.GalleryData, topicData.ID, topicData);
+                await _firestore.UpdateData(FirestoreCollections.GalleryData, topicData.ID, topicData);
             }
         }
 
         _firestoreTopicDatas.Clear();
         await LoadTopicDatas();
     }
+
 
     #endregion
 }
