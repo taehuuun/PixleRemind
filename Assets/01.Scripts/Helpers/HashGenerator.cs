@@ -3,9 +3,9 @@ using System.Text;
 
 public static class HashGenerator
 {
-    public static string GeneratorHash(string input)
+    public static string GenerateHash(string input)
     {
-        using (SHA256 sha256 = SHA256.Create(input))
+        using (SHA256 sha256 = SHA256.Create())
         {
             byte[] bytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(input));
 
