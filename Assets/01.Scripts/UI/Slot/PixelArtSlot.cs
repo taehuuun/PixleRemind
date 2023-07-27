@@ -7,16 +7,11 @@ public class PixelArtSlot : Slot
     public TMP_Text playTimeText;
     public PixelArtData pixelData;
     public GameObject completeMark;
-
-    public delegate void PixelArtSlotClickHandler(PixelArtData clickPixelArtData);
-
-    public event PixelArtSlotClickHandler OnClick;
-
+    
     public override void OnSlotClick()
     {
-        OnClick?.Invoke(pixelData);
+        DataManager.userData.SelectPixelArtID = pixelData.ID;
     }
-
     public override void SetSlot()
     {
         difficultyText.text = pixelData.Difficulty.ToString();

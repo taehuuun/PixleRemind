@@ -36,18 +36,6 @@ public class MainUI : BodyUI
             TopicSlot topicSlot = Instantiate(topicSlotPrefab, topicSlotContainer);
             topicSlot.data = DataManager.LoadJsonData<TopicData>(DataPath.GalleryDataPath, localTopicIds[i]);
             topicSlot.SetSlot();
-            topicSlot.OnClick += HandleTopicSlotClick;
         }
-    }
-    
-    /// <summary>
-    /// 해당 토픽 슬롯을 클릭 했을 때 호출되는 메서드
-    /// </summary>
-    /// <param name="clickedTopicData">클릭한 토픽 슬롯</param>
-    private void HandleTopicSlotClick(TopicData clickedTopicData)
-    {
-        GalleryManager.ins.SelTopicData = clickedTopicData;
-        LoadingTaskManager.Instance.NextSceneName = SceneNames.GalleryScene;
-        MoveScene(SceneNames.LoadingScene);
     }
 }
