@@ -477,9 +477,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1599446213}
-        m_TargetAssemblyTypeName: PlayUI, Assembly-CSharp
-        m_MethodName: SelectSlot
+      - m_Target: {fileID: 536653000}
+        m_TargetAssemblyTypeName: ColorMatchSystem, Assembly-CSharp
+        m_MethodName: CheckMatch
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 145171598}
@@ -739,9 +739,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1599446213}
-        m_TargetAssemblyTypeName: PlayUI, Assembly-CSharp
-        m_MethodName: SelectSlot
+      - m_Target: {fileID: 536653000}
+        m_TargetAssemblyTypeName: ColorMatchSystem, Assembly-CSharp
+        m_MethodName: CheckMatch
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 226873941}
@@ -1657,7 +1657,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1240038569
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1700,15 +1700,15 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\uB0A8\uC740 \uD53D\uC140 : 45"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: b772446770becea4bb00a5c5c9221f5f, type: 2}
-  m_sharedMaterial: {fileID: -7043172721660109426, guid: b772446770becea4bb00a5c5c9221f5f, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 4f1002415fcc7e7429d6a272d5a2b0bf, type: 2}
+  m_sharedMaterial: {fileID: 3188472244663407893, guid: 4f1002415fcc7e7429d6a272d5a2b0bf, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 16777215
+  m_fontColor: {r: 1, g: 1, b: 1, a: 0}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -2313,7 +2313,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1648489787
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2356,15 +2356,15 @@ MonoBehaviour:
       m_Calls: []
   m_text: 00:00:00
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: b772446770becea4bb00a5c5c9221f5f, type: 2}
-  m_sharedMaterial: {fileID: -7043172721660109426, guid: b772446770becea4bb00a5c5c9221f5f, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 4f1002415fcc7e7429d6a272d5a2b0bf, type: 2}
+  m_sharedMaterial: {fileID: 3188472244663407893, guid: 4f1002415fcc7e7429d6a272d5a2b0bf, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 16777215
+  m_fontColor: {r: 1, g: 1, b: 1, a: 0}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -2757,9 +2757,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1599446213}
-        m_TargetAssemblyTypeName: PlayUI, Assembly-CSharp
-        m_MethodName: SelectSlot
+      - m_Target: {fileID: 536653000}
+        m_TargetAssemblyTypeName: ColorMatchSystem, Assembly-CSharp
+        m_MethodName: CheckMatch
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 1926315282}
