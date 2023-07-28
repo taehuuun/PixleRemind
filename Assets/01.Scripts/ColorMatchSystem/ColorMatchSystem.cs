@@ -1,10 +1,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ColorMatchSystem : MonoBehaviour, ISubject
+public class ColorMatchSystem : MonoBehaviour
 {
     // 현재 보여질 픽셀 아트의 데이터
-    public PixelColorData pixelColorData;
+    // public _pixelArtData.PixelColorData _pixelArtData.PixelColorData;
+    private PixelArtData _pixelArtData;
     
     // 현제 픽셀 아트 데이터의 컬러 슬롯 UI
     public ColorSlot targetColorSlot;
@@ -12,66 +13,12 @@ public class ColorMatchSystem : MonoBehaviour, ISubject
     // 컬러 슬롯 UI
     public List<ColorSlot> selectColorSlots;
 
-    // UI 업데이트를 위한 옵저버 리스트
-    public List<IObserver> observers = new List<IObserver>();
-    
-    private int _score;
     private int _life;
     private float _disSimilarRange;
-    private bool _isGameOver = false;
     
     public float decRangeValue = 0.05f;
     public int maxLife;
     public float maxDisSimilarRange;
-    
-    public int Score
-    {
-        // _score 반환
-        get => _score;
-        
-        // _score수정 후 옵저버에게 변경을 일림
-        private set
-        {
-            _score = value;
-            NotifyObservers();
-        }
-    }
-    public int Life
-    {
-        // _life 반환
-        get => _life;
-        
-        // _life 수정 후 옵저버에게 변경을 알림
-        private set
-        {
-            _life = value;
-            NotifyObservers();
-        }
-    }
-    public float DisSimilarRange
-    {
-        // _disSimilarRange 반환
-        get => _disSimilarRange;
-        
-        // _disSimilarRange 수정 후 옵저버에게 변경을 알림
-        private set
-        {
-            _disSimilarRange = value;
-            NotifyObservers();
-        }
-    }
-    public bool IsGameOver
-    {
-        // _isGameOver 반환
-        get => _isGameOver;
-        
-        // _isGameOver 수정 후 옵저버에게 변경을 알림
-        set
-        {
-            _isGameOver = value;
-            NotifyObservers();
-        }
-    }
 
     /// <summary>
     /// 게임 재시작 메서드
@@ -98,7 +45,7 @@ public class ColorMatchSystem : MonoBehaviour, ISubject
         {
             OnCorrectMatch();
         }
-        else if (Life > 0)
+        else if (_life > 0)
         {
             OnIncorrectMatch();
         }
@@ -106,13 +53,20 @@ public class ColorMatchSystem : MonoBehaviour, ISubject
         // 일치 여부 반환
         return isMatched;
     }
-    
+    public bool IsGameOver()
+    {
+        return _life == 0 || _pixelArtData.IsCompleted;
+    }
+
+    #region 메인 미니 게임 로직
+
     /// <summary>
     /// 컬러값이 일치할 경우 호출되는 메서드
     /// </summary>
     private void OnCorrectMatch()
     {
-        IncreaseScore();
+        FillRandomPixel();
+        DisSimilarRange();
         SetNextColorSlot();
     }
   
@@ -127,27 +81,59 @@ public class ColorMatchSystem : MonoBehaviour, ISubject
         // life 감소
         DecreaseLife();
     }
+
+    private void FillRandomPixel()
+    {
+        if (_pixelArtData.PixelColorData.RemainingPixels <= 0) return;
+        
+        int selectPixelIdx = Random.Range(0, _pixelArtData.PixelColorData.CustomPixels.Count);
+        
+        var selectedPixel = _pixelArtData.PixelColorData.CustomPixels[selectPixelIdx];
+        int selectedCoord = Random.Range(0, selectedPixel.PixelCoords.Count);
+
+        Sprite sprite = PixelArtHelper.MakeThumbnail(_pixelArtData.ThumbnailData, _pixelArtData.Size);
+        Texture2D pixelArt = PixelArtHelper.SpriteToTexture2D(sprite);
+        
+        Color origin = new Color(selectedPixel.OriginalColor.R, selectedPixel.OriginalColor.G,
+            selectedPixel.OriginalColor.B, selectedPixel.OriginalColor.A);
+        
+        pixelArt.SetPixel(selectedPixel.PixelCoords[selectedCoord].X, selectedPixel.PixelCoords[selectedCoord].Y,
+            origin);
+        pixelArt.Apply();
+        
+        selectedPixel.PixelCoords.RemoveAt(selectedCoord);
+        
+        if (_pixelArtData.PixelColorData.CustomPixels[selectPixelIdx].PixelCoords.Count == 0)
+        {
+            Debug.Log($"{origin} 컬러 값과 해당하는 좌표들을 모두 채웠음 해당 컬러를 리스트에서 제거");
+            _pixelArtData.PixelColorData.CustomPixels.RemoveAt(selectPixelIdx);
+        }
+        
+        _pixelArtData.PixelColorData.RemainingPixels--;
+        _pixelArtData.ThumbnailData = PixelArtHelper.ExtractThumbnailData(pixelArt);
+
+        if (_pixelArtData.PixelColorData.RemainingPixels == 0)
+        {
+            _pixelArtData.IsCompleted = true;
+        }
+    }
    
     /// <summary>
     /// ColorMatchSystem의 상태를 리셋하는 메서드
     /// </summary>
     private void ResetStats()
     {
-        _isGameOver = false;
-        Life = maxLife;
-        Score = 0;
-        DisSimilarRange = maxDisSimilarRange;
+        _life = maxLife;
+        _disSimilarRange = maxDisSimilarRange;
     }
    
     /// <summary>
-    /// Score를 증가시키는 메서드
+    /// DisSimilarRange를 감소 시키는 메서드
     /// </summary>
-    private void IncreaseScore()
+    private void DisSimilarRange()
     {
-        Score++;
-        
         // DisSimilarRange 값을 감소
-        DisSimilarRange = Mathf.Clamp(DisSimilarRange - decRangeValue, 5, 100);
+        _disSimilarRange = Mathf.Clamp(_disSimilarRange - decRangeValue, 5, 100);
     }
    
     /// <summary>
@@ -156,15 +142,9 @@ public class ColorMatchSystem : MonoBehaviour, ISubject
     private void DecreaseLife()
     {
         // Life가 0이 아니면 감소
-        // Life가 0일 때 IsGameOver프로퍼티 true 변경
-        if (Life > 0)
+        if (_life > 0)
         {
-            Life--;
-
-            if (Life == 0)
-            {
-                IsGameOver = true;
-            }
+            _life--;
         }
     }
    
@@ -182,17 +162,17 @@ public class ColorMatchSystem : MonoBehaviour, ISubject
     /// </summary>
     private void SetRandomTargetColorFromPixelArtData()
     {
-        if (pixelColorData == null || pixelColorData.CustomPixels.Count == 0)
+        if (_pixelArtData.PixelColorData == null || _pixelArtData.PixelColorData.CustomPixels.Count == 0)
         {
             // Debug.LogWarning("No Pixel Art Data Found, Using Random Color");
             // SetRandomTargetColor();
             return;
         }
         
-        int randIdx = Random.Range(0, pixelColorData.CustomPixels.Count);
+        int randIdx = Random.Range(0, _pixelArtData.PixelColorData.CustomPixels.Count);
         
         // 랜덤 선택된 CustomPixels의 원본 색상값을 colorValue에 대입
-        ColorValue colorValue = pixelColorData.CustomPixels[randIdx].OriginalColor;
+        ColorValue colorValue = _pixelArtData.PixelColorData.CustomPixels[randIdx].OriginalColor;
         
         // 원본 색상값(ColorValue)을 Color 타입으로 생성
         Color randColor = new Color(colorValue.R, colorValue.G, colorValue.B, colorValue.A);
@@ -251,12 +231,12 @@ public class ColorMatchSystem : MonoBehaviour, ISubject
             }
             else
             {
-                randColor = GetRandomSimilarColor(targetColorSlot.slotImage.color, DisSimilarRange);
+                randColor = GetRandomSimilarColor(targetColorSlot.slotImage.color, _disSimilarRange);
                 
                 // 만약 랜덤 컬러가 타겟 슬롯 컬러와 같을 경우 컬러 재설정
                 while (randColor == targetColorSlot.slotImage.color)
                 {
-                    randColor = GetRandomSimilarColor(targetColorSlot.slotImage.color, DisSimilarRange);
+                    randColor = GetRandomSimilarColor(targetColorSlot.slotImage.color, _disSimilarRange);
                 }
             }   
             
@@ -284,39 +264,6 @@ public class ColorMatchSystem : MonoBehaviour, ISubject
         // 계산된 rgb 값을 이용하여 새로운 컬러를 반환
         return new Color(r, g, b);
     }
-    
-    /// <summary>
-    /// 옵저버를 등록하는 메서드
-    /// </summary>
-    /// <param name="observer">등록할 옵저버</param>
-    public void RegisterObserver(IObserver observer)
-    {
-        if (!observers.Contains(observer))
-        {
-            observers.Add(observer);
-        }
-    }
-    
-    /// <summary>
-    /// 옵저버를 제거하는 메서드
-    /// </summary>
-    /// <param name="observer">제거할 옵저버</param>
-    public void RemoveObserver(IObserver observer)
-    {
-        if (observers.Contains(observer))
-        {
-            observers.Remove(observer);
-        }
-    }
 
-    /// <summary>
-    /// 등록된 옵저버들에게 상태를 업데이트 하는 메서드
-    /// </summary>
-    public void NotifyObservers()
-    {
-        foreach (IObserver observer in observers)
-        {
-            observer.UpdateSubjectState();
-        }
-    }
+    #endregion
 }
