@@ -47,8 +47,7 @@ public class PlayUI : BodyUI
         matchUIMove.Return();
         yield return new WaitUntil(() => matchUIMove.isComplete);
 
-        GalleryManager.ins.IsMatching = false;
-        boardMove.Return();
+         boardMove.Return();
         playBtnMove.Return();
     }
     private IEnumerator ShowMatchUI()
