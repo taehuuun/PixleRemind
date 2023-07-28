@@ -56,6 +56,7 @@ public class GameManager : MonoBehaviour
         if (_selectPixelArtData.IsCompleted)
         {
             _selectTopicData.CompleteCount++;
+            _selectPixelArtData.PlayTime = _playTime;
         }
         
         SaveData();
