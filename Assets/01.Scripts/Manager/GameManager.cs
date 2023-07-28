@@ -57,6 +57,7 @@ public class GameManager : MonoBehaviour
         {
             _selectTopicData.CompleteCount++;
             _selectPixelArtData.PlayTime = _playTime;
+            playUI.SetPlayButton(_selectPixelArtData.IsCompleted);
         }
         
         SaveData();
