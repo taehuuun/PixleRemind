@@ -2125,9 +2125,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1599446213}
-        m_TargetAssemblyTypeName: PlayUI, Assembly-CSharp
-        m_MethodName: PlayBtnEvent
+      - m_Target: {fileID: 536653001}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: StartGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
