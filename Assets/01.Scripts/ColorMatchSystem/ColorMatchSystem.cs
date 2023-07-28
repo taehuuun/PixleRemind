@@ -6,16 +6,16 @@ public class ColorMatchSystem : MonoBehaviour
     // 현재 보여질 픽셀 아트의 데이터
     // public _pixelArtData.PixelColorData _pixelArtData.PixelColorData;
     private PixelArtData _pixelArtData;
-    
+
     // 현제 픽셀 아트 데이터의 컬러 슬롯 UI
     public ColorSlot targetColorSlot;
-    
+
     // 컬러 슬롯 UI
     public List<ColorSlot> selectColorSlots;
 
     private int _life;
     private float _disSimilarRange;
-    
+
     public float decRangeValue = 0.05f;
     public int maxLife;
     public float maxDisSimilarRange;
@@ -38,7 +38,7 @@ public class ColorMatchSystem : MonoBehaviour
     {
         // 타겟 컬러 슬롯과 선택 슬롯의 컬러가 일치하는지 비교
         bool isMatched = (slot.slotImage.color == targetColorSlot.slotImage.color);
-        
+
         // 일치 할경우 OnCorrectMatch 메서드 진행
         // 일치 하지 않을 경고, 기회가 남았을 때 OnIncorrectMatch 메서드 진행
         if (isMatched)
@@ -49,16 +49,22 @@ public class ColorMatchSystem : MonoBehaviour
         {
             OnIncorrectMatch();
         }
-        
+
         // 일치 여부 반환
         return isMatched;
     }
+
     public bool IsGameOver()
     {
         return _life == 0 || _pixelArtData.IsCompleted;
     }
 
-    #region 메인 미니 게임 로직
+    public void SetPixelArtData(PixelArtData pixelArtData)
+    {
+        _pixelArtData = pixelArtData;
+    }
+
+#region 메인 미니 게임 로직
 
     /// <summary>
     /// 컬러값이 일치할 경우 호출되는 메서드

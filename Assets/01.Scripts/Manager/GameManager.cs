@@ -34,6 +34,7 @@ public class GameManager : MonoBehaviour
         _userData = DataManager.userData;
         _selectTopicData = DataManager.LoadJsonData<TopicData>(DataPath.GalleryDataPath, _userData.SelectTopicID);
         _selectPixelArtData = _selectTopicData.PixelArtDatas.Find((pixelArtData) => pixelArtData.ID == DataManager.userData.SelectPixelArtID);
+        colorMatchSystem.SetPixelArtData(_selectPixelArtData);
         playUI.UpdatePixelArt(_selectPixelArtData.ThumbnailData,_selectPixelArtData.Size);
         playUI.SetPlayButton(_selectPixelArtData.IsCompleted);
     }
