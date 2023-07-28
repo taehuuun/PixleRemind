@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PixelArtSlot : Slot
 {
@@ -11,6 +12,8 @@ public class PixelArtSlot : Slot
     public override void OnSlotClick()
     {
         DataManager.userData.SelectPixelArtID = pixelData.ID;
+        LoadingTaskManager.Instance.NextSceneName = SceneNames.GalleryScene;
+        SceneManager.LoadScene(SceneNames.LoadingScene);
     }
     public override void SetSlot()
     {
