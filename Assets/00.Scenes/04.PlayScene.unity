@@ -811,8 +811,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Gallery
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: b772446770becea4bb00a5c5c9221f5f, type: 2}
-  m_sharedMaterial: {fileID: -7043172721660109426, guid: b772446770becea4bb00a5c5c9221f5f, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 4f1002415fcc7e7429d6a272d5a2b0bf, type: 2}
+  m_sharedMaterial: {fileID: 3188472244663407893, guid: 4f1002415fcc7e7429d6a272d5a2b0bf, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -927,6 +927,73 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -75}
   m_SizeDelta: {x: 0, y: -150}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &536652999
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 536653002}
+  - component: {fileID: 536653001}
+  - component: {fileID: 536653000}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &536653000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 536652999}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5904ac3e0600654448952837574e9ddf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetColorSlot: {fileID: 1447006372}
+  selectColorSlots:
+  - {fileID: 226873941}
+  - {fileID: 1926315282}
+  - {fileID: 145171598}
+  decRangeValue: 0.05
+  maxLife: 1
+  maxDisSimilarRange: 80
+--- !u!114 &536653001
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 536652999}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0505066fa76481344b764f6e8732417b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  colorMatchSystem: {fileID: 536653000}
+  playUI: {fileID: 1599446213}
+--- !u!4 &536653002
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 536652999}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &613936145
 GameObject:
   m_ObjectHideFlags: 0
@@ -1133,8 +1200,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Play
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: b772446770becea4bb00a5c5c9221f5f, type: 2}
-  m_sharedMaterial: {fileID: -7043172721660109426, guid: b772446770becea4bb00a5c5c9221f5f, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 4f1002415fcc7e7429d6a272d5a2b0bf, type: 2}
+  m_sharedMaterial: {fileID: 3188472244663407893, guid: 4f1002415fcc7e7429d6a272d5a2b0bf, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1421,8 +1488,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Back
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: b772446770becea4bb00a5c5c9221f5f, type: 2}
-  m_sharedMaterial: {fileID: -7043172721660109426, guid: b772446770becea4bb00a5c5c9221f5f, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 4f1002415fcc7e7429d6a272d5a2b0bf, type: 2}
+  m_sharedMaterial: {fileID: 3188472244663407893, guid: 4f1002415fcc7e7429d6a272d5a2b0bf, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2121,7 +2188,6 @@ GameObject:
   - component: {fileID: 1599446210}
   - component: {fileID: 1599446209}
   - component: {fileID: 1599446213}
-  - component: {fileID: 1599446214}
   m_Layer: 5
   m_Name: UI
   m_TagString: Untagged
@@ -2230,26 +2296,6 @@ MonoBehaviour:
   boardMove: {fileID: 1895216948}
   playBtnMove: {fileID: 1463665510}
   matchUIMove: {fileID: 48771863}
---- !u!114 &1599446214
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1599446208}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5904ac3e0600654448952837574e9ddf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  targetColorSlot: {fileID: 1447006372}
-  selectColorSlots:
-  - {fileID: 226873941}
-  - {fileID: 1926315282}
-  - {fileID: 145171598}
-  decRangeValue: 0.05
-  maxLife: 1
-  maxDisSimilarRange: 80
 --- !u!1 &1648489786
 GameObject:
   m_ObjectHideFlags: 0
