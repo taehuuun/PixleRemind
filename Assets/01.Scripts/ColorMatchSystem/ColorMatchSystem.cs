@@ -34,7 +34,7 @@ public class ColorMatchSystem : MonoBehaviour
     /// </summary>
     /// <param name="slot">클릭된 슬롯</param>
     /// <returns>일치하는지 여부 반환</returns>
-    public bool CheckMatch(ColorSlot slot)
+    public void CheckMatch(ColorSlot slot)
     {
         // 타겟 컬러 슬롯과 선택 슬롯의 컬러가 일치하는지 비교
         bool isMatched = (slot.slotImage.color == targetColorSlot.slotImage.color);
@@ -49,9 +49,6 @@ public class ColorMatchSystem : MonoBehaviour
         {
             OnIncorrectMatch();
         }
-
-        // 일치 여부 반환
-        return isMatched;
     }
 
     public bool IsGameOver()
@@ -166,7 +163,7 @@ public class ColorMatchSystem : MonoBehaviour
     /// <summary>
     /// 현재 픽셀 아트의 컬러중 랜덤하게 선택하여 타겟 컬러를 변경하는 메서드
     /// </summary>
-    private void SetRandomTargetColorFromPixelArtData()
+        private void SetRandomTargetColorFromPixelArtData()
     {
         if (_pixelArtData.PixelColorData == null || _pixelArtData.PixelColorData.CustomPixels.Count == 0)
         {
