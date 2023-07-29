@@ -1794,9 +1794,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1603840862}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 53ace6d138613d64bb7bf001cbcf9cea, type: 3}
+  m_Script: {fileID: 11500000, guid: 5810e45f57122ca4f9e10e320c4b37f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  genCollectTopicSlotParent: {fileID: 1864713411}
+  collectTopicSlotPrefab: {fileID: 215166979105000297, guid: 358b3e1b844f4eb458a72bad189a9c22, type: 3}
 --- !u!1 &1617017362
 GameObject:
   m_ObjectHideFlags: 0
