@@ -5,6 +5,8 @@ public class CollectUI : BodyUI
 {
     [SerializeField] private Transform genCollectTopicSlotParent;
     [SerializeField] private CollectTopicSlot collectTopicSlotPrefab;
+    [SerializeField] private CollectPixelArtSlot collectPixelArtSlotPrefab;
+    [SerializeField] private CollectPixelArtDetailPopup collectPixelArtDetailPopup;
     
     private void Start()
     {
