@@ -16,10 +16,11 @@ public class CollectedPixelArtData
         Description = "";
         ThumbnailSize = 0;
     }
-    public CollectedPixelArtData(string title, string thumbnailData, string description)
+    public CollectedPixelArtData(string title, string thumbnailData, string description, int thumbnailSize)
     {
         Title = title;
         ThumbnailData = thumbnailData;
         Description = description;
+        ThumbnailSize = thumbnailSize;
     }
 }
