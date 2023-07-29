@@ -6,6 +6,7 @@ using Firebase.Firestore;
 public class UserData
 {
     [FirestoreProperty] public List<string> LocalTopicDataIDs { get; set; }
+    [FirestoreProperty] public List<CollectedTopicData> CollectedTopicDataList { get; set; }
     [FirestoreProperty] public DateTime LastUpdated { get; set; }
     public string SelectTopicID { get; set; }
     public string SelectPixelArtID { get; set; }
@@ -13,5 +14,6 @@ public class UserData
     public UserData()
     {
         LocalTopicDataIDs = new List<string>();
+        CollectedTopicDataList = new List<CollectedTopicData>();
     }
 }
