@@ -2413,7 +2413,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1603840867}
         m_TargetAssemblyTypeName: BodyUI, Assembly-CSharp
         m_MethodName: MoveScene
         m_Mode: 5
