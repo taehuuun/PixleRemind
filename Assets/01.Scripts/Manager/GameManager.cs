@@ -50,13 +50,13 @@ public class GameManager : MonoBehaviour
     {
         _selectTopicData.CompleteCount++;
         _selectPixelArtData.PlayTime = _playTime;
-;
+
         CollectedTopicData curCollectTopicData =  DataManager.userData.CollectedTopicDataList.Find((collectTopic) => collectTopic.ID == _selectTopicData.ID);
         CollectedPixelArtData newCollectPixelArtData = new CollectedPixelArtData(_selectPixelArtData.Title, _selectPixelArtData.ThumbnailData, _selectPixelArtData.Description, _selectPixelArtData.Size);
         curCollectTopicData.CollectedPixelArtDataList.Add(newCollectPixelArtData);
         
 #if UNITY_ANDROID && !UNITY_EDITOR
-                 string FUID = FirebaseManager.ins.FireAuth.FUID;
+        string FUID = FirebaseManager.ins.FireAuth.FUID;
 #else
         string FUID = "Test";
 #endif
