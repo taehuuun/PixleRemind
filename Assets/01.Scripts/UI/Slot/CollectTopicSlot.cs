@@ -14,6 +14,7 @@ public class CollectTopicSlot : MonoBehaviour
         for (int i = 0; i < collectedTopicData.CollectedPixelArtDataList.Count; i++)
         {
             CollectPixelArtSlot newCollectPixelArtSlot = Instantiate(collectPixelArtSlotPrefab, genPixelArtSlotParent);
+            newCollectPixelArtSlot.SetSlot(collectedTopicData.CollectedPixelArtDataList[i]);
         } 
     }
 }
