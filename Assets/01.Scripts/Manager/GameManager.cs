@@ -41,6 +41,8 @@ public class GameManager : MonoBehaviour
     
     private void SaveData()
     {
+        _selectTopicData.ThumbData = _selectPixelArtData.ThumbnailData;
+        _selectTopicData.ThumbSize = _selectPixelArtData.Size;
         DataManager.SaveJsonData(DataPath.GalleryDataPath,_userData.SelectTopicID, _selectTopicData);
     }
 
