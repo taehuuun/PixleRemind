@@ -12,10 +12,11 @@ public class CollectPixelArtDetailPopup : MonoBehaviour
     {
         gameObject.SetActive(false);
     }
-
-    // Update is called once per frame
-    void Update()
+    
+    public void SetPopup(CollectedPixelArtData collectedPixelArtData)
     {
-        
+        titleText.text = collectedPixelArtData.Title;
+        descriptionText.text = collectedPixelArtData.Description;
+        thumbnailImage.sprite = PixelArtHelper.MakeThumbnail(collectedPixelArtData.ThumbnailData, collectedPixelArtData.ThumbnailSize);
     }
 }
