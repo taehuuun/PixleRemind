@@ -39,7 +39,7 @@ public class GameManager : MonoBehaviour
         playUI.SetPlayButton(_selectPixelArtData.IsCompleted);
     }
     
-    private void SaveData()
+    public void SaveData()
     {
         _selectTopicData.ThumbData = _selectPixelArtData.ThumbnailData;
         _selectTopicData.ThumbSize = _selectPixelArtData.Size;
