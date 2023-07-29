@@ -89,6 +89,7 @@ GameObject:
   - component: {fileID: 8875485672285615345}
   - component: {fileID: 3178922650192546134}
   - component: {fileID: 7754332004451988829}
+  - component: {fileID: 6470399722803256370}
   m_Layer: 5
   m_Name: CollectPixelSlot
   m_TagString: Untagged
@@ -212,6 +213,20 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &6470399722803256370
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4980567387588902102}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19bd67f9439dea64ca79381fd861d7f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  titleText: {fileID: 2459080566532519614}
+  thumbnailImage: {fileID: 3817001673978073465}
 --- !u!1 &6023721225337913411
 GameObject:
   m_ObjectHideFlags: 0

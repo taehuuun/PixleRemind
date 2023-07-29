@@ -689,6 +689,7 @@ GameObject:
   - component: {fileID: 7433464685115905585}
   - component: {fileID: 5044798862903847790}
   - component: {fileID: 8854162097683907575}
+  - component: {fileID: 215166979105000297}
   m_Layer: 5
   m_Name: CollectTopicSlot
   m_TagString: Untagged
@@ -756,6 +757,21 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &215166979105000297
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7107328743290249681}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab474d68279d0044caf5c9528b8fbf17, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  titleText: {fileID: 3054398140030292367}
+  genPixelArtSlotParent: {fileID: 5198750268655831928}
+  collectPixelArtSlotPrefab: {fileID: 6470399722803256370, guid: ba72b517f63042840a0017cd220d08cd, type: 3}
 --- !u!1 &7431127905867081868
 GameObject:
   m_ObjectHideFlags: 0
