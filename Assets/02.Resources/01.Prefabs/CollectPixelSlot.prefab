@@ -201,8 +201,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: TopicSlot, Assembly-CSharp
+      - m_Target: {fileID: 6470399722803256370}
+        m_TargetAssemblyTypeName: CollectPixelArtSlot, Assembly-CSharp
         m_MethodName: OnSlotClick
         m_Mode: 1
         m_Arguments:
