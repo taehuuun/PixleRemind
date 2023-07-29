@@ -5,7 +5,6 @@ public class CollectTopicSlot : MonoBehaviour
 {
     [SerializeField] private TMP_Text titleText;
     [SerializeField] private Transform genPixelArtSlotParent;
-    [SerializeField] private CollectPixelArtSlot collectPixelArtSlotPrefab;
 
     public void SetSlot(CollectedTopicData collectedTopicData)
     {
