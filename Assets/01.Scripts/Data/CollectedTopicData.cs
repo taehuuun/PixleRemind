@@ -28,9 +28,4 @@ public CollectedTopicData(string id, string title, string description, int total
         TotalPixelArtDataCount = totalPixelArtDataCount;
         CollectedPixelArtDataList = new List<CollectedPixelArtData>();
     }
-
-    public void AddCollectedPixelArtData(CollectedPixelArtData collectedPixelArtData)
-    {
-        CollectedPixelArtDataList?.Add(collectedPixelArtData);
-    }
 }
