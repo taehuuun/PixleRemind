@@ -8,6 +8,13 @@ public class CollectPixelArtSlot : MonoBehaviour
     [SerializeField] private Image thumbnailImage;
     private CollectedPixelArtData _collectPixelArtData;
 
+    public delegate void CollectPixelArtSlotClickHandler(CollectedPixelArtData collectedPixelArtData);
+    public event CollectPixelArtSlotClickHandler OnClick;
+
+    public void OnSlotClick()
+    {
+        OnClick?.Invoke(_collectPixelArtData);
+    }
     public void SetSlot(CollectedPixelArtData collectedPixelArtData)
     {
         _collectPixelArtData = collectedPixelArtData;
