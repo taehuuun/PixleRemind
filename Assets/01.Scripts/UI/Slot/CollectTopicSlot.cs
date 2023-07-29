@@ -9,6 +9,7 @@ public class CollectTopicSlot : MonoBehaviour
     public void SetSlot(CollectedTopicData collectedTopicData)
     {
         titleText.text = $"{collectedTopicData.Title} ({collectedTopicData.CollectedPixelArtDataList.Count} / {collectedTopicData.TotalPixelArtDataCount})";
+    }
 
     public Transform GetCollectPixelArtParent()
     {
