@@ -43,6 +43,13 @@ public class GameManager : MonoBehaviour
     {
         DataManager.SaveJsonData(DataPath.GalleryDataPath,_userData.SelectTopicID, _selectTopicData);
     }
+
+    private void CollectPixelArt()
+    {
+        _selectTopicData.CompleteCount++;
+        _selectPixelArtData.PlayTime = _playTime;
+        playUI.SetPlayButton(_selectPixelArtData.IsCompleted);
+    }
     
     private IEnumerator Plying()
     {
@@ -55,9 +62,7 @@ public class GameManager : MonoBehaviour
 
         if (_selectPixelArtData.IsCompleted)
         {
-            _selectTopicData.CompleteCount++;
-            _selectPixelArtData.PlayTime = _playTime;
-            playUI.SetPlayButton(_selectPixelArtData.IsCompleted);
+            CollectPixelArt();
         }
         
         SaveData();
