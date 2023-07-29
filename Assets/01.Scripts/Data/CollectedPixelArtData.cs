@@ -9,6 +9,13 @@ public class CollectedPixelArtData
     [FirestoreProperty] public string Description { get; private set; }
     [FirestoreProperty] public int ThumbnailSize { get; private set; }
 
+    public CollectedPixelArtData()
+    {
+        Title = "";
+        ThumbnailData = "";
+        Description = "";
+        ThumbnailSize = 0;
+    }
     public CollectedPixelArtData(string title, string thumbnailData, string description)
     {
         Title = title;
