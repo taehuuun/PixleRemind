@@ -39,14 +39,22 @@ public class GameManager : MonoBehaviour
         playUI.SetPlayButton(_selectPixelArtData.IsCompleted);
     }
     
-    public void SaveData()
+    public async void SaveData()
     {
         _selectTopicData.ThumbData = _selectPixelArtData.ThumbnailData;
         _selectTopicData.ThumbSize = _selectPixelArtData.Size;
         DataManager.SaveJsonData(DataPath.GalleryDataPath,_userData.SelectTopicID, _selectTopicData);
+        
+                
+#if UNITY_ANDROID && !UNITY_EDITOR
+        string FUID = FirebaseManager.ins.FireAuth.FUID;
+#else
+        string FUID = "Test";
+#endif
+        await FirebaseManager.ins.Firestore.UpdateData(FirestoreCollections.UserData, FUID, DataManager.userData);
     }
 
-    private async void CollectPixelArt()
+    private void CollectPixelArt()
     {
         _selectTopicData.CompleteCount++;
         _selectPixelArtData.PlayTime = _playTime;
@@ -54,13 +62,6 @@ public class GameManager : MonoBehaviour
         CollectedTopicData curCollectTopicData =  DataManager.userData.CollectedTopicDataList.Find((collectTopic) => collectTopic.ID == _selectTopicData.ID);
         CollectedPixelArtData newCollectPixelArtData = new CollectedPixelArtData(_selectPixelArtData.Title, _selectPixelArtData.ThumbnailData, _selectPixelArtData.Description, _selectPixelArtData.Size);
         curCollectTopicData.CollectedPixelArtDataList.Add(newCollectPixelArtData);
-        
-#if UNITY_ANDROID && !UNITY_EDITOR
-        string FUID = FirebaseManager.ins.FireAuth.FUID;
-#else
-        string FUID = "Test";
-#endif
-        await FirebaseManager.ins.Firestore.UpdateData(FirestoreCollections.UserData, FUID, DataManager.userData);
     }
     
     private IEnumerator Playing()
