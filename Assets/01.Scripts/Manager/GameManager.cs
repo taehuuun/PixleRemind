@@ -44,11 +44,21 @@ public class GameManager : MonoBehaviour
         DataManager.SaveJsonData(DataPath.GalleryDataPath,_userData.SelectTopicID, _selectTopicData);
     }
 
-    private void CollectPixelArt()
+    private async void CollectPixelArt()
     {
         _selectTopicData.CompleteCount++;
         _selectPixelArtData.PlayTime = _playTime;
-        playUI.SetPlayButton(_selectPixelArtData.IsCompleted);
+;
+        CollectedTopicData curCollectTopicData =  DataManager.userData.CollectedTopicDataList.Find((collectTopic) => collectTopic.ID == _selectTopicData.ID);
+        CollectedPixelArtData newCollectPixelArtData = new CollectedPixelArtData(_selectPixelArtData.Title, _selectPixelArtData.ThumbnailData, _selectPixelArtData.Description, _selectPixelArtData.Size);
+        curCollectTopicData.CollectedPixelArtDataList.Add(newCollectPixelArtData);
+        
+#if UNITY_ANDROID && !UNITY_EDITOR
+                 string FUID = FirebaseManager.ins.FireAuth.FUID;
+#else
+        string FUID = "Test";
+#endif
+        await FirebaseManager.ins.Firestore.UpdateData(FirestoreCollections.UserData, FUID, DataManager.userData);
     }
     
     private IEnumerator Playing()
@@ -59,6 +69,7 @@ public class GameManager : MonoBehaviour
             _playTime++;
             playUI.UpdatePlayTime(_playTime);
         }
+        playUI.HideUI();
 
         if (_selectPixelArtData.IsCompleted)
         {
@@ -66,7 +77,6 @@ public class GameManager : MonoBehaviour
         }
         
         SaveData();
-        playUI.HideUI();
     }
     private IEnumerator PixelArtUpdate()
     {
