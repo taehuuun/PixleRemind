@@ -122,7 +122,7 @@ public class UpdateManager : MonoBehaviour
             {
                 DataManager.SaveJsonData(DataPath.GalleryDataPath, topicID, serverData);
 
-                CollectedTopicData newCollectTopicData = new CollectedTopicData(serverData.Title, serverData.Description, serverData.TotalCount);
+                CollectedTopicData newCollectTopicData = new CollectedTopicData(serverData.ID, serverData.Title, serverData.Description, serverData.TotalCount);
 
                 DataManager.userData.LocalTopicDataIDs.Add(topicID);
                 DataManager.userData.CollectedTopicDataList.Add(newCollectTopicData);
