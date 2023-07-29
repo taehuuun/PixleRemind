@@ -690,7 +690,7 @@ GameObject:
   - component: {fileID: 5044798862903847790}
   - component: {fileID: 8854162097683907575}
   m_Layer: 5
-  m_Name: CollectTopicView
+  m_Name: CollectTopicSlot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
