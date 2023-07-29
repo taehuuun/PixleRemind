@@ -10,7 +10,7 @@ public class CollectPixelArtDetailPopup : MonoBehaviour
 
     public void OnSlotClick()
     {
-        
+        gameObject.SetActive(false);
     }
 
     // Update is called once per frame
