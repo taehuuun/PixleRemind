@@ -24,7 +24,7 @@ public class GameManager : MonoBehaviour
     {
         _playTime = 0;
         colorMatchSystem.ReStart();
-        StartCoroutine(Plying());
+        StartCoroutine(Playing());
         StartCoroutine(PixelArtUpdate());
         playUI.ShowUI();
     }
@@ -51,7 +51,7 @@ public class GameManager : MonoBehaviour
         playUI.SetPlayButton(_selectPixelArtData.IsCompleted);
     }
     
-    private IEnumerator Plying()
+    private IEnumerator Playing()
     {
         while (!colorMatchSystem.IsGameOver())
         {
