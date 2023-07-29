@@ -1820,8 +1820,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Back
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: a175ee0b6f61b2043b33faf750e94cd7, type: 2}
-  m_sharedMaterial: {fileID: -6672389476189711440, guid: a175ee0b6f61b2043b33faf750e94cd7, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 4f1002415fcc7e7429d6a272d5a2b0bf, type: 2}
+  m_sharedMaterial: {fileID: 3188472244663407893, guid: 4f1002415fcc7e7429d6a272d5a2b0bf, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1955,8 +1955,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Gallery
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: a175ee0b6f61b2043b33faf750e94cd7, type: 2}
-  m_sharedMaterial: {fileID: -6672389476189711440, guid: a175ee0b6f61b2043b33faf750e94cd7, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 4f1002415fcc7e7429d6a272d5a2b0bf, type: 2}
+  m_sharedMaterial: {fileID: 3188472244663407893, guid: 4f1002415fcc7e7429d6a272d5a2b0bf, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2793,7 +2793,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1603840867}
         m_TargetAssemblyTypeName: BodyUI, Assembly-CSharp
         m_MethodName: MoveScene
         m_Mode: 5
