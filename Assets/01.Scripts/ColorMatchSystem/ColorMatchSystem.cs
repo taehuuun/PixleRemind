@@ -163,7 +163,7 @@ public class ColorMatchSystem : MonoBehaviour
     /// <summary>
     /// 현재 픽셀 아트의 컬러중 랜덤하게 선택하여 타겟 컬러를 변경하는 메서드
     /// </summary>
-        private void SetRandomTargetColorFromPixelArtData()
+    private void SetRandomTargetColorFromPixelArtData()
     {
         if (_pixelArtData.PixelColorData == null || _pixelArtData.PixelColorData.CustomPixels.Count == 0)
         {
