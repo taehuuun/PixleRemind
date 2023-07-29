@@ -21,6 +21,13 @@ public class CollectUI : BodyUI
         {
             CollectTopicSlot newCollectTopicSlot = Instantiate(collectTopicSlotPrefab, genCollectTopicSlotParent);
             newCollectTopicSlot.SetSlot(collectedTopicData);
+
+            foreach (CollectedPixelArtData collectedPixelArtData in collectedTopicData.CollectedPixelArtDataList)
+            {
+                CollectPixelArtSlot newCollectPixelArtSlot = Instantiate(collectPixelArtSlotPrefab, newCollectTopicSlot.GetCollectPixelArtParent());
+                newCollectPixelArtSlot.SetSlot(collectedPixelArtData);
+                newCollectPixelArtSlot.OnClick += CollectPixelArtSlotClickHandler;
+            }
         }
     }
 
