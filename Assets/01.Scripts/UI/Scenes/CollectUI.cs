@@ -21,4 +21,10 @@ public class CollectUI : BodyUI
             newCollectTopicSlot.SetSlot(collectedTopicData);
         }
     }
+
+    private void CollectPixelArtSlotClickHandler(CollectedPixelArtData collectedPixelArtData)
+    {
+        collectPixelArtDetailPopup.SetPopup(collectedPixelArtData);
+        collectPixelArtDetailPopup.gameObject.SetActive(true);
+    }
 }
