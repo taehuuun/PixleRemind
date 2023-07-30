@@ -57,6 +57,12 @@ public class GameManager : MonoBehaviour
     private void CollectPixelArt()
     {
         _selectTopicData.CompleteCount++;
+
+        if (_selectTopicData.CompleteCount == _selectTopicData.TotalCount)
+        {
+            _selectTopicData.Complete = true;
+        }
+        
         _selectPixelArtData.PlayTime = _playTime;
 
         CollectedTopicData curCollectTopicData =  DataManager.userData.CollectedTopicDataList.Find((collectTopic) => collectTopic.ID == _selectTopicData.ID);
