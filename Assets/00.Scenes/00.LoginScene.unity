@@ -973,7 +973,7 @@ MonoBehaviour:
   m_text: "\uB85C\uADF8\uC778\uC911..."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 4f1002415fcc7e7429d6a272d5a2b0bf, type: 2}
-  m_sharedMaterial: {fileID: 3188472244663407893, guid: 4f1002415fcc7e7429d6a272d5a2b0bf, type: 2}
+  m_sharedMaterial: {fileID: -2967976773987473593, guid: 4f1002415fcc7e7429d6a272d5a2b0bf, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
