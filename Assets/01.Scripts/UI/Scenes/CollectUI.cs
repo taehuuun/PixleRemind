@@ -15,14 +15,14 @@ public class CollectUI : BodyUI
     
     private void SetSlot()
     {
-        List<CollectedTopicData> curCollectTopicDataList = DataManager.userData.CollectedTopicDataList;
+        List<DownloadTopicData> downloadTopicDataList = DataManager.userData.DownloadTopicDataList;
 
-        foreach (CollectedTopicData collectedTopicData in curCollectTopicDataList)
+        foreach (DownloadTopicData downloadTopicData in downloadTopicDataList)
         {
             CollectTopicSlot newCollectTopicSlot = Instantiate(collectTopicSlotPrefab, genCollectTopicSlotParent);
-            newCollectTopicSlot.SetSlot(collectedTopicData);
+            newCollectTopicSlot.SetSlot(downloadTopicData);
 
-            foreach (CollectedPixelArtData collectedPixelArtData in collectedTopicData.CollectedPixelArtDataList)
+            foreach (CollectedPixelArtData collectedPixelArtData in downloadTopicData.CollectedPixelArtDataList)
             {
                 CollectPixelArtSlot newCollectPixelArtSlot = Instantiate(collectPixelArtSlotPrefab, newCollectTopicSlot.GetCollectPixelArtParent());
                 newCollectPixelArtSlot.SetSlot(collectedPixelArtData);

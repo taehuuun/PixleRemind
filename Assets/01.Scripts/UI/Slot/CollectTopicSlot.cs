@@ -6,9 +6,9 @@ public class CollectTopicSlot : MonoBehaviour
     [SerializeField] private TMP_Text titleText;
     [SerializeField] private Transform genPixelArtSlotParent;
 
-    public void SetSlot(CollectedTopicData collectedTopicData)
+    public void SetSlot(DownloadTopicData downloadTopicData)
     {
-        titleText.text = $"{collectedTopicData.Title} ({collectedTopicData.CollectedPixelArtDataList.Count} / {collectedTopicData.TotalPixelArtDataCount})";
+        titleText.text = $"{downloadTopicData.Title} ({downloadTopicData.CollectedPixelArtDataList.Count} / {downloadTopicData.TotalPixelArtDataCount})";
     }
 
     public Transform GetCollectPixelArtParent()

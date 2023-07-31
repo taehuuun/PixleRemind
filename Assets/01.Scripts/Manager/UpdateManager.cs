@@ -122,10 +122,10 @@ public class UpdateManager : MonoBehaviour
             {
                 DataManager.SaveJsonData(DataPath.GalleryDataPath, topicID, serverData);
 
-                CollectedTopicData newCollectTopicData = new CollectedTopicData(serverData.ID, serverData.Title, serverData.Description, serverData.TotalCount);
+                DownloadTopicData newDownloadTopidData = new DownloadTopicData(serverData.ID, serverData.Title, serverData.Description, serverData.TotalCount);
 
                 DataManager.userData.LocalTopicDataIDs.Add(topicID);
-                DataManager.userData.CollectedTopicDataList.Add(newCollectTopicData);
+                DataManager.userData.DownloadTopicDataList.Add(newDownloadTopidData);
                 DataManager.userData.LastUpdated = DateTime.Now;
 
 #if UNITY_ANDROID && !UNITY_EDITOR

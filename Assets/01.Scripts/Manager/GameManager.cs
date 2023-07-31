@@ -65,9 +65,9 @@ public class GameManager : MonoBehaviour
         
         _selectPixelArtData.PlayTime = _playTime;
 
-        CollectedTopicData curCollectTopicData =  DataManager.userData.CollectedTopicDataList.Find((collectTopic) => collectTopic.ID == _selectTopicData.ID);
+        DownloadTopicData downloadTopicData =  DataManager.userData.DownloadTopicDataList.Find((collectTopic) => collectTopic.ID == _selectTopicData.ID);
         CollectedPixelArtData newCollectPixelArtData = new CollectedPixelArtData(_selectPixelArtData.Title, _selectPixelArtData.ThumbnailData, _selectPixelArtData.Description, _selectPixelArtData.Size);
-        curCollectTopicData.CollectedPixelArtDataList.Add(newCollectPixelArtData);
+        downloadTopicData.CollectedPixelArtDataList.Add(newCollectPixelArtData);
     }
     
     private IEnumerator Playing()
