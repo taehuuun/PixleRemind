@@ -1,5 +1,7 @@
+using System;
 using Firebase.Firestore;
 
+[FirestoreData, Serializable]
 public class BaseData
 {
     [FirestoreProperty] public string ID { get; set; }
