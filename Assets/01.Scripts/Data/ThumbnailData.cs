@@ -1,3 +1,3 @@
-public class ThumbnailData : BaseData
+public class BaseThumbnailData : BaseData
 {
 }
