@@ -12,7 +12,7 @@ public class TopicData : BaseThumbnailData
     [FirestoreProperty] public bool IsLocked { get; set; }
     [FirestoreProperty] public UnlockCondition UnlockCondition { get; set; }
     [FirestoreProperty] public DateTime LastUpdated { get; set; }
-    [FirestoreProperty] public List<PixelArtData> PixelArtDatas { get; set; }
+    [FirestoreProperty] public List<PixelArtData> PixelArtDataList { get; set; }
 
     public TopicData()
     {
@@ -23,7 +23,7 @@ public class TopicData : BaseThumbnailData
         IsLocked = false;
         UnlockCondition = new UnlockCondition();
         LastUpdated = DateTime.Now;
-        PixelArtDatas = new List<PixelArtData>();
+        PixelArtDataList = new List<PixelArtData>();
     }
 
     public TopicData(
@@ -39,7 +39,7 @@ public class TopicData : BaseThumbnailData
         bool isLocked,
         UnlockCondition unlockCondition,
         DateTime lastUpdated,
-        List<PixelArtData> pixelArtDatas) : base(id, title, description, thumbnailData, thumbnailSize)
+        List<PixelArtData> pixelArtDataList) : base(id, title, description, thumbnailData, thumbnailSize)
     {
         CompleteCount = completeCount;
         TotalCount = totalCount;
@@ -48,6 +48,6 @@ public class TopicData : BaseThumbnailData
         IsLocked = isLocked;
         UnlockCondition = unlockCondition;
         LastUpdated = lastUpdated;
-        PixelArtDatas = pixelArtDatas;
+        PixelArtDataList = pixelArtDataList;
     }
 }

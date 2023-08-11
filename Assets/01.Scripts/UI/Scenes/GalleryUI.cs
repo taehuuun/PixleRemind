@@ -14,7 +14,7 @@ public class GalleryUI : BodyUI
     {
         TopicData topicData = DataManager.LoadJsonData<TopicData>(DataPath.GalleryDataPath, DataManager.userData.SelectTopicID);
         
-        foreach (var pixelArtData in topicData.PixelArtDatas)
+        foreach (var pixelArtData in topicData.PixelArtDataList)
         {
             PixelArtSlot pixelArtSlot = Instantiate(pixelArtSlotPrefab, pixelArtSlotContainer);
             pixelArtSlot.pixelData = pixelArtData;

@@ -109,9 +109,9 @@ public class CustomTopicEditor : EditorWindow
             ShowUnlockCondition(topicData.UnlockCondition);
         }
 
-        if (topicData.PixelArtDatas != null && topicData.PixelArtDatas.Count > 0)
+        if (topicData.PixelArtDataList != null && topicData.PixelArtDataList.Count > 0)
         {
-            var pixelArtDatasCopy = new List<PixelArtData>(topicData.PixelArtDatas);
+            var pixelArtDatasCopy = new List<PixelArtData>(topicData.PixelArtDataList);
             foreach (var pixelArtData in pixelArtDatasCopy)
             {
                 if (!_foldOutPixelStatus.ContainsKey(pixelArtData))
@@ -150,12 +150,12 @@ public class CustomTopicEditor : EditorWindow
             // _isAddingPixelArtData = true;
             PixelArtDataEditWindow.Open(newPixelArtData =>
             {
-                topicData.PixelArtDatas.Add(newPixelArtData);
+                topicData.PixelArtDataList.Add(newPixelArtData);
                 _foldOutPixelStatus[newPixelArtData] = true;
 
                 if (string.IsNullOrEmpty(topicData.ThumbnailData) && newPixelArtData.ThumbnailData.Length > 0)
                 {
-                    topicData.ThumbnailData = topicData.PixelArtDatas[0].ThumbnailData;
+                    topicData.ThumbnailData = topicData.PixelArtDataList[0].ThumbnailData;
                 }
 
                 topicData.TotalCount++;
@@ -172,7 +172,7 @@ public class CustomTopicEditor : EditorWindow
                 topicData.TotalCount--;
             }
 
-            topicData.PixelArtDatas.Remove(_deletePixelArtData);
+            topicData.PixelArtDataList.Remove(_deletePixelArtData);
             _foldOutPixelStatus.Remove(_deletePixelArtData);
             _deletePixelArtData = null; // Don't forget to reset the reference
             Repaint();

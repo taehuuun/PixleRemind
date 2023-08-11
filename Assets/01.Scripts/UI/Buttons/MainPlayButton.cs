@@ -31,7 +31,7 @@ public class MainPlayButton : MonoBehaviour
         }
 
         _lastTopicData = DataManager.LoadJsonData<TopicData>(DataPath.GalleryDataPath, selectTopicID);
-        _lastPixelArtData = _lastTopicData?.PixelArtDatas.Find(pixelArtData => pixelArtData.ID == DataManager.userData.SelectPixelArtID);
+        _lastPixelArtData = _lastTopicData?.PixelArtDataList.Find(pixelArtData => pixelArtData.ID == DataManager.userData.SelectPixelArtID);
     }
 
     private async Task UpdateUserDataOnFirebase()
