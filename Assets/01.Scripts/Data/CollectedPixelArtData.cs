@@ -2,25 +2,10 @@ using System;
 using Firebase.Firestore;
 
 [FirestoreData, Serializable]
-public class CollectedPixelArtData
+public class CollectedPixelArtData : BaseThumbnailData
 {
-    [FirestoreProperty] public string Title { get; private set; }
-    [FirestoreProperty] public string ThumbnailData { get; private set; }
-    [FirestoreProperty] public string Description { get; private set; }
-    [FirestoreProperty] public int ThumbnailSize { get; private set; }
+    public CollectedPixelArtData() { }
 
-    public CollectedPixelArtData()
-    {
-        Title = "";
-        ThumbnailData = "";
-        Description = "";
-        ThumbnailSize = 0;
-    }
-    public CollectedPixelArtData(string title, string thumbnailData, string description, int thumbnailSize)
-    {
-        Title = title;
-        ThumbnailData = thumbnailData;
-        Description = description;
-        ThumbnailSize = thumbnailSize;
-    }
+    public CollectedPixelArtData(string id, string title, string description, string thumbnailData, int thumbnailSize)
+        : base(id, title, description, thumbnailData, thumbnailSize) { }
 }
