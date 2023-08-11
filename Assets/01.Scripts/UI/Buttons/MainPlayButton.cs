@@ -80,7 +80,7 @@ public class MainPlayButton : MonoBehaviour
 
     private void ConfigurePlayButtonForIncompletePixelArt()
     {
-        buttonImage.sprite = PixelArtHelper.MakeThumbnail(_lastPixelArtData.ThumbnailData, _lastPixelArtData.Size);
+        buttonImage.sprite = PixelArtHelper.MakeThumbnail(_lastPixelArtData.ThumbnailData, _lastPixelArtData.ThumbnailSize);
         buttonText.text = "이어하기";
         SetButtonActive(SceneManager.LoadScene, SceneNames.PlayScene);
     }

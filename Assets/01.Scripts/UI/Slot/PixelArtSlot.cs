@@ -19,7 +19,7 @@ public class PixelArtSlot : Slot
     {
         difficultyText.text = pixelData.Difficulty.ToString();
         titleText.text = pixelData.Title;
-        thumbnailImage.sprite = PixelArtHelper.MakeThumbnail(pixelData.ThumbnailData, pixelData.Size);
+        thumbnailImage.sprite = PixelArtHelper.MakeThumbnail(pixelData.ThumbnailData, pixelData.ThumbnailSize);
 
         if (pixelData.IsCompleted)
         {

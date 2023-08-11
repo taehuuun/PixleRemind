@@ -152,7 +152,7 @@ public static class PixelArtHelper
     {
         PixelColorData pixelColorData = ExtractPixelData(pixelArtImg);
         string thumbData = ExtractGrayThumbnailData(pixelArtImg);
-        PixelArtData newData = new PixelArtData(titleid, thumbData,description, 0, pixelArtImg.width, false, difficulty,
+        PixelArtData newData = new PixelArtData(string.Empty, titleid, description, thumbData, pixelArtImg.width, 0,false, difficulty,
             pixelColorData);
         return newData;
     }

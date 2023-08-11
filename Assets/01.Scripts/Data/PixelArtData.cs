@@ -2,41 +2,26 @@ using System;
 using Firebase.Firestore;
 
 [FirestoreData, Serializable]
-public class PixelArtData
+public class PixelArtData : BaseThumbnailData
 {
-    [FirestoreProperty] public string ID { get; set; }
-    [FirestoreProperty] public string Title { get; set; }
-    [FirestoreProperty] public string ThumbnailData { get; set; }
-    [FirestoreProperty] public string Description { get; set; }
     [FirestoreProperty] public int PlayTime { get; set; }
-    [FirestoreProperty] public int Size { get; set; }
     [FirestoreProperty] public bool IsCompleted { get; set; }
     [FirestoreProperty] public Difficulty Difficulty { get; set; }
     [FirestoreProperty] public PixelColorData PixelColorData { get; set; }
 
     public PixelArtData()
     {
-        ID = "";
-        Title = "";
-        ThumbnailData = "";
-        Description = "";
         PlayTime = 0;
-        Size = 0;
         IsCompleted = false;
         Difficulty = Difficulty.Easy;
-
         PixelColorData = new PixelColorData();
     }
 
-    public PixelArtData(string title, string thumbnailData, string description, int playTime, int size, bool isComplete,
-        Difficulty difficulty, PixelColorData pixelColorData)
+    public PixelArtData(string id, string title, string description, string thumbnailData, int thumbnailSize, int playTime, bool isCompleted, Difficulty difficulty, PixelColorData pixelColorData)
+        : base(id, title, description, thumbnailData, thumbnailSize)
     {
-        Title = title;
-        ThumbnailData = thumbnailData;
-        Description = description;
         PlayTime = playTime;
-        Size = size;
-        IsCompleted = isComplete;
+        IsCompleted = isCompleted;
         Difficulty = difficulty;
         PixelColorData = pixelColorData;
     }

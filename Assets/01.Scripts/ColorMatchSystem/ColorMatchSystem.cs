@@ -94,7 +94,7 @@ public class ColorMatchSystem : MonoBehaviour
         var selectedPixel = _pixelArtData.PixelColorData.CustomPixels[selectPixelIdx];
         int selectedCoord = Random.Range(0, selectedPixel.PixelCoords.Count);
 
-        Sprite sprite = PixelArtHelper.MakeThumbnail(_pixelArtData.ThumbnailData, _pixelArtData.Size);
+        Sprite sprite = PixelArtHelper.MakeThumbnail(_pixelArtData.ThumbnailData, _pixelArtData.ThumbnailSize);
         Texture2D pixelArt = PixelArtHelper.SpriteToTexture2D(sprite);
         
         Color origin = new Color(selectedPixel.OriginalColor.R, selectedPixel.OriginalColor.G,

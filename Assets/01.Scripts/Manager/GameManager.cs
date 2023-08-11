@@ -35,14 +35,14 @@ public class GameManager : MonoBehaviour
         _selectTopicData = DataManager.LoadJsonData<TopicData>(DataPath.GalleryDataPath, _userData.SelectTopicID);
         _selectPixelArtData = _selectTopicData.PixelArtDatas.Find((pixelArtData) => pixelArtData.ID == DataManager.userData.SelectPixelArtID);
         colorMatchSystem.SetPixelArtData(_selectPixelArtData);
-        playUI.UpdatePixelArt(_selectPixelArtData.ThumbnailData,_selectPixelArtData.Size);
+        playUI.UpdatePixelArt(_selectPixelArtData.ThumbnailData,_selectPixelArtData.ThumbnailSize);
         playUI.SetPlayButton(_selectPixelArtData.IsCompleted);
     }
     
     public async void SaveData()
     {
         _selectTopicData.ThumbData = _selectPixelArtData.ThumbnailData;
-        _selectTopicData.ThumbSize = _selectPixelArtData.Size;
+        _selectTopicData.ThumbSize = _selectPixelArtData.ThumbnailSize;
         DataManager.SaveJsonData(DataPath.GalleryDataPath,_userData.SelectTopicID, _selectTopicData);
         
                 
@@ -66,7 +66,7 @@ public class GameManager : MonoBehaviour
         _selectPixelArtData.PlayTime = _playTime;
 
         DownloadTopicData downloadTopicData =  DataManager.userData.DownloadTopicDataList.Find((collectTopic) => collectTopic.ID == _selectTopicData.ID);
-        CollectedPixelArtData newCollectPixelArtData = new CollectedPixelArtData(_selectPixelArtData.ID,_selectPixelArtData.Title, _selectPixelArtData.ThumbnailData, _selectPixelArtData.Description, _selectPixelArtData.Size);
+        CollectedPixelArtData newCollectPixelArtData = new CollectedPixelArtData(_selectPixelArtData.ID,_selectPixelArtData.Title, _selectPixelArtData.ThumbnailData, _selectPixelArtData.Description, _selectPixelArtData.ThumbnailSize);
         downloadTopicData.CollectedPixelArtDataList.Add(newCollectPixelArtData);
     }
     
@@ -94,7 +94,7 @@ public class GameManager : MonoBehaviour
             yield return new WaitUntil(() => _lastThumbnailData != _selectPixelArtData.ThumbnailData);
             _lastThumbnailData = _selectPixelArtData.ThumbnailData;
             playUI.UpdateRemainPixelCount(_selectPixelArtData.PixelColorData.RemainingPixels);
-            playUI.UpdatePixelArt(_lastThumbnailData, _selectPixelArtData.Size);
+            playUI.UpdatePixelArt(_lastThumbnailData, _selectPixelArtData.ThumbnailSize);
         }
     }
 }

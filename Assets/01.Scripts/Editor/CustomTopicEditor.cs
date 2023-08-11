@@ -201,7 +201,7 @@ public class CustomTopicEditor : EditorWindow
         pixelArtData.Title = EditorGUILayout.TextField("Title", pixelArtData.Title);
         EditorGUILayout.TextField("ThumbnailData", pixelArtData.ThumbnailData);
         EditorGUILayout.TextField("PlayTime", pixelArtData.PlayTime.ToString());
-        EditorGUILayout.TextField("Size", pixelArtData.Size.ToString());
+        EditorGUILayout.TextField("ThumbnailSize", pixelArtData.ThumbnailSize.ToString());
         EditorGUILayout.Toggle("IsCompleted", pixelArtData.IsCompleted);
         EditorGUILayout.IntField("Remaining Pixels", pixelArtData.PixelColorData.RemainingPixels);
         EditorGUILayout.LabelField("Description");
