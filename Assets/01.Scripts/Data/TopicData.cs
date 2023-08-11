@@ -3,15 +3,10 @@ using System.Collections.Generic;
 using Firebase.Firestore;
 
 [FirestoreData, Serializable]
-public class TopicData
+public class TopicData : BaseThumbnailData
 {
-    [FirestoreProperty] public string ID { get; set; }
-    [FirestoreProperty] public string Title { get; set; }
-    [FirestoreProperty] public string ThumbData { get; set; }
-    [FirestoreProperty] public string Description { get; set; }
     [FirestoreProperty] public int CompleteCount { get; set; }
     [FirestoreProperty] public int TotalCount { get; set; }
-    [FirestoreProperty] public int ThumbSize { get; set; }
     [FirestoreProperty] public bool Complete { get; set; }
     [FirestoreProperty] public bool Updateable { get; set; }
     [FirestoreProperty] public bool IsLocked { get; set; }
@@ -21,12 +16,8 @@ public class TopicData
 
     public TopicData()
     {
-        Title = "";
-        ThumbData = "";
-        Description = "";
         CompleteCount = 0;
         TotalCount = 0;
-        ThumbSize = 0;
         Complete = false;
         Updateable = false;
         IsLocked = false;
@@ -36,25 +27,22 @@ public class TopicData
     }
 
     public TopicData(
+        string id,
         string title,
-        string thumbData,
         string description,
+        string thumbnailData,
+        int thumbnailSize,
         int completeCount,
         int totalCount,
-        int thumbSize,
         bool complete,
         bool updateable,
         bool isLocked,
         UnlockCondition unlockCondition,
         DateTime lastUpdated,
-        List<PixelArtData> pixelArtDatas)
+        List<PixelArtData> pixelArtDatas) : base(id, title, description, thumbnailData, thumbnailSize)
     {
-        Title = title;
-        ThumbData = thumbData;
-        Description = description;
         CompleteCount = completeCount;
         TotalCount = totalCount;
-        ThumbSize = thumbSize;
         Complete = complete;
         Updateable = updateable;
         IsLocked = isLocked;

@@ -20,7 +20,7 @@ public class UpdateSlot : MonoBehaviour
     public void SetSlot(TopicData topicData, bool isMissing)
     {
         _topicData = topicData;
-        thumbnailImg.sprite = PixelArtHelper.MakeThumbnail(_topicData.ThumbData, _topicData.ThumbSize);
+        thumbnailImg.sprite = PixelArtHelper.MakeThumbnail(_topicData.ThumbnailData, _topicData.ThumbnailSize);
         titleText.text = $"{_topicData.Title} 픽셀아트 {_topicData.TotalCount}개";
         descriptionText.text = _topicData.Description;
         iconImg.sprite = isMissing ? missingIcon : updateIcon;

@@ -93,10 +93,9 @@ public class CustomTopicEditor : EditorWindow
         EditorGUILayout.LabelField("Description");
         topicData.Description = EditorGUILayout.TextArea(topicData.Description, GUILayout.Height(100));
         GUI.enabled = false;
-        EditorGUILayout.TextField("ThumbData", topicData.ThumbData);
+        EditorGUILayout.TextField("ThumbData", topicData.ThumbnailData);
         EditorGUILayout.TextField("CompleteCount", topicData.CompleteCount.ToString());
         EditorGUILayout.TextField("TotalCount", topicData.TotalCount.ToString());
-        EditorGUILayout.TextField("ThumbData", topicData.ThumbData);
         EditorGUILayout.Toggle("Complete", topicData.Complete);
         GUI.enabled = true;
         topicData.Updateable = EditorGUILayout.Toggle("Updateable", topicData.Updateable);
@@ -154,9 +153,9 @@ public class CustomTopicEditor : EditorWindow
                 topicData.PixelArtDatas.Add(newPixelArtData);
                 _foldOutPixelStatus[newPixelArtData] = true;
 
-                if (string.IsNullOrEmpty(topicData.ThumbData) && newPixelArtData.ThumbnailData.Length > 0)
+                if (string.IsNullOrEmpty(topicData.ThumbnailData) && newPixelArtData.ThumbnailData.Length > 0)
                 {
-                    topicData.ThumbData = topicData.PixelArtDatas[0].ThumbnailData;
+                    topicData.ThumbnailData = topicData.PixelArtDatas[0].ThumbnailData;
                 }
 
                 topicData.TotalCount++;
@@ -240,7 +239,7 @@ public class CustomTopicEditor : EditorWindow
             if (topicData.ID.StartsWith("_tempTopic_"))
             {
                 // Generate a hash for the topic data ID
-                string hashInput = $"{topicData.Title}{topicData.Description}{topicData.ThumbData}{topicData.CompleteCount}{topicData.TotalCount}{topicData.Complete}{topicData.Updateable}{topicData.IsLocked}{topicData.LastUpdated}";
+                string hashInput = $"{topicData.Title}{topicData.Description}{topicData.ThumbnailData}{topicData.CompleteCount}{topicData.TotalCount}{topicData.Complete}{topicData.Updateable}{topicData.IsLocked}{topicData.LastUpdated}";
                 string generatedHash = HashGenerator.GenerateHash(hashInput);
                 topicData.ID = generatedHash;
 
