@@ -1,7 +1,7 @@
 using System.IO;
 using UnityEngine;
 
-public class DataPath : MonoBehaviour
+public static class DataPath
 {
     // 로컬 저장 베이스 경로
     private static readonly string BasePath = Application.persistentDataPath;
