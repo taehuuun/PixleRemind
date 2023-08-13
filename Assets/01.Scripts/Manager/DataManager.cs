@@ -6,7 +6,7 @@ using Newtonsoft.Json;
 
 public static class DataManager
 {
-    public static UserData userData;
+    public static LocalData localData;
 
     /// <summary>
     /// 타겟 폴더의 모든 파일 이름을 반환하는 메서드
