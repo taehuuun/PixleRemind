@@ -6,7 +6,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private ColorMatchSystem colorMatchSystem;
     [SerializeField] private PlayUI playUI;
 
-    private UserData _userData;
+    private LocalData _localData;
     private PixelArtData _selectPixelArtData;
     private TopicData _selectTopicData;
     
@@ -31,9 +31,10 @@ public class GameManager : MonoBehaviour
     
     private void Init()
     {
-        _userData = DataManager.userData;
-        _selectTopicData = DataManager.LoadJsonData<TopicData>(DataPath.LocalTopicData, _userData.SelectTopicID);
-        _selectPixelArtData = _selectTopicData.PixelArtDataList.Find((pixelArtData) => pixelArtData.ID == DataManager.userData.SelectPixelArtID);
+        _localData = DataManager.localData;
+        
+        _selectTopicData = DataManager.LoadJsonData<TopicData>(DataPath.LocalTopicData, _localData.GetLastSelectTopicID());
+        _selectPixelArtData = _selectTopicData.PixelArtDataList.Find((pixelArtData) => pixelArtData.ID == DataManager.localData.GetLastSelectPixelArtID());
         colorMatchSystem.SetPixelArtData(_selectPixelArtData);
         playUI.UpdatePixelArt(_selectPixelArtData.ThumbnailData,_selectPixelArtData.ThumbnailSize);
         playUI.SetPlayButton(_selectPixelArtData.IsCompleted);
@@ -43,7 +44,7 @@ public class GameManager : MonoBehaviour
     {
         _selectTopicData.ThumbnailData = _selectPixelArtData.ThumbnailData;
         _selectTopicData.ThumbnailSize = _selectPixelArtData.ThumbnailSize;
-        DataManager.SaveJsonData(DataPath.LocalTopicData,_userData.SelectTopicID, _selectTopicData);
+        DataManager.SaveJsonData(DataPath.LocalTopicData,_localData.GetLastSelectTopicID(), _selectTopicData);
         
                 
 #if UNITY_ANDROID && !UNITY_EDITOR
@@ -51,7 +52,7 @@ public class GameManager : MonoBehaviour
 #else
         string FUID = "Test";
 #endif
-        await FirebaseManager.ins.Firestore.UpdateData(FirestoreCollections.UserData, FUID, DataManager.userData);
+        await FirebaseManager.ins.Firestore.UpdateData(FirestoreCollections.UserData, FUID, DataManager.localData);
     }
 
     private void CollectPixelArt()
@@ -65,9 +66,13 @@ public class GameManager : MonoBehaviour
         
         _selectPixelArtData.PlayTime = _playTime;
 
-        DownloadTopicData downloadTopicData =  DataManager.userData.DownloadTopicDataList.Find((collectTopic) => collectTopic.ID == _selectTopicData.ID);
-        CollectedPixelArtData newCollectPixelArtData = new CollectedPixelArtData(_selectPixelArtData.ID,_selectPixelArtData.Title, _selectPixelArtData.ThumbnailData, _selectPixelArtData.Description, _selectPixelArtData.ThumbnailSize);
-        downloadTopicData.CollectedPixelArtDataList.Add(newCollectPixelArtData);
+        // DownloadTopicData downloadTopicData =  DataManager.localData.DownloadTopicDataList.Find((collectTopic) => collectTopic.ID == _selectTopicData.ID);
+        CollectedPixelArtData newCollectPixelArtData = new CollectedPixelArtData(_selectPixelArtData.ID,_selectPixelArtData.Title, _selectPixelArtData.ThumbnailData, _selectPixelArtData.Description, _selectPixelArtData.ThumbnailSize, _selectPixelArtData.PlayTime);
+        
+        if(_localData.LocalCollectedPixelArtData.ContainsKey(_localData.GetLastSelectTopicID()))
+        {
+            _localData.LocalCollectedPixelArtData[_localData.GetLastSelectTopicID()].Add(newCollectPixelArtData);
+        }
     }
     
     private IEnumerator Playing()
