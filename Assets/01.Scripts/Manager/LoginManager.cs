@@ -47,25 +47,19 @@ public class LoginManager : MonoBehaviour
 #endif
             bool userDataExists =
                 await FirebaseManager.ins.Firestore.CheckDocumentExists(FirestoreCollections.UserData, FUID);
-
-            if (DataManager.userData == null)
-            {
-                DataManager.userData = new UserData();
-            }
-
-            if (!userDataExists)
-            {
-                DataManager.userData.LastUpdated = DateTime.Now;
-                await FirebaseManager.ins.Firestore.AddData(FirestoreCollections.UserData, FUID,
-                    DataManager.userData);
-            }
-            else
-            {
-                DataManager.userData = await FirebaseManager.ins.Firestore.GetData<UserData>(FirestoreCollections.UserData, FUID);
-            }
-
-            DataManager.userData.LocalTopicDataIDs =
-                DataManager.GetTargetFolderFileNames(DataPath.LocalTopicData);
+            
+            // Firestore의 FUID에 해당하는 UserData와 LocalData가 존재하는지 체크
+            // 둘 다 존재 할경우)
+            //      두 데이터를 비교하여 UserData에 존재 하지만, LocalData에 존재하지 않는 데이터를 찾아 
+            //      LocalData를 UserData와 일치 시킴
+            // UserData만 존재 할 경우)
+            //      LocalData의 내용을 UserData와 일치 시킴
+            // LocalData만 존재 하는 경우
+            //      UserData가 존재하지 않는 경우 해당 FUID의 데이터가 없음 (플레이 한 적이 없음) 하지만 LocalData가 존재 할 때 
+            //      다른 플레이어의 데이터를 경로에 배치 시킨걸로 간주 => 모든 데이터 리셋
+            // 둘다 존재 하지 않는 경우
+            //      UserData와 LocalData를 새로 생성 후 UserData를 Firestore에 업로드, LocalData는 로컬 경로에 저장
+            
         }
         catch (Exception ex)
         {

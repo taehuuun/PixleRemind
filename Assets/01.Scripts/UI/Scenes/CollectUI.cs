@@ -13,20 +13,28 @@ public class CollectUI : BodyUI
         SetSlot();
     }
     
-    private void SetSlot()
+    private async void SetSlot()
     {
-        List<DownloadTopicData> downloadTopicDataList = DataManager.userData.DownloadTopicDataList;
+        // UserData에서 DownloadTopicData 딕셔너리를 가져옴
+        UserData userData =
+            await FirebaseManager.ins.Firestore.GetData<UserData>(FirestoreCollections.UserData, "Test");
+        Dictionary<string, List<DownloadTopicData>> downloadTopicDataDict = userData.DownloadTopicData;
 
-        foreach (DownloadTopicData downloadTopicData in downloadTopicDataList)
+        // 딕셔너리를 반복하여 각 토픽 데이터를 처리
+        foreach (var downloadTopicDataPair in downloadTopicDataDict)
         {
-            CollectTopicSlot newCollectTopicSlot = Instantiate(collectTopicSlotPrefab, genCollectTopicSlotParent);
-            newCollectTopicSlot.SetSlot(downloadTopicData);
-
-            foreach (CollectedPixelArtData collectedPixelArtData in downloadTopicData.CollectedPixelArtDataList)
+            // downloadTopicDataPair.Value는 DownloadTopicData 리스트
+            foreach (DownloadTopicData downloadTopicData in downloadTopicDataPair.Value)
             {
-                CollectPixelArtSlot newCollectPixelArtSlot = Instantiate(collectPixelArtSlotPrefab, newCollectTopicSlot.GetCollectPixelArtParent());
-                newCollectPixelArtSlot.SetSlot(collectedPixelArtData);
-                newCollectPixelArtSlot.OnClick += CollectPixelArtSlotClickHandler;
+                CollectTopicSlot newCollectTopicSlot = Instantiate(collectTopicSlotPrefab, genCollectTopicSlotParent);
+                newCollectTopicSlot.SetSlot(downloadTopicData);
+
+                foreach (CollectedPixelArtData collectedPixelArtData in downloadTopicData.CollectedPixelArtDataList)
+                {
+                    CollectPixelArtSlot newCollectPixelArtSlot = Instantiate(collectPixelArtSlotPrefab, newCollectTopicSlot.GetCollectPixelArtParent());
+                    newCollectPixelArtSlot.SetSlot(collectedPixelArtData);
+                    newCollectPixelArtSlot.OnClick += CollectPixelArtSlotClickHandler;
+                }
             }
         }
     }

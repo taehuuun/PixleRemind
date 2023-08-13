@@ -65,7 +65,7 @@ public class UpdatePopup : CloseAbleUI
     {
         var selectedSlots = _topicSlots.Where(slot => slot.IsSelected).ToList();
 
-        if (DataManager.userData.LocalTopicDataIDs.Count == 0 && selectedSlots.Count == 0)
+        if (DataManager.localData.LocalTopicData.Keys.Count == 0 && selectedSlots.Count == 0)
         {
             PopupManager.Instance.ShowPopup("경고",$"최소 1개 이상 슬롯을 선택 해야 합니다.");
             return;
@@ -83,8 +83,8 @@ public class UpdatePopup : CloseAbleUI
     private void OnCloseButtonClicked()
     {
         var selectedSlots = _topicSlots.Where(slot => slot.IsSelected).ToList();
-
-        if (DataManager.userData.LocalTopicDataIDs.Count == 0 && selectedSlots.Count == 0)
+        
+        if (DataManager.localData.LocalTopicData.Keys.Count == 0 && selectedSlots.Count == 0)
         {
             PopupManager.Instance.ShowPopup("경고",$"최소 1개 이상 슬롯을 선택 해야 합니다.");
             // Debug.Log("최소 1개 이상 슬롯을 선택 해야 합니다.");

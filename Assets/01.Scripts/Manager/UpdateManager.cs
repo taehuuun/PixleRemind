@@ -9,6 +9,8 @@ public class UpdateManager : MonoBehaviour
 {
     public UpdatePopup updatePopup;
 
+    private UserData _userData;
+
     // 다운로드가 완료 되었을 때 이벤트
     public event Action OnDownloadCompleted;
     
@@ -26,14 +28,16 @@ public class UpdateManager : MonoBehaviour
         _topicDataList =
             await FirebaseManager.ins.Firestore.GetAllData<TopicData>(FirestoreCollections.GalleryData);
 
+#if UNITY_ANDROID && !UNITY_EDITOR
+        string FUID = FirebaseManager.ins.FireAuth.FUID;
+#else
+        string FUID = "Test";
+#endif
+        
         // 로드된 토픽 데이터 리스트를 정렬
         _topicDataList.Sort(new TopicDataListComparer());
+        _userData = await FirebaseManager.ins.Firestore.GetData<UserData>(FirestoreCollections.UserData, FUID);
 
-        if (DataManager.userData.LocalTopicDataIDs == null)
-        {
-            DataManager.userData.LocalTopicDataIDs = new List<string>();
-        }
-        
         await CheckForUpdated();
     }
 
@@ -44,7 +48,7 @@ public class UpdateManager : MonoBehaviour
     public Task CheckForUpdated()
     {
         // 로컬에 저장되어 있는 토픽 데이터 ID 리스트
-        List<string> localTopicDataIDs = DataManager.userData.LocalTopicDataIDs;
+        var localTopicDataIDs = DataManager.localData.LocalTopicData.Keys;
         
         // 다운로드 하지 않은 토픽 데이터 리스트
         List<TopicData> missingDataList = new List<TopicData>();
@@ -122,11 +126,9 @@ public class UpdateManager : MonoBehaviour
             {
                 DataManager.SaveJsonData(DataPath.LocalTopicData, topicID, serverData);
 
-                DownloadTopicData newDownloadTopidData = new DownloadTopicData(serverData.ID, serverData.Title, serverData.Description, serverData.TotalCount);
-
-                DataManager.userData.LocalTopicDataIDs.Add(topicID);
-                DataManager.userData.DownloadTopicDataList.Add(newDownloadTopidData);
-                DataManager.userData.LastUpdated = DateTime.Now;
+                DownloadTopicData newDownloadTopicData = new DownloadTopicData(serverData.ID, serverData.Title, serverData.Description, serverData.TotalCount);
+                _userData.DownloadTopicData[topicID].Add(newDownloadTopicData);
+                _userData.LastUpdated = DateTime.Now;
 
 #if UNITY_ANDROID && !UNITY_EDITOR
                  string FUID = FirebaseManager.ins.FireAuth.FUID;
@@ -134,7 +136,7 @@ public class UpdateManager : MonoBehaviour
                 string FUID = "Test";
 #endif
                 await FirebaseManager.ins.Firestore.UpdateData<UserData>(FirestoreCollections.UserData, FUID,
-                    DataManager.userData);
+                    _userData);
             
                 OnDownloadCompleted?.Invoke();
             }
