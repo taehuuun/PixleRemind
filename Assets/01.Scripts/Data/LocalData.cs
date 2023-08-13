@@ -1,29 +1,44 @@
-using System;
 using System.Collections.Generic;
 
 public class LocalData
 {
     public Dictionary<string, List<TopicData>> LocalTopicData { get; set; }
     public Dictionary<string, List<CollectedPixelArtData>> LocalCollectedPixelArtData { get; set; }
-    private string _lastSelectID;
+
+    private string _selectTopicDataID;
+    private string _selectPixelArtDataID;
+
+    public LocalData()
+    {
+        LocalTopicData = new Dictionary<string, List<TopicData>>();
+        LocalCollectedPixelArtData = new Dictionary<string, List<CollectedPixelArtData>>();
+        _selectTopicDataID = string.Empty;
+        _selectPixelArtDataID = string.Empty;
+    }
     
-    private string[] SplitLastSelectID()
+    public string GetSelectTopicDataID()
     {
-        if (string.IsNullOrEmpty(_lastSelectID) || _lastSelectID.Length <= 1)
-            return Array.Empty<string>();
-
-        return _lastSelectID.Split('/');
+        return _selectTopicDataID;
     }
 
-    public string GetLastSelectTopicID()
+    public string GetSelectPixelArtDataID()
     {
-        var splitSelectID = SplitLastSelectID();
-        return splitSelectID.Length > 0 ? splitSelectID[0] : string.Empty;
+        return _selectPixelArtDataID;
     }
-
-    public string GetLastSelectPixelArtID()
+    
+    public void SetSelectTopicDataID(string id)
     {
-        var splitSelectID = SplitLastSelectID();
-        return splitSelectID.Length > 1 ? splitSelectID[1] : string.Empty;
+        if (string.IsNullOrEmpty(id))
+            return;
+        
+        _selectTopicDataID = id;
+    }
+    
+    public void SetSelectPixelArtDataID(string id)
+    {
+        if (string.IsNullOrEmpty(id))
+            return;
+        
+        _selectPixelArtDataID = id;
     }
 }

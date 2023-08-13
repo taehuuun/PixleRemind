@@ -10,7 +10,7 @@ public class TopicSlot : Slot
 
     public override void OnSlotClick()
     {
-        DataManager.userData.SelectTopicID = data.ID;
+        DataManager.localData.SelectTopicDataID = data.ID;
         LoadingTaskManager.Instance.NextSceneName = SceneNames.GalleryScene;
         SceneManager.LoadScene(SceneNames.LoadingScene);
     }

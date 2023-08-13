@@ -33,8 +33,8 @@ public class GameManager : MonoBehaviour
     {
         _localData = DataManager.localData;
         
-        _selectTopicData = DataManager.LoadJsonData<TopicData>(DataPath.LocalTopicData, _localData.GetLastSelectTopicID());
-        _selectPixelArtData = _selectTopicData.PixelArtDataList.Find((pixelArtData) => pixelArtData.ID == DataManager.localData.GetLastSelectPixelArtID());
+        _selectTopicData = DataManager.LoadJsonData<TopicData>(DataPath.LocalTopicData, _localData.SelectTopicDataID);
+        _selectPixelArtData = _selectTopicData.PixelArtDataList.Find((pixelArtData) => pixelArtData.ID == DataManager.localData.SelectTopicDataID);
         colorMatchSystem.SetPixelArtData(_selectPixelArtData);
         playUI.UpdatePixelArt(_selectPixelArtData.ThumbnailData,_selectPixelArtData.ThumbnailSize);
         playUI.SetPlayButton(_selectPixelArtData.IsCompleted);
@@ -44,7 +44,7 @@ public class GameManager : MonoBehaviour
     {
         _selectTopicData.ThumbnailData = _selectPixelArtData.ThumbnailData;
         _selectTopicData.ThumbnailSize = _selectPixelArtData.ThumbnailSize;
-        DataManager.SaveJsonData(DataPath.LocalTopicData,_localData.GetLastSelectTopicID(), _selectTopicData);
+        DataManager.SaveJsonData(DataPath.LocalTopicData,_localData.SelectTopicDataID, _selectTopicData);
         
                 
 #if UNITY_ANDROID && !UNITY_EDITOR
@@ -69,9 +69,9 @@ public class GameManager : MonoBehaviour
         // DownloadTopicData downloadTopicData =  DataManager.localData.DownloadTopicDataList.Find((collectTopic) => collectTopic.ID == _selectTopicData.ID);
         CollectedPixelArtData newCollectPixelArtData = new CollectedPixelArtData(_selectPixelArtData.ID,_selectPixelArtData.Title, _selectPixelArtData.ThumbnailData, _selectPixelArtData.Description, _selectPixelArtData.ThumbnailSize, _selectPixelArtData.PlayTime);
         
-        if(_localData.LocalCollectedPixelArtData.ContainsKey(_localData.GetLastSelectTopicID()))
+        if(_localData.LocalCollectedPixelArtData.ContainsKey(_localData.SelectTopicDataID))
         {
-            _localData.LocalCollectedPixelArtData[_localData.GetLastSelectTopicID()].Add(newCollectPixelArtData);
+            _localData.LocalCollectedPixelArtData[_localData.SelectTopicDataID].Add(newCollectPixelArtData);
         }
     }
     
