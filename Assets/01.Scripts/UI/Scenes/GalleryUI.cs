@@ -12,7 +12,7 @@ public class GalleryUI : BodyUI
 
     private void SetPixelArtSlot()
     {
-        TopicData topicData = DataManager.LoadJsonData<TopicData>(DataPath.LocalTopicData, DataManager.localData.SelectTopicDataID);
+        TopicData topicData = DataManager.LoadJsonData<TopicData>(DataPath.LocalTopicData, DataManager.LocalData.SelectTopicDataID);
         
         foreach (var pixelArtData in topicData.PixelArtDataList)
         {

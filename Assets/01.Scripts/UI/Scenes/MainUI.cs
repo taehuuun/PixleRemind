@@ -27,7 +27,7 @@ public class MainUI : BodyUI
             Destroy(child.gameObject);
         }
         
-        var localTopicIds = DataManager.localData.LocalTopicData.Keys;
+        var localTopicIds = DataManager.LocalData.LocalTopicData.Keys;
 
         foreach (var topicDataID in localTopicIds)
         {

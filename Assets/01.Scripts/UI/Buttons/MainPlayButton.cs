@@ -23,7 +23,7 @@ public class MainPlayButton : MonoBehaviour
 
     private void LoadData()
     {
-        var selectTopicID = DataManager.localData.SelectTopicDataID;
+        var selectTopicID = DataManager.LocalData.SelectTopicDataID;
         if (string.IsNullOrEmpty(selectTopicID))
         {
             SetButtonInactive("토픽 선택");
@@ -31,7 +31,7 @@ public class MainPlayButton : MonoBehaviour
         }
 
         _lastTopicData = DataManager.LoadJsonData<TopicData>(DataPath.LocalTopicData, selectTopicID);
-        _lastPixelArtData = _lastTopicData?.PixelArtDataList.Find(pixelArtData => pixelArtData.ID == DataManager.localData.SelectPixelArtDataID);
+        _lastPixelArtData = _lastTopicData?.PixelArtDataList.Find(pixelArtData => pixelArtData.ID == DataManager.LocalData.SelectPixelArtDataID);
     }
 
     private async Task UpdateUserDataOnFirebase()
@@ -41,7 +41,7 @@ public class MainPlayButton : MonoBehaviour
 #else
         string FUID = "Test";
 #endif
-        await FirebaseManager.ins.Firestore.UpdateData(FirestoreCollections.UserData, FUID, DataManager.localData);
+        await FirebaseManager.ins.Firestore.UpdateData(FirestoreCollections.UserData, FUID, DataManager.LocalData);
     }
 
     private void ConfigurePlayButton()
@@ -54,7 +54,7 @@ public class MainPlayButton : MonoBehaviour
 
         if (_lastPixelArtData.IsCompleted)
         {
-            DataManager.localData.SelectPixelArtDataID = string.Empty;
+            DataManager.LocalData.SelectPixelArtDataID = string.Empty;
             ConfigurePlayButtonForCompletedPixelArt();
         }
         else
@@ -67,7 +67,7 @@ public class MainPlayButton : MonoBehaviour
     {
         if (_lastTopicData.Complete)
         {
-            DataManager.localData.SelectTopicDataID = string.Empty;
+            DataManager.LocalData.SelectTopicDataID = string.Empty;
             SetButtonInactive("토픽 선택");
         }
         else

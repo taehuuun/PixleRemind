@@ -48,7 +48,7 @@ public class UpdateManager : MonoBehaviour
     public Task CheckForUpdated()
     {
         // 로컬에 저장되어 있는 토픽 데이터 ID 리스트
-        var localTopicDataIDs = DataManager.localData.LocalTopicData.Keys;
+        var localTopicDataIDs = DataManager.LocalData.LocalTopicData.Keys;
         
         // 다운로드 하지 않은 토픽 데이터 리스트
         List<TopicData> missingDataList = new List<TopicData>();

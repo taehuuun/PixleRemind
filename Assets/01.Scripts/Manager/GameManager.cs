@@ -31,10 +31,10 @@ public class GameManager : MonoBehaviour
     
     private void Init()
     {
-        _localData = DataManager.localData;
+        _localData = DataManager.LocalData;
         
         _selectTopicData = DataManager.LoadJsonData<TopicData>(DataPath.LocalTopicData, _localData.SelectTopicDataID);
-        _selectPixelArtData = _selectTopicData.PixelArtDataList.Find((pixelArtData) => pixelArtData.ID == DataManager.localData.SelectTopicDataID);
+        _selectPixelArtData = _selectTopicData.PixelArtDataList.Find((pixelArtData) => pixelArtData.ID == DataManager.LocalData.SelectTopicDataID);
         colorMatchSystem.SetPixelArtData(_selectPixelArtData);
         playUI.UpdatePixelArt(_selectPixelArtData.ThumbnailData,_selectPixelArtData.ThumbnailSize);
         playUI.SetPlayButton(_selectPixelArtData.IsCompleted);
@@ -52,7 +52,7 @@ public class GameManager : MonoBehaviour
 #else
         string FUID = "Test";
 #endif
-        await FirebaseManager.ins.Firestore.UpdateData(FirestoreCollections.UserData, FUID, DataManager.localData);
+        await FirebaseManager.ins.Firestore.UpdateData(FirestoreCollections.UserData, FUID, DataManager.LocalData);
     }
 
     private void CollectPixelArt()
