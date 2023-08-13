@@ -3,9 +3,10 @@ using System.Collections.Generic;
 
 public class LocalData
 {
-    public Dictionary<string, TopicData> LocalTopicData { get; set; }
+    public Dictionary<string, List<TopicData>> LocalTopicData { get; set; }
+    public Dictionary<string, List<CollectedPixelArtData>> LocalCollectedPixelArtData { get; set; }
     private string _lastSelectID;
-
+    
     private string[] SplitLastSelectID()
     {
         if (string.IsNullOrEmpty(_lastSelectID) || _lastSelectID.Length <= 1)
