@@ -65,7 +65,7 @@ public class LoginManager : MonoBehaviour
             }
 
             DataManager.userData.LocalTopicDataIDs =
-                DataManager.GetTargetFolderFileNames(DataPath.GalleryDataPath);
+                DataManager.GetTargetFolderFileNames(DataPath.LocalTopicData);
         }
         catch (Exception ex)
         {

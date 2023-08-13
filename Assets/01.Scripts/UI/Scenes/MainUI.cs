@@ -34,7 +34,7 @@ public class MainUI : BodyUI
         for (int i = 0; i < localTopicIds.Count; i++)
         {
             TopicSlot topicSlot = Instantiate(topicSlotPrefab, topicSlotContainer);
-            topicSlot.data = DataManager.LoadJsonData<TopicData>(DataPath.GalleryDataPath, localTopicIds[i]);
+            topicSlot.data = DataManager.LoadJsonData<TopicData>(DataPath.LocalTopicData, localTopicIds[i]);
             topicSlot.SetSlot();
         }
     }

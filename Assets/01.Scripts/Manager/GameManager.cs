@@ -32,7 +32,7 @@ public class GameManager : MonoBehaviour
     private void Init()
     {
         _userData = DataManager.userData;
-        _selectTopicData = DataManager.LoadJsonData<TopicData>(DataPath.GalleryDataPath, _userData.SelectTopicID);
+        _selectTopicData = DataManager.LoadJsonData<TopicData>(DataPath.LocalTopicData, _userData.SelectTopicID);
         _selectPixelArtData = _selectTopicData.PixelArtDataList.Find((pixelArtData) => pixelArtData.ID == DataManager.userData.SelectPixelArtID);
         colorMatchSystem.SetPixelArtData(_selectPixelArtData);
         playUI.UpdatePixelArt(_selectPixelArtData.ThumbnailData,_selectPixelArtData.ThumbnailSize);
@@ -43,7 +43,7 @@ public class GameManager : MonoBehaviour
     {
         _selectTopicData.ThumbnailData = _selectPixelArtData.ThumbnailData;
         _selectTopicData.ThumbnailSize = _selectPixelArtData.ThumbnailSize;
-        DataManager.SaveJsonData(DataPath.GalleryDataPath,_userData.SelectTopicID, _selectTopicData);
+        DataManager.SaveJsonData(DataPath.LocalTopicData,_userData.SelectTopicID, _selectTopicData);
         
                 
 #if UNITY_ANDROID && !UNITY_EDITOR

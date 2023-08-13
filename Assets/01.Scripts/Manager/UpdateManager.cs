@@ -80,7 +80,7 @@ public class UpdateManager : MonoBehaviour
             // Firestore 데이터와 비교하여 로컬에 없는 데이터를 outdatedDataList 추가
             foreach (var id in localTopicDataIDs)
             {
-                TopicData localData = DataManager.LoadJsonData<TopicData>(DataPath.GalleryDataPath, id);
+                TopicData localData = DataManager.LoadJsonData<TopicData>(DataPath.LocalTopicData, id);
                 TopicData serverData = _topicDataList.Find(data => data.ID == id);
 
                 if (serverData.LastUpdated > localData.LastUpdated)
@@ -120,7 +120,7 @@ public class UpdateManager : MonoBehaviour
         {
             if (serverData != null)
             {
-                DataManager.SaveJsonData(DataPath.GalleryDataPath, topicID, serverData);
+                DataManager.SaveJsonData(DataPath.LocalTopicData, topicID, serverData);
 
                 DownloadTopicData newDownloadTopidData = new DownloadTopicData(serverData.ID, serverData.Title, serverData.Description, serverData.TotalCount);
 
