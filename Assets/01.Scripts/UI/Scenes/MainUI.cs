@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -29,12 +27,12 @@ public class MainUI : BodyUI
             Destroy(child.gameObject);
         }
         
-        List<string> localTopicIds = DataManager.userData.LocalTopicDataIDs;
+        var localTopicIds = DataManager.localData.LocalTopicData.Keys;
 
-        for (int i = 0; i < localTopicIds.Count; i++)
+        foreach (var topicDataID in localTopicIds)
         {
             TopicSlot topicSlot = Instantiate(topicSlotPrefab, topicSlotContainer);
-            topicSlot.data = DataManager.LoadJsonData<TopicData>(DataPath.LocalTopicData, localTopicIds[i]);
+            topicSlot.data = DataManager.LoadJsonData<TopicData>(DataPath.LocalTopicData, topicDataID);
             topicSlot.SetSlot();
         }
     }
