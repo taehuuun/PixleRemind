@@ -13,12 +13,10 @@ public class CollectUI : BodyUI
         SetSlot();
     }
     
-    private async void SetSlot()
+    private void SetSlot()
     {
         // UserData에서 DownloadTopicData 딕셔너리를 가져옴
-        UserData userData =
-            await FirebaseManager.ins.Firestore.GetData<UserData>(FirestoreCollections.UserData, "Test");
-        Dictionary<string, List<DownloadTopicData>> downloadTopicDataDict = userData.DownloadTopicData;
+        Dictionary<string, List<DownloadTopicData>> downloadTopicDataDict = DataManager.UserData.DownloadTopicData;
 
         // 딕셔너리를 반복하여 각 토픽 데이터를 처리
         foreach (var downloadTopicDataPair in downloadTopicDataDict)

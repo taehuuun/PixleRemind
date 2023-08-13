@@ -2,14 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Newtonsoft.Json;
 using UnityEngine;
 
 public class UpdateManager : MonoBehaviour
 {
     public UpdatePopup updatePopup;
-
-    private UserData _userData;
 
     // 다운로드가 완료 되었을 때 이벤트
     public event Action OnDownloadCompleted;
@@ -36,7 +33,6 @@ public class UpdateManager : MonoBehaviour
         
         // 로드된 토픽 데이터 리스트를 정렬
         _topicDataList.Sort(new TopicDataListComparer());
-        _userData = await FirebaseManager.ins.Firestore.GetData<UserData>(FirestoreCollections.UserData, FUID);
 
         await CheckForUpdated();
     }
@@ -119,7 +115,7 @@ public class UpdateManager : MonoBehaviour
     public async Task DownloadTopicData(string topicID)
     {
         TopicData serverData = _topicDataList.Find(data => data.ID == topicID);
-
+        
         try
         {
             if (serverData != null)
@@ -127,8 +123,8 @@ public class UpdateManager : MonoBehaviour
                 DataManager.SaveJsonData(DataPath.LocalTopicData, topicID, serverData);
 
                 DownloadTopicData newDownloadTopicData = new DownloadTopicData(serverData.ID, serverData.Title, serverData.Description, serverData.TotalCount);
-                _userData.DownloadTopicData[topicID].Add(newDownloadTopicData);
-                _userData.LastUpdated = DateTime.Now;
+                DataManager.UserData.DownloadTopicData[topicID].Add(newDownloadTopicData);
+                DataManager.UserData.LastUpdated = DateTime.Now;
 
 #if UNITY_ANDROID && !UNITY_EDITOR
                  string FUID = FirebaseManager.ins.FireAuth.FUID;
@@ -136,7 +132,7 @@ public class UpdateManager : MonoBehaviour
                 string FUID = "Test";
 #endif
                 await FirebaseManager.ins.Firestore.UpdateData<UserData>(FirestoreCollections.UserData, FUID,
-                    _userData);
+                    DataManager.UserData);
             
                 OnDownloadCompleted?.Invoke();
             }

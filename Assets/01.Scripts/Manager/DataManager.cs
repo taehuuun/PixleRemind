@@ -6,6 +6,7 @@ using Newtonsoft.Json;
 
 public static class DataManager
 {
+    public static UserData UserData { get; set; }
     public static LocalData LocalData { get; set; }
 
     /// <summary>
