@@ -77,19 +77,23 @@ public static class DataSyncManager
     private static async Task SyncLocalDataWithUserData()
     {
         // TopicData 다운로드 필요
+        DataManager.LocalData = new LocalData();
+        
         foreach (var key in DataManager.UserData.DownloadTopicData.Keys)
         {
             TopicData downloadTopicData =
                 await FirebaseManager.ins.Firestore.GetData<TopicData>(FirestoreCollections.GalleryData, key);
             DataManager.LocalData.LocalTopicData.Add(key,downloadTopicData);
         }
-        
+
         // CollectedData 동기화
         var userDataDownloadTopicDataKeys = DataManager.UserData.DownloadTopicData.Keys;
         foreach (var key in userDataDownloadTopicDataKeys)
         {
             DataManager.LocalData.LocalCollectedPixelArtData.Add(key,DataManager.UserData.DownloadTopicData[key].CollectedPixelArtDataList);
         }
+        
+        DataManager.SaveJsonData(DataPath.LocalData,"LocalData",DataManager.LocalData);
     }
 
     private static void ResetAllData()
