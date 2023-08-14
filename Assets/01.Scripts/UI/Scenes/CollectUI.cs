@@ -16,23 +16,19 @@ public class CollectUI : BodyUI
     private void SetSlot()
     {
         // UserData에서 DownloadTopicData 딕셔너리를 가져옴
-        Dictionary<string, List<DownloadTopicData>> downloadTopicDataDict = DataManager.UserData.DownloadTopicData;
+        var downloadTopicDataDict = DataManager.UserData.DownloadTopicData.Values;
 
         // 딕셔너리를 반복하여 각 토픽 데이터를 처리
-        foreach (var downloadTopicDataPair in downloadTopicDataDict)
+        foreach (var downloadTopicData in downloadTopicDataDict)
         {
-            // downloadTopicDataPair.Value는 DownloadTopicData 리스트
-            foreach (DownloadTopicData downloadTopicData in downloadTopicDataPair.Value)
-            {
-                CollectTopicSlot newCollectTopicSlot = Instantiate(collectTopicSlotPrefab, genCollectTopicSlotParent);
-                newCollectTopicSlot.SetSlot(downloadTopicData);
+            CollectTopicSlot newCollectTopicSlot = Instantiate(collectTopicSlotPrefab, genCollectTopicSlotParent);
+            newCollectTopicSlot.SetSlot(downloadTopicData);
 
-                foreach (CollectedPixelArtData collectedPixelArtData in downloadTopicData.CollectedPixelArtDataList)
-                {
-                    CollectPixelArtSlot newCollectPixelArtSlot = Instantiate(collectPixelArtSlotPrefab, newCollectTopicSlot.GetCollectPixelArtParent());
-                    newCollectPixelArtSlot.SetSlot(collectedPixelArtData);
-                    newCollectPixelArtSlot.OnClick += CollectPixelArtSlotClickHandler;
-                }
+            foreach (CollectedPixelArtData collectedPixelArtData in downloadTopicData.CollectedPixelArtDataList)
+            {
+                CollectPixelArtSlot newCollectPixelArtSlot = Instantiate(collectPixelArtSlotPrefab, newCollectTopicSlot.GetCollectPixelArtParent());
+                newCollectPixelArtSlot.SetSlot(collectedPixelArtData);
+                newCollectPixelArtSlot.OnClick += CollectPixelArtSlotClickHandler;
             }
         }
     }

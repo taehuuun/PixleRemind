@@ -124,7 +124,7 @@ public class UpdateManager : MonoBehaviour
                 DataManager.SaveJsonData(DataPath.LocalTopicData, "LocalData", DataManager.LocalData);
 
                 DownloadTopicData newDownloadTopicData = new DownloadTopicData(serverData.ID, serverData.Title, serverData.Description, serverData.TotalCount);
-                DataManager.UserData.DownloadTopicData[topicID].Add(newDownloadTopicData);
+                DataManager.UserData.DownloadTopicData.Add(topicID,newDownloadTopicData);
                 DataManager.UserData.LastUpdated = DateTime.Now;
 
 #if UNITY_ANDROID && !UNITY_EDITOR
