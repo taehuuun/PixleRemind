@@ -120,7 +120,8 @@ public class UpdateManager : MonoBehaviour
         {
             if (serverData != null)
             {
-                DataManager.SaveJsonData(DataPath.LocalTopicData, topicID, serverData);
+                DataManager.LocalData.LocalTopicData.Add(topicID, serverData);
+                DataManager.SaveJsonData(DataPath.LocalTopicData, "LocalData", DataManager.LocalData);
 
                 DownloadTopicData newDownloadTopicData = new DownloadTopicData(serverData.ID, serverData.Title, serverData.Description, serverData.TotalCount);
                 DataManager.UserData.DownloadTopicData[topicID].Add(newDownloadTopicData);
