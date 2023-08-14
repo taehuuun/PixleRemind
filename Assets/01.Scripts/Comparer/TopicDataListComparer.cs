@@ -12,26 +12,18 @@ public class TopicDataListComparer : IComparer<TopicData>
     /// <returns>비교 결과</returns>
     public int Compare(TopicData x, TopicData y)
     {
-        // 각 타이틀에서 타이틀만 추출
-        string titleX = Regex.Replace(x.Title, @"\d", "");
-        string titleY = Regex.Replace(y.Title, @"\d", "");
+        // 각 타이틀에서 타이틀만 추출 (숫자 제거)
+        string titleX = Regex.Replace(x.Title, @"\d+", "").Trim();
+        string titleY = Regex.Replace(y.Title, @"\d+", "").Trim();
 
         // 각 타이틀에서 숫자만 추출
         int.TryParse(Regex.Match(x.Title, @"\d+").Value, out var numberX);
         int.TryParse(Regex.Match(y.Title, @"\d+").Value, out var numberY);
-        
-        // 우선 타이틀 부분을 비교
-        int titleComparison = String.Compare(titleX, titleY, StringComparison.Ordinal);
-        
-        // 타이틀이 동일 하면 숫자를 비교 하여 반환
-        // 다르다면, 결과를 반환
-        if (titleComparison == 0)
-        {
-            return numberX.CompareTo(numberY);
-        }
-        else
-        {
-            return titleComparison;
-        }
+
+        // 우선 타이틀 부분을 한글 사전 순으로 비교
+        int titleComparison = String.Compare(titleX, titleY, StringComparison.CurrentCulture);
+
+        // 타이틀이 동일 하면 숫자를 비교 하여 반환, 다르다면 타이틀 비교 결과를 반환
+        return titleComparison == 0 ? numberX.CompareTo(numberY) : titleComparison;
     }
 }
