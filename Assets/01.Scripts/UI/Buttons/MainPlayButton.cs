@@ -51,8 +51,8 @@ public class MainPlayButton : MonoBehaviour
             playButton.interactable = false;
             return;
         }
-
-        if (_lastPixelArtData.IsCompleted)
+        
+        if (_lastPixelArtData == null ||_lastPixelArtData.IsCompleted)
         {
             DataManager.LocalData.SelectPixelArtDataID = string.Empty;
             ConfigurePlayButtonForCompletedPixelArt();
