@@ -30,7 +30,7 @@ public class MainPlayButton : MonoBehaviour
             return;
         }
 
-        _lastTopicData = DataManager.LoadJsonData<TopicData>(DataPath.LocalTopicData, selectTopicID);
+        _lastTopicData = DataManager.LocalData.LocalTopicData[DataManager.LocalData.SelectTopicDataID];
         _lastPixelArtData = _lastTopicData?.PixelArtDataList.Find(pixelArtData => pixelArtData.ID == DataManager.LocalData.SelectPixelArtDataID);
     }
 
