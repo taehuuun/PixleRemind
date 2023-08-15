@@ -4,8 +4,14 @@ using UnityEngine;
 
 public static class DataSyncManager
 {
-    public static async Task SyncUserDataAndLocalData(string fuid)
+    public static async Task SyncUserDataAndLocalData()
     {
+#if UNITY_ANDROID && !UNITY_EDITOR
+        string fuid = FirebaseManager.ins.FireAuth.FUID;
+#else
+        string fuid = "Test";
+#endif
+        
         Debug.Log("사용자 데이터와 로컬 데이터 동기화 시작");
         DataManager.UserData =
             await FirebaseManager.ins.Firestore.GetData<UserData>(FirestoreCollections.UserData, fuid);
