@@ -33,24 +33,4 @@ public class LoginManager : MonoBehaviour
             }
 #endif
     }
-    
-    /// <summary>
-    /// Firestore를 통해 UserData를 로드하는 메서드
-    /// </summary>
-    public static async Task LoadUserData()
-    {
-        try
-        {
-#if UNITY_ANDROID && !UNITY_EDITOR
-        string FUID = FirebaseManager.ins.FireAuth.FUID;
-#else
-            string FUID = "Test";
-#endif
-            await DataSyncManager.SyncUserDataAndLocalData(FUID);
-        }
-        catch (Exception ex)
-        {
-            Debug.LogError($"Failed to get topic data ids. Exception: {ex}");
-        }
-    }
 }
