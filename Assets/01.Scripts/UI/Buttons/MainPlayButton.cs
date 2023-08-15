@@ -41,7 +41,7 @@ public class MainPlayButton : MonoBehaviour
 #else
         string FUID = "Test";
 #endif
-        await FirebaseManager.ins.Firestore.UpdateData(FirestoreCollections.UserData, FUID, DataManager.LocalData);
+        await FirebaseManager.ins.Firestore.UpdateData(FirestoreCollections.UserData, FUID, DataManager.UserData);
     }
 
     private void ConfigurePlayButton()
