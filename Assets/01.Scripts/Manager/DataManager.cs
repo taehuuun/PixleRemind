@@ -18,6 +18,16 @@ public static class DataManager
         }
         SaveJsonDataToFile(DataPath.LocalData, "LocalData", LocalData);
     }
+    
+    public static LocalData LoadLocalData()
+    {
+        if (LocalData == null)
+        {
+            LocalData = LoadJsonDataFromFile<LocalData>(DataPath.LocalData, "LocalData");
+        }
+
+        return LocalData;
+    }
 
     /// <summary>
     /// 타겟 폴더의 모든 파일 이름을 반환하는 메서드
