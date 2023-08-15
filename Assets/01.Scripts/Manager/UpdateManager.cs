@@ -121,6 +121,7 @@ public class UpdateManager : MonoBehaviour
             if (serverData != null)
             {
                 DataManager.LocalData.LocalTopicData.Add(topicID, serverData);
+                DataManager.LocalData.LocalCollectedPixelArtData.Add(topicID, new List<CollectedPixelArtData>());
                 DataManager.SaveLocalData();
 
                 DownloadTopicData newDownloadTopicData = new DownloadTopicData(serverData.ID, serverData.Title, serverData.Description, serverData.TotalCount);
