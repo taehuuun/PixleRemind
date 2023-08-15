@@ -9,6 +9,16 @@ public static class DataManager
     public static UserData UserData { get; set; }
     public static LocalData LocalData { get; set; }
 
+    public static void SaveLocalData()
+    {
+        if (LocalData == null)
+        {
+            Debug.LogError("로컬 데이터가 Null임 => 저장 실패");
+            return;
+        }
+        SaveJsonDataToFile(DataPath.LocalData, "LocalData", LocalData);
+    }
+
     /// <summary>
     /// 타겟 폴더의 모든 파일 이름을 반환하는 메서드
     /// </summary>
