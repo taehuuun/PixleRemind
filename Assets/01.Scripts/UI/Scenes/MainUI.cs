@@ -32,7 +32,7 @@ public class MainUI : BodyUI
         foreach (var topicDataID in localTopicIds)
         {
             TopicSlot topicSlot = Instantiate(topicSlotPrefab, topicSlotContainer);
-            topicSlot.data = DataManager.LoadJsonData<TopicData>(DataPath.LocalTopicData, topicDataID);
+            topicSlot.data = DataManager.LocalData.LocalTopicData[topicDataID];
             topicSlot.SetSlot();
         }
     }
