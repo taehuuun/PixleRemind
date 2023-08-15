@@ -9,7 +9,7 @@ public static class DataSyncManager
         Debug.Log("사용자 데이터와 로컬 데이터 동기화 시작");
         DataManager.UserData =
             await FirebaseManager.ins.Firestore.GetData<UserData>(FirestoreCollections.UserData, fuid);
-        DataManager.LocalData = DataManager.LoadJsonData<LocalData>(DataPath.LocalData, "LocalData");
+        DataManager.LocalData = DataManager.LoadLocalData();
 
         if (DataManager.UserData != null && DataManager.LocalData != null)
         {
@@ -104,14 +104,14 @@ public static class DataSyncManager
             DataManager.LocalData.LocalCollectedPixelArtData.Add(key, DataManager.UserData.DownloadTopicData[key].CollectedPixelArtDataList);
         }
 
-        DataManager.SaveJsonData(DataPath.LocalData, "LocalData", DataManager.LocalData);
+        DataManager.SaveLocalData();
     }
 
     private static void ResetAllData()
     {
         Debug.Log("모든 데이터 리셋");
         DataManager.LocalData = new LocalData();
-        DataManager.SaveJsonData(DataPath.LocalData, "LocalData", DataManager.LocalData);
+        DataManager.SaveLocalData();
     }
 
     private static async Task CreateAndSaveNewData(string fuid)
@@ -121,6 +121,6 @@ public static class DataSyncManager
         DataManager.LocalData = new LocalData();
 
         await FirebaseManager.ins.Firestore.AddData(FirestoreCollections.UserData, fuid, DataManager.UserData);
-        DataManager.SaveJsonData(DataPath.LocalData, "LocalData", DataManager.LocalData);
+        DataManager.SaveLocalData();
     }
 }
