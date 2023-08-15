@@ -12,6 +12,7 @@ public class PixelArtSlot : Slot
     public override void OnSlotClick()
     {
         DataManager.LocalData.SelectPixelArtDataID = pixelData.ID;
+        DataManager.SaveLocalData();
         LoadingTaskManager.Instance.NextSceneName = SceneNames.PlayScene;
         SceneManager.LoadScene(SceneNames.LoadingScene);
     }
