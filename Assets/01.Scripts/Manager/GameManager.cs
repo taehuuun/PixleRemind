@@ -45,7 +45,7 @@ public class GameManager : MonoBehaviour
         _selectTopicData.ThumbnailData = _selectPixelArtData.ThumbnailData;
         _selectTopicData.ThumbnailSize = _selectPixelArtData.ThumbnailSize;
         DataManager.LocalData.LocalTopicData[DataManager.LocalData.SelectTopicDataID] = _selectTopicData;
-        DataManager.SaveJsonData(DataPath.LocalData,"LocalData", DataManager.LocalData);
+        DataManager.SaveLocalData();
         
                 
 #if UNITY_ANDROID && !UNITY_EDITOR
