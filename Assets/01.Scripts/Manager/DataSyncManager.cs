@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using UnityEngine;
@@ -66,12 +67,23 @@ public static class DataSyncManager
     private static void SyncCollectedPixelArtData()
     {
         Debug.Log("CollectedPixelArtData 동기화 시작");
-        foreach (var topicData in DataManager.UserData.DownloadTopicData)
-        {
-            var key = topicData.Key;
-            var userCollectedDataList = topicData.Value.CollectedPixelArtDataList;
-            var localCollectedDataList = DataManager.LocalData.LocalCollectedPixelArtData[key];
 
+        var userDownloadTopicDataKey = DataManager.UserData.DownloadTopicData.Keys;
+        
+        Debug.Log($"{userDownloadTopicDataKey.Count}");
+        
+        foreach (var key in userDownloadTopicDataKey)
+        {
+            if (!DataManager.LocalData.LocalCollectedPixelArtData.ContainsKey(key) ||
+                !DataManager.LocalData.LocalCollectedPixelArtData.ContainsKey(key))
+            {
+                Debug.Log($"{key}가 존재하지 않음");
+                continue;
+            }
+            
+            List<CollectedPixelArtData> userCollectedDataList = DataManager.UserData.DownloadTopicData[key].CollectedPixelArtDataList;
+            List<CollectedPixelArtData> localCollectedDataList = DataManager.LocalData.LocalCollectedPixelArtData[key];
+            
             // UserData에는 존재하지만 LocalData에 존재하지 않는 경우
             foreach (var data in userCollectedDataList.Except(localCollectedDataList))
             {
