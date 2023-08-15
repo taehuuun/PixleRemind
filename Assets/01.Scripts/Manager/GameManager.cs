@@ -34,7 +34,7 @@ public class GameManager : MonoBehaviour
         _localData = DataManager.LocalData;
         
         _selectTopicData = DataManager.LocalData.LocalTopicData[DataManager.LocalData.SelectTopicDataID];
-        _selectPixelArtData = _selectTopicData.PixelArtDataList.Find((pixelArtData) => pixelArtData.ID == DataManager.LocalData.SelectTopicDataID);
+        _selectPixelArtData = _selectTopicData.PixelArtDataList.Find((pixelArtData) => pixelArtData.ID == DataManager.LocalData.SelectPixelArtDataID);
         colorMatchSystem.SetPixelArtData(_selectPixelArtData);
         playUI.UpdatePixelArt(_selectPixelArtData.ThumbnailData,_selectPixelArtData.ThumbnailSize);
         playUI.SetPlayButton(_selectPixelArtData.IsCompleted);
