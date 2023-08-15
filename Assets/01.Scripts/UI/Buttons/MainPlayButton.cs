@@ -73,7 +73,8 @@ public class MainPlayButton : MonoBehaviour
         else
         {
             buttonText.text = _lastTopicData.Title;
-            buttonImage.gameObject.SetActive(false);
+            buttonImage.sprite =
+                PixelArtHelper.MakeThumbnail(_lastTopicData.ThumbnailData, _lastTopicData.ThumbnailSize);
             SetButtonActive(SceneManager.LoadScene, SceneNames.GalleryScene);
         }
     }
