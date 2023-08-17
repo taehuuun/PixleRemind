@@ -5,6 +5,8 @@ public class ColorMatchSystem : MonoBehaviour
 {
     [SerializeField] private ColorSlot targetColorSlot;
     [SerializeField] private List<ColorSlot> selectColorSlots;
+    
+    [SerializeField] private int maxLife;
     [SerializeField] private float decRangeValue = 0.05f;
     
     private PixelArtData _pixelArtData;
@@ -12,7 +14,6 @@ public class ColorMatchSystem : MonoBehaviour
     private int _life;
     private float _disSimilarRange;
 
-    public int maxLife;
     public float maxDisSimilarRange;
 
     /// <summary>
