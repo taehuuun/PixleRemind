@@ -3,14 +3,8 @@ using UnityEngine;
 
 public class ColorMatchSystem : MonoBehaviour
 {
-    // 현재 보여질 픽셀 아트의 데이터
-    // public _pixelArtData.PixelColorData _pixelArtData.PixelColorData;
     private PixelArtData _pixelArtData;
-
-    // 현제 픽셀 아트 데이터의 컬러 슬롯 UI
     public ColorSlot targetColorSlot;
-
-    // 컬러 슬롯 UI
     public List<ColorSlot> selectColorSlots;
 
     private int _life;
@@ -36,11 +30,8 @@ public class ColorMatchSystem : MonoBehaviour
     /// <returns>일치하는지 여부 반환</returns>
     public void CheckMatch(ColorSlot slot)
     {
-        // 타겟 컬러 슬롯과 선택 슬롯의 컬러가 일치하는지 비교
         bool isMatched = (slot.slotImage.color == targetColorSlot.slotImage.color);
 
-        // 일치 할경우 OnCorrectMatch 메서드 진행
-        // 일치 하지 않을 경고, 기회가 남았을 때 OnIncorrectMatch 메서드 진행
         if (isMatched)
         {
             OnCorrectMatch();
@@ -78,10 +69,8 @@ public class ColorMatchSystem : MonoBehaviour
     /// </summary>
     private void OnIncorrectMatch()
     {
-        // 진동 효과
         Handheld.Vibrate();
         
-        // life 감소
         DecreaseLife();
     }
 
@@ -167,8 +156,6 @@ public class ColorMatchSystem : MonoBehaviour
     {
         if (_pixelArtData.PixelColorData == null || _pixelArtData.PixelColorData.CustomPixels.Count == 0)
         {
-            // Debug.LogWarning("No Pixel Art Data Found, Using Random Color");
-            // SetRandomTargetColor();
             return;
         }
         
