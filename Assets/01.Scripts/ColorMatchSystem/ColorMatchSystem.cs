@@ -4,8 +4,9 @@ using UnityEngine;
 public class ColorMatchSystem : MonoBehaviour
 {
     [SerializeField] private ColorSlot targetColorSlot;
+    [SerializeField] private List<ColorSlot> selectColorSlots;
+    
     private PixelArtData _pixelArtData;
-    public List<ColorSlot> selectColorSlots;
 
     private int _life;
     private float _disSimilarRange;
