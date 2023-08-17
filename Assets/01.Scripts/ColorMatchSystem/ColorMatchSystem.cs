@@ -8,13 +8,12 @@ public class ColorMatchSystem : MonoBehaviour
     
     [SerializeField] private int maxLife;
     [SerializeField] private float decRangeValue = 0.05f;
+    [SerializeField] private float maxDisSimilarRange;
     
     private PixelArtData _pixelArtData;
 
     private int _life;
     private float _disSimilarRange;
-
-    public float maxDisSimilarRange;
 
     /// <summary>
     /// 게임 재시작 메서드
