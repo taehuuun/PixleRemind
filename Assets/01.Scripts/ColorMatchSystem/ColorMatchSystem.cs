@@ -3,8 +3,8 @@ using UnityEngine;
 
 public class ColorMatchSystem : MonoBehaviour
 {
+    [SerializeField] private ColorSlot targetColorSlot;
     private PixelArtData _pixelArtData;
-    public ColorSlot targetColorSlot;
     public List<ColorSlot> selectColorSlots;
 
     private int _life;
