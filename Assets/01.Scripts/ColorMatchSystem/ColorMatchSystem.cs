@@ -8,6 +8,7 @@ public class ColorMatchSystem : MonoBehaviour
     
     [SerializeField] private int maxLife;
     [SerializeField] private float decRangeValue = 0.05f;
+    [SerializeField] private int maxLife;
     
     private PixelArtData _pixelArtData;
 
