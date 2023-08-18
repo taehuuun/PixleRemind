@@ -76,7 +76,7 @@ public class ColorMatchMiniGame : MonoBehaviour
     private void FillRandomPixel()
     {
         // 해당 픽셀 아트가 복구 해야할 픽셀이 남아있는지 체크
-        if (_pixelArtData.PixelColorData.RemainingPixels <= 0) return;
+        if (NoRemainingPixels()) return;
         
         // 해당 픽셀 아트의 랜덤 픽셀 선택
         int selectPixelIdx = Random.Range(0, _pixelArtData.PixelColorData.CustomPixels.Count);
