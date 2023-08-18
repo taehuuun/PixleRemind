@@ -130,7 +130,12 @@ public class ColorMatchMiniGame : MonoBehaviour
     {
         return Random.Range(0, _pixelArtData.PixelColorData.CustomPixels.Count);
     }
-   
+
+    private CustomPixel GetSelectedPixel(int index)
+    {
+        return _pixelArtData.PixelColorData.CustomPixels[index];
+    }
+    
     /// <summary>
     /// ColorMatchSystem의 상태를 리셋하는 메서드
     /// </summary>
