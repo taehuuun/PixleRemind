@@ -75,13 +75,19 @@ public class ColorMatchMiniGame : MonoBehaviour
 
     private void FillRandomPixel()
     {
+        // 해당 픽셀 아트가 복구 해야할 픽셀이 남아있는지 체크
         if (_pixelArtData.PixelColorData.RemainingPixels <= 0) return;
         
+        // 해당 픽셀 아트의 랜덤 픽셀 선택
         int selectPixelIdx = Random.Range(0, _pixelArtData.PixelColorData.CustomPixels.Count);
         
+        // 선택된 랜덤 픽셀
         var selectedPixel = _pixelArtData.PixelColorData.CustomPixels[selectPixelIdx];
+        
+        // 선택된 랜덤 픽셀의 컬러와 같은 컬러인 픽셀 좌표 중 하나를 선택
         int selectedCoord = Random.Range(0, selectedPixel.PixelCoords.Count);
 
+        // 해당 픽셀 아트의 썸네일 데이터를 Texture2D로 변환 후 해당 좌표의 픽셀 컬러를 원본 컬러로 적용
         Sprite sprite = PixelArtHelper.MakeThumbnail(_pixelArtData.ThumbnailData, _pixelArtData.ThumbnailSize);
         Texture2D pixelArt = PixelArtHelper.SpriteToTexture2D(sprite);
         
@@ -92,17 +98,23 @@ public class ColorMatchMiniGame : MonoBehaviour
             origin);
         pixelArt.Apply();
         
+        // 복구 후 해당 픽셀 컬러의 좌표 제거
         selectedPixel.PixelCoords.RemoveAt(selectedCoord);
         
+        // 복구 후 해당 픽셀 컬러를 가지고 있는 좌표가 없다면 => 해당 컬러 정보가 필요 없음 => 제거
         if (_pixelArtData.PixelColorData.CustomPixels[selectPixelIdx].PixelCoords.Count == 0)
         {
             Debug.Log($"{origin} 컬러 값과 해당하는 좌표들을 모두 채웠음 해당 컬러를 리스트에서 제거");
             _pixelArtData.PixelColorData.CustomPixels.RemoveAt(selectPixelIdx);
         }
         
+        // 해당 픽셀 아트의 남은 픽셀 수 감소
         _pixelArtData.PixelColorData.RemainingPixels--;
+        
+        // 해당 픽셀 아트의 썸네일 데이터를 복원 후 데이터로 업데이트
         _pixelArtData.ThumbnailData = PixelArtHelper.ExtractThumbnailData(pixelArt);
 
+        //남은 픽셀 수가 없을 때 완료 처리 진행
         if (_pixelArtData.PixelColorData.RemainingPixels == 0)
         {
             _pixelArtData.IsCompleted = true;
