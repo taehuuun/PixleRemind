@@ -125,6 +125,11 @@ public class ColorMatchMiniGame : MonoBehaviour
     {
         return _pixelArtData.PixelColorData.RemainingPixels <= 0;
     }
+
+    private int SelectRandomPixelIndex()
+    {
+        return Random.Range(0, _pixelArtData.PixelColorData.CustomPixels.Count);
+    }
    
     /// <summary>
     /// ColorMatchSystem의 상태를 리셋하는 메서드
