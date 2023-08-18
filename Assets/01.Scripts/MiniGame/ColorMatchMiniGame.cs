@@ -120,6 +120,11 @@ public class ColorMatchMiniGame : MonoBehaviour
             _pixelArtData.IsCompleted = true;
         }
     }
+
+    private bool NoRemainingPixels()
+    {
+        return _pixelArtData.PixelColorData.RemainingPixels <= 0;
+    }
    
     /// <summary>
     /// ColorMatchSystem의 상태를 리셋하는 메서드
