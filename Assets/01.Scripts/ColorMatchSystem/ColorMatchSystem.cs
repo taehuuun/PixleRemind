@@ -31,9 +31,7 @@ public class ColorMatchSystem : MonoBehaviour
     /// <returns>일치하는지 여부 반환</returns>
     public void CheckMatch(ColorSlot slot)
     {
-        bool isMatched = (slot.slotImage.color == targetColorSlot.slotImage.color);
-
-        if (isMatched)
+        if (slot.slotImage.color == targetColorSlot.slotImage.color)
         {
             OnCorrectMatch();
         }
