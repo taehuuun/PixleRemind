@@ -79,10 +79,10 @@ public class ColorMatchMiniGame : MonoBehaviour
         if (NoRemainingPixels()) return;
         
         // 해당 픽셀 아트의 랜덤 픽셀 선택
-        int selectPixelIdx = Random.Range(0, _pixelArtData.PixelColorData.CustomPixels.Count);
+        int randomPixelIndex = SelectRandomPixelIndex();
         
         // 선택된 랜덤 픽셀
-        var selectedPixel = _pixelArtData.PixelColorData.CustomPixels[selectPixelIdx];
+        var selectedPixel = _pixelArtData.PixelColorData.CustomPixels[randomPixelIndex];
         
         // 선택된 랜덤 픽셀의 컬러와 같은 컬러인 픽셀 좌표 중 하나를 선택
         int selectedCoord = Random.Range(0, selectedPixel.PixelCoords.Count);
@@ -102,10 +102,10 @@ public class ColorMatchMiniGame : MonoBehaviour
         selectedPixel.PixelCoords.RemoveAt(selectedCoord);
         
         // 복구 후 해당 픽셀 컬러를 가지고 있는 좌표가 없다면 => 해당 컬러 정보가 필요 없음 => 제거
-        if (_pixelArtData.PixelColorData.CustomPixels[selectPixelIdx].PixelCoords.Count == 0)
+        if (_pixelArtData.PixelColorData.CustomPixels[randomPixelIndex].PixelCoords.Count == 0)
         {
             Debug.Log($"{origin} 컬러 값과 해당하는 좌표들을 모두 채웠음 해당 컬러를 리스트에서 제거");
-            _pixelArtData.PixelColorData.CustomPixels.RemoveAt(selectPixelIdx);
+            _pixelArtData.PixelColorData.CustomPixels.RemoveAt(randomPixelIndex);
         }
         
         // 해당 픽셀 아트의 남은 픽셀 수 감소
