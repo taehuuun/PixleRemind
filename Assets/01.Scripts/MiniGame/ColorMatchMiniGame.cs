@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ColorMatchSystem : MonoBehaviour
+public class ColorMatchMiniGame : MonoBehaviour
 {
     [SerializeField] private ColorSlot targetColorSlot;
     [SerializeField] private List<ColorSlot> selectColorSlots;

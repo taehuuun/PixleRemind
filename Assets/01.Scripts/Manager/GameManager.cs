@@ -1,9 +1,10 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField] private ColorMatchSystem colorMatchSystem;
+    [FormerlySerializedAs("colorMatchSystem")] [SerializeField] private ColorMatchMiniGame colorMatchMiniGame;
     [SerializeField] private PlayUI playUI;
 
     private LocalData _localData;
@@ -23,7 +24,7 @@ public class GameManager : MonoBehaviour
     public void StartGame()
     {
         _playTime = 0;
-        colorMatchSystem.ReStart();
+        colorMatchMiniGame.ReStart();
         StartCoroutine(Playing());
         StartCoroutine(PixelArtUpdate());
         playUI.ShowUI();
@@ -35,7 +36,7 @@ public class GameManager : MonoBehaviour
         
         _selectTopicData = DataManager.LocalData.LocalTopicData[DataManager.LocalData.SelectTopicDataID];
         _selectPixelArtData = _selectTopicData.PixelArtDataList.Find((pixelArtData) => pixelArtData.ID == DataManager.LocalData.SelectPixelArtDataID);
-        colorMatchSystem.SetPixelArtData(_selectPixelArtData);
+        colorMatchMiniGame.SetPixelArtData(_selectPixelArtData);
         playUI.UpdatePixelArt(_selectPixelArtData.ThumbnailData,_selectPixelArtData.ThumbnailSize);
         playUI.SetPlayButton(_selectPixelArtData.IsCompleted);
     }
@@ -75,7 +76,7 @@ public class GameManager : MonoBehaviour
     
     private IEnumerator Playing()
     {
-        while (!colorMatchSystem.IsGameOver())
+        while (!colorMatchMiniGame.IsGameOver())
         {
             yield return _timerDelay;
             _playTime++;
@@ -92,7 +93,7 @@ public class GameManager : MonoBehaviour
     }
     private IEnumerator PixelArtUpdate()
     {
-        while (!colorMatchSystem.IsGameOver())
+        while (!colorMatchMiniGame.IsGameOver())
         {
             yield return new WaitUntil(() => _lastThumbnailData != _selectPixelArtData.ThumbnailData);
             _lastThumbnailData = _selectPixelArtData.ThumbnailData;
