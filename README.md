@@ -17,9 +17,10 @@
   
 <details>
  <details>
-  <summary>2023.07.30 (이어하기 구현)</summary>
+  <summary>2023.08.10 (데이터 구조/관리 개선)</summary>
   
-  - 마지막으로 작업을 진행 한 데이터를 이어할 수 있도록 구현
+  - 기존의 Data클래스 구조 개선
+  - LocalData와 UserData를 분리하여 관리 방식 개선
   </details>
  <summary>완료 작업</summary>
   <details>
