@@ -88,8 +88,7 @@ public class ColorMatchMiniGame : MonoBehaviour
         int selectedCoord = Random.Range(0, selectedPixel.PixelCoords.Count);
 
         // 해당 픽셀 아트의 썸네일 데이터를 Texture2D로 변환 후 해당 좌표의 픽셀 컬러를 원본 컬러로 적용
-        Sprite sprite = PixelArtHelper.MakeThumbnail(_pixelArtData.ThumbnailData, _pixelArtData.ThumbnailSize);
-        Texture2D pixelArt = PixelArtHelper.SpriteToTexture2D(sprite);
+        Texture2D pixelArt = GetPixelArtTexture();
         
         Color origin = new Color(selectedPixel.OriginalColor.R, selectedPixel.OriginalColor.G,
             selectedPixel.OriginalColor.B, selectedPixel.OriginalColor.A);
