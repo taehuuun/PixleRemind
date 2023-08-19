@@ -135,6 +135,12 @@ public class ColorMatchMiniGame : MonoBehaviour
     {
         return _pixelArtData.PixelColorData.CustomPixels[index];
     }
+
+    private Texture2D GetPixelArtTexture()
+    {
+        Sprite sprite = PixelArtHelper.MakeThumbnail(_pixelArtData.ThumbnailData, _pixelArtData.ThumbnailSize);
+        return PixelArtHelper.SpriteToTexture2D(sprite);
+    }
     
     /// <summary>
     /// ColorMatchSystem의 상태를 리셋하는 메서드
