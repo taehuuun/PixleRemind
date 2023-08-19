@@ -82,7 +82,7 @@ public class ColorMatchMiniGame : MonoBehaviour
         int randomPixelIndex = SelectRandomPixelIndex();
         
         // 선택된 랜덤 픽셀
-        var selectedPixel = _pixelArtData.PixelColorData.CustomPixels[randomPixelIndex];
+        CustomPixel selectedPixel = GetSelectedPixel(randomPixelIndex);
         
         // 선택된 랜덤 픽셀의 컬러와 같은 컬러인 픽셀 좌표 중 하나를 선택
         int selectedCoord = Random.Range(0, selectedPixel.PixelCoords.Count);
