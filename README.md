@@ -10,17 +10,41 @@
 ## 개발 일지
 
 <details>
-<summary>2023.06.26 (팝업 시스템 구현)</summary>
-
-- Popup, PopupManager 구현
-- 기존 팝업 코드를 PopupManager에서 구현 할 수 있도록 수정
-</details>
+ <summary>진행 중인 작업</summary>
+ 
+ - 전체적인 코드 리팩토링
+ </details>
+  
 <details>
-<summary>2023.06.21 (Firestore 활용 토픽 업데이트 구현)</summary>
-
-- Firestore 활용 추가 토픽 업데이트 체크 기능 구현
-- 씬 플레이 플로우 수정
-- 전체적인 코드 설명 주석 추가중...
+ <details>
+  <summary>2023.07.30 (이어하기 구현)</summary>
+  
+  - 마지막으로 작업을 진행 한 데이터를 이어할 수 있도록 구현
+  </details>
+ <summary>완료 작업</summary>
+  <details>
+  <summary>2023.07.30 (이어하기 구현)</summary>
+  
+  - 마지막으로 작업을 진행 한 데이터를 이어할 수 있도록 구현
+  </details>
+  <details>
+  <summary>2023.07.29 (도감 시스템 구현)</summary>
+  
+  - 복원이 완료된 픽셀 아트를 도감에 등록 가능 하도록 구현
+  </details>
+  <details>
+  <summary>2023.06.26 (팝업 시스템 구현)</summary>
+  
+  - Popup, PopupManager 구현
+  - 기존 팝업 코드를 PopupManager에서 구현 할 수 있도록 수정
+  </details>
+  <details>
+  <summary>2023.06.21 (Firestore 활용 토픽 업데이트 구현)</summary>
+  
+  - Firestore 활용 추가 토픽 업데이트 체크 기능 구현
+  - 씬 플레이 플로우 수정
+  - 전체적인 코드 설명 주석 추가
+  </details>
 </details>
 
 ## 스크린샷
