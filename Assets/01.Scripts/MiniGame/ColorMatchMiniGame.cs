@@ -145,6 +145,12 @@ public class ColorMatchMiniGame : MonoBehaviour
         return new Color(selectedPixel.OriginalColor.R, selectedPixel.OriginalColor.G, selectedPixel.OriginalColor.B,
             selectedPixel.OriginalColor.A);
     }
+
+    private void ApplyPixelColor(Texture2D pixelArt, CustomPixel selectedPixel, int selectedCoord, Color origin)
+    {
+        pixelArt.SetPixel(selectedPixel.PixelCoords[selectedCoord].X,selectedPixel.PixelCoords[selectedCoord].Y, origin);
+        pixelArt.Apply();
+    }
     
     /// <summary>
     /// ColorMatchSystem의 상태를 리셋하는 메서드
