@@ -140,6 +140,12 @@ public class ColorMatchMiniGame : MonoBehaviour
         Sprite sprite = PixelArtHelper.MakeThumbnail(_pixelArtData.ThumbnailData, _pixelArtData.ThumbnailSize);
         return PixelArtHelper.SpriteToTexture2D(sprite);
     }
+
+    private Color GetOriginalColor(CustomPixel selectedPixel)
+    {
+        return new Color(selectedPixel.OriginalColor.R, selectedPixel.OriginalColor.G, selectedPixel.OriginalColor.B,
+            selectedPixel.OriginalColor.A);
+    }
     
     /// <summary>
     /// ColorMatchSystem의 상태를 리셋하는 메서드
