@@ -149,6 +149,18 @@ public class ColorMatchMiniGame : MonoBehaviour
         pixelArt.SetPixel(selectedPixel.PixelCoords[selectedCoord].X,selectedPixel.PixelCoords[selectedCoord].Y, origin);
         pixelArt.Apply();
     }
+
+    private void UpdatePixelData(CustomPixel selectedPixel, int selectedCoord, int rnadomPixelIndex)
+    {
+        selectedPixel.PixelCoords.RemoveAt(selectedCoord);
+        
+        if (selectedPixel.PixelCoords.Count == 0)
+        {
+            _pixelArtData.PixelColorData.CustomPixels.RemoveAt(rnadomPixelIndex);
+        }
+
+        _pixelArtData.PixelColorData.RemainingPixels--;
+    }
     
     /// <summary>
     /// ColorMatchSystem의 상태를 리셋하는 메서드
