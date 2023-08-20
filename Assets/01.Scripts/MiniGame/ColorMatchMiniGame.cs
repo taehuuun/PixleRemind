@@ -149,6 +149,11 @@ public class ColorMatchMiniGame : MonoBehaviour
 
         _pixelArtData.PixelColorData.RemainingPixels--;
     }
+
+    private void UpdateThumbnailData(Texture2D pixelArt)
+    {
+        _pixelArtData.ThumbnailData = PixelArtHelper.ExtractThumbnailData(pixelArt);
+    }
     
     /// <summary>
     /// ColorMatchSystem의 상태를 리셋하는 메서드
