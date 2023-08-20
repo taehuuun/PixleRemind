@@ -93,16 +93,7 @@ public class ColorMatchMiniGame : MonoBehaviour
         Color origin = GetOriginalColor(selectedPixel);
 
         ApplyPixelColor(pixelArt, selectedPixel, selectedCoord, origin);
-        
-        // 복구 후 해당 픽셀 컬러의 좌표 제거
-        selectedPixel.PixelCoords.RemoveAt(selectedCoord);
-        
-        // 복구 후 해당 픽셀 컬러를 가지고 있는 좌표가 없다면 => 해당 컬러 정보가 필요 없음 => 제거
-        if (_pixelArtData.PixelColorData.CustomPixels[randomPixelIndex].PixelCoords.Count == 0)
-        {
-            Debug.Log($"{origin} 컬러 값과 해당하는 좌표들을 모두 채웠음 해당 컬러를 리스트에서 제거");
-            _pixelArtData.PixelColorData.CustomPixels.RemoveAt(randomPixelIndex);
-        }
+        UpdatePixelData(selectedPixel, selectedCoord, randomPixelIndex);
         
         // 해당 픽셀 아트의 남은 픽셀 수 감소
         _pixelArtData.PixelColorData.RemainingPixels--;
