@@ -94,9 +94,7 @@ public class ColorMatchMiniGame : MonoBehaviour
 
         ApplyPixelColor(pixelArt, selectedPixel, selectedCoord, origin);
         UpdatePixelData(selectedPixel, selectedCoord, randomPixelIndex);
-        
-        // 해당 픽셀 아트의 썸네일 데이터를 복원 후 데이터로 업데이트
-        _pixelArtData.ThumbnailData = PixelArtHelper.ExtractThumbnailData(pixelArt);
+        UpdateThumbnailData(pixelArt);
 
         //남은 픽셀 수가 없을 때 완료 처리 진행
         if (_pixelArtData.PixelColorData.RemainingPixels == 0)
