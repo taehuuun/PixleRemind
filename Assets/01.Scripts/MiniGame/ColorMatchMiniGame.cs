@@ -89,6 +89,7 @@ public class ColorMatchMiniGame : MonoBehaviour
         UpdateThumbnailData(pixelArt);
         CheckComplete();
     }
+    #region  FillRandomPixel 관련 메서드
 
     private bool NoRemainingPixels()
     {
@@ -147,6 +148,7 @@ public class ColorMatchMiniGame : MonoBehaviour
             _pixelArtData.IsCompleted = true;
         }
     }
+    #endregion
     
     /// <summary>
     /// ColorMatchSystem의 상태를 리셋하는 메서드
