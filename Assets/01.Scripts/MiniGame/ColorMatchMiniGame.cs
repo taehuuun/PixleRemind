@@ -91,10 +91,8 @@ public class ColorMatchMiniGame : MonoBehaviour
         Texture2D pixelArt = GetPixelArtTexture();
 
         Color origin = GetOriginalColor(selectedPixel);
-        
-        pixelArt.SetPixel(selectedPixel.PixelCoords[selectedCoord].X, selectedPixel.PixelCoords[selectedCoord].Y,
-            origin);
-        pixelArt.Apply();
+
+        ApplyPixelColor(pixelArt, selectedPixel, selectedCoord, origin);
         
         // 복구 후 해당 픽셀 컬러의 좌표 제거
         selectedPixel.PixelCoords.RemoveAt(selectedCoord);
