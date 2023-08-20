@@ -152,6 +152,14 @@ public class ColorMatchMiniGame : MonoBehaviour
     {
         _pixelArtData.ThumbnailData = PixelArtHelper.ExtractThumbnailData(pixelArt);
     }
+
+    private void CheckComplete()
+    {
+        if (_pixelArtData.PixelColorData.RemainingPixels == 0)
+        {
+            _pixelArtData.IsCompleted = true;
+        }
+    }
     
     /// <summary>
     /// ColorMatchSystem의 상태를 리셋하는 메서드
