@@ -95,12 +95,7 @@ public class ColorMatchMiniGame : MonoBehaviour
         ApplyPixelColor(pixelArt, selectedPixel, selectedCoord, origin);
         UpdatePixelData(selectedPixel, selectedCoord, randomPixelIndex);
         UpdateThumbnailData(pixelArt);
-
-        //남은 픽셀 수가 없을 때 완료 처리 진행
-        if (_pixelArtData.PixelColorData.RemainingPixels == 0)
-        {
-            _pixelArtData.IsCompleted = true;
-        }
+        CheckComplete();
     }
 
     private bool NoRemainingPixels()
