@@ -75,21 +75,13 @@ public class ColorMatchMiniGame : MonoBehaviour
 
     private void FillRandomPixel()
     {
-        // 해당 픽셀 아트가 복구 해야할 픽셀이 남아있는지 체크
         if (NoRemainingPixels()) return;
         
-        // 해당 픽셀 아트의 랜덤 픽셀 선택
         int randomPixelIndex = SelectRandomPixelIndex();
-        
-        // 선택된 랜덤 픽셀
         CustomPixel selectedPixel = GetSelectedPixel(randomPixelIndex);
-        
-        // 선택된 랜덤 픽셀의 컬러와 같은 컬러인 픽셀 좌표 중 하나를 선택
         int selectedCoord = Random.Range(0, selectedPixel.PixelCoords.Count);
 
-        // 해당 픽셀 아트의 썸네일 데이터를 Texture2D로 변환 후 해당 좌표의 픽셀 컬러를 원본 컬러로 적용
         Texture2D pixelArt = GetPixelArtTexture();
-
         Color origin = GetOriginalColor(selectedPixel);
 
         ApplyPixelColor(pixelArt, selectedPixel, selectedCoord, origin);
