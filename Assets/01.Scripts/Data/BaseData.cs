@@ -27,4 +27,9 @@ public class BaseData
     {
         Title = title;
     }
+
+    public void SetDescription(string description)
+    {
+        Description = description;
+    }
 }
