@@ -47,9 +47,9 @@ public class CustomTopicEditor : EditorWindow
         if (GUILayout.Button("Add TopicData"))
         {
             var newTopicData = new TopicData();
+            newTopicData.SetTitle(_firestoreTopicDatas.Count.ToString());
+            newTopicData.SetID($"_tempTopic_{_firestoreTopicDatas.Count.ToString()}");
             _firestoreTopicDatas.Add(newTopicData);
-            newTopicData.Title = _firestoreTopicDatas.Count.ToString();
-            newTopicData.ID = $"_tempTopic_{_firestoreTopicDatas.Count.ToString()}";
             _foldOutTopicStatus[newTopicData.ID] = true;
         }
 
@@ -89,9 +89,9 @@ public class CustomTopicEditor : EditorWindow
         GUI.enabled = false;
         EditorGUILayout.TextField("ID", topicData.ID);
         GUI.enabled = true;
-        topicData.Title = EditorGUILayout.TextField("Title", topicData.Title);
+        topicData.SetTitle(EditorGUILayout.TextField("Title", topicData.Title));
         EditorGUILayout.LabelField("Description");
-        topicData.Description = EditorGUILayout.TextArea(topicData.Description, GUILayout.Height(100));
+        topicData.SetDescription(EditorGUILayout.TextArea(topicData.Description, GUILayout.Height(100)));
         GUI.enabled = false;
         EditorGUILayout.TextField("ThumbData", topicData.ThumbnailData);
         EditorGUILayout.TextField("CompleteCount", topicData.CompleteCount.ToString());
@@ -155,7 +155,9 @@ public class CustomTopicEditor : EditorWindow
 
                 if (string.IsNullOrEmpty(topicData.ThumbnailData) && newPixelArtData.ThumbnailData.Length > 0)
                 {
-                    topicData.ThumbnailData = topicData.PixelArtDataList[0].ThumbnailData;
+                    string thumbnailData = topicData.PixelArtDataList[0].ThumbnailData;
+                    int thumbnailSize = topicData.ThumbnailSize;
+                    topicData.UpdateThumbnailData(thumbnailData, thumbnailSize);
                 }
 
                 topicData.TotalCount++;
@@ -196,8 +198,8 @@ public class CustomTopicEditor : EditorWindow
         }
 
         GUI.enabled = false;
-        pixelArtData.ID = EditorGUILayout.TextField("ID", pixelArtData.ID); 
-        pixelArtData.Title = EditorGUILayout.TextField("Title", pixelArtData.Title);
+        pixelArtData.SetID(EditorGUILayout.TextField("ID", pixelArtData.ID));
+        pixelArtData.SetTitle(EditorGUILayout.TextField("Title", pixelArtData.Title)); 
         EditorGUILayout.TextField("ThumbnailData", pixelArtData.ThumbnailData);
         EditorGUILayout.TextField("PlayTime", pixelArtData.PlayTime.ToString());
         EditorGUILayout.TextField("ThumbnailSize", pixelArtData.ThumbnailSize.ToString());
@@ -241,7 +243,7 @@ public class CustomTopicEditor : EditorWindow
                 // Generate a hash for the topic data ID
                 string hashInput = $"{topicData.Title}{topicData.Description}{topicData.ThumbnailData}{topicData.CompleteCount}{topicData.TotalCount}{topicData.Complete}{topicData.Updateable}{topicData.IsLocked}{topicData.LastUpdated}";
                 string generatedHash = HashGenerator.GenerateHash(hashInput);
-                topicData.ID = generatedHash;
+                topicData.SetID(generatedHash);
 
                 // Only add the data with the hashed ID
                 await _firestore.AddData(FirestoreCollections.GalleryData, topicData.ID,topicData);
