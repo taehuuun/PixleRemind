@@ -43,8 +43,7 @@ public class GameManager : MonoBehaviour
     
     public async void SaveData()
     {
-        _selectTopicData.ThumbnailData = _selectPixelArtData.ThumbnailData;
-        _selectTopicData.ThumbnailSize = _selectPixelArtData.ThumbnailSize;
+        _selectTopicData.UpdateThumbnailData(_selectPixelArtData.ThumbnailData,_selectPixelArtData.ThumbnailSize);
         DataManager.LocalData.LocalTopicData[DataManager.LocalData.SelectTopicDataID] = _selectTopicData;
         DataManager.SaveLocalData();
         
