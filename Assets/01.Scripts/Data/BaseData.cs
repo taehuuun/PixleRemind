@@ -17,4 +17,9 @@ public class BaseData
         Title = title;
         Description = description;
     }
+
+    public void SetID(string id)
+    {
+        ID = id;
+    }
 }
