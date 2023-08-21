@@ -15,4 +15,10 @@ public class BaseThumbnailData : BaseData
         ThumbnailData = thumbnailData;
         ThumbnailSize = thumbnailSize;
     }
+
+    public void UpdateThumbnailData(string thumbnailData, int thumbnailSize)
+    {
+        ThumbnailData = thumbnailData;
+        ThumbnailSize = thumbnailSize;
+    }
 }
