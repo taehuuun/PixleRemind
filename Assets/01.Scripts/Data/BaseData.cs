@@ -4,9 +4,9 @@ using Firebase.Firestore;
 [FirestoreData, Serializable]
 public class BaseData
 {
-    [FirestoreProperty] public string ID { get; set; }
-    [FirestoreProperty] public string Title { get; set; }
-    [FirestoreProperty] public string Description { get; set; }
+    [FirestoreProperty] public string ID { get; private set; }
+    [FirestoreProperty] public string Title { get; private set; }
+    [FirestoreProperty] public string Description { get; private set; }
     
     public BaseData()
     {
