@@ -138,7 +138,9 @@ public class ColorMatchMiniGame : MonoBehaviour
 
     private void UpdateThumbnailData(Texture2D pixelArt)
     {
-        _pixelArtData.ThumbnailData = PixelArtHelper.ExtractThumbnailData(pixelArt);
+        string thumbnailData = PixelArtHelper.ExtractThumbnailData(pixelArt);
+        int thumbnailSize = _pixelArtData.ThumbnailSize;
+        _pixelArtData.UpdateThumbnailData(thumbnailData,thumbnailSize); 
     }
 
     private void CheckComplete()
