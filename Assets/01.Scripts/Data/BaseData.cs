@@ -22,4 +22,9 @@ public class BaseData
     {
         ID = id;
     }
+
+    public void SetTitle(string title)
+    {
+        Title = title;
+    }
 }
