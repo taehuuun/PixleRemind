@@ -9,7 +9,7 @@ public class BaseData
     [FirestoreProperty] public string Description { get; private set; }
     
     public BaseData() : this(string.Empty, string.Empty,string.Empty) { }
-    
+    public BaseData(string id) :this(id,string.Empty,string.Empty) {}
     public BaseData(string id, string title, string description)
     {
         ID = id;
