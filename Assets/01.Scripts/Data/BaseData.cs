@@ -10,6 +10,7 @@ public class BaseData
     
     public BaseData() : this(string.Empty, string.Empty,string.Empty) { }
     public BaseData(string id) :this(id,string.Empty,string.Empty) {}
+    public BaseData(string id, string title) : this(id, title, string.Empty) {}
     public BaseData(string id, string title, string description)
     {
         ID = id;
