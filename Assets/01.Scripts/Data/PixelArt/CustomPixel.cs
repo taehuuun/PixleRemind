@@ -20,6 +20,11 @@ public class CustomPixel
     {
         PixelCoords.Add(coord);
     }
+
+    private bool IsValidIndexRange(int index)
+    {
+        return index >= 0 && index < PixelCoords.Count;
+    }
     private CustomColor GetGrayValue(CustomColor origin)
     {
         float grayValue = (origin.R + origin.G + origin.B) / 3;
