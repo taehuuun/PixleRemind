@@ -16,6 +16,10 @@ public class CustomPixel
         PixelCoords = new List<PixelCoord>();
     }
 
+    public void AddPixelCoord(PixelCoord coord)
+    {
+        PixelCoords.Add(coord);
+    }
     private CustomColor GetGrayValue(CustomColor origin)
     {
         float grayValue = (origin.R + origin.G + origin.B) / 3;
