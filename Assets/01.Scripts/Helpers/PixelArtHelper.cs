@@ -24,20 +24,19 @@ public static class PixelArtHelper
             for (int x = 0; x < extractTarget.width; x++)
             {
                 // 텍스쳐의 x,y값에 대한 컬러값 추출
-                Color getPixelColor = extractTarget.GetPixel(x, y);
+                CustomColor getPixelColor = new CustomColor(extractTarget.GetPixel(x, y));
                 
                 // 픽셀 컬러값중 알파값이 1이상인 경우
-                if (getPixelColor.a >= 1)
+                if (getPixelColor.A >= 1)
                 {
                     // 각 컬러의 rgba값을 이용한 키 생성
-                    string colorKey = $"{getPixelColor.r}_{getPixelColor.g}_{getPixelColor.b}_{getPixelColor.a}";
+                    string colorKey = $"{getPixelColor.R}_{getPixelColor.G}_{getPixelColor.B}_{getPixelColor.A}";
                     
                     // 딕셔너리에 colorKey가 포함되어 있지 않은 경우만
                     if (!colorGroups.ContainsKey(colorKey))
                     {
                         // Firestore 업로드를 위한 CustomPixel 생성후 추가
-                        CustomPixel customPixel = new CustomPixel(getPixelColor.r, getPixelColor.g, getPixelColor.b,
-                            getPixelColor.a);
+                        CustomPixel customPixel = new CustomPixel(getPixelColor);
                         colorGroups[colorKey] = customPixel;
                     }
                     
