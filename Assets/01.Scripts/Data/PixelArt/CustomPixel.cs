@@ -20,6 +20,10 @@ public class CustomPixel
     {
         PixelCoords.Add(coord);
     }
+    public int GetPixelCoordCount()
+    {
+        return PixelCoords.Count;
+    }
 
     private bool IsValidIndexRange(int index)
     {
