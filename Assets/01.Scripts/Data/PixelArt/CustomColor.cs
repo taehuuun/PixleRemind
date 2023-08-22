@@ -13,16 +13,8 @@ public class CustomColor
     [FirestoreProperty] public float B { get; set; }
     [FirestoreProperty] public float A { get; set; }
 
-    public CustomColor()
-    {
-        R = 0;
-        G = 0;
-        B = 0;
-        A = 0;
-    }
-
+    public CustomColor() : this(0,0,0,0) {}
     public CustomColor(Color color) : this(color.r, color.g,color.b,color.a) {}
-
     public CustomColor(float r, float g, float b, float a)
     {
         R = r;
