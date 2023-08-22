@@ -17,13 +17,6 @@ public class CustomPixel
         GrayColor = new CustomRGBA(grayValue, grayValue, grayValue, a);
     }
 
-    private void Initialize(CustomRGBA customRgba)
-    {
-        OriginalColor = customRgba;
-        GrayColor = GetGrayValue(customRgba);
-        PixelCoords = new List<PixelCoord>();
-    }
-
     private CustomRGBA GetGrayValue(CustomRGBA origin)
     {
         float grayValue = (origin.R + origin.G + origin.B) / 3;
