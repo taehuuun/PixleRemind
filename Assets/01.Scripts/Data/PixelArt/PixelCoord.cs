@@ -4,8 +4,8 @@ using Firebase.Firestore;
 [FirestoreData, Serializable]
 public class PixelCoord
 {
-    [FirestoreProperty] public int X { get; set; }
-    [FirestoreProperty] public int Y { get; set; }
+    [FirestoreProperty] public int X { get; private set; }
+    [FirestoreProperty] public int Y { get; private set; }
 
     public PixelCoord()
     {
