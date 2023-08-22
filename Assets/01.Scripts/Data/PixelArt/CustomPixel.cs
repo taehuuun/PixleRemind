@@ -33,6 +33,13 @@ public class CustomPixel
     {
         return PixelCoords.Count;
     }
+    public PixelCoord GetPixelCoord(int index)
+    {
+        if (!IsValidIndexRange(index))
+            return null;
+
+        return PixelCoords[index];
+    }
 
     private bool IsValidIndexRange(int index)
     {
