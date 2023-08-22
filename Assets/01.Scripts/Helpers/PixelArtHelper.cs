@@ -42,7 +42,7 @@ public static class PixelArtHelper
                     
                     // 딕셔너리에 해당하는 키의 픽셀 좌표 리스트 추가
                     PixelCoord coord = new PixelCoord(x, y);
-                    colorGroups[colorKey].PixelCoords.Add(coord);
+                    colorGroups[colorKey].AddPixelCoord(coord);
                     pixelColorData.RemainingPixels++;
                 }
             }
