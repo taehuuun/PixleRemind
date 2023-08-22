@@ -2,53 +2,6 @@
 using System.Collections.Generic;
 using Firebase.Firestore;
 
-/// <summary>
-/// Firestore 업로드를 위한 커스텀 Color 클래스
-/// </summary>
-[FirestoreData, Serializable]
-public class CustomRGBA
-{
-    [FirestoreProperty] public float R { get; set; }
-    [FirestoreProperty] public float G { get; set; }
-    [FirestoreProperty] public float B { get; set; }
-    [FirestoreProperty] public float A { get; set; }
-
-    public CustomRGBA()
-    {
-        R = 0;
-        G = 0;
-        B = 0;
-        A = 0;
-    }
-
-    public CustomRGBA(float r, float g, float b, float a)
-    {
-        R = r;
-        G = g;
-        B = b;
-        A = a;
-    }
-}
-
-[FirestoreData, Serializable]
-public class PixelCoord
-{
-    [FirestoreProperty] public int X { get; set; }
-    [FirestoreProperty] public int Y { get; set; }
-
-    public PixelCoord()
-    {
-        X = 0;
-        Y = 0;
-    }
-
-    public PixelCoord(int x, int y)
-    {
-        X = x;
-        Y = y;
-    }
-}
-
 [FirestoreData, Serializable]
 public class CustomPixel
 {
