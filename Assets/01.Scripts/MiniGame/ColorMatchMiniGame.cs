@@ -204,10 +204,10 @@ public class ColorMatchMiniGame : MonoBehaviour
         int randIdx = Random.Range(0, _pixelArtData.PixelColorData.CustomPixels.Count);
         
         // 랜덤 선택된 CustomPixels의 원본 색상값을 colorValue에 대입
-        CustomRGBA customRgba = _pixelArtData.PixelColorData.CustomPixels[randIdx].OriginalColor;
+        CustomColor customColor = _pixelArtData.PixelColorData.CustomPixels[randIdx].OriginalColor;
         
         // 원본 색상값(ColorValue)을 Color 타입으로 생성
-        Color randColor = new Color(customRgba.R, customRgba.G, customRgba.B, customRgba.A);
+        Color randColor = new Color(customColor.R, customColor.G, customColor.B, customColor.A);
         
         // 명도 값 조절을 위한 -0.1 ~ 0.1 값을 세팅
         float brightVar = Random.Range(-0.1f, 0.1f);

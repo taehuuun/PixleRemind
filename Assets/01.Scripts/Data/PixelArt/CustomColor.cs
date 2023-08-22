@@ -5,14 +5,14 @@ using Firebase.Firestore;
 /// Firestore 업로드를 위한 커스텀 Color 클래스
 /// </summary>
 [FirestoreData, Serializable]
-public class CustomRGBA
+public class CustomColor
 {
     [FirestoreProperty] public float R { get; set; }
     [FirestoreProperty] public float G { get; set; }
     [FirestoreProperty] public float B { get; set; }
     [FirestoreProperty] public float A { get; set; }
 
-    public CustomRGBA()
+    public CustomColor()
     {
         R = 0;
         G = 0;
@@ -20,7 +20,7 @@ public class CustomRGBA
         A = 0;
     }
 
-    public CustomRGBA(float r, float g, float b, float a)
+    public CustomColor(float r, float g, float b, float a)
     {
         R = r;
         G = g;
