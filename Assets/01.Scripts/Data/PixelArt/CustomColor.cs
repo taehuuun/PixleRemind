@@ -22,4 +22,9 @@ public class CustomColor
         B = b;
         A = a;
     }
+
+    public Color ToUnityColor()
+    {
+        return new Color(R, G, B, A);
+    }
 }
