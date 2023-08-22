@@ -7,7 +7,7 @@ public class CustomPixel
 {
     [FirestoreProperty] public CustomRGBA OriginalColor { get; private set; }
     [FirestoreProperty] public CustomRGBA GrayColor { get; private set; }
-    [FirestoreProperty] public List<PixelCoord> PixelCoords { get; private set; }
+    [FirestoreProperty] public List<PixelCoord> PixelCoords { private get; set; }
 
     public CustomPixel()
     {
