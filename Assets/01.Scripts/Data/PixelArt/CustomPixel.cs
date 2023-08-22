@@ -32,8 +32,9 @@ public class CustomPixel
         GrayColor = new CustomRGBA(grayValue, grayValue, grayValue, a);
     }
 
-    private float GetGrayValue(float r, float g, float b)
+    private CustomRGBA GetGrayValue(CustomRGBA origin)
     {
-        return (r + g + b) / 3;
+        float grayValue = (origin.R + origin.G + origin.B) / 3;
+        return new CustomRGBA(grayValue, grayValue,grayValue,origin.A);
     }
 }
