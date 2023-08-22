@@ -9,12 +9,11 @@ public class CustomPixel
     [FirestoreProperty] public CustomRGBA GrayColor { get; private set; }
     [FirestoreProperty] public List<PixelCoord> PixelCoords { private get; set; }
     
-    public CustomPixel(float r, float g, float b, float a)
+    public CustomPixel(CustomRGBA customRgba)
     {
-        float grayValue = GetGrayValue(r, g, b);
-
-        OriginalColor = new CustomRGBA(r, g, b, a);
-        GrayColor = new CustomRGBA(grayValue, grayValue, grayValue, a);
+        OriginalColor = customRgba;
+        GrayColor = GetGrayValue(customRgba);
+        PixelCoords = new List<PixelCoord>();
     }
 
     private CustomRGBA GetGrayValue(CustomRGBA origin)
