@@ -79,7 +79,7 @@ public class ColorMatchMiniGame : MonoBehaviour
         
         int randomPixelIndex = SelectRandomPixelIndex();
         CustomPixel selectedPixel = GetSelectedPixel(randomPixelIndex);
-        int selectedCoord = Random.Range(0, selectedPixel.PixelCoords.Count);
+        int selectedCoord = Random.Range(0, selectedPixel.GetPixelCoordCount());
 
         Texture2D pixelArt = GetPixelArtTexture();
         Color origin = GetOriginalColor(selectedPixel);
@@ -120,15 +120,16 @@ public class ColorMatchMiniGame : MonoBehaviour
 
     private void ApplyPixelColor(Texture2D pixelArt, CustomPixel selectedPixel, int selectedCoord, Color origin)
     {
-        pixelArt.SetPixel(selectedPixel.PixelCoords[selectedCoord].X,selectedPixel.PixelCoords[selectedCoord].Y, origin);
+        PixelCoord selectedPixelCoord = selectedPixel.GetPixelCoord(selectedCoord);
+        pixelArt.SetPixel(selectedPixelCoord.X,selectedPixelCoord.Y, origin);
         pixelArt.Apply();
     }
 
     private void UpdatePixelData(CustomPixel selectedPixel, int selectedCoord, int rnadomPixelIndex)
     {
-        selectedPixel.PixelCoords.RemoveAt(selectedCoord);
+        selectedPixel.RemovePixelCoord(selectedCoord);
         
-        if (selectedPixel.PixelCoords.Count == 0)
+        if (selectedPixel.GetPixelCoordCount() == 0)
         {
             _pixelArtData.PixelColorData.CustomPixels.RemoveAt(rnadomPixelIndex);
         }
