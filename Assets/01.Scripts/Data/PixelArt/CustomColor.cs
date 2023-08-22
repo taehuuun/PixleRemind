@@ -8,10 +8,10 @@ using UnityEngine;
 [FirestoreData, Serializable]
 public class CustomColor
 {
-    [FirestoreProperty] public float R { get; set; }
-    [FirestoreProperty] public float G { get; set; }
-    [FirestoreProperty] public float B { get; set; }
-    [FirestoreProperty] public float A { get; set; }
+    [FirestoreProperty] public float R { get; private set; }
+    [FirestoreProperty] public float G { get; private set; }
+    [FirestoreProperty] public float B { get; private set; }
+    [FirestoreProperty] public float A { get; private set; }
 
     public CustomColor() : this(0,0,0,0) {}
     public CustomColor(Color color) : this(color.r, color.g,color.b,color.a) {}
