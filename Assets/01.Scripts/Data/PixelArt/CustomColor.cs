@@ -1,5 +1,6 @@
 using System;
 using Firebase.Firestore;
+using UnityEngine;
 
 /// <summary>
 /// Firestore 업로드를 위한 커스텀 Color 클래스
@@ -19,6 +20,8 @@ public class CustomColor
         B = 0;
         A = 0;
     }
+
+    public CustomColor(Color color) : this(color.r, color.g,color.b,color.a) {}
 
     public CustomColor(float r, float g, float b, float a)
     {
