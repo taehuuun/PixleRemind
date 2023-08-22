@@ -4,10 +4,10 @@ using Firebase.Firestore;
 [FirestoreData, Serializable]
 public class PixelArtData : BaseThumbnailData
 {
-    [FirestoreProperty] public int PlayTime { get; set; }
-    [FirestoreProperty] public bool IsCompleted { get; set; }
-    [FirestoreProperty] public Difficulty Difficulty { get; set; }
-    [FirestoreProperty] public PixelColorData PixelColorData { get; set; }
+    [FirestoreProperty] public int PlayTime { get; private set; }
+    [FirestoreProperty] public bool IsCompleted { get; private set; }
+    [FirestoreProperty] public Difficulty Difficulty { get; private set; }
+    [FirestoreProperty] public PixelColorData PixelColorData { get; private set; }
 
     public PixelArtData()
     {
