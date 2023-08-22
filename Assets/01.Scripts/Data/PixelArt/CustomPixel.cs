@@ -5,10 +5,7 @@ using Firebase.Firestore;
 [FirestoreData, Serializable]
 public class CustomPixel
 {
-    // 픽셀 아트의 원본 색상 값
     [FirestoreProperty] public CustomRGBA OriginalColor { get; private set; }
-    
-    // 픽셀 아트의 흑백 색상 값
     [FirestoreProperty] public CustomRGBA GrayColor { get; private set; }
     [FirestoreProperty] public List<PixelCoord> PixelCoords { get; private set; }
 
