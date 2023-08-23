@@ -18,6 +18,10 @@ public class PixelColorData
     {
         RemainingPixels = count;
     }
+    public int GetCustomPixelCount()
+    {
+        return CustomPixels.Count;
+    }
     private bool IsValidIndexRange(int index)
     {
         return index >= 0 && index < CustomPixels.Count;
