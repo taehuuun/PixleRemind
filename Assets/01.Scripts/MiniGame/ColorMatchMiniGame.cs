@@ -98,12 +98,12 @@ public class ColorMatchMiniGame : MonoBehaviour
 
     private int SelectRandomPixelIndex()
     {
-        return Random.Range(0, _pixelArtData.PixelColorData.CustomPixels.Count);
+        return Random.Range(0, _pixelArtData.PixelColorData.GetCustomPixelCount());
     }
 
     private CustomPixel GetSelectedPixel(int index)
     {
-        return _pixelArtData.PixelColorData.CustomPixels[index];
+        return _pixelArtData.PixelColorData.GetCustomPixel(index);
     }
 
     private Texture2D GetPixelArtTexture()
@@ -131,10 +131,10 @@ public class ColorMatchMiniGame : MonoBehaviour
         
         if (selectedPixel.GetPixelCoordCount() == 0)
         {
-            _pixelArtData.PixelColorData.CustomPixels.RemoveAt(rnadomPixelIndex);
+            _pixelArtData.PixelColorData.RemoveCustomPixel(rnadomPixelIndex);
         }
 
-        _pixelArtData.PixelColorData.RemainingPixels--;
+        _pixelArtData.PixelColorData.DecreaseRemainingPixelCount();
     }
 
     private void UpdateThumbnailData(Texture2D pixelArt)
@@ -197,15 +197,15 @@ public class ColorMatchMiniGame : MonoBehaviour
     /// </summary>
     private void SetRandomTargetColorFromPixelArtData()
     {
-        if (_pixelArtData.PixelColorData == null || _pixelArtData.PixelColorData.CustomPixels.Count == 0)
+        if (_pixelArtData.PixelColorData == null || _pixelArtData.PixelColorData.GetCustomPixelCount() == 0)
         {
             return;
         }
         
-        int randIdx = Random.Range(0, _pixelArtData.PixelColorData.CustomPixels.Count);
+        int randIdx = Random.Range(0, _pixelArtData.PixelColorData.GetCustomPixelCount());
         
         // 랜덤 선택된 CustomPixels의 원본 색상값을 colorValue에 대입
-        CustomColor customColor = _pixelArtData.PixelColorData.CustomPixels[randIdx].OriginalColor;
+        CustomColor customColor = _pixelArtData.PixelColorData.GetCustomPixel(randIdx).OriginalColor;
         
         // 원본 색상값(ColorValue)을 Color 타입으로 생성
         Color randColor = new Color(customColor.R, customColor.G, customColor.B, customColor.A);
