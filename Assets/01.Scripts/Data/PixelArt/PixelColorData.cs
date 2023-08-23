@@ -13,4 +13,9 @@ public class PixelColorData
         RemainingPixels = 0;
         CustomPixels = new List<CustomPixel>();
     }
+
+    public void SetRemainingPixelCount(int count)
+    {
+        RemainingPixels = count;
+    }
 }
