@@ -65,7 +65,7 @@ public class GameManager : MonoBehaviour
             _selectTopicData.Complete = true;
         }
         
-        _selectPixelArtData.PlayTime = _playTime;
+        _selectPixelArtData.SetPlayTime(_playTime);
 
         CollectedPixelArtData newCollectPixelArtData = new CollectedPixelArtData(_selectPixelArtData.ID,_selectPixelArtData.Title, _selectPixelArtData.Description, _selectPixelArtData.ThumbnailData, _selectPixelArtData.ThumbnailSize, _selectPixelArtData.PlayTime);
         
