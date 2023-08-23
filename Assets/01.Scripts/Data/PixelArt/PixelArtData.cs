@@ -27,4 +27,8 @@ public class PixelArtData : BaseThumbnailData
     {
         IsCompleted = isCompleted;
     }
+    public void SetDifficulty(Difficulty difficulty)
+    {
+        Difficulty = difficulty;
+    }
 }
