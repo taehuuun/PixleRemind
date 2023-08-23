@@ -18,6 +18,16 @@ public class PixelColorData
     {
         RemainingPixels = count;
     }
+
+    public void DecreaseRemainingPixelCount()
+    {
+        if (RemainingPixels == 0)
+        {
+            return;
+        }
+
+        RemainingPixels--;
+    }
     public void RemoveCustomPixel(int index)
     {
         if(!IsValidIndexRange(index))
