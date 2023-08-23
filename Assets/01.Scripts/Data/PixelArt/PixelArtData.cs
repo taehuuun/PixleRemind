@@ -9,14 +9,7 @@ public class PixelArtData : BaseThumbnailData
     [FirestoreProperty] public Difficulty Difficulty { get; private set; }
     [FirestoreProperty] public PixelColorData PixelColorData { get; private set; }
 
-    public PixelArtData()
-    {
-        PlayTime = 0;
-        IsCompleted = false;
-        Difficulty = Difficulty.Easy;
-        PixelColorData = new PixelColorData();
-    }
-
+    public PixelArtData() : this(string.Empty, string.Empty, string.Empty, string.Empty, 0, 0, false, Difficulty.Easy,new PixelColorData()){}
     public PixelArtData(string id, string title, string description, string thumbnailData, int thumbnailSize, int playTime, bool isCompleted, Difficulty difficulty, PixelColorData pixelColorData)
         : base(id, title, description, thumbnailData, thumbnailSize)
     {
