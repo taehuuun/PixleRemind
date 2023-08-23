@@ -207,7 +207,7 @@ public class CustomTopicEditor : EditorWindow
         EditorGUILayout.IntField("Remaining Pixels", pixelArtData.PixelColorData.RemainingPixels);
         EditorGUILayout.LabelField("Description");
         EditorGUILayout.TextArea(pixelArtData.Description,GUILayout.Height(100));
-        pixelArtData.Difficulty = (Difficulty)EditorGUILayout.EnumPopup("Difficulty", pixelArtData.Difficulty);
+        pixelArtData.SetDifficulty((Difficulty)EditorGUILayout.EnumPopup("Difficulty", pixelArtData.Difficulty));
         GUI.enabled = true;
     }
 
