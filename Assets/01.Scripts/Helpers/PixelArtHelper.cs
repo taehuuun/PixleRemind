@@ -16,7 +16,7 @@ public static class PixelArtHelper
         
         // 중복 컬러값을 방지 하기 위한 딕셔너리 사용
         Dictionary<string, CustomPixel> colorGroups = new Dictionary<string, CustomPixel>();
-        
+        int remainingCount = 0;
         // 텍스쳐의 높이 만큼 반복
         for (int y = 0; y < extractTarget.height; y++)
         {
@@ -43,13 +43,14 @@ public static class PixelArtHelper
                     // 딕셔너리에 해당하는 키의 픽셀 좌표 리스트 추가
                     PixelCoord coord = new PixelCoord(x, y);
                     colorGroups[colorKey].AddPixelCoord(coord);
-                    pixelColorData.RemainingPixels++;
+                    remainingCount++;
                 }
             }
         }
         
         // 추가된 딕셔너리의 Value값들을 리스트로 변환        
         pixelColorData.CustomPixels = colorGroups.Values.ToList();
+        pixelColorData.SetRemainingPixelCount(remainingCount);
         
         return pixelColorData;
     }
