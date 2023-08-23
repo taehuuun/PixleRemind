@@ -148,7 +148,7 @@ public class ColorMatchMiniGame : MonoBehaviour
     {
         if (_pixelArtData.PixelColorData.RemainingPixels == 0)
         {
-            _pixelArtData.IsCompleted = true;
+            _pixelArtData.SetIsCompleted(true);
         }
     }
     #endregion
