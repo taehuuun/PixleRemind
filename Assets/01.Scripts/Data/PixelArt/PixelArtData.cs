@@ -18,4 +18,9 @@ public class PixelArtData : BaseThumbnailData
         Difficulty = difficulty;
         PixelColorData = pixelColorData;
     }
+
+    public void SetPlayTime(int playTime)
+    {
+        PlayTime = playTime;
+    }
 }
