@@ -23,4 +23,8 @@ public class PixelArtData : BaseThumbnailData
     {
         PlayTime = playTime;
     }
+    public void SetIsCompleted(bool isCompleted)
+    {
+        IsCompleted = isCompleted;
+    }
 }
