@@ -18,9 +18,25 @@ public class PixelColorData
     {
         RemainingPixels = count;
     }
+    public void RemoveCustomPixel(int index)
+    {
+        if(!IsValidIndexRange(index))
+            return;
+        
+        CustomPixels.RemoveAt(index);
+    }
     public int GetCustomPixelCount()
     {
         return CustomPixels.Count;
+    }
+    public CustomPixel GetCustomPixel(int index)
+    {
+        if (!IsValidIndexRange(index))
+        {
+            return null;
+        }
+
+        return CustomPixels[index];
     }
     private bool IsValidIndexRange(int index)
     {
