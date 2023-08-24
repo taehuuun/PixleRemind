@@ -20,4 +20,8 @@ public class LocalData
     {
         SelectPixelArtDataID = id;
     }
+    public void SetTopicDataID(string id)
+    {
+        SelectTopicDataID = id;
+    }
 }
