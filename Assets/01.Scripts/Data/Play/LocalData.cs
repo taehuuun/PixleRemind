@@ -15,4 +15,9 @@ public class LocalData
         SelectTopicDataID = string.Empty;
         SelectPixelArtDataID = string.Empty;
     }
+
+    public void SetPixelArtDataID(string id)
+    {
+        SelectPixelArtDataID = id;
+    }
 }
