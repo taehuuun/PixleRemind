@@ -25,6 +25,10 @@ public class LocalData
     {
         SelectTopicDataID = id;
     }
+    public void SetLocalTopicData(string key, TopicData data)
+    {
+        LocalTopicData[key] = data;
+    }
     public void AddLocalTopicData(string key, TopicData data)
     {
         LocalTopicData.Add(key,data);
