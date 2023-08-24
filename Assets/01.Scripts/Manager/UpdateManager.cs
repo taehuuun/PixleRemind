@@ -125,8 +125,8 @@ public class UpdateManager : MonoBehaviour
                 DataManager.SaveLocalData();
 
                 DownloadTopicData newDownloadTopicData = new DownloadTopicData(serverData.ID, serverData.Title, serverData.Description, serverData.TotalCount);
-                DataManager.UserData.DownloadTopicData.Add(topicID,newDownloadTopicData);
-                DataManager.UserData.LastUpdated = DateTime.Now;
+                DataManager.UserData.SetDownloadTopicData(topicID,newDownloadTopicData);
+                DataManager.UserData.SetLastUpdateDate(DateTime.Now);
 
 #if UNITY_ANDROID && !UNITY_EDITOR
                  string FUID = FirebaseManager.ins.FireAuth.FUID;
