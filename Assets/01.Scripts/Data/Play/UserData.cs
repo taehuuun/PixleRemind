@@ -13,4 +13,9 @@ public class UserData
         DownloadTopicData = new Dictionary<string, DownloadTopicData>();
         LastUpdated = new DateTime();
     }
+
+    public void SetLastUpdateDate(DateTime dateTime)
+    {
+        LastUpdated = dateTime;
+    }
 }
