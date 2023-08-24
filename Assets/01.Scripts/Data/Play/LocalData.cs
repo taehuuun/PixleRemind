@@ -3,66 +3,66 @@ using System.Linq;
 
 public class LocalData
 {
-    public Dictionary<string, TopicData> LocalTopicData { private get;  set; }
-    public Dictionary<string, List<CollectedPixelArtData>> LocalCollectedPixelArtData { private get; set; }
+    private readonly Dictionary<string, TopicData> _localTopicData;
+    private readonly Dictionary<string, List<CollectedPixelArtData>> _localCollectedPixelArtData;
 
-    public string SelectTopicDataID { get; private set; }
-    public string SelectPixelArtDataID { get; private set; }
+    private string _selectTopicDataID;
+    private string _selectPixelArtDataID;
 
     public LocalData()
     {
-        LocalTopicData = new Dictionary<string, TopicData>();
-        LocalCollectedPixelArtData = new Dictionary<string, List<CollectedPixelArtData>>();
-        SelectTopicDataID = string.Empty;
-        SelectPixelArtDataID = string.Empty;
+        _localTopicData = new Dictionary<string, TopicData>();
+        _localCollectedPixelArtData = new Dictionary<string, List<CollectedPixelArtData>>();
+        _selectTopicDataID = string.Empty;
+        _selectPixelArtDataID = string.Empty;
     }
 
     public int GetTopicDataCount()
     {
-        return LocalTopicData.Keys.Count;
+        return _localTopicData.Keys.Count;
     }
     public void SetPixelArtDataID(string id)
     {
-        SelectPixelArtDataID = id;
+        _selectPixelArtDataID = id;
     }
     public void SetTopicDataID(string id)
     {
-        SelectTopicDataID = id;
+        _selectTopicDataID = id;
     }
     public void SetLocalTopicData(string key, TopicData data)
     {
-        LocalTopicData[key] = data;
+        _localTopicData[key] = data;
     }
     public void AddLocalTopicData(string key, TopicData data)
     {
-        LocalTopicData.Add(key,data);
+        _localTopicData.Add(key,data);
     }
     public void AddCollectedPixelArtList(string key, List<CollectedPixelArtData> collectedPixelArtDataList)
     {
-        LocalCollectedPixelArtData.Add(key, collectedPixelArtDataList);
+        _localCollectedPixelArtData.Add(key, collectedPixelArtDataList);
     }
     public void AddCollectedPixelArt(string key, CollectedPixelArtData data)
     {
-        LocalCollectedPixelArtData[key].Add(data);
+        _localCollectedPixelArtData[key].Add(data);
     }
     public void RemoveTopicData(string key)
     {
-        LocalTopicData.Remove(key);
+        _localTopicData.Remove(key);
     }
     public bool ContainTopicDataKey(string key)
     {
-        return LocalTopicData.ContainsKey(key);
+        return _localTopicData.ContainsKey(key);
     }
     public List<CollectedPixelArtData> GetCollectedPixelArtList(string key)
     {
-        return LocalCollectedPixelArtData[key];
+        return _localCollectedPixelArtData[key];
     }
     public TopicData GetTopicData(string key)
     {
-        return LocalTopicData[key];
+        return _localTopicData[key];
     }
     public List<string> GetTopicDataKeys()
     {
-        return LocalTopicData.Keys.ToList();
+        return _localTopicData.Keys.ToList();
     }
 }
