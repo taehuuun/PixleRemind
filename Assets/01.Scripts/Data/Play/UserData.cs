@@ -30,4 +30,8 @@ public class UserData
             list.CollectedPixelArtDataList.Add(data);
         }
     }
+    public IReadOnlyList<DownloadTopicData> GetDownloadTopicDataList()
+    {
+        return DownloadTopicData.Values.ToList().AsReadOnly();
+    }
 }
