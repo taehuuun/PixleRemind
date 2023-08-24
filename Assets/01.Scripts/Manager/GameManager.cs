@@ -70,7 +70,7 @@ public class GameManager : MonoBehaviour
         CollectedPixelArtData newCollectPixelArtData = new CollectedPixelArtData(_selectPixelArtData.ID,_selectPixelArtData.Title, _selectPixelArtData.Description, _selectPixelArtData.ThumbnailData, _selectPixelArtData.ThumbnailSize, _selectPixelArtData.PlayTime);
         
         DataManager.LocalData.AddCollectedPixelArt(DataManager.LocalData.GetTopicID(),newCollectPixelArtData);
-        DataManager.UserData.DownloadTopicData[DataManager.LocalData.GetTopicID()].CollectedPixelArtDataList.Add(newCollectPixelArtData);
+        DataManager.UserData.AddCollectedPixelArt(DataManager.LocalData.GetTopicID(),newCollectPixelArtData);
     }
     
     private IEnumerator Playing()
