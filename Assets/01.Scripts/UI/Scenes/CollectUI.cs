@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CollectUI : BodyUI
@@ -16,7 +15,7 @@ public class CollectUI : BodyUI
     private void SetSlot()
     {
         // UserData에서 DownloadTopicData 딕셔너리를 가져옴
-        var downloadTopicDataDict = DataManager.UserData.DownloadTopicData.Values;
+        var downloadTopicDataDict = DataManager.UserData.GetDownloadTopicDataList();
 
         // 딕셔너리를 반복하여 각 토픽 데이터를 처리
         foreach (var downloadTopicData in downloadTopicDataDict)
