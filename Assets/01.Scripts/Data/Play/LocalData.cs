@@ -49,6 +49,10 @@ public class LocalData
     {
         return LocalCollectedPixelArtData[key];
     }
+    public TopicData GetTopicData(string key)
+    {
+        return LocalTopicData[key];
+    }
     public List<string> GetTopicDataKeys()
     {
         return LocalTopicData.Keys.ToList();
