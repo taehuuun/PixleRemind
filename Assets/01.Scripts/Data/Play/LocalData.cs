@@ -28,4 +28,8 @@ public class LocalData
     {
         LocalTopicData.Add(key,data);
     }
+    public void AddCollectedPixelArtList(string key, List<CollectedPixelArtData> collectedPixelArtDataList)
+    {
+        LocalCollectedPixelArtData.Add(key, collectedPixelArtDataList);
+    }
 }
