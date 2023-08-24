@@ -44,7 +44,7 @@ public class UpdateManager : MonoBehaviour
     public Task CheckForUpdated()
     {
         // 로컬에 저장되어 있는 토픽 데이터 ID 리스트
-        var localTopicDataIDs = DataManager.LocalData.LocalTopicData.Keys;
+        var localTopicDataIDs = DataManager.LocalData.GetTopicDataKeys();
         
         // 다운로드 하지 않은 토픽 데이터 리스트
         List<TopicData> missingDataList = new List<TopicData>();
@@ -80,7 +80,7 @@ public class UpdateManager : MonoBehaviour
             // Firestore 데이터와 비교하여 로컬에 없는 데이터를 outdatedDataList 추가
             foreach (var id in localTopicDataIDs)
             {
-                TopicData localData = DataManager.LocalData.LocalTopicData[id];
+                TopicData localData = DataManager.LocalData.GetTopicData(id);
                 TopicData serverData = _topicDataList.Find(data => data.ID == id);
 
                 if (serverData.LastUpdated > localData.LastUpdated)
@@ -120,8 +120,8 @@ public class UpdateManager : MonoBehaviour
         {
             if (serverData != null)
             {
-                DataManager.LocalData.LocalTopicData.Add(topicID, serverData);
-                DataManager.LocalData.LocalCollectedPixelArtData.Add(topicID, new List<CollectedPixelArtData>());
+                DataManager.LocalData.AddLocalTopicData(topicID, serverData);
+                DataManager.LocalData.AddCollectedPixelArtList(topicID, new List<CollectedPixelArtData>());
                 DataManager.SaveLocalData();
 
                 DownloadTopicData newDownloadTopicData = new DownloadTopicData(serverData.ID, serverData.Title, serverData.Description, serverData.TotalCount);
