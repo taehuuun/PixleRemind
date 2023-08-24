@@ -17,6 +17,10 @@ public class LocalData
         SelectPixelArtDataID = string.Empty;
     }
 
+    public int GetTopicDataCount()
+    {
+        return LocalTopicData.Keys.Count;
+    }
     public void SetPixelArtDataID(string id)
     {
         SelectPixelArtDataID = id;
