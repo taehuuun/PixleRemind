@@ -81,7 +81,7 @@ public static class DataSyncManager
             }
             
             List<CollectedPixelArtData> userCollectedDataList = DataManager.UserData.DownloadTopicData[key].CollectedPixelArtDataList;
-            List<CollectedPixelArtData> localCollectedDataList = DataManager.LocalData.GetCollectedPixelArtList(key).ToList();
+            List<CollectedPixelArtData> localCollectedDataList = DataManager.LocalData.GetCollectedPixelArtList(key);
             
             // UserData에는 존재하지만 LocalData에 존재하지 않는 경우
             foreach (var data in userCollectedDataList.Except(localCollectedDataList))
