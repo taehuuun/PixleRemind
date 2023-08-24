@@ -32,4 +32,8 @@ public class LocalData
     {
         LocalCollectedPixelArtData.Add(key, collectedPixelArtDataList);
     }
+    public void AddCollectedPixelArt(string key, CollectedPixelArtData data)
+    {
+        LocalCollectedPixelArtData[key].Add(data);
+    }
 }
