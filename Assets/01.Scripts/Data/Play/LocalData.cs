@@ -41,10 +41,6 @@ public class LocalData
     {
         _localTopicData[key] = data;
     }
-    public void AddLocalTopicData(string key, TopicData data)
-    {
-        _localTopicData.Add(key,data);
-    }
     public void AddCollectedPixelArtList(string key, List<CollectedPixelArtData> collectedPixelArtDataList)
     {
         _localCollectedPixelArtData.Add(key, collectedPixelArtDataList);
