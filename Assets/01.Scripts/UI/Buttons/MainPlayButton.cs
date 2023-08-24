@@ -23,15 +23,15 @@ public class MainPlayButton : MonoBehaviour
 
     private void LoadData()
     {
-        var selectTopicID = DataManager.LocalData.SelectTopicDataID;
+        var selectTopicID = DataManager.LocalData.GetTopicID();
         if (string.IsNullOrEmpty(selectTopicID))
         {
             SetButtonInactive("토픽 선택");
             return;
         }
 
-        _lastTopicData = DataManager.LocalData.GetTopicData(DataManager.LocalData.SelectTopicDataID);
-        _lastPixelArtData = _lastTopicData?.PixelArtDataList.Find(pixelArtData => pixelArtData.ID == DataManager.LocalData.SelectPixelArtDataID);
+        _lastTopicData = DataManager.LocalData.GetTopicData(selectTopicID);
+        _lastPixelArtData = _lastTopicData?.PixelArtDataList.Find(pixelArtData => pixelArtData.ID == DataManager.LocalData.GetPixelArtID());
     }
 
     private async Task UpdateUserDataOnFirebase()
