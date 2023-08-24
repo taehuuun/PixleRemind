@@ -34,4 +34,8 @@ public class UserData
     {
         return DownloadTopicData.Values.ToList().AsReadOnly();
     }
+    public IReadOnlyList<string> GetDownloadTopicDataKeys()
+    {
+        return DownloadTopicData.Keys.ToList().AsReadOnly();
+    }
 }
