@@ -33,8 +33,8 @@ public class GameManager : MonoBehaviour
     private void Init()
     {
         _localData = DataManager.LocalData;
-        
-        _selectTopicData = DataManager.LocalData.LocalTopicData[DataManager.LocalData.SelectTopicDataID];
+
+        _selectTopicData = DataManager.LocalData.GetTopicData(DataManager.LocalData.SelectTopicDataID);
         _selectPixelArtData = _selectTopicData.PixelArtDataList.Find((pixelArtData) => pixelArtData.ID == DataManager.LocalData.SelectPixelArtDataID);
         colorMatchMiniGame.SetPixelArtData(_selectPixelArtData);
         playUI.UpdatePixelArt(_selectPixelArtData.ThumbnailData,_selectPixelArtData.ThumbnailSize);
@@ -44,7 +44,7 @@ public class GameManager : MonoBehaviour
     public async void SaveData()
     {
         _selectTopicData.UpdateThumbnailData(_selectPixelArtData.ThumbnailData,_selectPixelArtData.ThumbnailSize);
-        DataManager.LocalData.LocalTopicData[DataManager.LocalData.SelectTopicDataID] = _selectTopicData;
+        DataManager.LocalData.SetLocalTopicData(DataManager.LocalData.SelectTopicDataID, _selectTopicData);
         DataManager.SaveLocalData();
         
                 
@@ -69,7 +69,7 @@ public class GameManager : MonoBehaviour
 
         CollectedPixelArtData newCollectPixelArtData = new CollectedPixelArtData(_selectPixelArtData.ID,_selectPixelArtData.Title, _selectPixelArtData.Description, _selectPixelArtData.ThumbnailData, _selectPixelArtData.ThumbnailSize, _selectPixelArtData.PlayTime);
         
-        DataManager.LocalData.LocalCollectedPixelArtData[DataManager.LocalData.SelectTopicDataID].Add(newCollectPixelArtData);
+        DataManager.LocalData.AddCollectedPixelArt(DataManager.LocalData.SelectTopicDataID,newCollectPixelArtData);
         DataManager.UserData.DownloadTopicData[DataManager.LocalData.SelectTopicDataID].CollectedPixelArtDataList.Add(newCollectPixelArtData);
     }
     
