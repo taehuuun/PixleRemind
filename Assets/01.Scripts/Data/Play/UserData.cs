@@ -5,8 +5,8 @@ using Firebase.Firestore;
 [FirestoreData, Serializable]
 public class UserData
 {
-    [FirestoreProperty] public Dictionary<string,DownloadTopicData> DownloadTopicData { get; set; }
-    [FirestoreProperty] public DateTime LastUpdated { get; set; }
+    [FirestoreProperty] public Dictionary<string,DownloadTopicData> DownloadTopicData { private get; set; }
+    [FirestoreProperty] public DateTime LastUpdated { get; private set; }
 
     public UserData()
     {
