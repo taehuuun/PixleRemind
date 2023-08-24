@@ -2,11 +2,11 @@ using System.Collections.Generic;
 
 public class LocalData
 {
-    public Dictionary<string, TopicData> LocalTopicData { get; set; }
-    public Dictionary<string, List<CollectedPixelArtData>> LocalCollectedPixelArtData { get; set; }
+    public Dictionary<string, TopicData> LocalTopicData { private get;  set; }
+    public Dictionary<string, List<CollectedPixelArtData>> LocalCollectedPixelArtData { private get; set; }
 
-    public string SelectTopicDataID { get; set; }
-    public string SelectPixelArtDataID { get; set; }
+    public string SelectTopicDataID { get; private set; }
+    public string SelectPixelArtDataID { get; private set; }
 
     public LocalData()
     {
