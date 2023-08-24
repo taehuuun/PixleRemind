@@ -53,7 +53,7 @@ public static class DataSyncManager
             Debug.Log($"UserData에 존재하나 LocalData에 없는 키 발견: {key}");
             TopicData downloadTopicData =
                 await FirebaseManager.ins.Firestore.GetData<TopicData>(FirestoreCollections.GalleryData, key);
-            DataManager.LocalData.AddLocalTopicData(key,downloadTopicData);
+            DataManager.LocalData.SetLocalTopicData(key,downloadTopicData);
         }
 
         // LocalData에는 존재하지만 UserData에 존재하지 않는 경우
@@ -81,7 +81,7 @@ public static class DataSyncManager
             }
             
             List<CollectedPixelArtData> userCollectedDataList = DataManager.UserData.DownloadTopicData[key].CollectedPixelArtDataList;
-            List<CollectedPixelArtData> localCollectedDataList = DataManager.LocalData.GetCollectedPixelArtList(key);
+            List<CollectedPixelArtData> localCollectedDataList = DataManager.LocalData.GetCollectedPixelArtList(key).ToList();
             
             // UserData에는 존재하지만 LocalData에 존재하지 않는 경우
             foreach (var data in userCollectedDataList.Except(localCollectedDataList))
@@ -110,7 +110,7 @@ public static class DataSyncManager
             Debug.Log($"TopicData 다운로드: {key}");
             TopicData downloadTopicData =
                 await FirebaseManager.ins.Firestore.GetData<TopicData>(FirestoreCollections.GalleryData, key);
-            DataManager.LocalData.AddLocalTopicData(key, downloadTopicData);
+            DataManager.LocalData.SetLocalTopicData(key, downloadTopicData);
         }
 
         // CollectedData 동기화
