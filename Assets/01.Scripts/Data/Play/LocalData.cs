@@ -47,7 +47,10 @@ public class LocalData
     }
     public void AddCollectedPixelArt(string key, CollectedPixelArtData data)
     {
-        _localCollectedPixelArtData[key].Add(data);
+        if (_localCollectedPixelArtData.TryGetValue(key, out var list))
+        {
+            list.Add(data);
+        }
     }
     public void RemoveTopicData(string key)
     {
