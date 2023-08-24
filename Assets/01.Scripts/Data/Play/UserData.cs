@@ -38,4 +38,8 @@ public class UserData
     {
         return DownloadTopicData.Keys.ToList().AsReadOnly();
     }
+    public List<CollectedPixelArtData> GetCollectedPixelArtDataList(string key)
+    {
+        return DownloadTopicData[key].CollectedPixelArtDataList;
+    }
 }
