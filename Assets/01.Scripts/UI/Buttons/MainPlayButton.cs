@@ -30,7 +30,7 @@ public class MainPlayButton : MonoBehaviour
             return;
         }
 
-        _lastTopicData = DataManager.LocalData.LocalTopicData[DataManager.LocalData.SelectTopicDataID];
+        _lastTopicData = DataManager.LocalData.GetTopicData(DataManager.LocalData.SelectTopicDataID);
         _lastPixelArtData = _lastTopicData?.PixelArtDataList.Find(pixelArtData => pixelArtData.ID == DataManager.LocalData.SelectPixelArtDataID);
     }
 
@@ -54,7 +54,7 @@ public class MainPlayButton : MonoBehaviour
         
         if (_lastPixelArtData == null ||_lastPixelArtData.IsCompleted)
         {
-            DataManager.LocalData.SelectPixelArtDataID = string.Empty;
+            DataManager.LocalData.SetPixelArtDataID(string.Empty);
             ConfigurePlayButtonForCompletedPixelArt();
         }
         else
@@ -67,7 +67,7 @@ public class MainPlayButton : MonoBehaviour
     {
         if (_lastTopicData.Complete)
         {
-            DataManager.LocalData.SelectTopicDataID = string.Empty;
+            DataManager.LocalData.SetTopicDataID(string.Empty);
             SetButtonInactive("토픽 선택");
         }
         else
