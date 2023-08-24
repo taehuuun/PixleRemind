@@ -27,12 +27,12 @@ public class MainUI : BodyUI
             Destroy(child.gameObject);
         }
         
-        var localTopicIds = DataManager.LocalData.LocalTopicData.Keys;
+        var localTopicIds = DataManager.LocalData.GetTopicDataKeys();
 
         foreach (var topicDataID in localTopicIds)
         {
             TopicSlot topicSlot = Instantiate(topicSlotPrefab, topicSlotContainer);
-            topicSlot.data = DataManager.LocalData.LocalTopicData[topicDataID];
+            topicSlot.data = DataManager.LocalData.GetTopicData(topicDataID);
             topicSlot.SetSlot();
         }
     }
