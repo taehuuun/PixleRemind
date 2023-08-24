@@ -34,8 +34,8 @@ public class GameManager : MonoBehaviour
     {
         _localData = DataManager.LocalData;
 
-        _selectTopicData = DataManager.LocalData.GetTopicData(DataManager.LocalData.SelectTopicDataID);
-        _selectPixelArtData = _selectTopicData.PixelArtDataList.Find((pixelArtData) => pixelArtData.ID == DataManager.LocalData.SelectPixelArtDataID);
+        _selectTopicData = DataManager.LocalData.GetTopicData(DataManager.LocalData.GetTopicID());
+        _selectPixelArtData = _selectTopicData.PixelArtDataList.Find((pixelArtData) => pixelArtData.ID == DataManager.LocalData.GetPixelArtID());
         colorMatchMiniGame.SetPixelArtData(_selectPixelArtData);
         playUI.UpdatePixelArt(_selectPixelArtData.ThumbnailData,_selectPixelArtData.ThumbnailSize);
         playUI.SetPlayButton(_selectPixelArtData.IsCompleted);
@@ -44,7 +44,7 @@ public class GameManager : MonoBehaviour
     public async void SaveData()
     {
         _selectTopicData.UpdateThumbnailData(_selectPixelArtData.ThumbnailData,_selectPixelArtData.ThumbnailSize);
-        DataManager.LocalData.SetLocalTopicData(DataManager.LocalData.SelectTopicDataID, _selectTopicData);
+        DataManager.LocalData.SetLocalTopicData(DataManager.LocalData.GetTopicID(), _selectTopicData);
         DataManager.SaveLocalData();
         
                 
@@ -69,8 +69,8 @@ public class GameManager : MonoBehaviour
 
         CollectedPixelArtData newCollectPixelArtData = new CollectedPixelArtData(_selectPixelArtData.ID,_selectPixelArtData.Title, _selectPixelArtData.Description, _selectPixelArtData.ThumbnailData, _selectPixelArtData.ThumbnailSize, _selectPixelArtData.PlayTime);
         
-        DataManager.LocalData.AddCollectedPixelArt(DataManager.LocalData.SelectTopicDataID,newCollectPixelArtData);
-        DataManager.UserData.DownloadTopicData[DataManager.LocalData.SelectTopicDataID].CollectedPixelArtDataList.Add(newCollectPixelArtData);
+        DataManager.LocalData.AddCollectedPixelArt(DataManager.LocalData.GetTopicID(),newCollectPixelArtData);
+        DataManager.UserData.DownloadTopicData[DataManager.LocalData.GetTopicID()].CollectedPixelArtDataList.Add(newCollectPixelArtData);
     }
     
     private IEnumerator Playing()
