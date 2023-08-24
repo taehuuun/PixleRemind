@@ -44,7 +44,7 @@ public static class DataSyncManager
     private static async Task SyncTopicDataKeys()
     {
         Debug.Log("TopicData 키 동기화 시작");
-        var userKeys = DataManager.UserData.DownloadTopicData.Keys.ToList();
+        var userKeys = DataManager.UserData.GetDownloadTopicDataKeys();
         var localKeys = DataManager.LocalData.GetTopicDataKeys();
 
         // UserData에는 존재하지만 LocalData에 존재하지 않는 경우
@@ -68,7 +68,7 @@ public static class DataSyncManager
     {
         Debug.Log("CollectedPixelArtData 동기화 시작");
 
-        var userDownloadTopicDataKey = DataManager.UserData.DownloadTopicData.Keys;
+        var userDownloadTopicDataKey = DataManager.UserData.GetDownloadTopicDataKeys();
         
         Debug.Log($"{userDownloadTopicDataKey.Count}");
         
@@ -80,7 +80,7 @@ public static class DataSyncManager
                 continue;
             }
             
-            List<CollectedPixelArtData> userCollectedDataList = DataManager.UserData.DownloadTopicData[key].CollectedPixelArtDataList;
+            List<CollectedPixelArtData> userCollectedDataList = DataManager.UserData.GetCollectedPixelArtDataList(key);
             List<CollectedPixelArtData> localCollectedDataList = DataManager.LocalData.GetCollectedPixelArtList(key);
             
             // UserData에는 존재하지만 LocalData에 존재하지 않는 경우
@@ -104,8 +104,10 @@ public static class DataSyncManager
         Debug.Log("LocalData를 UserData와 동기화 시작");
         DataManager.LocalData = new LocalData();
 
+        var keys = DataManager.UserData.GetDownloadTopicDataKeys();
+        
         // TopicData 다운로드 필요
-        foreach (var key in DataManager.UserData.DownloadTopicData.Keys)
+        foreach (var key in keys)
         {
             Debug.Log($"TopicData 다운로드: {key}");
             TopicData downloadTopicData =
@@ -114,11 +116,10 @@ public static class DataSyncManager
         }
 
         // CollectedData 동기화
-        var userDataDownloadTopicDataKeys = DataManager.UserData.DownloadTopicData.Keys;
-        foreach (var key in userDataDownloadTopicDataKeys)
+        foreach (var key in keys)
         {
-            Debug.Log($"CollectedData 동기화: {key}");
-            DataManager.LocalData.AddCollectedPixelArtList(key, DataManager.UserData.DownloadTopicData[key].CollectedPixelArtDataList);
+            List<CollectedPixelArtData> collectedPixelArtDataList = DataManager.UserData.GetCollectedPixelArtDataList(key);
+            DataManager.LocalData.AddCollectedPixelArtList(key, collectedPixelArtDataList);
         }
 
         DataManager.SaveLocalData();
