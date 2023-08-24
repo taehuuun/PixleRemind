@@ -69,8 +69,8 @@ public class LocalData
     {
         return _localTopicData[key];
     }
-    public List<string> GetTopicDataKeys()
+    public IReadOnlyList<string> GetTopicDataKeys()
     {
-        return _localTopicData.Keys.ToList();
+        return _localTopicData.Keys.ToList().AsReadOnly();
     }
 }
