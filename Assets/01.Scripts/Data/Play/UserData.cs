@@ -23,4 +23,11 @@ public class UserData
     {
         DownloadTopicData[key] = data;
     }
+    public void AddCollectedPixelArt(string key, CollectedPixelArtData data)
+    {
+        if(DownloadTopicData.TryGetValue(key, out var list))
+        {
+            list.CollectedPixelArtDataList.Add(data);
+        }
+    }
 }
