@@ -25,6 +25,10 @@ public class LocalData
     {
         return _selectTopicDataID;
     }
+    public string GetPixelArtID()
+    {
+        return _selectPixelArtDataID;
+    }
     public void SetPixelArtDataID(string id)
     {
         _selectPixelArtDataID = id;
