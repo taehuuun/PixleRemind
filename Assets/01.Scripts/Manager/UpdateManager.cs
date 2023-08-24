@@ -120,7 +120,7 @@ public class UpdateManager : MonoBehaviour
         {
             if (serverData != null)
             {
-                DataManager.LocalData.AddLocalTopicData(topicID, serverData);
+                DataManager.LocalData.SetLocalTopicData(topicID, serverData);
                 DataManager.LocalData.AddCollectedPixelArtList(topicID, new List<CollectedPixelArtData>());
                 DataManager.SaveLocalData();
 
