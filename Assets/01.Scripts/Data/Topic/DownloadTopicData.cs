@@ -6,7 +6,7 @@ using Firebase.Firestore;
 public class DownloadTopicData : BaseData
 {
     [FirestoreProperty] public int TotalPixelArtDataCount { get; private set; }
-    [FirestoreProperty] public List<CollectedPixelArtData> CollectedPixelArtDataList { get; private set; }
+    [FirestoreProperty] public List<CollectedPixelArtData> CollectedPixelArtDataList { private get; set; }
 
     public DownloadTopicData()
     {
