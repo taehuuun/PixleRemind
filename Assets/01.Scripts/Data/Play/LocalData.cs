@@ -19,7 +19,7 @@ public class LocalData
 
     public int GetTopicDataCount()
     {
-        return _localTopicData.Keys.Count;
+        return _localTopicData.Count;
     }
     public string GetTopicID()
     {
