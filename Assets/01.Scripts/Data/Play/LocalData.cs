@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 
 public class LocalData
 {
@@ -35,5 +36,21 @@ public class LocalData
     public void AddCollectedPixelArt(string key, CollectedPixelArtData data)
     {
         LocalCollectedPixelArtData[key].Add(data);
+    }
+    public void RemoveTopicData(string key)
+    {
+        LocalTopicData.Remove(key);
+    }
+    public bool ContainTopicDataKey(string key)
+    {
+        return LocalTopicData.ContainsKey(key);
+    }
+    public List<CollectedPixelArtData> GetCollectedPixelArtList(string key)
+    {
+        return LocalCollectedPixelArtData[key];
+    }
+    public List<string> GetTopicDataKeys()
+    {
+        return LocalTopicData.Keys.ToList();
     }
 }
