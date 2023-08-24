@@ -60,10 +60,10 @@ public class LocalData
     {
         return _localTopicData.ContainsKey(key);
     }
-    public IReadOnlyList<CollectedPixelArtData> GetCollectedPixelArtList(string key)
+    public List<CollectedPixelArtData> GetCollectedPixelArtList(string key)
     {
         _localCollectedPixelArtData.TryGetValue(key, out var list);
-        return list?.AsReadOnly();
+        return list?.ToList();
     }
     public TopicData GetTopicData(string key)
     {
