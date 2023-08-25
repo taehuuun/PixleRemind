@@ -67,4 +67,8 @@ public class TopicData : BaseThumbnailData
     {
         IsLocked = state;
     }
+    public void SetUpdateAble(bool state)
+    {
+        Updateable = state;
+    }
 }
