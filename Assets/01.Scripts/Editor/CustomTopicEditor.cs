@@ -95,11 +95,11 @@ public class CustomTopicEditor : EditorWindow
         GUI.enabled = false;
         EditorGUILayout.TextField("ThumbData", topicData.ThumbnailData);
         EditorGUILayout.TextField("CompleteCount", topicData.CompleteCount.ToString());
-        EditorGUILayout.TextField("TotalCount", topicData.TotalCount.ToString());
+        EditorGUILayout.TextField("TotalCount", topicData.GetPixelArtsCount().ToString());
         EditorGUILayout.Toggle("Complete", topicData.Complete);
         GUI.enabled = true;
-        topicData.Updateable = EditorGUILayout.Toggle("Updateable", topicData.Updateable);
-        topicData.IsLocked = EditorGUILayout.Toggle("IsLocked", topicData.IsLocked);
+        topicData.SetUpdateAble(EditorGUILayout.Toggle("Updateable", topicData.Updateable));
+        topicData.SetLock(EditorGUILayout.Toggle("IsLocked", topicData.IsLocked));
         GUI.enabled = false;
         EditorGUILayout.TextField("LastUpdated", topicData.LastUpdated.ToString());
         GUI.enabled = true;
@@ -109,9 +109,9 @@ public class CustomTopicEditor : EditorWindow
             ShowUnlockCondition(topicData.UnlockCondition);
         }
 
-        if (topicData.PixelArtDataList != null && topicData.PixelArtDataList.Count > 0)
+        if (topicData.GetPixelArtList() != null && topicData.GetPixelArtsCount() > 0)
         {
-            var pixelArtDatasCopy = new List<PixelArtData>(topicData.PixelArtDataList);
+            var pixelArtDatasCopy = new List<PixelArtData>(topicData.GetPixelArtList());
             foreach (var pixelArtData in pixelArtDatasCopy)
             {
                 if (!_foldOutPixelStatus.ContainsKey(pixelArtData))
@@ -150,17 +150,16 @@ public class CustomTopicEditor : EditorWindow
             // _isAddingPixelArtData = true;
             PixelArtDataEditWindow.Open(newPixelArtData =>
             {
-                topicData.PixelArtDataList.Add(newPixelArtData);
+                topicData.AddPixelArt(newPixelArtData);
                 _foldOutPixelStatus[newPixelArtData] = true;
 
                 if (string.IsNullOrEmpty(topicData.ThumbnailData) && newPixelArtData.ThumbnailData.Length > 0)
                 {
-                    string thumbnailData = topicData.PixelArtDataList[0].ThumbnailData;
+                    string thumbnailData = topicData.GetPixelArt(0).ThumbnailData;
                     int thumbnailSize = topicData.ThumbnailSize;
                     topicData.UpdateThumbnailData(thumbnailData, thumbnailSize);
                 }
 
-                topicData.TotalCount++;
                 Repaint();
             });
         }
@@ -169,14 +168,12 @@ public class CustomTopicEditor : EditorWindow
 
         if (_deletePixelArtData != null)
         {
-            if (topicData.TotalCount > 0)
+            if (topicData.GetPixelArtsCount() > 0)
             {
-                topicData.TotalCount--;
+                topicData.RemovePixelArt(_deletePixelArtData);
+                _foldOutPixelStatus.Remove(_deletePixelArtData);
+                _deletePixelArtData = null; // Don't forget to reset the reference
             }
-
-            topicData.PixelArtDataList.Remove(_deletePixelArtData);
-            _foldOutPixelStatus.Remove(_deletePixelArtData);
-            _deletePixelArtData = null; // Don't forget to reset the reference
             Repaint();
         }
 
@@ -236,12 +233,12 @@ public class CustomTopicEditor : EditorWindow
     {
         foreach (var topicData in _firestoreTopicDatas)
         {
-            topicData.LastUpdated = DateTime.Now;
+            topicData.SetLastUpdate(DateTime.Now);
 
             if (topicData.ID.StartsWith("_tempTopic_"))
             {
                 // Generate a hash for the topic data ID
-                string hashInput = $"{topicData.Title}{topicData.Description}{topicData.ThumbnailData}{topicData.CompleteCount}{topicData.TotalCount}{topicData.Complete}{topicData.Updateable}{topicData.IsLocked}{topicData.LastUpdated}";
+                string hashInput = $"{topicData.Title}{topicData.Description}{topicData.ThumbnailData}{topicData.CompleteCount}{topicData.GetPixelArtsCount()}{topicData.Complete}{topicData.Updateable}{topicData.IsLocked}{topicData.LastUpdated}";
                 string generatedHash = HashGenerator.GenerateHash(hashInput);
                 topicData.SetID(generatedHash);
 
