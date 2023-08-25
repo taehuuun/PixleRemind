@@ -42,4 +42,17 @@ public class TopicData : BaseThumbnailData
     {
         return PixelArtDataList.Count;
     }
+    public PixelArtData GetPixelArt(string id)
+    {
+        return PixelArtDataList.Find((pixelArtData) => pixelArtData.ID == id);
+    }
+    public PixelArtData GetPixelArt(int index)
+    {
+        if (!IsValidIndexRange(index))
+        {
+            return null;
+        }
+
+        return PixelArtDataList[index];
+    }
 }
