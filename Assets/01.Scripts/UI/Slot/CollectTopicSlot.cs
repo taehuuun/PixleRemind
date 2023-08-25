@@ -8,7 +8,7 @@ public class CollectTopicSlot : MonoBehaviour
 
     public void SetSlot(DownloadTopicData downloadTopicData)
     {
-        titleText.text = $"{downloadTopicData.Title} ({downloadTopicData.CollectedPixelArtDataList.Count} / {downloadTopicData.TotalPixelArtDataCount})";
+        titleText.text = $"{downloadTopicData.Title} ({downloadTopicData.GetCollectedPixelArtCount()} / {downloadTopicData.TotalPixelArtDataCount})";
     }
 
     public Transform GetCollectPixelArtParent()
