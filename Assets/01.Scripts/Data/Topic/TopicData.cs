@@ -75,4 +75,8 @@ public class TopicData : BaseThumbnailData
     {
         LastUpdated = time;
     }
+    public void IncreaseCompleteCount()
+    {
+        CompleteCount++;
+    }
 }
