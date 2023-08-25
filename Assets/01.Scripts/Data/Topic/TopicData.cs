@@ -95,4 +95,8 @@ public class TopicData : BaseThumbnailData
             PixelArtDataList.Remove(data);
         }
     }
+    private bool IsValidIndexRange(int index)
+    {
+        return index >= 0 && index < PixelArtDataList.Count;
+    }
 }
