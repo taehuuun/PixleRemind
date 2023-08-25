@@ -88,4 +88,11 @@ public class TopicData : BaseThumbnailData
         
         PixelArtDataList.Add(data);
     }
+    public void RemovePixelArt(PixelArtData data)
+    {
+        if (PixelArtDataList.Contains(data))
+        {
+            PixelArtDataList.Remove(data);
+        }
+    }
 }
