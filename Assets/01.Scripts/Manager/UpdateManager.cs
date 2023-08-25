@@ -124,7 +124,7 @@ public class UpdateManager : MonoBehaviour
                 DataManager.LocalData.AddCollectedPixelArtList(topicID, new List<CollectedPixelArtData>());
                 DataManager.SaveLocalData();
 
-                DownloadTopicData newDownloadTopicData = new DownloadTopicData(serverData.ID, serverData.Title, serverData.Description, serverData.TotalCount);
+                DownloadTopicData newDownloadTopicData = new DownloadTopicData(serverData.ID, serverData.Title, serverData.Description, serverData.GetPixelArtsCount());
                 DataManager.UserData.SetDownloadTopicData(topicID,newDownloadTopicData);
                 DataManager.UserData.SetLastUpdateDate(DateTime.Now);
 
