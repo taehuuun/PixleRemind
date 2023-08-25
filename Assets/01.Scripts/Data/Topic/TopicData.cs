@@ -55,4 +55,8 @@ public class TopicData : BaseThumbnailData
 
         return PixelArtDataList[index];
     }
+    public IReadOnlyList<PixelArtData> GetPixelArtList()
+    {
+        return PixelArtDataList.AsReadOnly();
+    }
 }
