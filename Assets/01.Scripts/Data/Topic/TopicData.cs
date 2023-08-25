@@ -5,14 +5,14 @@ using Firebase.Firestore;
 [FirestoreData, Serializable]
 public class TopicData : BaseThumbnailData
 {
-    [FirestoreProperty] public int CompleteCount { get; set; }
-    [FirestoreProperty] public int TotalCount { get; set; }
-    [FirestoreProperty] public bool Complete { get; set; }
-    [FirestoreProperty] public bool Updateable { get; set; }
-    [FirestoreProperty] public bool IsLocked { get; set; }
-    [FirestoreProperty] public UnlockCondition UnlockCondition { get; set; }
-    [FirestoreProperty] public DateTime LastUpdated { get; set; }
-    [FirestoreProperty] public List<PixelArtData> PixelArtDataList { get; set; }
+    [FirestoreProperty] public int CompleteCount { get; private set; }
+    [FirestoreProperty] public int TotalCount { get; private set; }
+    [FirestoreProperty] public bool Complete { get; private set; }
+    [FirestoreProperty] public bool Updateable { get; private set; }
+    [FirestoreProperty] public bool IsLocked { get; private set; }
+    [FirestoreProperty] public UnlockCondition UnlockCondition { get; private set; }
+    [FirestoreProperty] public DateTime LastUpdated { get; private set; }
+    [FirestoreProperty] public List<PixelArtData> PixelArtDataList { private get; set; }
 
     public TopicData()
     {
