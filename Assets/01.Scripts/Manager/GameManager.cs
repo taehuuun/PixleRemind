@@ -35,7 +35,7 @@ public class GameManager : MonoBehaviour
         _localData = DataManager.LocalData;
 
         _selectTopicData = DataManager.LocalData.GetTopicData(DataManager.LocalData.GetTopicID());
-        _selectPixelArtData = _selectTopicData.PixelArtDataList.Find((pixelArtData) => pixelArtData.ID == DataManager.LocalData.GetPixelArtID());
+        _selectPixelArtData = _selectTopicData.GetPixelArt(DataManager.LocalData.GetPixelArtID());
         colorMatchMiniGame.SetPixelArtData(_selectPixelArtData);
         playUI.UpdatePixelArt(_selectPixelArtData.ThumbnailData,_selectPixelArtData.ThumbnailSize);
         playUI.SetPlayButton(_selectPixelArtData.IsCompleted);
@@ -58,11 +58,11 @@ public class GameManager : MonoBehaviour
 
     private void CollectPixelArt()
     {
-        _selectTopicData.CompleteCount++;
+        _selectTopicData.IncreaseCompleteCount();
 
-        if (_selectTopicData.CompleteCount == _selectTopicData.TotalCount)
+        if (_selectTopicData.CompleteCount == _selectTopicData.GetPixelArtsCount())
         {
-            _selectTopicData.Complete = true;
+            _selectTopicData.SetComplete(true);
         }
         
         _selectPixelArtData.SetPlayTime(_playTime);
