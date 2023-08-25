@@ -71,4 +71,8 @@ public class TopicData : BaseThumbnailData
     {
         Updateable = state;
     }
+    public void SetLastUpdate(DateTime time)
+    {
+        LastUpdated = time;
+    }
 }
