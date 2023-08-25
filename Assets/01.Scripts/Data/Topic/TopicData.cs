@@ -59,4 +59,8 @@ public class TopicData : BaseThumbnailData
     {
         return PixelArtDataList.AsReadOnly();
     }
+    public void SetComplete(bool state)
+    {
+        Complete = state;
+    }
 }
