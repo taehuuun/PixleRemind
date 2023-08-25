@@ -79,4 +79,13 @@ public class TopicData : BaseThumbnailData
     {
         CompleteCount++;
     }
+    public void AddPixelArt(PixelArtData data)
+    {
+        if (data == null)
+        {
+            return;
+        }
+        
+        PixelArtDataList.Add(data);
+    }
 }
