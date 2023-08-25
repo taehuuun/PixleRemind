@@ -1,6 +1,5 @@
 using TMPro;
 using UnityEngine;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class UpdateSlot : MonoBehaviour
@@ -21,7 +20,7 @@ public class UpdateSlot : MonoBehaviour
     {
         _topicData = topicData;
         thumbnailImg.sprite = PixelArtHelper.MakeThumbnail(_topicData.ThumbnailData, _topicData.ThumbnailSize);
-        titleText.text = $"{_topicData.Title} 픽셀아트 {_topicData.TotalCount}개";
+        titleText.text = $"{_topicData.Title} 픽셀아트 {_topicData.GetPixelArtsCount()}개";
         descriptionText.text = _topicData.Description;
         iconImg.sprite = isMissing ? missingIcon : updateIcon;
     }
