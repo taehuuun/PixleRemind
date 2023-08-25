@@ -23,4 +23,8 @@ public class DownloadTopicData : BaseData
     {
         return CollectedPixelArtDataList.Count;
     }
+    public IReadOnlyList<CollectedPixelArtData> GetCollectedPixelArtData()
+    {
+        return CollectedPixelArtDataList.AsReadOnly();
+    }
 }
