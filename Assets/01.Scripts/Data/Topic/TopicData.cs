@@ -14,17 +14,7 @@ public class TopicData : BaseThumbnailData
     [FirestoreProperty] public DateTime LastUpdated { get; private set; }
     [FirestoreProperty] public List<PixelArtData> PixelArtDataList { private get; set; }
 
-    public TopicData()
-    {
-        CompleteCount = 0;
-        TotalCount = 0;
-        Complete = false;
-        Updateable = false;
-        IsLocked = false;
-        UnlockCondition = new UnlockCondition();
-        LastUpdated = DateTime.Now;
-        PixelArtDataList = new List<PixelArtData>();
-    }
+    public TopicData() : this(string.Empty, string.Empty,string.Empty,string.Empty,0,0,0,false,false,false,new UnlockCondition(),DateTime.Now,new List<PixelArtData>()) { }
 
     public TopicData(
         string id,
