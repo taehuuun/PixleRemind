@@ -19,7 +19,7 @@ public class TopicSlot : Slot
     {
         titleText.text = data.Title;
         completeMark.SetActive(data.Complete);
-        completeCountText.text = $"{data.CompleteCount} / {data.TotalCount}";
+        completeCountText.text = $"{data.CompleteCount} / {data.GetPixelArtsCount()}";
         thumbnailImage.sprite = PixelArtHelper.MakeThumbnail(data.ThumbnailData, data.ThumbnailSize);
     }
 }
