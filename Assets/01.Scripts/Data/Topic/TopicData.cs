@@ -63,4 +63,8 @@ public class TopicData : BaseThumbnailData
     {
         Complete = state;
     }
+    public void SetLock(bool state)
+    {
+        IsLocked = state;
+    }
 }
