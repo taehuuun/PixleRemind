@@ -27,7 +27,7 @@ public class UserData
     {
         if(DownloadTopicData.TryGetValue(key, out var list))
         {
-            list.CollectedPixelArtDataList.Add(data);
+            list.AddCollectedPixelArt(data);
         }
     }
     public IReadOnlyList<DownloadTopicData> GetDownloadTopicDataList()
@@ -40,6 +40,6 @@ public class UserData
     }
     public List<CollectedPixelArtData> GetCollectedPixelArtDataList(string key)
     {
-        return DownloadTopicData[key].CollectedPixelArtDataList;
+        return DownloadTopicData[key].GetCollectedPixelArtData().ToList();
     }
 }
