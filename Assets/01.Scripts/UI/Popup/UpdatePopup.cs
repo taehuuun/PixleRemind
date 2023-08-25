@@ -4,7 +4,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UpdatePopup : CloseAbleUI
+public class UpdatePopup : MonoBehaviour
 {
     // 토픽 데이터들을 추가할 Transform
     public Transform contentParent;
