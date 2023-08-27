@@ -6,6 +6,7 @@ public class SplashText : MonoBehaviour
 {
     [SerializeField] private TMP_Text[] splashText;
     [SerializeField] private float delay;
+    [SerializeField] private float completeDelay;
     [SerializeField] private float scaleDuration;
     [SerializeField] private float moveDuration;
     [SerializeField] private string fullText;
@@ -46,6 +47,8 @@ public class SplashText : MonoBehaviour
             StartCoroutine(AnimateText(splashText[i].transform));
             yield return new WaitForSeconds(delay);
         }
+        
+        yield return new WaitForSeconds(completeDelay);
         
         Complete = true;
     }

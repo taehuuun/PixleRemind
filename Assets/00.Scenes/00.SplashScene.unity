@@ -531,6 +531,7 @@ MonoBehaviour:
   - {fileID: 1369297833}
   - {fileID: 1137346385}
   delay: 0.3
+  completeDelay: 1.5
   scaleDuration: 0.2
   moveDuration: 0.3
   fullText: LTH
@@ -687,6 +688,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5eaa4bebbddd37f4aafc868a0378bf15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  splashText: {fileID: 788861077}
 --- !u!1 &1137346383
 GameObject:
   m_ObjectHideFlags: 0
