@@ -12,10 +12,18 @@ public class SplashText : MonoBehaviour
     [SerializeField] private string fullText;
     
     public bool Complete { get; private set;}
+
+    private WaitForSeconds _waitForDelay;
+    private WaitForSeconds _waitForMoveDelay;
+    private WaitForSeconds _waitForCompleteDelay;
     
     private void Start()
     {
+        _waitForDelay = new WaitForSeconds(delay);
+        _waitForMoveDelay = new WaitForSeconds(moveDuration + delay);
+        _waitForCompleteDelay = new WaitForSeconds(completeDelay);
         Complete = false;
+        
         StartCoroutine(ShowText());
     }
 
@@ -25,30 +33,30 @@ public class SplashText : MonoBehaviour
         {
             splashText[i].text = fullText[i].ToString();
             StartCoroutine(AnimateText(splashText[i].transform));
-            yield return new WaitForSeconds(delay);
+            yield return _waitForDelay;
         }
 
         // Step 2: Move LT up and H down
-        yield return new WaitForSeconds(delay);
+        yield return _waitForDelay;
         StartCoroutine(MoveText(splashText[0].transform, new Vector3(0, 150, 0), moveDuration));
         StartCoroutine(MoveText(splashText[1].transform, new Vector3(0, 150, 0), moveDuration));
         StartCoroutine(MoveText(splashText[2].transform, new Vector3(0, -150, 0), moveDuration));
 
         // Step 3: Move LT to right and H to left
-        yield return new WaitForSeconds(moveDuration + delay);
+        yield return _waitForMoveDelay;
         StartCoroutine(MoveText(splashText[0].transform, new Vector3(50, 0, 0), moveDuration));
         StartCoroutine(MoveText(splashText[1].transform, new Vector3(120, 0, 0), moveDuration));
         StartCoroutine(MoveText(splashText[2].transform, new Vector3(-225, 0, 0), moveDuration));
         
-        yield return new WaitForSeconds(delay);
+        yield return _waitForDelay;
         
         for (int i = 0; i < fullText.Length; i++)
         {
             StartCoroutine(AnimateText(splashText[i].transform));
-            yield return new WaitForSeconds(delay);
+            yield return _waitForDelay;
         }
         
-        yield return new WaitForSeconds(completeDelay);
+        yield return _waitForCompleteDelay;
         
         Complete = true;
     }
