@@ -20,7 +20,7 @@ public class SplashUI : BodyUI
         _waitForDelay = new WaitForSeconds(delay);
         _waitForMoveDelay = new WaitForSeconds(moveDuration + delay);
         _waitForCompleteDelay = new WaitForSeconds(completeDelay);
-        StartCoroutine(SplashAfter());
+        StartCoroutine(Splash());
     }
 
     private IEnumerator Splash()
