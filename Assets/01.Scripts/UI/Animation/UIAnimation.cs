@@ -36,11 +36,11 @@ public static class UIAnimation
         while (time <= duration)
         {
             float t = time / duration;
-            uiTransform.position = Vector3.Lerp(originPosition, targetPosition, t);
+            uiTransform.localPosition = Vector3.Lerp(originPosition, targetPosition, t);
             time += Time.deltaTime;
             yield return null;
         }
 
-        uiTransform.position = targetPosition;
+        uiTransform.localPosition = targetPosition;
     }
 }
