@@ -25,7 +25,7 @@ public static class UIAnimation
             yield return null;
         }
 
-        uiTransform.localScale = targetScale;
+        uiTransform.localScale = originScale;
     }
     public static IEnumerator MoveUI(Transform uiTransform, Vector3 offset, float duration)
     {
