@@ -483,7 +483,6 @@ GameObject:
   - component: {fileID: 788861076}
   - component: {fileID: 788861079}
   - component: {fileID: 788861078}
-  - component: {fileID: 788861077}
   m_Layer: 5
   m_Name: SplashText
   m_TagString: Untagged
@@ -514,27 +513,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &788861077
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 788861075}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9cdaafcded89f974b96803b5fe006489, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  splashText:
-  - {fileID: 1151849111}
-  - {fileID: 1369297833}
-  - {fileID: 1137346385}
-  delay: 0.3
-  completeDelay: 1.5
-  scaleDuration: 0.2
-  moveDuration: 0.3
-  fullText: LTH
 --- !u!114 &788861078
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -688,7 +666,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5eaa4bebbddd37f4aafc868a0378bf15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  splashText: {fileID: 788861077}
+  splashText:
+  - {fileID: 1151849111}
+  - {fileID: 1369297833}
+  - {fileID: 1137346385}
+  delay: 0.3
+  completeDelay: 1.5
+  scaleDuration: 0.2
+  moveDuration: 0.3
+  fullText: LTH
 --- !u!1 &1137346383
 GameObject:
   m_ObjectHideFlags: 0
