@@ -5,8 +5,8 @@ using Firebase.Firestore;
 [FirestoreData, Serializable]
 public class DownloadTopicData : BaseData
 {
-    [FirestoreProperty] public int TotalPixelArtDataCount { get; private set; }
-    [FirestoreProperty] public List<CollectedPixelArtData> CollectedPixelArtDataList { private get; set; }
+    [FirestoreProperty] public int TotalPixelArtDataCount { get; set; }
+    [FirestoreProperty] public List<CollectedPixelArtData> CollectedPixelArtDataList { get; set; }
 
     public DownloadTopicData() : this(string.Empty,string.Empty, string.Empty,0) { }
     public DownloadTopicData(string id, string title, string description, int totalPixelArtDataCount) : base(id, title, description)
