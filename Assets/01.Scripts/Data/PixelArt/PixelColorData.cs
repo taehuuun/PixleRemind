@@ -4,9 +4,9 @@ using Firebase.Firestore;
 [FirestoreData]
 public class PixelColorData
 {
-    [FirestoreProperty] public int RemainingPixels { get; private set; }
+    [FirestoreProperty] public int RemainingPixels { get; set; }
 
-    [FirestoreProperty] public List<CustomPixel> CustomPixels { private get; set; }
+    [FirestoreProperty] public List<CustomPixel> CustomPixels { get; set; }
 
     public PixelColorData()
     {

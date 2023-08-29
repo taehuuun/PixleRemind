@@ -4,7 +4,7 @@ using Firebase.Firestore;
 [FirestoreData, Serializable]
 public class CollectedPixelArtData : BaseThumbnailData
 {
-    [FirestoreProperty] public int PlayTime { get; private set; }
+    [FirestoreProperty] public int PlayTime { get; set; }
 
     public CollectedPixelArtData() : this(string.Empty, string.Empty, string.Empty, string.Empty, 0, 0){}
 

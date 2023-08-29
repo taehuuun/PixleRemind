@@ -4,8 +4,8 @@ using Firebase.Firestore;
 [FirestoreData, Serializable]
 public class BaseThumbnailData : BaseData
 {
-    [FirestoreProperty] public string ThumbnailData { get; private set; }
-    [FirestoreProperty] public int ThumbnailSize { get; private set; }
+    [FirestoreProperty] public string ThumbnailData { get; set; }
+    [FirestoreProperty] public int ThumbnailSize { get; set; }
 
     public BaseThumbnailData() : this(string.Empty, string.Empty, string.Empty, string.Empty, 0) { }
 
