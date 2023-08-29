@@ -5,9 +5,9 @@ using Firebase.Firestore;
 [FirestoreData, Serializable]
 public class CustomPixel
 {
-    [FirestoreProperty] public CustomColor OriginalColor { get; private set; }
-    [FirestoreProperty] public CustomColor GrayColor { get; private set; }
-    [FirestoreProperty] public List<PixelCoord> PixelCoords { private get; set; }
+    [FirestoreProperty] public CustomColor OriginalColor { get; set; }
+    [FirestoreProperty] public CustomColor GrayColor { get; set; }
+    [FirestoreProperty] public List<PixelCoord> PixelCoords { get; set; }
 
     public CustomPixel() : this(new CustomColor()) { }
     public CustomPixel(CustomColor customColor)
