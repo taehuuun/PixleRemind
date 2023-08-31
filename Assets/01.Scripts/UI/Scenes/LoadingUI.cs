@@ -2,13 +2,12 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
-using Michsky.MUIP;
 
 public class LoadingUI : BodyUI
 {
-    [SerializeField] private ProgressBar loadingBar;
-    // [SerializeField] private Image loadingBar;
+    [SerializeField] private Image loadingBar;
     [SerializeField] private TMP_Text taskText;
+    [SerializeField] private TMP_Text percentText;
     [SerializeField] private TMP_Text[] splashTexts;
     [SerializeField] private float scaleDuration;
     [SerializeField] private float scaleDelay;
@@ -22,8 +21,9 @@ public class LoadingUI : BodyUI
     {
         _waitForRepeatDelay = new WaitForSeconds(repeatDelay);
         _waitForScaleDelay = new WaitForSeconds(scaleDelay);
-        loadingBar.currentPercent = 0f;
+        loadingBar.fillAmount = 0f;
         taskText.text = "";
+        percentText.text = "0%";
 
         StartCoroutine(ScaleText());
         StartCoroutine(ShowLoadingProgress());
@@ -49,23 +49,23 @@ public class LoadingUI : BodyUI
     {
         while (!LoadingTaskManager.Instance.AllTaskComplete)
         {
-            loadingBar.currentPercent = LoadingTaskManager.Instance.TaskProgress * 100f;
-            loadingBar.textPercent.text = $"{LoadingTaskManager.Instance.TaskProgress * 100f:#.##} %";
+            loadingBar.fillAmount = LoadingTaskManager.Instance.TaskProgress;
+            percentText.text = $"{LoadingTaskManager.Instance.TaskProgress * 100f:#.##} %";
             taskText.text = LoadingTaskManager.Instance.CurrentTask;
 
             yield return null;
         }
 
-        loadingBar.currentPercent = 100f;
-        loadingBar.textPercent.text = $"100 %";
+        loadingBar.fillAmount= 1f;
+        percentText.text = $"100 %";
         taskText.text = $"{LoadingTaskManager.Instance.NextSceneName} 씬으로 로딩중..";
         
         LoadingTaskManager.Instance.ActivateScene();
 
         while (!LoadingTaskManager.Instance.IsSceneLoadingCompleted())
         {
-            loadingBar.currentPercent = LoadingTaskManager.Instance.TaskProgress * 100f;
-            loadingBar.textPercent.text = $"{LoadingTaskManager.Instance.TaskProgress * 100f:#.##} %";
+            loadingBar.fillAmount = LoadingTaskManager.Instance.TaskProgress;
+            percentText.text = $"{LoadingTaskManager.Instance.TaskProgress * 100f:#.##} %";
             
             yield return null;
         }
