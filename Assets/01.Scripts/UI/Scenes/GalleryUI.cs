@@ -1,11 +1,11 @@
 using UnityEngine;
 
-public class GalleryUI : BodyUI
+public class GalleryUI : BaseSceneUI
 {
     public Transform pixelArtSlotContainer;
     public PixelArtSlot pixelArtSlotPrefab;
-
-    private void Start()
+    
+    protected override void Initialize()
     {
         SetPixelArtSlot();
     }
