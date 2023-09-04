@@ -38,15 +38,7 @@ public class LoadingManager : MonoBehaviour
         _sceneLoadingOperation.allowSceneActivation = false;
     }
 
-    public bool IsSceneLoadingCompleted()
-    {
-        if (_sceneLoadingOperation != null)
-        {
-            return _sceneLoadingOperation.isDone;
-        }
-
-        return false;
-    }
+    public bool IsSceneLoadingCompleted() => _sceneLoadingOperation?.isDone ?? false;
 
     public void ActivateScene()
     {
