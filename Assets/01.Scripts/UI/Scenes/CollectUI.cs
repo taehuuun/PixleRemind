@@ -1,17 +1,17 @@
 using UnityEngine;
 
-public class CollectUI : BodyUI
+public class CollectUI : BaseSceneUI
 {
     [SerializeField] private Transform genCollectTopicSlotParent;
     [SerializeField] private CollectTopicSlot collectTopicSlotPrefab;
     [SerializeField] private CollectPixelArtSlot collectPixelArtSlotPrefab;
     [SerializeField] private CollectPixelArtDetailPopup collectPixelArtDetailPopup;
-    
-    private void Start()
+
+    protected override void Initialize()
     {
         SetSlot();
     }
-    
+
     private void SetSlot()
     {
         // UserData에서 DownloadTopicData 딕셔너리를 가져옴
