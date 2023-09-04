@@ -27,6 +27,11 @@ public class LoadingManager : MonoBehaviour
         DontDestroyOnLoad(this);
     }
 
+    public void StartNextSceneLoading(string nextScene)
+    {
+        NextSceneName = nextScene;
+        SceneManager.LoadScene(SceneNames.LoadingScene);
+    }
     public void LoadSceneAsync(string sceneName)
     {
         _sceneLoadingOperation = SceneManager.LoadSceneAsync(sceneName);
