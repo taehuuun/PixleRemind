@@ -6,4 +6,6 @@ public abstract class BaseSceneUI : MonoBehaviour
     {
         SceneManager.LoadScene(scene);
     }
+    
+    protected abstract void Initialize();
 }
