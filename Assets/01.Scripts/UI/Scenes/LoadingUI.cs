@@ -27,8 +27,8 @@ public class LoadingUI : BaseSceneUI
 
         StartCoroutine(ScaleText());
         StartCoroutine(ShowLoadingProgress());
-        LoadingTaskManager.Instance.LoadSceneAsync(LoadingTaskManager.Instance.NextSceneName);
-        _ = LoadingTaskManager.Instance.RunTasks();
+        LoadingManager.Instance.LoadSceneAsync(LoadingManager.Instance.NextSceneName);
+        _ = LoadingManager.Instance.RunTasks();
     }
 
     private IEnumerator ScaleText()
@@ -47,32 +47,30 @@ public class LoadingUI : BaseSceneUI
     
     private IEnumerator ShowLoadingProgress()
     {
-        while (!LoadingTaskManager.Instance.AllTaskComplete)
+        while (!LoadingManager.Instance.AllTaskComplete)
         {
-            loadingBar.fillAmount = LoadingTaskManager.Instance.TaskProgress;
-            percentText.text = $"{LoadingTaskManager.Instance.TaskProgress * 100f:#.##} %";
-            taskText.text = LoadingTaskManager.Instance.CurrentTask;
+            loadingBar.fillAmount = LoadingManager.Instance.TaskProgress;
+            percentText.text = $"{LoadingManager.Instance.TaskProgress * 100f:#.##} %";
+            taskText.text = LoadingManager.Instance.CurrentTask;
 
             yield return null;
         }
 
         loadingBar.fillAmount= 1f;
         percentText.text = $"100 %";
-        taskText.text = $"{LoadingTaskManager.Instance.NextSceneName} 씬으로 로딩중..";
+        taskText.text = $"{LoadingManager.Instance.NextSceneName} 씬으로 로딩중..";
         
-        LoadingTaskManager.Instance.ActivateScene();
-
-        while (!LoadingTaskManager.Instance.IsSceneLoadingCompleted())
+        while (!LoadingManager.Instance.IsSceneLoadingCompleted())
         {
-            loadingBar.fillAmount = LoadingTaskManager.Instance.TaskProgress;
-            percentText.text = $"{LoadingTaskManager.Instance.TaskProgress * 100f:#.##} %";
+            loadingBar.fillAmount = LoadingManager.Instance.TaskProgress;
+            percentText.text = $"{LoadingManager.Instance.TaskProgress * 100f:#.##} %";
             
             yield return null;
         }
+        taskText.text = $"{LoadingManager.Instance.NextSceneName} 씬으로 로딩 완료..";
         
-        taskText.text = $"{LoadingTaskManager.Instance.NextSceneName} 씬으로 로딩 완료..";
+        LoadingManager.Instance.ActivateScene();
         
-        LoadingTaskManager.Instance.ResetTasks();
-        MoveScene(LoadingTaskManager.Instance.NextSceneName);
+        LoadingManager.Instance.ResetTasks();
     }
 }
