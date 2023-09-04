@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public abstract class BodyUI : MonoBehaviour
+public abstract class BaseSceneUI : MonoBehaviour
 {
     public void MoveScene(string scene)
     {
