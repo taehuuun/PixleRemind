@@ -2,9 +2,9 @@ using UnityEngine;
 
 public abstract class BaseSceneUI : MonoBehaviour
 {
-    public void MoveScene(string scene)
+    private void Start()
     {
-        SceneManager.LoadScene(scene);
+        Initialize();
     }
     
     protected abstract void Initialize();
