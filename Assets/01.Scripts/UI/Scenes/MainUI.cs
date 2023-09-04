@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class MainUI : BodyUI
+public class MainUI : BaseSceneUI
 {
     public UpdateManager updateManager;
     public Button playBtn;
