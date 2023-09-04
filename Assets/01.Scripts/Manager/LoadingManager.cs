@@ -4,9 +4,9 @@ using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class LoadingTaskManager : MonoBehaviour
+public class LoadingManager : MonoBehaviour
 {
-    public static LoadingTaskManager Instance;
+    public static LoadingManager Instance { get; private set; }
     
     public float TaskProgress { get; private set; }
     public bool AllTaskComplete { get; private set; }
