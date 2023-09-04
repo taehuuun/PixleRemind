@@ -9,7 +9,7 @@ public class MainUI : BaseSceneUI
     public Transform topicSlotContainer;
     public TopicSlot topicSlotPrefab;
 
-    private void Start()
+    protected override void Initialize()
     {
         SetTopicSlot();
         
