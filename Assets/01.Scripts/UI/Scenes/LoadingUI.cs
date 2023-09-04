@@ -17,7 +17,7 @@ public class LoadingUI : BaseSceneUI
     private WaitForSeconds _waitForRepeatDelay;
     private WaitForSeconds _waitForScaleDelay;
     
-    private void Start()
+    protected override void Initialize()
     {
         _waitForRepeatDelay = new WaitForSeconds(repeatDelay);
         _waitForScaleDelay = new WaitForSeconds(scaleDelay);
