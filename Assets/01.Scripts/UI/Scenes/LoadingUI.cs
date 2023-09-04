@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 
-public class LoadingUI : BodyUI
+public class LoadingUI : BaseSceneUI
 {
     [SerializeField] private Image loadingBar;
     [SerializeField] private TMP_Text taskText;
