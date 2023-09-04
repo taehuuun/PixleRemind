@@ -58,19 +58,35 @@ public class LoadingManager : MonoBehaviour
         _tasks.Add(new TaskData(task, name));
     }
 
+    public async Task ExecuteTask(TaskData taskData, int index, int total)
+    {
+        CurrentTask = taskData.Name;
+        await taskData.Task.Invoke();
+        TaskProgress = (float)(index + 1) / total;
+        CurrentTask = $"{taskData.Name} 완료";
+        await Task.Delay(1000);
+    }
+    
     /// <summary>
     /// 추가된 Task를 하나씩 진행 시키는 메서드
     /// </summary>
     public async Task RunTasks()
     {
         CurrentTask = "";
-        for (int i = 0; i < _tasks.Count; i++)
+
+        int totalTasks = _tasks.Count;
+        
+        if (totalTasks > 0)
         {
-            CurrentTask = _tasks[i].Name;
-            await _tasks[i].Task.Invoke();
-            TaskProgress = (float)(i + 1) / _tasks.Count;
-            CurrentTask = $"{_tasks[i].Name} 완료!";
-            await Task.Delay(1000);
+            for (int i = 0; i < _tasks.Count; i++)
+            {
+                await ExecuteTask(_tasks[i], i, totalTasks);
+            }
+        }
+        else
+        {
+            float randomWaitTime = UnityEngine.Random.Range(0.6f, 1.0f);
+            await Task.Delay(TimeSpan.FromSeconds(randomWaitTime));
         }
 
         AllTaskComplete = true;
