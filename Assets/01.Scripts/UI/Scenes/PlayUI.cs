@@ -8,11 +8,8 @@ public class PlayUI : BaseSceneUI
     public Image board;
     public TMP_Text remainPixelText;
     public TMP_Text playTimeText;
-
-    public MoveUI boardMove;
-    public MoveUI playBtnMove;
-    public MoveUI matchUIMove;
-
+    public Transform playBtn;
+    public Transform matchUI;
     
     protected override void Initialize()
     {
@@ -33,7 +30,7 @@ public class PlayUI : BaseSceneUI
     }
     public void SetPlayButton(bool isComplete)
     {
-        playBtnMove.gameObject.SetActive(!isComplete);
+        playBtn.gameObject.SetActive(!isComplete);
     }
     public void ShowUI()
     {
@@ -50,19 +47,20 @@ public class PlayUI : BaseSceneUI
 
     private IEnumerator HideMatchUI()
     {
-        matchUIMove.Return();
-        yield return new WaitUntil(() => matchUIMove.isComplete);
-
-         boardMove.Return();
-        playBtnMove.Return();
+        yield return UIAnimation.MoveUI(matchUI, new Vector3(0, -710, 0), 0.5f);
+        StartCoroutine(UIAnimation.MoveUI(board.transform, new Vector3(0, -300, 0), 0.5f));
+        StartCoroutine(UIAnimation.MoveUI(playBtn, new Vector3(0, 400, 0), 0.5f));
     }
     private IEnumerator ShowMatchUI()
     {
-        boardMove.StartMove();
-        playBtnMove.StartMove();
+        // 두 개의 코루틴을 시작합니다.
+        Coroutine coroutine1 = StartCoroutine(UIAnimation.MoveUI(board.transform, new Vector3(0, 300, 0), 0.5f));
+        Coroutine coroutine2 = StartCoroutine(UIAnimation.MoveUI(playBtn, new Vector3(0, -400, 0), 0.5f));
 
-        yield return new WaitUntil(() => (boardMove.isComplete && playBtnMove.isComplete));
-
-        matchUIMove.StartMove();
+        // 두 코루틴이 완료될 때까지 기다립니다.
+        yield return coroutine1;
+        yield return coroutine2;
+        
+        StartCoroutine(UIAnimation.MoveUI(matchUI, new Vector3(0, 710, 0), 0.5f));
     }
 }
