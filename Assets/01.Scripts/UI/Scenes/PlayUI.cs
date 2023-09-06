@@ -3,7 +3,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PlayUI : BodyUI
+public class PlayUI : BaseSceneUI
 {
     public Image board;
     public TMP_Text remainPixelText;
@@ -13,6 +13,12 @@ public class PlayUI : BodyUI
     public MoveUI playBtnMove;
     public MoveUI matchUIMove;
 
+    
+    protected override void Initialize()
+    {
+        remainPixelText.text =remainPixelText.text = $"남은 픽셀 : ?개";
+    }
+    
     public void UpdatePlayTime(int playTime)
     {
         playTimeText.text = UIHelper.FormatSecondsToTimeString(playTime);
