@@ -1,6 +1,5 @@
 using TMPro;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class PixelArtSlot : Slot
 {
@@ -13,8 +12,7 @@ public class PixelArtSlot : Slot
     {
         DataManager.LocalData.SetPixelArtDataID(pixelData.ID);
         DataManager.SaveLocalData();
-        LoadingManager.Instance.NextSceneName = SceneNames.PlayScene;
-        SceneManager.LoadScene(SceneNames.LoadingScene);
+        LoadingManager.Instance.StartNextSceneLoading(SceneNames.PlayScene);
     }
     public override void SetSlot()
     {
