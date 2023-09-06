@@ -60,6 +60,8 @@ public class LoadingUI : BaseSceneUI
         percentText.text = $"100 %";
         taskText.text = $"{LoadingManager.Instance.NextSceneName} 씬으로 로딩중..";
         
+        LoadingManager.Instance.ActivateScene();
+        
         while (!LoadingManager.Instance.IsSceneLoadingCompleted())
         {
             loadingBar.fillAmount = LoadingManager.Instance.TaskProgress;
@@ -68,8 +70,6 @@ public class LoadingUI : BaseSceneUI
             yield return null;
         }
         taskText.text = $"{LoadingManager.Instance.NextSceneName} 씬으로 로딩 완료..";
-        
-        LoadingManager.Instance.ActivateScene();
         
         LoadingManager.Instance.ResetTasks();
     }
