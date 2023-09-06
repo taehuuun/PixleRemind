@@ -56,6 +56,10 @@ public class LocalData
     {
         _localTopicData.Remove(key);
     }
+    public void RemoveCollectedPixelArtData(string key, CollectedPixelArtData data)
+    {
+        _localCollectedPixelArtData[key].Remove(data);
+    }
     public bool ContainTopicDataKey(string key)
     {
         return _localTopicData.ContainsKey(key);
