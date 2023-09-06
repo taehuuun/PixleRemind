@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -62,40 +63,53 @@ public static class DataSyncManager
             Debug.Log($"LocalData에 존재하나 UserData에 없는 키 발견: {key}");
             DataManager.LocalData.RemoveTopicData(key);
         }
+        
+        DataManager.SaveLocalData();
     }
 
     private static void SyncCollectedPixelArtData()
     {
-        Debug.Log("CollectedPixelArtData 동기화 시작");
-
-        var userDownloadTopicDataKey = DataManager.UserData.GetDownloadTopicDataKeys();
-        
-        Debug.Log($"{userDownloadTopicDataKey.Count}");
-        
-        foreach (var key in userDownloadTopicDataKey)
+        try
         {
-            if (!DataManager.LocalData.ContainTopicDataKey(key))
+            Debug.Log("CollectedPixelArtData 동기화 시작");
+
+            var userDownloadTopicDataKey = DataManager.UserData.GetDownloadTopicDataKeys();
+
+            Debug.Log($"{userDownloadTopicDataKey.Count}");
+
+            foreach (var key in userDownloadTopicDataKey)
             {
-                Debug.Log($"{key}가 존재하지 않음");
-                continue;
-            }
-            
-            List<CollectedPixelArtData> userCollectedDataList = DataManager.UserData.GetCollectedPixelArtDataList(key);
-            List<CollectedPixelArtData> localCollectedDataList = DataManager.LocalData.GetCollectedPixelArtList(key);
-            
-            // UserData에는 존재하지만 LocalData에 존재하지 않는 경우
-            foreach (var data in userCollectedDataList.Except(localCollectedDataList))
-            {
-                Debug.Log($"UserData에 존재하나 LocalData에 없는 데이터 발견: {data}");
-                localCollectedDataList.Add(data);
+                Debug.Log("Key Loop 시작");
+                if (!DataManager.LocalData.ContainTopicDataKey(key))
+                {
+                    Debug.Log($"{key}가 존재하지 않음");
+                    continue;
+                }
+
+                List<CollectedPixelArtData> userCollectedDataList = DataManager.UserData.GetCollectedPixelArtDataList(key) ?? new List<CollectedPixelArtData>();
+                List<CollectedPixelArtData> localCollectedDataList = DataManager.LocalData.GetCollectedPixelArtList(key) ?? new List<CollectedPixelArtData>();
+
+                // UserData에는 존재하지만 LocalData에 존재하지 않는 경우
+                foreach (var data in userCollectedDataList.Except(localCollectedDataList))
+                {
+                    Debug.Log($"UserData에 존재하나 LocalData에 없는 데이터 발견: {data}");
+                    DataManager.LocalData.AddCollectedPixelArt(key, data);
+                }
+
+                // LocalData에는 존재하지만 UserData에 존재하지 않는 경우
+                foreach (var data in localCollectedDataList.Except(userCollectedDataList))
+                {
+                    Debug.Log($"LocalData에 존재하나 UserData에 없는 데이터 발견: {data}");
+                    DataManager.LocalData.RemoveCollectedPixelArtData(key, data);
+                }
             }
 
-            // LocalData에는 존재하지만 UserData에 존재하지 않는 경우
-            foreach (var data in localCollectedDataList.Except(userCollectedDataList))
-            {
-                Debug.Log($"LocalData에 존재하나 UserData에 없는 데이터 발견: {data}");
-                localCollectedDataList.Remove(data);
-            }
+            DataManager.SaveLocalData();
+            Debug.Log("CollectedPixelArtData 동기화 완료");
+        }
+        catch (Exception e)
+        {
+            Debug.LogError($"동기화 중 에러 발생: {e}");
         }
     }
 
