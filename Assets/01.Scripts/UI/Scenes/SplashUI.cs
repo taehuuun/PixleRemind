@@ -2,7 +2,7 @@ using System.Collections;
 using TMPro;
 using UnityEngine;
 
-public class SplashUI : BodyUI
+public class SplashUI : BaseSceneUI
 {
     [SerializeField] private TMP_Text[] splashText;
     [SerializeField] private float delay;
@@ -15,7 +15,7 @@ public class SplashUI : BodyUI
     private WaitForSeconds _waitForMoveDelay;
     private WaitForSeconds _waitForCompleteDelay;
     
-    private void Start()
+    protected override void Initialize()
     {
         _waitForDelay = new WaitForSeconds(delay);
         _waitForMoveDelay = new WaitForSeconds(moveDuration + delay);
