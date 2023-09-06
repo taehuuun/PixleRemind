@@ -37,15 +37,15 @@ public class PlayUI : BaseSceneUI
     }
     public void ShowUI()
     {
-        StartCoroutine(UIHelper.FadeEffect(playTimeText, 0.5f, FadeType.In));
-        StartCoroutine(UIHelper.FadeEffect(remainPixelText, 0.5f, FadeType.In));
+        StartCoroutine(UIAnimation.FadeEffect(playTimeText, 0.5f, FadeType.In));
+        StartCoroutine(UIAnimation.FadeEffect(remainPixelText, 0.5f, FadeType.In));
         StartCoroutine(ShowMatchUI());
     }
     public void HideUI()
     {
         StartCoroutine(HideMatchUI());
-        StartCoroutine(UIHelper.FadeEffect(playTimeText, 0.5f, FadeType.Out));
-        StartCoroutine(UIHelper.FadeEffect(remainPixelText, 0.5f, FadeType.Out));
+        StartCoroutine(UIAnimation.FadeEffect(playTimeText, 0.5f, FadeType.Out));
+        StartCoroutine(UIAnimation.FadeEffect(remainPixelText, 0.5f, FadeType.Out));
     }
 
     private IEnumerator HideMatchUI()
