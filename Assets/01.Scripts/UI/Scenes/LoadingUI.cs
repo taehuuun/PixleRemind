@@ -58,19 +58,17 @@ public class LoadingUI : BaseSceneUI
 
         loadingBar.fillAmount= 1f;
         percentText.text = $"100 %";
-        taskText.text = $"{LoadingManager.Instance.NextSceneName} 씬으로 로딩중..";
         
+        LoadingManager.Instance.ResetTasks();
         LoadingManager.Instance.ActivateScene();
         
+        taskText.text = $"{LoadingManager.Instance.NextSceneName} 씬으로 이동 중..";
         while (!LoadingManager.Instance.IsSceneLoadingCompleted())
         {
             loadingBar.fillAmount = LoadingManager.Instance.TaskProgress;
-            percentText.text = $"{LoadingManager.Instance.TaskProgress * 100f:#.##} %";
+            percentText.text = string.Empty;
             
             yield return null;
         }
-        taskText.text = $"{LoadingManager.Instance.NextSceneName} 씬으로 로딩 완료..";
-        
-        LoadingManager.Instance.ResetTasks();
     }
 }
