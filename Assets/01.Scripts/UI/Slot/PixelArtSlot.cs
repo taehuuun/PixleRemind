@@ -26,7 +26,7 @@ public class PixelArtSlot : Slot
         {
             completeMark.SetActive(true);
             playTimeText.gameObject.SetActive(true);
-            playTimeText.text = UIHelper.FormatSecondsToTimeString(pixelData.PlayTime);
+            playTimeText.text = StringHelper.FormatSecondsToTimeString(pixelData.PlayTime);
         }
 
         completeMark.SetActive(pixelData.IsCompleted);
