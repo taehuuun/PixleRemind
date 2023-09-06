@@ -1,6 +1,5 @@
 using TMPro;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class TopicSlot : Slot
 {
@@ -12,8 +11,7 @@ public class TopicSlot : Slot
     {
         DataManager.LocalData.SetTopicDataID(data.ID);
         DataManager.SaveLocalData();
-        LoadingManager.Instance.NextSceneName = SceneNames.GalleryScene;
-        SceneManager.LoadScene(SceneNames.LoadingScene);
+        LoadingManager.Instance.StartNextSceneLoading(SceneNames.GalleryScene);
     }
     public override void SetSlot()
     {
