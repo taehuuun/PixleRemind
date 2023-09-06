@@ -21,7 +21,7 @@ public class PlayUI : BaseSceneUI
     
     public void UpdatePlayTime(int playTime)
     {
-        playTimeText.text = UIHelper.FormatSecondsToTimeString(playTime);
+        playTimeText.text = StringHelper.FormatSecondsToTimeString(playTime);
     }
     public void UpdatePixelArt(string thumbnailData, int size)
     {
